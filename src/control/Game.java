@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class Game extends Application {
 	
 	public static void main(String args[]) {
-		System.out.println("GFY Oracle");
+		System.out.println("FUCK YOU JAVA");
 		launch();
 	}
 	
