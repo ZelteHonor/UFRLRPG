@@ -4,6 +4,7 @@ import gameObjects.GameObjects;
 
 public class Entity extends GameObjects {
 
+	
 	private int level, health, intellect, strenght, agility, mana, speed, perception;
 	public Entity(int level,int  health,int  intellect,int  strenght,int  agility, int mana,int  speed,int  perception)
 	{
