@@ -4,6 +4,7 @@
 package render;
 
 import java.util.Objects;
+import world.World;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -17,17 +18,17 @@ import javafx.scene.paint.Color;
  */
 public class Render {
 	
-	//Graphical interface
+	//Interface Graphique
 	private Canvas GUI;
 	
-	//Dimension et resolution of screen
+	//Dimension et résolution d'affichage
 	private final int DH;
 	private final int DW;
 	private final int RESOLUTION;
 
-	//To pin up
-	private Tile world[][];
-	private Objects objects[];
+	//À afficher
+	private World.TILE[][] world;
+	private GameObjects objects[];
 
 	/**
 	 * Constructor
@@ -35,7 +36,7 @@ public class Render {
 	 * @param world
 	 * @param objects
 	 */
-	public Render(Tile world[][],Objects objects[]) {
+	public Render(World.TILE[][] world,GameObjects objects[]) {
 		
 		this.world = world;
 		this.objects = objects;
@@ -53,10 +54,10 @@ public class Render {
 	 * 
 	 * @param world
 	 * @param objects
-	 * @param Width dimension
-	 * @param Height dimension
+	 * @param largeur dimension
+	 * @param hauteur dimension
 	 */
-	public Render(Tile world[][],Objects objects[],int DW,int DH) {
+	public Render(World.TILE[][] world,GameObjects objects[],int DW,int DH) {
 		this.world = world;
 		this.objects = objects;
 		
@@ -75,7 +76,7 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(Tile world[][],Objects objects[],int DW,int DH,int resolution) {
+	public Render(World.TILE[][] world,GameObjects objects[],int DW,int DH,int resolution) {
 		this.world = world;
 		this.objects = objects;
 		
@@ -95,7 +96,7 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(Tile world[][],Objects objects[],Canvas GUI,int DW,int DH,int resolution) {
+	public Render(World.TILE[][] world,Objects objects[],Canvas GUI,int DW,int DH,int resolution) {
 		this.world = world;
 		this.objects = objects;
 		
