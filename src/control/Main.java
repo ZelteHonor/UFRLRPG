@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	
 	public static void main(String args[]) {
-		System.out.println("Good enought JAVA");
+		System.out.println("THIS WOULD BE MUCH BETTER IN C++");
 		launch();
 	}
 	
