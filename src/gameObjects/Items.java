@@ -6,6 +6,7 @@ public class Items extends GameObjects{
 	
 	public Items(int weight, boolean evil)
 	{
+		super();
 		this.weight = weight;
 		this.evil = evil;
 	}
