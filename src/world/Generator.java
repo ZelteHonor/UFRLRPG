@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class Generator {
 	
-	private final int ROOM_COUNT = 24;
-	private final int ROOM_BIG_COUNT = 6;
+	private final int ROOM_COUNT = 12;
+	private final int ROOM_BIG_COUNT = 3;
 	private final int ROOM_MAX_DISTANCE = World.SIZE/6;
 	
 	private final int CAVE_BLUR_RADIUS = 3;
-	private final int CAVE_THRESHOLD = 118;
+	private final int CAVE_THRESHOLD = 117;
 	
 	/* Rooms */
 	private class Room {
@@ -53,7 +53,7 @@ public class Generator {
 		carve();
 		connect();
 		fillCaves();
-		
+		specify();
 		return tiles;
 	}
 	
@@ -213,6 +213,26 @@ public class Generator {
 					tiles[i][j] = World.TILE.WALL;
 	}
 	
+	private void specify() {
+		for(int i = 0; i < World.SIZE; i++)
+			for(int j = 0; j < World.SIZE; j++)
+				if (tiles[i][j] == World.TILE.WALL)
+					if (nextTo(i,j,World.TILE.DONJON) || nextTo(i,j,World.TILE.TUNNEL));
+					else if (nextTo(i,j,World.TILE.CAVE))
+						tiles[i][j] = World.TILE.ROCK;
+					else
+						tiles[i][j] = World.TILE.BLACK;
+	}
+	
+	private boolean nextTo(int x, int y, World.TILE type) {
+		for(int i = -1; i <= 1; i++)
+			for(int j = -1; j <= 1; j++)
+				if ((x+i >= 0 && y+j >= 0 && x+i < World.SIZE && y+j < World.SIZE))
+					if (tiles[x+i][y+j] == type)
+						return true;
+		return false;
+	}
+	
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
@@ -229,7 +249,7 @@ public class Generator {
 	private void createTunnel(Room from, Room target) {
 		Room a = new Room(0,0,0,0);
 		Room b = new Room(0,0,0,0);
-		boolean large = (distance(from,target) > ROOM_MAX_DISTANCE);
+		boolean large = (distance(from,target) < ROOM_MAX_DISTANCE);
 		
 		int nx, ny;		
 		nx = (int)(target.x + Math.random() * target.w);
@@ -335,9 +355,11 @@ public class Generator {
 			for(int j = 0; j < World.SIZE; j++) {
 				switch (data[i][j].ordinal()) {
 				case 0: System.out.print(" "); break;
-				case 1: System.out.print("*"); break;
-				case 2: System.out.print("#"); break;
-				case 3: System.out.print("%"); break;
+				case 1: System.out.print("#"); break;
+				case 2: System.out.print("%"); break;
+				case 3: System.out.print(","); break;
+				case 4: System.out.print("."); break;
+				case 5: System.out.print("¸"); break;
 				}
 			}
 			System.out.println();
