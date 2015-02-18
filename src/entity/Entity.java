@@ -1,13 +1,18 @@
 package entity;
 
+import java.util.ArrayList;
+
 import gameObjects.GameObjects;
+import gameObjects.Items;
 
 public class Entity extends GameObjects {
 
-	
-	private int level, health, intellect, strenght, agility, mana, speed, perception;
-	public Entity(int level,int  health,int  intellect,int  strenght,int  agility, int mana,int  speed,int  perception)
-	{
+	private int level, health, intellect, strenght, agility, mana, speed,
+			perception;
+	private ArrayList<Items> inventory;
+
+	public Entity(int level, int health, int intellect, int strenght,
+			int agility, int mana, int speed, int perception, ArrayList<Items> inventory) {
 		this.level = level;
 		this.health = health;
 		this.intellect = intellect;
@@ -16,5 +21,6 @@ public class Entity extends GameObjects {
 		this.mana = mana;
 		this.speed = speed;
 		this.perception = perception;
+		this.inventory = inventory;
 	}
 }
