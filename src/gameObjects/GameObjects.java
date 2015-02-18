@@ -43,7 +43,7 @@ public abstract class GameObjects {
 		
 		if(nAngle > 0 && nAngle > 360)
 		{
-			this.angle = angle;
+			this.angle = nAngle;
 		}
 		
 	}
