@@ -105,8 +105,19 @@ public class Generator {
 		rooms.remove(0);
 		
 		while (rooms.size() > 0) {
+			boolean success = false;
+			Room target = rooms.get((int)(Math.random()*rooms.size()));
 			
+			ArrayList<Room> available = (ArrayList<Room>) network.clone();
+			ArrayList<Room> tested = new ArrayList<Room>();
+			
+			while (!success && available.size() > 0) {
+				Room from = available.get((int)(Math.random()*available.size()));
+			}
 		}
 	}
 	
+	private int distance(Room a, Room b) {
+		return (int) Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+	}
 }
