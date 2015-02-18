@@ -146,12 +146,15 @@ public class Render {
 		
 		//Screen position
 		double spx = (x - (DW*RESOLUTION/2));
-		
 		double spy = (y - (DH*RESOLUTION/2));
 		
-		for(int i = (int)(spx/RESOLUTION); i < (DW+1); i++)
+		//Starting Case
+		int scx = (int)(spx/RESOLUTION);
+		int scy = (int)(spy/RESOLUTION);
+		
+		for(int i = scx; i < (scx + (DW+1)); i++)
 		{
-			for(int j = (int)(spy/RESOLUTION); j < (DH+1); j++)
+			for(int j = scy; j < (scy + (DH+1)); j++)
 			{
 				System.out.println(i + " " + j);
 				if(i >= 0 && j >= 0)
