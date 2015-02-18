@@ -2,8 +2,10 @@ package control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -12,6 +14,13 @@ public class Controller implements Initializable {
 	private BorderPane root;
 	@FXML
 	private Pane pane;
+	@FXML
+	private Canvas view;
+	@FXML
+	private Pane gamePane;
+	
+	
+	
 	Input input;
 
 	@Override
