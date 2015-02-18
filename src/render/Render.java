@@ -42,8 +42,8 @@ public class Render {
 		this.world = world;
 		this.objects = objects;
 		
-		DH = 10;
-		DW = 15;
+		DH = 11;
+		DW = 20;
 		RESOLUTION = 64;
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
@@ -134,15 +134,14 @@ public class Render {
 	}
 	
 	/**
-	 * Draw the world from the center of coordinate (x,y)
+	 * Dessine le monde autour du point (x,y)
 	 * 
 	 * @param world
 	 * @param position x
 	 * @param position y
 	 */
 	public void draw(World.TILE[][] world,double x, double y){
-		int temp = 0;
-		
+		String matriceTemp = "";
 		
 		//Screen position
 		double spx = (x - (DW*RESOLUTION/2));
@@ -152,30 +151,61 @@ public class Render {
 		int scx = (int)(spx/RESOLUTION);
 		int scy = (int)(spy/RESOLUTION);
 		
-		for(int i = scx; i < (scx + (DW+1)); i++)
+		System.out.println(spx + " " + spy);
+		System.out.println(scx + " " + scy);
+		
+		for(int j = scy; j < (scy + (DH+2)); j++)
 		{
-			for(int j = scy; j < (scy + (DH+1)); j++)
+			for(int i = scx; i < (scx + (DW+2)); i++)
 			{
-				System.out.println(i + " " + j);
+				
+				
 				if(i >= 0 && j >= 0)
-				System.out.println(world[i][j].toString());
+				{
+					matriceTemp += " " + world[i][j].toString();
+				}
 			}
+			
+			matriceTemp += "\n";
+			
 		}
+		
+		System.out.println(matriceTemp);
 		
 	}
 	
+	/**
+	 * 
+	 * @return GUI
+	 */
 	public Canvas getGUI(){
 		return GUI;
 	}
+	/**
+	 * 
+	 * @param gUI
+	 */
 	public void setGUI(Canvas gUI) {
 		GUI = gUI;
 	}
+	/**
+	 * 
+	 * @return DH
+	 */
 	public int getDH() {
 		return DH;
 	}
+	/**
+	 * 
+	 * @return DW
+	 */
 	public int getDW() {
 		return DW;
 	}
+	/**
+	 * 
+	 * @return RESOLUTION
+	 */
 	public int getRESOLUTION() {
 		return RESOLUTION;
 	}
@@ -203,7 +233,7 @@ public class Render {
 		
 		world[0][0] = World.TILE.CAVE;
 		Render test = new Render(world,null);
-		test.draw(world, 0, 0);
+		test.draw(world, 0*64, 0*64);
 
 	}
 
