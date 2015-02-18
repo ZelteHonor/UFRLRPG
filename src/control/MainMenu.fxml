@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="root" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Controller">
+   <center>
+      <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="525.0" layoutY="549.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="Quit" />
+            <Button layoutX="525.0" layoutY="381.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="Option" />
+            <Button layoutX="525.0" layoutY="229.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="New game" />
+            <Button layoutX="525.0" layoutY="68.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="Continue" />
+         </children></Pane>
+   </center>
+</BorderPane>
