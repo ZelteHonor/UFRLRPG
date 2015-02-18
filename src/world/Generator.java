@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class Generator {
 	
-	private final int ROOM_COUNT = 48;
-	private final int ROOM_BIG_COUNT = 12;
+	private final int ROOM_COUNT = 12;
+	private final int ROOM_BIG_COUNT = 3;
 	private final int ROOM_MAX_DISTANCE = World.SIZE/6;
 	
 	private final int CAVE_BLUR_RADIUS = 3;
-	private final int CAVE_THRESHOLD = 255;
+	private final int CAVE_THRESHOLD = 117;
 	
 	/* Rooms */
 	private class Room {
@@ -34,28 +34,26 @@ public class Generator {
 	
 	/* World */
 	private World.TILE[][] tiles;
-	private char[][] caves; 
+	private int[][] caves; 
 	
 	/* Public */
 	public Generator() {
 		tiles = new World.TILE[World.SIZE][World.SIZE];
-		caves = new char[World.SIZE][World.SIZE];
+		caves = new int[World.SIZE][World.SIZE];
 		
 		rooms = new ArrayList<Room>();
 		tunnels = new ArrayList<Room>();
 	}
 	
 	public World.TILE[][] generate() {
-		return generate(true);
-	}
-	
-	public World.TILE[][] generate(boolean caves) {
 		clear();
 		generateRooms();
 		generateTunnels();
 		generateCaves();
 		carve();
 		connect();
+		fillCaves();
+		specify();
 		return tiles;
 	}
 	
@@ -158,7 +156,7 @@ public class Generator {
 	private void generateCaves() {
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
-				caves[i][j] = (char)(Math.random()*255);
+				caves[i][j] = (int)(Math.random()*255);
 		
 		blurCaves();
 		blurCaves();
@@ -166,12 +164,13 @@ public class Generator {
 	
 	private void connect() {
 		int[][] map = new int[World.SIZE][World.SIZE];
-		int map_count = 0;
+		int map_count = 1;
 		
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] != World.TILE.WALL && tiles[i][j] != World.TILE.CAVE && map[i][j] == 0)
-					fill(i, j, map, ++map_count);
+					fill(i, j, map, map_count++);
+		map_count--;
 	
 		if (map_count > 1) {
 			ArrayList<Room> in = new ArrayList<Room>();
@@ -204,6 +203,36 @@ public class Generator {
 					
 	}
 	
+	private void fillCaves() {
+		int[][] map = new int[World.SIZE][World.SIZE];
+		fill(rooms.get(0).x+1, rooms.get(0).y+1, map, 1);
+		
+		for(int i = 0; i < World.SIZE; i++)
+			for(int j = 0; j < World.SIZE; j++)
+				if (map[i][j] == 0 && tiles[i][j] != World.TILE.WALL)
+					tiles[i][j] = World.TILE.WALL;
+	}
+	
+	private void specify() {
+		for(int i = 0; i < World.SIZE; i++)
+			for(int j = 0; j < World.SIZE; j++)
+				if (tiles[i][j] == World.TILE.WALL)
+					if (nextTo(i,j,World.TILE.DONJON) || nextTo(i,j,World.TILE.TUNNEL));
+					else if (nextTo(i,j,World.TILE.CAVE))
+						tiles[i][j] = World.TILE.ROCK;
+					else
+						tiles[i][j] = World.TILE.BLACK;
+	}
+	
+	private boolean nextTo(int x, int y, World.TILE type) {
+		for(int i = -1; i <= 1; i++)
+			for(int j = -1; j <= 1; j++)
+				if ((x+i >= 0 && y+j >= 0 && x+i < World.SIZE && y+j < World.SIZE))
+					if (tiles[x+i][y+j] == type)
+						return true;
+		return false;
+	}
+	
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
@@ -220,7 +249,7 @@ public class Generator {
 	private void createTunnel(Room from, Room target) {
 		Room a = new Room(0,0,0,0);
 		Room b = new Room(0,0,0,0);
-		boolean large = (distance(from,target) > ROOM_MAX_DISTANCE);
+		boolean large = (distance(from,target) < ROOM_MAX_DISTANCE);
 		
 		int nx, ny;		
 		nx = (int)(target.x + Math.random() * target.w);
@@ -261,21 +290,25 @@ public class Generator {
 	}
 	
 	private void blurCaves() {
-		char[][] blur_map = new char[World.SIZE][World.SIZE];
+		int[][] blur_map = new int[World.SIZE][World.SIZE];
 		
 		for(int i = 0; i < World.SIZE; i++) {
 			for(int j = 0; j < World.SIZE; j++) {
-				int total = 0;				
-				for (int a = -CAVE_BLUR_RADIUS; a <= CAVE_BLUR_RADIUS; a++)
-					for (int b = -CAVE_BLUR_RADIUS; b <= CAVE_BLUR_RADIUS; b++)
-						total += caves[i][j];
-				blur_map[i][j] = (char)(total / (CAVE_BLUR_RADIUS * CAVE_BLUR_RADIUS));
+				int total = 0;		
+				int count = 0;
+				for (int a = -CAVE_BLUR_RADIUS; a <= CAVE_BLUR_RADIUS; a++){
+					for (int b = -CAVE_BLUR_RADIUS; b <= CAVE_BLUR_RADIUS; b++) {
+						if (i+a >= 0 && j+b >= 0 && i+a < World.SIZE && j+b < World.SIZE) {
+							total += caves[i+a][j+b];
+							count++;
+						}
+					}
+				}
+				blur_map[i][j] = (int)(total /count);
 			}
 		}
 		
-		for(int i = 0; i < World.SIZE; i++)
-			for(int j = 0; j < World.SIZE; j++)
-				caves[i][j] = blur_map[i][j];
+		caves = blur_map;
 	}
 	
 	private void carve() {
@@ -322,9 +355,11 @@ public class Generator {
 			for(int j = 0; j < World.SIZE; j++) {
 				switch (data[i][j].ordinal()) {
 				case 0: System.out.print(" "); break;
-				case 1: System.out.print("*"); break;
-				case 2: System.out.print("#"); break;
-				case 3: System.out.print("%"); break;
+				case 1: System.out.print("#"); break;
+				case 2: System.out.print("%"); break;
+				case 3: System.out.print(","); break;
+				case 4: System.out.print("."); break;
+				case 5: System.out.print("¸"); break;
 				}
 			}
 			System.out.println();
