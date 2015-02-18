@@ -120,7 +120,7 @@ public class Render {
 	
 	public void draw(GameObjects obj){
 		
-		//GUI.getGraphicsContext2D().drawImage(obj/*.getBLABLABLA(image)*/, obj.getX(), obj.getY);//++++++++++++++++++++++++++++++++++++++++AJUSTEMENT ICI
+		GUI.getGraphicsContext2D().drawImage(obj.getSprite(), obj.getX(), obj.getY());
 		
 	}
 	
@@ -209,6 +209,9 @@ public class Render {
 	public int getRESOLUTION() {
 		return RESOLUTION;
 	}
+	
+	
+	
 	//TEMPORAIRE____POUR_TESTS
 	/**
 	 * @param args
