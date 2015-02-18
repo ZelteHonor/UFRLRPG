@@ -4,6 +4,7 @@
 package render;
 
 import java.util.Objects;
+import gameObjects.GameObjects;
 import world.World;
 
 import javafx.scene.canvas.Canvas;
@@ -36,7 +37,7 @@ public class Render {
 	 * @param world
 	 * @param objects
 	 */
-	public Render(World.TILE[][] world,GameObjects objects[]) {
+	public Render(World.TILE[][] world, GameObjects objects[]) {
 		
 		this.world = world;
 		this.objects = objects;
@@ -57,7 +58,7 @@ public class Render {
 	 * @param largeur dimension
 	 * @param hauteur dimension
 	 */
-	public Render(World.TILE[][] world,GameObjects objects[],int DW,int DH) {
+	public Render(World.TILE[][] world, GameObjects objects[], int DW, int DH) {
 		this.world = world;
 		this.objects = objects;
 		
@@ -76,7 +77,7 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(World.TILE[][] world,GameObjects objects[],int DW,int DH,int resolution) {
+	public Render(World.TILE[][] world, GameObjects objects[], int DW, int DH, int resolution) {
 		this.world = world;
 		this.objects = objects;
 		
@@ -96,7 +97,7 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(World.TILE[][] world,Objects objects[],Canvas GUI,int DW,int DH,int resolution) {
+	public Render(World.TILE[][] world, GameObjects objects[], Canvas GUI, int DW, int DH, int resolution) {
 		this.world = world;
 		this.objects = objects;
 		
@@ -117,13 +118,13 @@ public class Render {
 		
 	}
 	
-	public void draw(Objects obj){
+	public void draw(GameObjects obj){
 		
-		GUI.getGraphicsContext2D().drawImage(obj/*.getBLABLABLA(image)*/, obj.getX(), obj.getY);//++++++++++++++++++++++++++++++++++++++++AJUSTEMENT ICI
+		//GUI.getGraphicsContext2D().drawImage(obj/*.getBLABLABLA(image)*/, obj.getX(), obj.getY);//++++++++++++++++++++++++++++++++++++++++AJUSTEMENT ICI
 		
 	}
 	
-	public void draw(Objects obj[]){
+	public void draw(GameObjects obj[]){
 		
 		for(int i = 0; i < obj.length; i++)
 		{
@@ -139,7 +140,9 @@ public class Render {
 	 * @param position x
 	 * @param position y
 	 */
-	public void draw(Tile world[][],double x, double y){
+	public void draw(World.TILE[][] world,double x, double y){
+		int temp = 0;
+		
 		
 		//Screen position
 		double spx = (x - (DW*RESOLUTION/2));
@@ -150,7 +153,9 @@ public class Render {
 		{
 			for(int j = (int)(spy/RESOLUTION); j < (DH+1); j++)
 			{
-				
+				System.out.println(i + " " + j);
+				if(i >= 0 && j >= 0)
+				System.out.println(world[i][j].toString());
 			}
 		}
 		
@@ -176,7 +181,26 @@ public class Render {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		World.TILE[][] world = new World.TILE[World.SIZE][World.SIZE];
+		
+		for(int i = 0; i < 128; i++)
+		{
+			
+			for(int j = 0; j < 128; j++)
+			{
+				
+				world[i][j] = World.TILE.DONJON;
+				
+			}
+			
+		}
+		
+		
+		world[0][0] = World.TILE.CAVE;
+		
+		world[0][0] = World.TILE.CAVE;
+		Render test = new Render(world,null);
+		test.draw(world, 0, 0);
 
 	}
 
