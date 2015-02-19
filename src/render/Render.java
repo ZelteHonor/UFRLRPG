@@ -4,11 +4,11 @@
 package render;
 
 import java.util.Objects;
+
 import gameObjects.GameObjects;
 import world.World;
-
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 /**
  * Cette classe dessine sur un Canvas le monde et ces objets.
@@ -30,6 +30,9 @@ public class Render {
 	//À afficher
 	private World.TILE[][] world;
 	private GameObjects objects[];
+	
+	//Lien des TILE
+	private String tileLink[];
 
 	/**
 	 * Constructor
@@ -37,10 +40,9 @@ public class Render {
 	 * @param world
 	 * @param objects
 	 */
-	public Render(World.TILE[][] world, GameObjects objects[]) {
+	public Render(World.TILE[][] world) {
 		
 		this.world = world;
-		this.objects = objects;
 		
 		DH = 11;
 		DW = 20;
@@ -48,7 +50,7 @@ public class Render {
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		
+		initLinks();
 	}
 	/**
 	 * Constructor
@@ -58,15 +60,16 @@ public class Render {
 	 * @param largeur dimension
 	 * @param hauteur dimension
 	 */
-	public Render(World.TILE[][] world, GameObjects objects[], int DW, int DH) {
+	public Render(World.TILE[][] world, int DW, int DH) {
 		this.world = world;
-		this.objects = objects;
 		
 		this.DH = DH;
 		this.DW = DW;
 		RESOLUTION = 64;
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
+		
+		initLinks();
 	}
 	/**
 	 * Constructor
@@ -77,15 +80,16 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(World.TILE[][] world, GameObjects objects[], int DW, int DH, int resolution) {
+	public Render(World.TILE[][] world, int DW, int DH, int resolution) {
 		this.world = world;
-		this.objects = objects;
 		
 		this.DH = DH;
 		this.DW = DW;
 		this.RESOLUTION = resolution;
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
+		
+		initLinks();
 	}
 	/**
 	 * Constructor
@@ -97,27 +101,32 @@ public class Render {
 	 * @param Height dimension
 	 * @param resolution
 	 */
-	public Render(World.TILE[][] world, GameObjects objects[], Canvas GUI, int DW, int DH, int resolution) {
+	public Render(World.TILE[][] world, Canvas GUI, int DW, int DH, int resolution) {
 		this.world = world;
-		this.objects = objects;
 		
 		this.DH = DH;
 		this.DW = DW;
 		this.RESOLUTION = resolution;
 		
 		this.GUI = GUI;
+		
+		initLinks();
 	}
 	
 	/**
-	 * Fill with black the GUI.
+	 * Remplis de noir le canvas
 	 */
 	public void clear(){
 		
-		GUI.getGraphicsContext2D().setFill(Color.BLACK);
-		GUI.getGraphicsContext2D().fill();
+		GUI.getGraphicsContext2D().fillRect(0, 0, DW*RESOLUTION, DH*RESOLUTION);
 		
 	}
 	
+	/**
+	 * Dessine l'objet
+	 * 
+	 * @param obj
+	 */
 	public void draw(GameObjects obj){
 		
 		GUI.getGraphicsContext2D().drawImage(obj.getSprite(), obj.getX(), obj.getY());
@@ -140,8 +149,7 @@ public class Render {
 	 * @param position x
 	 * @param position y
 	 */
-	public void draw(World.TILE[][] world,double x, double y){
-		String matriceTemp = "";
+	public void drawWorld(double x, double y){
 		
 		//Screen position
 		double spx = (x - (DW*RESOLUTION/2));
@@ -151,29 +159,58 @@ public class Render {
 		int scx = (int)(spx/RESOLUTION);
 		int scy = (int)(spy/RESOLUTION);
 		
-		System.out.println(spx + " " + spy);
-		System.out.println(scx + " " + scy);
+		clear();
+		
 		
 		for(int j = scy; j < (scy + (DH+2)); j++)
 		{
 			for(int i = scx; i < (scx + (DW+2)); i++)
 			{
+				System.out.println(world[i][j].ordinal());
 				
-				
-				if(i >= 0 && j >= 0)
+				try
 				{
-					matriceTemp += " " + world[i][j].toString();
-				}
+					switch(world[i][j].ordinal())
+					{
+						
+					
+					case 0 :
+						break;
+					case 1 :
+						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[0]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						System.out.println(new Image(tileLink[0]));
+						break;
+					case 2 :
+						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[1]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						System.out.println(new Image(tileLink[1]));
+						break;
+					case 3 :
+						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[2]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						System.out.println(new Image(tileLink[2]));
+						break;
+					case 4 :
+						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[3]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						System.out.println(new Image(tileLink[3]));
+						break;
+					case 5 :
+						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[4]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						System.out.println(new Image(tileLink[4]));
+						break;
+					}
+				}catch(ArrayIndexOutOfBoundsException e){}
+				
 			}
-			
-			matriceTemp += "\n";
 			
 		}
 		
-		System.out.println(matriceTemp);
-		
 	}
 	
+	public GameObjects[] getObjects() {
+		return objects;
+	}
+	public void setObjects(GameObjects[] objects) {
+		this.objects = objects;
+	}
 	/**
 	 * 
 	 * @return GUI
@@ -212,6 +249,19 @@ public class Render {
 	
 	
 	
+	/**
+	 * C'est ici que ce trouve les liens des images des tuiles.
+	 */
+	private void initLinks()
+	{
+		tileLink = new String[6];
+		tileLink[0] = "/action_drawhealth.gif";
+		tileLink[1] = "/action_gravity.gif";
+		tileLink[2] = "/action_ifcollision.gif";
+		tileLink[3] = "/action_ifquestion.gif";
+		tileLink[4] = "/action_ifscore.gif";
+		tileLink[5] = "/action_vreverse.gif";
+	}
 	//TEMPORAIRE____POUR_TESTS
 	/**
 	 * @param args
@@ -225,7 +275,7 @@ public class Render {
 			for(int j = 0; j < 128; j++)
 			{
 				
-				world[i][j] = World.TILE.DONJON;
+				//world[i][j] = World.TILE.DONJON;
 				
 			}
 			
@@ -235,8 +285,8 @@ public class Render {
 		world[0][0] = World.TILE.CAVE;
 		
 		world[0][0] = World.TILE.CAVE;
-		Render test = new Render(world,null);
-		test.draw(world, 0*64, 0*64);
+		Render test = new Render(world);
+		test.drawWorld(0*64, 0*64);
 
 	}
 

@@ -3,6 +3,8 @@ package control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import render.Render;
+import world.Generator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -26,7 +28,16 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Input input = new Input();
-		// faire en sorte qu'un mappage des touches soit fait selon un fichiers
-		// externe de ssauvegarde ou de donnée storé dans des constances.
+		/* faire en sorte qu'un mappage des touches soit fait selon un fichiers
+		 externe de ssauvegarde ou de donnée storé dans des constances.*/
+		
+		
+		//TEST GRAPHIQUES ICI
+		Generator gen = new Generator();
+		gen.generate();
+		Render render = new Render(gen.tiles);
+		render.drawWorld(1000, 1000);
+		pane.getChildren().add(render.getGUI());
+		//=========================================
 	}
 }
