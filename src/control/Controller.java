@@ -33,11 +33,15 @@ public class Controller implements Initializable {
 		
 		
 		//TEST GRAPHIQUES ICI
-		Generator gen = new Generator();
+		
+		//le tile de Generator est private et sans get/set!
+		
+		/*Generator gen = new Generator();
 		gen.generate();
 		Render render = new Render(gen.tiles);
 		render.drawWorld(1000, 1000);
-		pane.getChildren().add(render.getGUI());
+		pane.getChildren().add(render.getGUI());*/
+		
 		//=========================================
 	}
 }
