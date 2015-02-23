@@ -254,39 +254,20 @@ public class Render {
 	 */
 	private void initLinks()
 	{
-		tileLink = new String[6];
-		tileLink[0] = "/action_drawhealth.gif";
-		tileLink[1] = "/action_gravity.gif";
-		tileLink[2] = "/action_ifcollision.gif";
-		tileLink[3] = "/action_ifquestion.gif";
-		tileLink[4] = "/action_ifscore.gif";
-		tileLink[5] = "/action_vreverse.gif";
+		tileLink = new String[5];
+		tileLink[0] = "/Ovo64/wall.png";// WALL
+		tileLink[1] = "/Ovo64/stone.png";//ROCK
+		tileLink[2] = "/Ovo64/dirt.png";//CAVE
+		tileLink[3] = "/Ovo64/plank.png";//DONJON
+		tileLink[4] = "/Ovo64/plank_alt.png";//TUNNEL
 	}
+	
 	//TEMPORAIRE____POUR_TESTS
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		World.TILE[][] world = new World.TILE[World.SIZE][World.SIZE];
 		
-		for(int i = 0; i < 128; i++)
-		{
-			
-			for(int j = 0; j < 128; j++)
-			{
-				
-				//world[i][j] = World.TILE.DONJON;
-				
-			}
-			
-		}
-		
-		
-		world[0][0] = World.TILE.CAVE;
-		
-		world[0][0] = World.TILE.CAVE;
-		Render test = new Render(world);
-		test.drawWorld(0*64, 0*64);
 
 	}
 
