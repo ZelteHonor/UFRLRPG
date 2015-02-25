@@ -6,6 +6,7 @@
 
 package world;
 
+import world.World;
 import java.util.ArrayList;
 
 public class Generator {
@@ -45,7 +46,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Génère le monde, sous forme d'un array de l'enum World.TILE
+	 * Gï¿½nï¿½re le monde, sous forme d'un array de l'enum World.TILE
 	 * @return world array
 	 */
 	public World.TILE[][] generate() {
@@ -61,7 +62,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Prépare le monde, en settant les variables et vidant les arrays
+	 * Prï¿½pare le monde, en settant les variables et vidant les arrays
 	 */
 	private void clear() {
 		for(int i = 0; i < World.SIZE; i++) {
@@ -76,7 +77,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Génère ROOM_COUNT salles, dont ROOOM_BIG_COUNT sont des "grosses" salles.
+	 * Gï¿½nï¿½re ROOM_COUNT salles, dont ROOOM_BIG_COUNT sont des "grosses" salles.
 	 * S'assure que les salles ne se overlap pas.
 	 */
 	private void generateRooms() {
@@ -95,7 +96,7 @@ public class Generator {
 			room.x = (int)(Math.random() * (World.SIZE - room.w));
 			room.y = (int)(Math.random() * (World.SIZE - room.h));
 			
-			/* Vérifie pour le overlap */
+			/* Vï¿½rifie pour le overlap */
 			for (int i = 0; i < rooms.size(); i++) {
 				Room other = rooms.get(i);
 				if (!((other.x > room.x + room.w) || (other.x + other.w < room.x) || (other.y > room.y + room.h) || (other.y + other.h < room.y)))
@@ -111,7 +112,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Sélectionne des salles, et les connectes avec des tunnels.
+	 * Sï¿½lectionne des salles, et les connectes avec des tunnels.
 	 */
 	private void generateTunnels() {
 		ArrayList<Room> network = new ArrayList<Room>();
@@ -126,7 +127,7 @@ public class Generator {
 			ArrayList<Room> available = (ArrayList<Room>) network.clone();
 			ArrayList<Room> tested = new ArrayList<Room>();
 			
-			/* Tente de trouver une salle qui est dans la limite acceptable, et qui est déjà connectée à une autre salles */
+			/* Tente de trouver une salle qui est dans la limite acceptable, et qui est dï¿½jï¿½ connectï¿½e ï¿½ une autre salles */
 			while (!success && available.size() > 0) {
 				from = available.get((int)(Math.random()*available.size()));
 				if (distance(from, target) <= ROOM_MAX_DISTANCE) {
@@ -170,7 +171,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Génère des grottes, basée sur un tableau de bruit
+	 * Gï¿½nï¿½re des grottes, basï¿½e sur un tableau de bruit
 	 */
 	private void generateCaves() {
 		for(int i = 0; i < World.SIZE; i++)
@@ -183,7 +184,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Connecte les groupes de salles, jusqu'à ce qu'elle soit toutes connectées
+	 * Connecte les groupes de salles, jusqu'ï¿½ ce qu'elle soit toutes connectï¿½es
 	 */
 	private void connect() {
 		int[][] map = new int[World.SIZE][World.SIZE];
@@ -227,7 +228,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Enlève les grottes qui ne sont pas accesible des couloirs
+	 * Enlï¿½ve les grottes qui ne sont pas accesible des couloirs
 	 */
 	private void fillCaves() {
 		int[][] map = new int[World.SIZE][World.SIZE];
@@ -240,7 +241,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Enlève les tuiles qui ne sont pas visible, et spécifie le type de mur
+	 * Enlï¿½ve les tuiles qui ne sont pas visible, et spï¿½cifie le type de mur
 	 */
 	private void specify() {
 		for(int i = 0; i < World.SIZE; i++)
@@ -254,7 +255,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Vérifie si une tuile type est à proximité directe de x,y
+	 * Vï¿½rifie si une tuile type est ï¿½ proximitï¿½ directe de x,y
 	 * @param x
 	 * @param y
 	 * @param type que l'on cherche
@@ -270,11 +271,11 @@ public class Generator {
 	}
 	
 	/**
-	 * Fonction récursive pour inonder les salles
-	 * @param x de départ
-	 * @param y de départ
+	 * Fonction rï¿½cursive pour inonder les salles
+	 * @param x de dï¿½part
+	 * @param y de dï¿½part
 	 * @param map le tableau de stockage
-	 * @param val la valeur à écrire
+	 * @param val la valeur ï¿½ ï¿½crire
 	 */
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
@@ -290,7 +291,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Crée un tunnel entre deux salles
+	 * Crï¿½e un tunnel entre deux salles
 	 * @param from
 	 * @param target
 	 */
@@ -338,7 +339,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Fonction de flou sur l'array des grottes pour attenuer le bruit aléatoire
+	 * Fonction de flou sur l'array des grottes pour attenuer le bruit alï¿½atoire
 	 */
 	private void blurCaves() {
 		int[][] blur_map = new int[World.SIZE][World.SIZE];

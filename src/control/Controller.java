@@ -1,5 +1,6 @@
 package control;
 
+import entity.Player;
 import gameObjects.GameObjects;
 
 import java.net.URL;
@@ -16,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -33,7 +35,13 @@ public class Controller implements Initializable {
 	private Service<Void> timer;
 
 	private ArrayList<GameObjects> objects;
+	
+	public enum KEYSTATE {PRESSED ,DOWN, RELEASED, UP};
 
+	//Test
+	//int j = 0;
+	
+	
 	public void initGame() {
 
 	}
@@ -42,12 +50,17 @@ public class Controller implements Initializable {
 		Thread th = new Thread(update);
 		th.setDaemon(true);
 		th.start();
+
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		// TEST GRAPHIQUES ICI
+
+		objects = new ArrayList<GameObjects>();
+		
+		Player player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
 
 		Generator gen = new Generator();
 
@@ -57,8 +70,43 @@ public class Controller implements Initializable {
 
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-			public void handle(KeyEvent ke) {
+			public void handle(KeyEvent event) {
 
+				if (event.getCode() == KeyCode.W)
+				{
+					player.setKeyState(0, KEYSTATE.PRESSED);
+				} else if (event.getCode() == KeyCode.S)
+				{
+					player.setKeyState(1, KEYSTATE.PRESSED);
+				}
+				if (event.getCode() == KeyCode.A)
+				{
+					player.setKeyState(2, KEYSTATE.PRESSED);
+				} else if (event.getCode() == KeyCode.D)
+				{
+					player.setKeyState(3, KEYSTATE.PRESSED);
+				}
+			}
+		});
+		
+		pane.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+			public void handle(KeyEvent event) {
+
+				if (event.getCode() == KeyCode.W)
+				{
+					player.setKeyState(0, KEYSTATE.RELEASED);
+				} else if (event.getCode() == KeyCode.S)
+				{
+					player.setKeyState(1, KEYSTATE.RELEASED);
+				}
+				if (event.getCode() == KeyCode.A)
+				{
+					player.setKeyState(2, KEYSTATE.RELEASED);
+				} else if (event.getCode() == KeyCode.D)
+				{
+					player.setKeyState(3, KEYSTATE.RELEASED);
+				}
 			}
 		});
 
@@ -78,21 +126,23 @@ public class Controller implements Initializable {
 				return new Task<Void>() {
 					@Override
 					protected Void call() throws InterruptedException {
+						while (true) {
+							javafx.application.Platform
+									.runLater(new Runnable() {
 
-						javafx.application.Platform.runLater(new Runnable() {
+										@Override
+										public void run() {
+											launchUpdater();
+										}
 
-							@Override
-							public void run() {
-								launchUpdater();
-							}
-
-						});
-
-						return null;
+									});
+							Thread.sleep(17);
+						}
 					}
 				};
 			}
 		};
+		timer.start();
 
 		// =========================================
 	}
