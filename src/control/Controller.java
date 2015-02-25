@@ -5,9 +5,11 @@ import java.util.ResourceBundle;
 
 import render.Render;
 import world.Generator;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -17,19 +19,15 @@ public class Controller implements Initializable {
 	@FXML
 	private Pane pane;
 	@FXML
-	private Canvas view;
-	@FXML
 	private Pane gamePane;
 	
 	
 	
-	Input input;
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Input input = new Input();
-		/* faire en sorte qu'un mappage des touches soit fait selon un fichiers
-		 externe de ssauvegarde ou de donnée storé dans des constances.*/
+		
 		
 		
 		//TEST GRAPHIQUES ICI
@@ -40,6 +38,12 @@ public class Controller implements Initializable {
 		render.drawWorld(1000, 1000);
 		pane.getChildren().add(render.getGUI());
 		
+		pane.setOnKeyPressed(new EventHandler<KeyEvent>(){
+			
+            public void handle(KeyEvent ke) {
+                
+            }
+		});
 		//=========================================
 	}
 }
