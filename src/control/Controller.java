@@ -1,10 +1,15 @@
 package control;
 
+import gameObjects.GameObjects;
+
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import render.Render;
 import world.Generator;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +26,16 @@ public class Controller implements Initializable {
 	@FXML
 	private Pane gamePane;
 	
+	private Task<Void> update;
 	
+	private Service<Void> timer;
+	
+	private ArrayList<GameObjects> objects;
+	
+	public void initGame()
+	{
+		
+	}
 	
 	
 

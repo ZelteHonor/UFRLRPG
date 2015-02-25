@@ -6,7 +6,7 @@ public abstract class GameObjects {
 
 	private int x, y, angle;
 
-	private Image sprite;
+	private String sprite;
 
 	public GameObjects() {
 		this.x = 0;
@@ -27,7 +27,7 @@ public abstract class GameObjects {
 		return angle;
 	}
 
-	public Image getSprite() {
+	public String getSprite() {
 		return sprite;
 	}
 
@@ -49,7 +49,7 @@ public abstract class GameObjects {
 
 	}
 
-	public void setSprite(Image sprite) {
+	public void setSprite(String sprite) {
 		this.sprite = sprite;
 	}
 
