@@ -34,11 +34,11 @@ public class Controller implements Initializable {
 		
 		//TEST GRAPHIQUES ICI
 		
-		/*Generator gen = new Generator();
+		Generator gen = new Generator();
 
 		Render render = new Render(gen.generate());
 		render.drawWorld(1000, 1000);
-		pane.getChildren().add(render.getGUI());*/
+		pane.getChildren().add(render.getGUI());
 		
 		//=========================================
 	}

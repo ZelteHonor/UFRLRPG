@@ -3,8 +3,6 @@
  */
 package render;
 
-import java.util.Objects;
-
 import gameObjects.GameObjects;
 import world.World;
 import javafx.scene.canvas.Canvas;
@@ -35,9 +33,9 @@ public class Render {
 	private String tileLink[];
 
 	/**
-	 * Constructor
+	 * Constructeur
 	 * 
-	 * @param world
+	 * @param world[]
 	 * @param objects
 	 */
 	public Render(World.TILE[][] world) {
@@ -53,10 +51,9 @@ public class Render {
 		initLinks();
 	}
 	/**
-	 * Constructor
+	 * Constructeur
 	 * 
-	 * @param world
-	 * @param objects
+	 * @param world[]
 	 * @param largeur dimension
 	 * @param hauteur dimension
 	 */
@@ -72,10 +69,9 @@ public class Render {
 		initLinks();
 	}
 	/**
-	 * Constructor
+	 * Constructeur
 	 * 
-	 * @param world
-	 * @param objects
+	 * @param world[]
 	 * @param Width dimension
 	 * @param Height dimension
 	 * @param resolution
@@ -92,10 +88,9 @@ public class Render {
 		initLinks();
 	}
 	/**
-	 * Constructor
+	 * Constructeur
 	 * 
 	 * @param world
-	 * @param objects
 	 * @param Graphical user interface
 	 * @param Width dimension
 	 * @param Height dimension
@@ -133,6 +128,11 @@ public class Render {
 		
 	}
 	
+	/**
+	 * Dessine une liste d'objet
+	 * 
+	 * @param obj[]
+	 */
 	public void draw(GameObjects obj[]){
 		
 		for(int i = 0; i < obj.length; i++)
@@ -246,8 +246,6 @@ public class Render {
 	public int getRESOLUTION() {
 		return RESOLUTION;
 	}
-	
-	
 	
 	/**
 	 * C'est ici que ce trouve les liens des images des tuiles.
