@@ -1,12 +1,13 @@
 package gameObjects;
 
-import javafx.scene.image.Image;
 
 public abstract class GameObjects {
 
-	private int x, y, angle;
+	protected int x, y;
 
-	private String sprite;
+	protected int angle;
+
+	protected String sprite;
 
 	public GameObjects() {
 		this.x = 0;
@@ -14,6 +15,8 @@ public abstract class GameObjects {
 		this.angle = 0;
 
 	}
+	
+	public abstract void update();
 
 	public int getX() {
 		return x;

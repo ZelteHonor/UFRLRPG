@@ -11,4 +11,10 @@ public class Items extends GameObjects{
 		this.evil = evil;
 	}
 
+	@Override
+	public void update() {
+		angle++;
+		
+	}
+
 }

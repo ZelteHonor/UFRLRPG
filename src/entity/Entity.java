@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import gameObjects.GameObjects;
 import gameObjects.Items;
 
-public class Entity extends GameObjects {
+public abstract class Entity extends GameObjects {
 
 	private int level, health, intellect, strenght, agility, mana, speed,
 			perception;
@@ -23,4 +23,7 @@ public class Entity extends GameObjects {
 		this.perception = perception;
 		this.inventory = inventory;
 	}
+
+	@Override
+	public abstract void update();
 }
