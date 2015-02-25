@@ -1,7 +1,7 @@
 /**
  * WorldGen 1.0
  * Traduit du C++ par David Bourgault
- * Version original par David Bourgault
+ * Version originale par David Bourgault
  */
 
 package world;
@@ -17,7 +17,6 @@ public class Generator {
 	private final int CAVE_BLUR_RADIUS = 3;
 	private final int CAVE_THRESHOLD = 117;
 	
-	/* Rooms */
 	private class Room {
 		public int x, y, w,h;
 		
@@ -45,6 +44,10 @@ public class Generator {
 		tunnels = new ArrayList<Room>();
 	}
 	
+	/**
+	 * Génère le monde, sous forme d'un array de l'enum World.TILE
+	 * @return world array
+	 */
 	public World.TILE[][] generate() {
 		clear();
 		generateRooms();
@@ -57,7 +60,9 @@ public class Generator {
 		return tiles;
 	}
 	
-	/* Generation */
+	/**
+	 * Prépare le monde, en settant les variables et vidant les arrays
+	 */
 	private void clear() {
 		for(int i = 0; i < World.SIZE; i++) {
 			for(int j = 0; j < World.SIZE; j++) {
@@ -70,6 +75,10 @@ public class Generator {
 		tunnels.clear();
 	}
 	
+	/**
+	 * Génère ROOM_COUNT salles, dont ROOOM_BIG_COUNT sont des "grosses" salles.
+	 * S'assure que les salles ne se overlap pas.
+	 */
 	private void generateRooms() {
 		int bigroom_count = 0;
 		
@@ -86,6 +95,7 @@ public class Generator {
 			room.x = (int)(Math.random() * (World.SIZE - room.w));
 			room.y = (int)(Math.random() * (World.SIZE - room.h));
 			
+			/* Vérifie pour le overlap */
 			for (int i = 0; i < rooms.size(); i++) {
 				Room other = rooms.get(i);
 				if (!((other.x > room.x + room.w) || (other.x + other.w < room.x) || (other.y > room.y + room.h) || (other.y + other.h < room.y)))
@@ -100,6 +110,9 @@ public class Generator {
 		}
 	}
 	
+	/**
+	 * Sélectionne des salles, et les connectes avec des tunnels.
+	 */
 	private void generateTunnels() {
 		ArrayList<Room> network = new ArrayList<Room>();
 		network.add(rooms.get(0));
@@ -113,6 +126,7 @@ public class Generator {
 			ArrayList<Room> available = (ArrayList<Room>) network.clone();
 			ArrayList<Room> tested = new ArrayList<Room>();
 			
+			/* Tente de trouver une salle qui est dans la limite acceptable, et qui est déjà connectée à une autre salles */
 			while (!success && available.size() > 0) {
 				from = available.get((int)(Math.random()*available.size()));
 				if (distance(from, target) <= ROOM_MAX_DISTANCE) {
@@ -128,6 +142,7 @@ public class Generator {
 			tested.clear();
 			available = (ArrayList<Room>) rooms.clone();
 			
+			/* Tente de trouver une salle qui est dans la limite acceptable */
 			while (!success && available.size() > 0) {
 				from = available.get((int)(Math.random()*available.size()));
 				if (distance(from, target) <= ROOM_MAX_DISTANCE) {
@@ -140,6 +155,7 @@ public class Generator {
 				}
 			}
 			
+			/* Prend une salle au hasard */
 			if (success == false) {
 				available = (ArrayList<Room>) network.clone();
 				from = available.get((int)(Math.random()*available.size()));
@@ -153,15 +169,22 @@ public class Generator {
 		rooms = (ArrayList<Room>) network.clone();
 	}
 	
+	/**
+	 * Génère des grottes, basée sur un tableau de bruit
+	 */
 	private void generateCaves() {
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
 				caves[i][j] = (int)(Math.random()*255);
 		
+		/* Blur 2 fois pour meilleur resultat */
 		blurCaves();
 		blurCaves();
 	}
 	
+	/**
+	 * Connecte les groupes de salles, jusqu'à ce qu'elle soit toutes connectées
+	 */
 	private void connect() {
 		int[][] map = new int[World.SIZE][World.SIZE];
 		int map_count = 1;
@@ -203,6 +226,9 @@ public class Generator {
 					
 	}
 	
+	/**
+	 * Enlève les grottes qui ne sont pas accesible des couloirs
+	 */
 	private void fillCaves() {
 		int[][] map = new int[World.SIZE][World.SIZE];
 		fill(rooms.get(0).x+1, rooms.get(0).y+1, map, 1);
@@ -213,6 +239,9 @@ public class Generator {
 					tiles[i][j] = World.TILE.WALL;
 	}
 	
+	/**
+	 * Enlève les tuiles qui ne sont pas visible, et spécifie le type de mur
+	 */
 	private void specify() {
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
@@ -224,6 +253,13 @@ public class Generator {
 						tiles[i][j] = World.TILE.BLACK;
 	}
 	
+	/**
+	 * Vérifie si une tuile type est à proximité directe de x,y
+	 * @param x
+	 * @param y
+	 * @param type que l'on cherche
+	 * @return boolean
+	 */
 	private boolean nextTo(int x, int y, World.TILE type) {
 		for(int i = -1; i <= 1; i++)
 			for(int j = -1; j <= 1; j++)
@@ -233,6 +269,13 @@ public class Generator {
 		return false;
 	}
 	
+	/**
+	 * Fonction récursive pour inonder les salles
+	 * @param x de départ
+	 * @param y de départ
+	 * @param map le tableau de stockage
+	 * @param val la valeur à écrire
+	 */
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
@@ -246,6 +289,11 @@ public class Generator {
 			fill(x, y+1, map, val);
 	}
 	
+	/**
+	 * Crée un tunnel entre deux salles
+	 * @param from
+	 * @param target
+	 */
 	private void createTunnel(Room from, Room target) {
 		Room a = new Room(0,0,0,0);
 		Room b = new Room(0,0,0,0);
@@ -289,6 +337,9 @@ public class Generator {
 		tunnels.add(b);
 	}
 	
+	/**
+	 * Fonction de flou sur l'array des grottes pour attenuer le bruit aléatoire
+	 */
 	private void blurCaves() {
 		int[][] blur_map = new int[World.SIZE][World.SIZE];
 		
@@ -311,6 +362,9 @@ public class Generator {
 		caves = blur_map;
 	}
 	
+	/**
+	 * Applique les salles logiques, les tunnels logiques et les grottes dans le tableau final de monde 
+	 */
 	private void carve() {
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
@@ -343,26 +397,13 @@ public class Generator {
 					tiles[i][j] = World.TILE.WALL;
 	}
 	
+	/**
+	 * Calcule la distance entre deux salles a,b
+	 * @param a
+	 * @param b
+	 * @return distance between a and b
+	 */
 	private int distance(Room a, Room b) {
 		return (int) Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
-	}
-	
-	public static void main(String args[]) {
-		Generator gen = new Generator();
-		World.TILE[][] data = gen.generate();
-		
-		for(int i = 0; i < World.SIZE; i++) {
-			for(int j = 0; j < World.SIZE; j++) {
-				switch (data[i][j].ordinal()) {
-				case 0: System.out.print(" "); break;
-				case 1: System.out.print("#"); break;
-				case 2: System.out.print("%"); break;
-				case 3: System.out.print(","); break;
-				case 4: System.out.print("."); break;
-				case 5: System.out.print("¸"); break;
-				}
-			}
-			System.out.println();
-		}
 	}
 }
