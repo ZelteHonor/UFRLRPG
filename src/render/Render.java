@@ -3,6 +3,9 @@
  */
 package render;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import gameObjects.GameObjects;
 import world.World;
 import javafx.scene.canvas.Canvas;
@@ -29,8 +32,8 @@ public class Render {
 	private World.TILE[][] world;
 	private GameObjects objects[];
 	
-	//Lien des TILE
-	private String tileLink[];
+	//Lien des Images
+	private HashMap<String,Image> spriteMap;
 
 	/**
 	 * Constructeur
@@ -42,13 +45,13 @@ public class Render {
 		
 		this.world = world;
 		
-		DH = 11;
-		DW = 20;
+		DH = 30;//11
+		DW = 30;//20
 		RESOLUTION = 64;
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		initLinks();
+		initSpriteMap();
 	}
 	/**
 	 * Constructeur
@@ -66,7 +69,7 @@ public class Render {
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		initLinks();
+		initSpriteMap();
 	}
 	/**
 	 * Constructeur
@@ -85,7 +88,7 @@ public class Render {
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		initLinks();
+		initSpriteMap();
 	}
 	/**
 	 * Constructeur
@@ -105,7 +108,7 @@ public class Render {
 		
 		this.GUI = GUI;
 		
-		initLinks();
+		initSpriteMap();
 	}
 	
 	/**
@@ -124,7 +127,69 @@ public class Render {
 	 */
 	public void draw(GameObjects obj){
 		
-		GUI.getGraphicsContext2D().drawImage(obj.getSprite(), obj.getX(), obj.getY());
+		GUI.getGraphicsContext2D().save();
+		GUI.getGraphicsContext2D().rotate(25);
+		
+		//int[] temp = changeCoordinate(obj.getX(),obj.getY(),0);
+		
+		double c = Math.sqrt(obj.getX()*obj.getX() + obj.getX()*obj.getX());
+		
+		System.out.println("("+obj.getX()+","+obj.getY()+")");
+		//System.out.println("("+temp[0]+","+temp[1]+")");
+		System.out.println("("+c*Math.sin(90-25)+","+c*Math.cos(90-25)+")");
+		
+		
+		
+		GUI.getGraphicsContext2D().drawImage(getSprite(obj), c*Math.sin(90-25), c*Math.cos(90-25));
+		
+		GUI.getGraphicsContext2D().restore();
+	}
+	
+	/**
+	 * Ajuste la position d'une coordonnée
+	 * 
+	 * @param x
+	 * @param y
+	 * @param angle
+	 * @return nouvelles positions
+	 */
+	public int[] changeCoordinate(int x,int y,double theta)
+	{
+		//distance points/centre
+		double c = Math.sqrt((x*x)+(y*y));
+		
+		//angle de la position initiale
+		double alpha = Math.atan(y/x);
+		
+		//angle entre le point initiale et le point finale
+		double beta = theta - alpha;
+		
+		//La Translation à éffectuer
+		double DeltaX = c - c*Math.cos(beta);
+		double DeltaY = c - c*Math.sin(beta);
+		
+		int xFinale = (int) (c - DeltaX);
+		int yFinale = (int) (DeltaY);
+		
+		return new int[]{xFinale,yFinale};
+	}
+	
+	/**
+	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
+	 * 
+	 * @param obj
+	 * @return L'image du sprite
+	 */
+	public Image getSprite(GameObjects obj)
+	{
+		Image sprite = spriteMap.get(obj.getSprite());
+		
+		if(sprite == null)
+		{
+			spriteMap.put(obj.getSprite(), new Image(obj.getSprite()));
+		}
+		
+		return sprite;
 		
 	}
 	
@@ -172,29 +237,28 @@ public class Render {
 				{
 					switch(world[i][j].ordinal())
 					{
-						
+
+
+
+
+
 					
 					case 0 :
 						break;
 					case 1 :
-						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[0]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
-						System.out.println(new Image(tileLink[0]));
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
 						break;
 					case 2 :
-						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[1]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
-						System.out.println(new Image(tileLink[1]));
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
 						break;
 					case 3 :
-						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[2]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
-						System.out.println(new Image(tileLink[2]));
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
 						break;
 					case 4 :
-						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[3]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
-						System.out.println(new Image(tileLink[3]));
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
 						break;
 					case 5 :
-						GUI.getGraphicsContext2D().drawImage(new Image(tileLink[4]), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
-						System.out.println(new Image(tileLink[4]));
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
 						break;
 					}
 				}catch(ArrayIndexOutOfBoundsException e){}
@@ -248,15 +312,16 @@ public class Render {
 	}
 	
 	/**
-	 * C'est ici que ce trouve les liens des images des tuiles.
+	 * Initialise spriteMap et les tuiles.
 	 */
-	private void initLinks()
+	private void initSpriteMap()
 	{
-		tileLink = new String[5];
-		tileLink[0] = "img/wall.png";// WALL
-		tileLink[1] = "img/stone.png";//ROCK
-		tileLink[2] = "img/dirt.png";//CAVE
-		tileLink[3] = "img/plank.png";//DONJON
-		tileLink[4] = "img/plank_alt.png";//TUNNEL
+		spriteMap = new HashMap<>();
+		
+		spriteMap.put("img/wall.png", new Image("img/wall.png"));// WALL
+		spriteMap.put("img/stone.png", new Image("img/stone.png"));//ROCK
+		spriteMap.put("img/dirt.png", new Image("img/dirt.png"));//CAVE
+		spriteMap.put("img/plank.png", new Image("img/plank.png"));//DONJON
+		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 	}
 }

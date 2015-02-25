@@ -2,9 +2,10 @@ package gameObjects;
 
 import javafx.scene.image.Image;
 
-public abstract class GameObjects {
+public class GameObjects {
 
-	private int x, y, angle;
+	private int x, y;
+	private double angle;
 
 	private String sprite;
 
@@ -23,7 +24,7 @@ public abstract class GameObjects {
 		return y;
 	}
 
-	public int getAngle() {
+	public double getAngle() {
 		return angle;
 	}
 

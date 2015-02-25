@@ -46,10 +46,17 @@ public class Controller implements Initializable {
 		
 		//TEST GRAPHIQUES ICI
 		
+		GameObjects tryIt = new GameObjects();
+		tryIt.setX(300);
+		tryIt.setY(0);
+		tryIt.setSprite("img/dirt.png");
+		tryIt.setAngle(45);
+		
 		Generator gen = new Generator();
 
 		Render render = new Render(gen.generate());
 		render.drawWorld(1000, 1000);
+		render.draw(tryIt);
 		pane.getChildren().add(render.getGUI());
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>(){
