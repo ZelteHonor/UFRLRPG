@@ -19,6 +19,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setTitle("UFRLRPG : Unoriginal till the end!");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
