@@ -255,20 +255,10 @@ public class Render {
 	private void initLinks()
 	{
 		tileLink = new String[5];
-		tileLink[0] = "/Ovo64/wall.png";// WALL
-		tileLink[1] = "/Ovo64/stone.png";//ROCK
-		tileLink[2] = "/Ovo64/dirt.png";//CAVE
-		tileLink[3] = "/Ovo64/plank.png";//DONJON
-		tileLink[4] = "/Ovo64/plank_alt.png";//TUNNEL
+		tileLink[0] = "img/wall.png";// WALL
+		tileLink[1] = "img/stone.png";//ROCK
+		tileLink[2] = "img/dirt.png";//CAVE
+		tileLink[3] = "img/plank.png";//DONJON
+		tileLink[4] = "img/plank_alt.png";//TUNNEL
 	}
-	
-	//TEMPORAIRE____POUR_TESTS
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-
-	}
-
 }
