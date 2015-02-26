@@ -45,8 +45,8 @@ public class Render {
 		
 		this.world = world;
 		
-		DH = 30;//11
-		DW = 30;//20
+		DH = 11;//11
+		DW = 60;//20
 		RESOLUTION = 64;
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
@@ -127,51 +127,15 @@ public class Render {
 	 */
 	public void draw(GameObjects obj){
 		
-		GUI.getGraphicsContext2D().save();
-		GUI.getGraphicsContext2D().rotate(25);
+		Image sprite = getSprite(obj);
 		
-		//int[] temp = changeCoordinate(obj.getX(),obj.getY(),0);
+		GUI.getGraphicsContext2D().translate(obj.getX(),obj.getY());
 		
-		double c = Math.sqrt(obj.getX()*obj.getX() + obj.getX()*obj.getX());
+		GUI.getGraphicsContext2D().rotate(obj.getAngle());
 		
-		System.out.println("("+obj.getX()+","+obj.getY()+")");
-		//System.out.println("("+temp[0]+","+temp[1]+")");
-		System.out.println("("+c*Math.sin(90-25)+","+c*Math.cos(90-25)+")");
-		
-		
-		
-		GUI.getGraphicsContext2D().drawImage(getSprite(obj), c*Math.sin(90-25), c*Math.cos(90-25));
+		GUI.getGraphicsContext2D().drawImage(sprite, -(sprite.getWidth()/2), -(sprite.getHeight()/2));
 		
 		GUI.getGraphicsContext2D().restore();
-	}
-	
-	/**
-	 * Ajuste la position d'une coordonnée
-	 * 
-	 * @param x
-	 * @param y
-	 * @param angle
-	 * @return nouvelles positions
-	 */
-	public int[] changeCoordinate(int x,int y,double theta)
-	{
-		//distance points/centre
-		double c = Math.sqrt((x*x)+(y*y));
-		
-		//angle de la position initiale
-		double alpha = Math.atan(y/x);
-		
-		//angle entre le point initiale et le point finale
-		double beta = theta - alpha;
-		
-		//La Translation à éffectuer
-		double DeltaX = c - c*Math.cos(beta);
-		double DeltaY = c - c*Math.sin(beta);
-		
-		int xFinale = (int) (c - DeltaX);
-		int yFinale = (int) (DeltaY);
-		
-		return new int[]{xFinale,yFinale};
 	}
 	
 	/**
@@ -231,7 +195,6 @@ public class Render {
 		{
 			for(int i = scx; i < (scx + (DW+2)); i++)
 			{
-				System.out.println(world[i][j].ordinal());
 				
 				try
 				{

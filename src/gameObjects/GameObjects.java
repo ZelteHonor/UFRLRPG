@@ -12,7 +12,7 @@ public class GameObjects {
 	public GameObjects() {
 		this.x = 0;
 		this.y = 0;
-		this.angle = 0;
+		this.angle = 0.0;
 
 	}
 
@@ -42,11 +42,9 @@ public class GameObjects {
 		this.y = y;
 	}
 
-	public void setAngle(int nAngle) {
+	public void setAngle(double nAngle) {
 
-		if (nAngle > 0 && nAngle > 360) {
-			this.angle = nAngle;
-		}
+		this.angle = 360*((nAngle/360) - (Math.toIntExact((long) (nAngle/360))));
 
 	}
 

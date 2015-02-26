@@ -47,10 +47,10 @@ public class Controller implements Initializable {
 		//TEST GRAPHIQUES ICI
 		
 		GameObjects tryIt = new GameObjects();
-		tryIt.setX(300);
-		tryIt.setY(0);
+		tryIt.setX(100);
+		tryIt.setY(100);
 		tryIt.setSprite("img/dirt.png");
-		tryIt.setAngle(45);
+		tryIt.setAngle(90);
 		
 		Generator gen = new Generator();
 
