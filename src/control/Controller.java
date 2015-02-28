@@ -42,10 +42,6 @@ public class Controller implements Initializable {
 
 	}
 
-	public void update() {
-
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -78,7 +74,10 @@ public class Controller implements Initializable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						update();
+						for(GameObjects o : objects)
+						{
+							o.update();
+						}
 					}
 				});
 				return null;
