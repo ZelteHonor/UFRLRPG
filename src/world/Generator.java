@@ -32,6 +32,9 @@ public class Generator {
 	private ArrayList<Room> rooms;
 	private ArrayList<Room> tunnels;
 	
+	private int exitdownx, exitdowny;
+	private int exitupx, exitupy;
+	
 	/* World */
 	private World.TILE[][] tiles;
 	private int[][] caves; 
@@ -54,6 +57,7 @@ public class Generator {
 		generateRooms();
 		generateTunnels();
 		generateCaves();
+		generatesExits();
 		carve();
 		connect();
 		fillCaves();
@@ -181,6 +185,17 @@ public class Generator {
 		/* Blur 2 fois pour meilleur resultat */
 		blurCaves();
 		blurCaves();
+	}
+	
+	/**
+	 * Génère l'entrée et la sortie du niveau
+	 */
+	private void generatesExits() {
+		exitupx = (rooms.get(0).x + 1) + (int)(Math.random()*rooms.get(0).w);
+		exitupy = (rooms.get(0).y + 1) + (int)(Math.random()*rooms.get(0).h);
+		
+		exitdownx = (rooms.get(rooms.size()-1).x + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).w);
+		exitdowny = (rooms.get(rooms.size()-1).y + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).h);
 	}
 	
 	/**
@@ -396,6 +411,9 @@ public class Generator {
 			for(int j = 0; j < World.SIZE; j++)
 				if (i == 0 || j == 0 || i == World.SIZE -1 || j == World.SIZE -1)
 					tiles[i][j] = World.TILE.WALL;
+		
+		tiles[exitupx][exitupy] = World.TILE.EXITUP;
+		tiles[exitdownx][exitdowny] = World.TILE.EXITDOWN;
 	}
 	
 	/**
@@ -406,5 +424,12 @@ public class Generator {
 	 */
 	private int distance(Room a, Room b) {
 		return (int) Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+	}
+	
+	public int getStartX() {
+		return exitupx * 64;
+	}
+	public int getStartY() {
+		return exitupy * 64;
 	}
 }
