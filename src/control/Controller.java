@@ -43,71 +43,74 @@ public class Controller implements Initializable {
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
 	};
+
 	@FXML
-	public void quit(){
+	public void quit() {
 		System.exit(0);
 	}
-	
+
 	/**
 	 * Créer une scène contenant un bouton lancant le initGame()
+	 * 
 	 * @throws IOException
 	 */
-	public void gameReady()throws IOException{
+	public void gameReady() throws IOException {
 		Stage stage;
 		Parent newRoot;
-		stage=(Stage) pane.getScene().getWindow();
+		stage = (Stage) pane.getScene().getWindow();
 		newRoot = FXMLLoader.load(getClass().getResource("Game.fxml"));
 		Scene scene = new Scene(newRoot);
-	    stage.setScene(scene);
-	    stage.show();
+		stage.setScene(scene);
+		stage.show();
 	}
-	
+
 	@FXML
-	public void initGame()  {
+	public void initGame() {
 
-		
 		// TEST GRAPHIQUES ICI
-				
-		
-			    
-				GameObjects tryIt = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
-				tryIt.setX(100);
-				tryIt.setY(100);
-				tryIt.setSprite("img/dirt.png");
-				tryIt.setAngle(90);
 
-				Generator gen = new Generator();
+		GameObjects tryIt = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
+		tryIt.setX(100);
+		tryIt.setY(100);
+		tryIt.setSprite("img/dirt.png");
+		tryIt.setAngle(90);
 
-				Render render = new Render(gen.generate());
-				render.drawWorld(1000, 1000);
-				render.draw(tryIt);
-				gamePane.getChildren().add(render.getGUI());
+		Generator gen = new Generator();
 
-				gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		Render render = new Render(gen.generate());
+		render.drawWorld(1000, 1000);
+		render.draw(tryIt);
+		gamePane.getChildren().add(render.getGUI());
 
-					public void handle(KeyEvent ke) {
-						if(ke.getCode() == KeyCode.W)
-						{
-							System.out.println("wow");
-						}
-						
-					}
-				});
-				
-				this.update = gameTask();
+		gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-				timer = gameTimer();
-		
+			public void handle(KeyEvent ke) {
+				if (ke.getCode() == KeyCode.W) {
+					System.out.println("wow");
+				}
+
+			}
+		});
+
+		this.update = gameTask();
+
+		timer = gameTimer();
+
 	}
 
+	/**
+	 * gère le temps de rafraichisement du jeu appelant à chaque 60ème de secondes la tâche gameTask
+	 * 
+	 * @return null
+	 */
 	private Service<Void> gameTimer() {
 
 		return new Service<Void>() {
 			@Override
 			protected Task<Void> createTask() {
-				
+
 				Platform.runLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						for (GameObjects o : objects) {
@@ -129,6 +132,11 @@ public class Controller implements Initializable {
 		};
 	}
 
+	/**
+	 * appelle la méthode update sur
+	 * chaque élément de la liste des éléments du jeu
+	 * @return null 
+	 */
 	private Task<Void> gameTask() {
 		return new Task<Void>() {
 			@Override
@@ -137,8 +145,7 @@ public class Controller implements Initializable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						for(GameObjects o : objects)
-						{
+						for (GameObjects o : objects) {
 							o.update();
 						}
 					}
@@ -152,8 +159,6 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		
-		
 	}
 
 }
