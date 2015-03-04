@@ -82,28 +82,6 @@ public class Controller implements Initializable {
 	public void statChooser(MouseEvent e)
 	{
 		Button b = (Button) e.getSource();
-		/*if(){
-			if(b == strM){
-				
-			}
-			else if(b == intM){
-				
-			}
-			else if(b == aglM){
-				
-			}
-		}
-		else{
-			if(b == strL){
-				
-			}
-			else if(b == intL){
-				
-			}
-			else if(b == aglL){
-				
-			}
-		}*/
 	}
 
 	/**
@@ -135,17 +113,17 @@ public class Controller implements Initializable {
 
 		// TEST GRAPHIQUES ICI
 
-		GameObjects tryIt = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
-		tryIt.setX(100);
-		tryIt.setY(100);
-		tryIt.setSprite("img/dirt.png");
-		tryIt.setAngle(90);
+		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
+		player.setX(100);
+		player.setY(100);
+		player.setSprite("img/dirt.png");
+		player.setAngle(90);
 
 		Generator gen = new Generator();
 
 		Render render = new Render(gen.generate());
 		render.drawWorld(1000, 1000);
-		render.draw(tryIt);
+		render.draw(player);
 		gamePane.getChildren().add(render.getGUI());
 
 		gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -159,12 +137,12 @@ public class Controller implements Initializable {
 				else if(ke.getCode() == KeyCode.A) {
 					System.out.println("A down");
 					
-					player.setKeyState(1, KEYSTATE.DOWN);
+					player.setKeyState(2, KEYSTATE.DOWN);
 				}
 				else if(ke.getCode() == KeyCode.S) {
 					System.out.println("S down");
 					
-					player.setKeyState(2, KEYSTATE.DOWN);
+					player.setKeyState(1, KEYSTATE.DOWN);
 				}
 				else if(ke.getCode() == KeyCode.D) {
 					System.out.println("D down");
@@ -243,5 +221,6 @@ public class Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(location.toString());
 	}
+			
 
 }
