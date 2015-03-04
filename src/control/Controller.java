@@ -89,50 +89,59 @@ public class Controller implements Initializable {
 					}
 				});
 				
-				this.update = new Task<Void>() {
-					@Override
-					protected Void call() throws Exception {
+				this.update = gameTask();
 
-						Platform.runLater(new Runnable() {
-							@Override
-							public void run() {
-								for(GameObjects o : objects)
-								{
-									o.update();
-								}
-							}
-						});
-						return null;
-
-					};
-				};
-
-				timer = new Service<Void>() {
-					@Override
-					protected Task<Void> createTask() {
-						
-						Platform.runLater(new Runnable() {
-							
-							@Override
-							public void run() {
-								for (GameObjects o : objects) {
-									o.update();
-								}
-							}
-						});
-						try {
-							Thread.sleep(17);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						return null;
-
-					}
-
-				};
+				timer = gameTimer();
 		
+	}
+
+	private Service<Void> gameTimer() {
+
+		return new Service<Void>() {
+			@Override
+			protected Task<Void> createTask() {
+				
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						for (GameObjects o : objects) {
+							o.update();
+						}
+					}
+				});
+				try {
+					Thread.sleep(17);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return null;
+
+			}
+
+		};
+	}
+
+	private Task<Void> gameTask() {
+		return new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						for(GameObjects o : objects)
+						{
+							o.update();
+						}
+					}
+				});
+				return null;
+
+			};
+		};
 	}
 
 	@Override
