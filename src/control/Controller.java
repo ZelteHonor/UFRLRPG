@@ -59,7 +59,7 @@ public class Controller implements Initializable {
 	public void gameReady() throws IOException {
 		Stage stage;
 		Parent newRoot;
-		stage = (Stage) pane.getScene().getWindow();
+		stage = (Stage) root.getScene().getWindow();
 		newRoot = FXMLLoader.load(getClass().getResource("Game.fxml"));
 		Scene scene = new Scene(newRoot);
 		stage.setScene(scene);
