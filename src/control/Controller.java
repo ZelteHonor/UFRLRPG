@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import render.Render;
 import world.Generator;
+import world.World;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -20,8 +21,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -36,9 +40,36 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Pane gamePane;
+<<<<<<< HEAD
 
 	private static String gameState;
+=======
+	
+	@FXML
+	private Label totalP;
+	@FXML
+	private Label strengthP;
+	@FXML
+	private Label intellectP;
+	@FXML
+	private Label agilityP;
+	
+	@FXML
+	private Button strM;
+	@FXML
+	private Button strL;
+	@FXML
+	private Button intM;
+	@FXML
+	private Button intL;
+	@FXML
+	private Button aglM;
+	@FXML
+	private Button aglL;
+>>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
 
+	private World world;
+	
 	private Task<Void> update;
 
 	private Service<Void> timer;
@@ -54,6 +85,11 @@ public class Controller implements Initializable {
 	@FXML
 	public void quit() {
 		System.exit(0);
+	}
+	
+	public void statChooser(MouseEvent e)
+	{
+		Button b = (Button) e.getSource();
 	}
 
 	/**
@@ -79,7 +115,12 @@ public class Controller implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	
+>>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
 	@FXML
 	public void initGame() {
 
@@ -91,9 +132,7 @@ public class Controller implements Initializable {
 		player.setSprite("img/dirt.png");
 		player.setAngle(90);
 
-		Generator gen = new Generator();
-
-		Render render = new Render(gen.generate());
+		Render render = new Render(world.getFloor(0).getTiles());
 		render.drawWorld(1000, 1000);
 		render.draw(player);
 		gamePane.getChildren().add(render.getGUI());
@@ -125,7 +164,7 @@ public class Controller implements Initializable {
 		this.update = gameTask();
 
 		timer = gameTimer();
-
+		timer.start();
 	}
 
 	/**
@@ -190,11 +229,17 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+<<<<<<< HEAD
 		
 //		if (location.toString().contains("MainMenu.fxml")) {
 //			
 //			
 //		}
 	}
+=======
+		world = new World();
+	}
+			
+>>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
 
 }

@@ -19,31 +19,31 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Total Point" />
-                  <Label text="30" />
+                  <Label fx:id="totalP" text="30" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Strength" />
-                  <Label text="5" />
-                  <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" text="-" />
+                  <Label fx:id="strengthP" text="5" />
+                  <Button fx:id="strM" mnemonicParsing="false" onMouseClicked="#statChooser" text="+" />
+                  <Button fx:id="strL" mnemonicParsing="false" onMouseClicked="#statChooser" text="-" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Intellect" />
-                  <Label text="5" />
-                  <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" text="-" />
+                  <Label fx:id="intellectP" text="5" />
+                  <Button fx:id="intM" mnemonicParsing="false" onMouseClicked="#statChooser" text="+" />
+                  <Button fx:id="intL" mnemonicParsing="false" onMouseClicked="#statChooser" text="-" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Agility" />
-                  <Label text="5" />
-                  <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" text="-" />
+                  <Label fx:id="agilityP" text="5" />
+                  <Button fx:id="aglM" mnemonicParsing="false" onMouseClicked="#statChooser" text="+" />
+                  <Button fx:id="aglL" mnemonicParsing="false" onMouseClicked="#statChooser" text="-" />
                </children>
             </HBox>
          </children>

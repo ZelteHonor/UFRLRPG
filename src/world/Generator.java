@@ -32,6 +32,9 @@ public class Generator {
 	private ArrayList<Room> rooms;
 	private ArrayList<Room> tunnels;
 	
+	private int exitdownx, exitdowny;
+	private int exitupx, exitupy;
+	
 	/* World */
 	private World.TILE[][] tiles;
 	private int[][] caves; 
@@ -54,6 +57,7 @@ public class Generator {
 		generateRooms();
 		generateTunnels();
 		generateCaves();
+		generatesExits();
 		carve();
 		connect();
 		fillCaves();
@@ -184,6 +188,17 @@ public class Generator {
 	}
 	
 	/**
+	 * Génère l'entrée et la sortie du niveau
+	 */
+	private void generatesExits() {
+		exitupx = (rooms.get(0).x + 1) + (int)(Math.random()*rooms.get(0).w);
+		exitupy = (rooms.get(0).y + 1) + (int)(Math.random()*rooms.get(0).h);
+		
+		exitdownx = (rooms.get(rooms.size()-1).x + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).w);
+		exitdowny = (rooms.get(rooms.size()-1).y + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).h);
+	}
+	
+	/**
 	 * Connecte les groupes de salles, jusqu'ï¿½ ce qu'elle soit toutes connectï¿½es
 	 */
 	private void connect() {
@@ -220,9 +235,16 @@ public class Generator {
 				}
 			}
 			
-			createTunnel(from, target);
-			carve();
-			connect();
+			// NOT SUPPOSED TO HAPPEN
+			if (!(from == null || target == null)) {
+				System.out.println(from + " " + target);
+				createTunnel(from, target);
+				carve();
+				connect();
+			}
+			else {
+				System.out.println("Fuckity fuck fuck");
+			}
 		}
 					
 	}
@@ -280,13 +302,13 @@ public class Generator {
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
-		if (tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0 && x > 0)
+		if (x > 0 && tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0)
 			fill(x-1, y, map, val);
-		if (tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0 && x < World.SIZE-1)
+		if (x < World.SIZE-1 && tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0)
 			fill(x+1, y, map, val);
-		if (tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0 && y > 0)
+		if (y > 0 && tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0)
 			fill(x, y-1, map, val);
-		if (tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0 && y < World.SIZE-1)
+		if (y > World.SIZE-1 && tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0)
 			fill(x, y+1, map, val);
 	}
 	
@@ -396,6 +418,9 @@ public class Generator {
 			for(int j = 0; j < World.SIZE; j++)
 				if (i == 0 || j == 0 || i == World.SIZE -1 || j == World.SIZE -1)
 					tiles[i][j] = World.TILE.WALL;
+		
+		tiles[exitupx][exitupy] = World.TILE.EXITUP;
+		tiles[exitdownx][exitdowny] = World.TILE.EXITDOWN;
 	}
 	
 	/**
@@ -406,5 +431,12 @@ public class Generator {
 	 */
 	private int distance(Room a, Room b) {
 		return (int) Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+	}
+	
+	public int getStartX() {
+		return exitupx * 64;
+	}
+	public int getStartY() {
+		return exitupy * 64;
 	}
 }
