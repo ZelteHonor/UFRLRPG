@@ -33,18 +33,18 @@ public class Controller implements Initializable {
 	private BorderPane gameRoot;
 	@FXML
 	private BorderPane charRoot;
-	
+
 	@FXML
 	private Pane gamePane;
-	
-	
+
+	private static String gameState;
 
 	private Task<Void> update;
 
 	private Service<Void> timer;
 
 	private ArrayList<GameObjects> objects;
-	
+
 	private Player player;
 
 	public enum KEYSTATE {
@@ -69,15 +69,17 @@ public class Controller implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	public void createCharacter()throws IOException{
+
+	public void createCharacter() throws IOException {
 		Stage stage;
-		stage=(Stage) mainRoot.getScene().getWindow();
-		charRoot = FXMLLoader.load(getClass().getResource("CharacterCreation.fxml"));
+		stage = (Stage) mainRoot.getScene().getWindow();
+		charRoot = FXMLLoader.load(getClass().getResource(
+				"CharacterCreation.fxml"));
 		Scene scene = new Scene(charRoot);
-	    stage.setScene(scene);
-	    stage.show();
+		stage.setScene(scene);
+		stage.show();
 	}
+
 	@FXML
 	public void initGame() {
 
@@ -101,22 +103,19 @@ public class Controller implements Initializable {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
 					System.out.println("w down");
-					
+
 					player.setKeyState(0, KEYSTATE.DOWN);
-				}
-				else if(ke.getCode() == KeyCode.A) {
+				} else if (ke.getCode() == KeyCode.A) {
 					System.out.println("A down");
-					
+
 					player.setKeyState(2, KEYSTATE.DOWN);
-				}
-				else if(ke.getCode() == KeyCode.S) {
+				} else if (ke.getCode() == KeyCode.S) {
 					System.out.println("S down");
-					
+
 					player.setKeyState(1, KEYSTATE.DOWN);
-				}
-				else if(ke.getCode() == KeyCode.D) {
+				} else if (ke.getCode() == KeyCode.D) {
 					System.out.println("D down");
-					
+
 					player.setKeyState(3, KEYSTATE.DOWN);
 				}
 
@@ -130,7 +129,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * gère le temps de rafraichisement du jeu appelant à chaque 60ème de secondes la tâche gameTask
+	 * gère le temps de rafraichisement du jeu appelant à chaque 60ème de
+	 * secondes la tâche gameTask
 	 * 
 	 * @return null
 	 */
@@ -145,8 +145,8 @@ public class Controller implements Initializable {
 					@Override
 					public void run() {
 						Thread th = new Thread(update);
-				        th.setDaemon(true);
-				        th.start();
+						th.setDaemon(true);
+						th.start();
 					}
 				});
 				try {
@@ -164,9 +164,10 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la méthode update sur
-	 * chaque élément de la liste des éléments du jeu
-	 * @return null 
+	 * appelle la méthode update sur chaque élément de la liste des éléments du
+	 * jeu
+	 * 
+	 * @return null
 	 */
 	private Task<Void> gameTask() {
 		return new Task<Void>() {
@@ -189,6 +190,11 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-			}
+		
+//		if (location.toString().contains("MainMenu.fxml")) {
+//			
+//			
+//		}
+	}
 
 }
