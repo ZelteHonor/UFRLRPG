@@ -110,9 +110,9 @@ public class Controller implements Initializable {
 					
 					@Override
 					public void run() {
-						for (GameObjects o : objects) {
-							o.update();
-						}
+						Thread th = new Thread(update);
+				        th.setDaemon(true);
+				        th.start();
 					}
 				});
 				try {
