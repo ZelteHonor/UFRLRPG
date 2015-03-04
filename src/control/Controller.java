@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -85,7 +86,11 @@ public class Controller implements Initializable {
 				gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 					public void handle(KeyEvent ke) {
-
+						if(ke.getCode() == KeyCode.W)
+						{
+							System.out.println("wow");
+						}
+						
 					}
 				});
 				
