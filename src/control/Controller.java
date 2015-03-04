@@ -33,6 +33,9 @@ public class Controller implements Initializable {
 	private Pane pane;
 	@FXML
 	private Pane gamePane;
+	
+	@FXML
+	private BorderPane charRoot;
 
 	private Task<Void> update;
 
@@ -58,20 +61,18 @@ public class Controller implements Initializable {
 	 */
 	public void gameReady() throws IOException {
 		Stage stage;
-		Parent newRoot;
-		stage = (Stage) root.getScene().getWindow();
-		newRoot = FXMLLoader.load(getClass().getResource("Game.fxml"));
-		Scene scene = new Scene(newRoot);
+		stage = (Stage) charRoot.getScene().getWindow();
+		charRoot = FXMLLoader.load(getClass().getResource("Game.fxml"));
+		Scene scene = new Scene(charRoot);
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	public void createCharacter()throws IOException{
 		Stage stage;
-		Parent newRoot;
-		stage=(Stage) root.getScene().getWindow();
-		newRoot = FXMLLoader.load(getClass().getResource("CharacterCreation.fxml"));
-		Scene scene = new Scene(newRoot);
+		stage=(Stage) pane.getScene().getWindow();
+		root = FXMLLoader.load(getClass().getResource("CharacterCreation.fxml"));
+		Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
 	}
