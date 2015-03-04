@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Floor {
 	private World.TILE[][] tiles;
+	
+	
+
 	private ArrayList<GameObjects> objects;
 	private int startx, starty;
 	
@@ -24,5 +27,9 @@ public class Floor {
 	
 	public void setObjects(ArrayList<GameObjects> objects) {
 		this.objects = objects;
+	}
+	
+	public World.TILE[][] getTiles() {
+		return tiles;
 	}
 }

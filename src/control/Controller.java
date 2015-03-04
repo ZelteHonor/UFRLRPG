@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import render.Render;
 import world.Generator;
+import world.World;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -62,6 +63,8 @@ public class Controller implements Initializable {
 	@FXML
 	private Button aglL;
 
+	private World world;
+	
 	private Task<Void> update;
 
 	private Service<Void> timer;
@@ -119,9 +122,7 @@ public class Controller implements Initializable {
 		player.setSprite("img/dirt.png");
 		player.setAngle(90);
 
-		Generator gen = new Generator();
-
-		Render render = new Render(gen.generate());
+		Render render = new Render(world.getFloor(1).getTiles());
 		render.drawWorld(1000, 1000);
 		render.draw(player);
 		gamePane.getChildren().add(render.getGUI());
@@ -219,7 +220,7 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(location.toString());
+		world = new World();
 	}
 			
 
