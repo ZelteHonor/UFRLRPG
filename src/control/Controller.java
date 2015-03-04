@@ -39,6 +39,8 @@ public class Controller implements Initializable {
 	private Service<Void> timer;
 
 	private ArrayList<GameObjects> objects;
+	
+	private Player player;
 
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
@@ -86,7 +88,24 @@ public class Controller implements Initializable {
 
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
-					System.out.println("wow");
+					System.out.println("w down");
+					
+					player.setKeyState(0, KEYSTATE.DOWN);
+				}
+				else if(ke.getCode() == KeyCode.A) {
+					System.out.println("A down");
+					
+					player.setKeyState(1, KEYSTATE.DOWN);
+				}
+				else if(ke.getCode() == KeyCode.S) {
+					System.out.println("S down");
+					
+					player.setKeyState(2, KEYSTATE.DOWN);
+				}
+				else if(ke.getCode() == KeyCode.D) {
+					System.out.println("D down");
+					
+					player.setKeyState(3, KEYSTATE.DOWN);
 				}
 
 			}
