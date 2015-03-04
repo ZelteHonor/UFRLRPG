@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class Floor {
 	private World.TILE[][] tiles;
-	
-	
-
 	private ArrayList<GameObjects> objects;
 	private int startx, starty;
 	

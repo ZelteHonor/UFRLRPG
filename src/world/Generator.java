@@ -235,9 +235,16 @@ public class Generator {
 				}
 			}
 			
-			createTunnel(from, target);
-			carve();
-			connect();
+			// NOT SUPPOSED TO HAPPEN
+			if (!(from == null || target == null)) {
+				System.out.println(from + " " + target);
+				createTunnel(from, target);
+				carve();
+				connect();
+			}
+			else {
+				System.out.println("Fuckity fuck fuck");
+			}
 		}
 					
 	}
@@ -295,13 +302,13 @@ public class Generator {
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
-		if (tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0 && x > 0)
+		if (x > 0 && tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0)
 			fill(x-1, y, map, val);
-		if (tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0 && x < World.SIZE-1)
+		if (x < World.SIZE-1 && tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0)
 			fill(x+1, y, map, val);
-		if (tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0 && y > 0)
+		if (y > 0 && tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0)
 			fill(x, y-1, map, val);
-		if (tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0 && y < World.SIZE-1)
+		if (y > World.SIZE-1 && tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0)
 			fill(x, y+1, map, val);
 	}
 	
