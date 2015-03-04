@@ -1,5 +1,6 @@
 package gameObjects;
 
+import world.Floor;
 import javafx.scene.image.Image;
 
 public abstract class GameObjects {
@@ -52,6 +53,6 @@ public abstract class GameObjects {
 		this.sprite = sprite;
 	}
 	
-	public abstract void update();
+	public abstract void update(Floor floor);
 
 }

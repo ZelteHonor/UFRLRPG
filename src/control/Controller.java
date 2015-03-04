@@ -208,7 +208,7 @@ public class Controller implements Initializable {
 					@Override
 					public void run() {
 						for (GameObjects o : objects) {
-							o.update();
+							o.update(world.getFloor(1));
 						}
 					}
 				});

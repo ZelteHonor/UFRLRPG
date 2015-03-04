@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
+import world.Floor;
 import control.Controller;
 import control.Controller.KEYSTATE;
 import gameObjects.Items;
@@ -33,7 +34,7 @@ public class Player extends Entity{
 	}
 
 	@Override
-	public void update() {
+	public void update(Floor floor) {
 		move();
 		
 		/* Angle */

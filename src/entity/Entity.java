@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
+import world.Floor;
 import gameObjects.GameObjects;
 import gameObjects.Items;
 
@@ -25,5 +26,5 @@ public abstract class Entity extends GameObjects {
 	}
 
 	@Override
-	public abstract void update();
+	public abstract void update(Floor floor);
 }

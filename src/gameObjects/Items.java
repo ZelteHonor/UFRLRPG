@@ -1,5 +1,7 @@
 package gameObjects;
 
+import world.Floor;
+
 public class Items extends GameObjects{
 	private int weight;
 	private boolean evil;
@@ -12,7 +14,7 @@ public class Items extends GameObjects{
 	}
 
 	@Override
-	public void update() {
+	public void update(Floor floor) {
 		angle++;
 		
 	}
