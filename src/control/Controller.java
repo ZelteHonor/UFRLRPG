@@ -122,7 +122,7 @@ public class Controller implements Initializable {
 		player.setSprite("img/dirt.png");
 		player.setAngle(90);
 
-		Render render = new Render(world.getFloor(1).getTiles());
+		Render render = new Render(world.getFloor(0).getTiles());
 		render.drawWorld(1000, 1000);
 		render.draw(player);
 		gamePane.getChildren().add(render.getGUI());
