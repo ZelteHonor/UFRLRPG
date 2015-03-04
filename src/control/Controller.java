@@ -20,8 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -37,7 +40,27 @@ public class Controller implements Initializable {
 	@FXML
 	private Pane gamePane;
 	
+	@FXML
+	private Label totalP;
+	@FXML
+	private Label strengthP;
+	@FXML
+	private Label intellectP;
+	@FXML
+	private Label agilityP;
 	
+	@FXML
+	private Button strM;
+	@FXML
+	private Button strL;
+	@FXML
+	private Button intM;
+	@FXML
+	private Button intL;
+	@FXML
+	private Button aglM;
+	@FXML
+	private Button aglL;
 
 	private Task<Void> update;
 
@@ -54,6 +77,33 @@ public class Controller implements Initializable {
 	@FXML
 	public void quit() {
 		System.exit(0);
+	}
+	
+	public void statChooser(MouseEvent e)
+	{
+		Button b = (Button) e.getSource();
+		/*if(){
+			if(b == strM){
+				
+			}
+			else if(b == intM){
+				
+			}
+			else if(b == aglM){
+				
+			}
+		}
+		else{
+			if(b == strL){
+				
+			}
+			else if(b == intL){
+				
+			}
+			else if(b == aglL){
+				
+			}
+		}*/
 	}
 
 	/**
@@ -78,6 +128,8 @@ public class Controller implements Initializable {
 	    stage.setScene(scene);
 	    stage.show();
 	}
+	
+	
 	@FXML
 	public void initGame() {
 
@@ -126,7 +178,7 @@ public class Controller implements Initializable {
 		this.update = gameTask();
 
 		timer = gameTimer();
-
+		timer.start();
 	}
 
 	/**
@@ -189,7 +241,7 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		System.out.println(location.toString());
 	}
 
 }
