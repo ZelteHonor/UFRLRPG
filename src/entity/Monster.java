@@ -2,8 +2,6 @@ package entity;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
 import world.Floor;
 import gameObjects.Items;
 
@@ -25,10 +23,7 @@ public class Monster extends Entity{
 		
 	}
 	
-	private class ASearch{
-		
-		
-	}
+	
 	
 
 }

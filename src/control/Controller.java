@@ -40,11 +40,9 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Pane gamePane;
-<<<<<<< HEAD
 
 	private static String gameState;
-=======
-	
+
 	@FXML
 	private Label totalP;
 	@FXML
@@ -66,7 +64,7 @@ public class Controller implements Initializable {
 	private Button aglM;
 	@FXML
 	private Button aglL;
->>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
+
 
 	private World world;
 	
@@ -115,12 +113,6 @@ public class Controller implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-<<<<<<< HEAD
-
-=======
-	
-	
->>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
 	@FXML
 	public void initGame() {
 
@@ -229,17 +221,7 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-<<<<<<< HEAD
-		
-//		if (location.toString().contains("MainMenu.fxml")) {
-//			
-//			
-//		}
-	}
-=======
 		world = new World();
 	}
-			
->>>>>>> 0341d1cac44a9019fa66fd88899d646af0bada66
 
 }
