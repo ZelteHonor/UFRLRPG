@@ -13,12 +13,16 @@ public class Ai {
 		HashSet<Node> openList = new HashSet<Node>();
 		HashSet<Node> closedList = new HashSet<Node>();
 		Node current = new Node(start, null, 0f, (float) start.distance(end));
+		closedList.add(current);
 		for (int i = (int) (start.getX() - 1); i < start.getX() + 1; i++) {
 			for (int j = (int) (start.getY() - 1); j < start.getY() + 1; j++) {
 				if (i != start.getX() && j != start.getY()) {
 					Point temp = new Point(i, j);
-					openList.add(new Node(temp, current, (float) temp
-							.distance(start), (float) temp.distance(end)));
+					if (floor.getTiles()[i][j] != World.TILE.WALL
+							&& floor.getTiles()[i][j] != World.TILE.ROCK) {
+						openList.add(new Node(temp, null, (float) temp
+								.distance(start), (float) temp.distance(end)));
+					}
 				}
 			}
 		}
@@ -38,7 +42,9 @@ public class Ai {
 								(float) temp.distance(current.getCoor())
 										+ current.getTotal(),
 								(float) temp.distance(end));
-						if (!closedList.contains(maybe) && floor.getTiles()[i][j] != World.TILE.WALL && floor.getTiles()[i][j] != World.TILE.ROCK) {
+						if (!closedList.contains(maybe)
+								&& floor.getTiles()[i][j] != World.TILE.WALL
+								&& floor.getTiles()[i][j] != World.TILE.ROCK) {
 							openList.add(maybe);
 						}
 					}

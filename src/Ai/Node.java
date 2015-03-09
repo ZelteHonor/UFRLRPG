@@ -3,7 +3,7 @@ package Ai;
 import java.awt.Point;
 
 
-public class Node implements Comparable {
+public class Node implements Comparable<Node> {
 		private Point coor;
 		private Node lastNode;
 		private float fromB, toE;
@@ -25,10 +25,17 @@ public class Node implements Comparable {
 		{
 			return fromB + toE;
 		}
-
+		
+		public Node getFirst(){
+			Node temp = this;
+			while(this.lastNode != null){
+				temp = temp.lastNode;
+			}
+			return temp;
+		}
 		@Override
-		public int compareTo(Object o) {
-			return (int) (this.getTotal() - ((Node) o).getTotal());
+		public int compareTo(Node o) {
+			return (int) (this.getTotal() - o.getTotal());
 		}
 	
 }
