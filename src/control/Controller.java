@@ -134,7 +134,6 @@ public class Controller implements Initializable {
 		gamePane.getChildren().add(render.getGUI());
 
 		gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
 					System.out.println("W down");
@@ -153,9 +152,29 @@ public class Controller implements Initializable {
 
 					player.setKeyState(3, KEYSTATE.DOWN);
 				}
-
 			}
-			
+		});
+		
+		gamePane.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent ke) {
+				if (ke.getCode() == KeyCode.W) {
+					System.out.println("W down");
+
+					player.setKeyState(0, KEYSTATE.RELEASED);
+				} else if (ke.getCode() == KeyCode.A) {
+					System.out.println("A down");
+
+					player.setKeyState(2, KEYSTATE.RELEASED);
+				} else if (ke.getCode() == KeyCode.S) {
+					System.out.println("S down");
+
+					player.setKeyState(1, KEYSTATE.RELEASED);
+				} else if (ke.getCode() == KeyCode.D) {
+					System.out.println("D down");
+
+					player.setKeyState(3, KEYSTATE.RELEASED);
+				}
+			}
 		});
 		
 		gamePane.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -166,6 +185,7 @@ public class Controller implements Initializable {
 				{
 					System.out.println("left click");
 					player.setKeyState(4, KEYSTATE.DOWN);
+					System.out.println(player.getX());
 				}
 				else if(mou.getButton() == MouseButton.SECONDARY)
 				{
@@ -181,10 +201,6 @@ public class Controller implements Initializable {
 		this.update = new GameTask();
 		
 		this.screenRefresh = new GameRender();
-		
-		objects = new ArrayList<GameObjects>();
-		
-		objects.add(player);
 
 		timer = new GameTimer();
 		timer.start();
@@ -281,7 +297,7 @@ public class Controller implements Initializable {
                 					try
                 					{
                 						render.drawWorld(player.getX(), player.getY());
-                						render.draw(objects);
+                						render.draw(player);
                 					}catch(NullPointerException e){}
         						});
                 		

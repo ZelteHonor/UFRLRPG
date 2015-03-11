@@ -12,6 +12,7 @@ import java.util.Map;
 
 
 
+
 import sun.tools.jar.Main;
 import gameObjects.GameObjects;
 import world.Generator;
@@ -214,8 +215,12 @@ public class Render {
 		int scx = (int)(spx/RESOLUTION);
 		int scy = (int)(spy/RESOLUTION);
 		
-		clear();
+		//strafe
 		
+		double sx = (spx - scx);
+		double sy = (spy - scy);
+		
+		clear();
 		
 		for(int j = scy; j < (scy + (DH+2)); j++)
 		{
@@ -230,19 +235,19 @@ public class Render {
 					case 0 :
 						break;
 					case 1 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), ((i - scx)*RESOLUTION) - sx, ((j - scy)*RESOLUTION) - sy);
 						break;
 					case 2 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), ((i - scx)*RESOLUTION) - sx, ((j - scy)*RESOLUTION) - sy);
 						break;
 					case 3 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), ((i - scx)*RESOLUTION) - sx, ((j - scy)*RESOLUTION) - sy);
 						break;
 					case 4 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), ((i - scx)*RESOLUTION) - sx, ((j - scy)*RESOLUTION) - sy);
 						break;
 					case 5 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), (i - scx)*RESOLUTION, (j - scy)*RESOLUTION);
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), ((i - scx)*RESOLUTION) - sx, ((j - scy)*RESOLUTION) - sy);
 						break;
 					}
 				}catch(ArrayIndexOutOfBoundsException e){}
