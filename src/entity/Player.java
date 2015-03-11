@@ -10,8 +10,8 @@ import gameObjects.Items;
 public class Player extends Entity{
 	
 	/* Movement */
-	private Controller.KEYSTATE[] key; //WSAD,right click, left clock
- 	private double vx, vy;
+	private Controller.KEYSTATE[] key; //WSAD
+	private double vx, vy;
 
 	public Player(int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception,ArrayList<Items> inventory) {
@@ -21,7 +21,7 @@ public class Player extends Entity{
 		vx = 0;
 		vy = 0;
 
-		key = new Controller.KEYSTATE[4];
+		key = new Controller.KEYSTATE[6];
 		for(int i = 0; i < key.length ; i++)
 		{
 			key[i] = Controller.KEYSTATE.UP;

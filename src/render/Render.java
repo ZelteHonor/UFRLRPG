@@ -36,12 +36,12 @@ public class Render {
 	//Interface Graphique
 	private Canvas GUI;
 	
-	//Dimension et rï¿½solution d'affichage
+	//Dimension et résolution d'affichage
 	private final int DH;
 	private final int DW;
 	private final int RESOLUTION;
 
-	//ï¿½ afficher
+	//À afficher
 	private World.TILE[][] world;
 	private GameObjects objects[];
 	
@@ -64,9 +64,9 @@ public class Render {
 		DW = 20;//20
 		RESOLUTION = 64;
 		
-		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
+		//GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		initSpriteMap();
+		//initSpriteMap();
 		
 		wall = new Wall(world);
 		wall.recalculate(0, 0);
@@ -180,7 +180,7 @@ public class Render {
 		
 		GUI.getGraphicsContext2D().save();
 		
-		//Ombrage gï¿½nï¿½ral
+		//Ombrage général
 		//GUI.getGraphicsContext2D().setGlobalAlpha(0.3);
 		//GUI.getGraphicsContext2D().fillRect(0, 0, DW*RESOLUTION	,DH*RESOLUTION);
 		GUI.getGraphicsContext2D().restore();
@@ -254,7 +254,7 @@ public class Render {
 	}
 	
 	/**
-	 * Vï¿½rifie si le sprite existe dans spriteMap, sinon l'ajoute.
+	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
 	 * 
 	 * @param obj
 	 * @return L'image du sprite
@@ -341,7 +341,7 @@ public class Render {
 		
 		public void recalculate(int x, int y)
 		{
-			System.out.println("ï¿½-"+(x - (DW/2))+" "+(y - (DH/2))+"-ï¿½");
+			System.out.println("¤-"+(x - (DW/2))+" "+(y - (DH/2))+"-¤");
 			
 			afficher();
 			
@@ -353,11 +353,11 @@ public class Render {
 
 					try
 					{
-					//Vï¿½rifie si c'est un mur
+					//Vérifie si c'est un mur
 					if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
 					{
 						
-						//Vï¿½rifie si elle est seule ou non
+						//Vérifie si elle est seule ou non
 						if((world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK) || (world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK))
 						{
 							
@@ -411,11 +411,11 @@ public class Render {
 						if(mur.contains(new Point(i,j))){
 						affiche += "O";}
 						else{
-						affiche += "ï¿½";}
+						affiche += "¤";}
 					}
 					else
 					{
-						affiche += "ï¿½";
+						affiche += "¬";
 					}
 				}
 				
@@ -453,7 +453,7 @@ public class Render {
 		
 		private void deleteRepetitions()
 		{
-			//ï¿½ faire
+			//à faire
 		}
 	}
 	
