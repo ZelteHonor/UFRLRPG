@@ -9,11 +9,23 @@ import world.World;
 
 public class Ai {
 
+	/**
+	 * A* search algorithm.
+	 * @param start
+	 * 	The starting point
+	 * @param end
+	 * 	The targer
+	 * @param floor
+	 * 	The floor on wich you are
+	 * @return
+	 * 	Return a Node with the path on his tail
+	 */
 	public static Node getPath(Point start, Point end, Floor floor) {
 		HashSet<Node> openList = new HashSet<Node>();
 		HashSet<Node> closedList = new HashSet<Node>();
 		Node current = new Node(start, null, 0f, (float) start.distance(end));
 		closedList.add(current);
+		//Take all valid node around the start
 		for (int i = (int) (start.getX() - 1); i < start.getX() + 1; i++) {
 			for (int j = (int) (start.getY() - 1); j < start.getY() + 1; j++) {
 				if (i != start.getX() && j != start.getY()) {
@@ -28,9 +40,11 @@ public class Ai {
 		}
 
 		while (!current.getCoor().equals(end)) {
+			//The current Node is the one with the lowest cost
 			current = Collections.min(openList);
 			openList.remove(current);
 			closedList.add(current);
+			//Take all node around the current node
 			for (int i = (int) (current.getCoor().getX() - 1); i < current
 					.getCoor().getX() + 1; i++) {
 				for (int j = (int) (current.getCoor().getY() - 1); j < current
