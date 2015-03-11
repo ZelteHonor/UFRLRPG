@@ -56,12 +56,12 @@ public class Generator {
 		clear();
 		generateRooms();
 		generateTunnels();
-		generateCaves();
 		generatesExits();
+		generateCaves();
 		carve();
 		connect();
 		fillCaves();
-		specify();
+		specify();		
 		return tiles;
 	}
 	
@@ -203,14 +203,13 @@ public class Generator {
 	 */
 	private void connect() {
 		int[][] map = new int[World.SIZE][World.SIZE];
-		int map_count = 1;
+		int map_count = 10;
 		
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] != World.TILE.WALL && tiles[i][j] != World.TILE.CAVE && map[i][j] == 0)
-					fill(i, j, map, map_count++);
-		map_count--;
-	
+					fill(i, j, map, ++map_count);
+		
 		if (map_count > 1) {
 			ArrayList<Room> in = new ArrayList<Room>();
 			ArrayList<Room> out = new ArrayList<Room>();
@@ -242,9 +241,7 @@ public class Generator {
 				carve();
 				connect();
 			}
-			else {
-				System.out.println("Fuckity fuck fuck");
-			}
+			
 		}
 					
 	}
@@ -254,7 +251,7 @@ public class Generator {
 	 */
 	private void fillCaves() {
 		int[][] map = new int[World.SIZE][World.SIZE];
-		fill(rooms.get(0).x+1, rooms.get(0).y+1, map, 1);
+		fill(exitupx, exitupy, map, 1);
 		
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
@@ -302,13 +299,13 @@ public class Generator {
 	private void fill(int x, int y,int[][] map, int val) {
 		map[x][y] = val;
 		
-		if (x > 0 && tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0)
+		if (tiles[x-1][y] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x-1][y] == 0)
 			fill(x-1, y, map, val);
-		if (x < World.SIZE-1 && tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0)
+		if (tiles[x+1][y] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x+1][y] == 0)
 			fill(x+1, y, map, val);
-		if (y > 0 && tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0)
+		if (tiles[x][y-1] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x][y-1] == 0)
 			fill(x, y-1, map, val);
-		if (y > World.SIZE-1 && tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0)
+		if (tiles[x][y+1] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x][y+1] == 0)
 			fill(x, y+1, map, val);
 	}
 	
@@ -411,8 +408,6 @@ public class Generator {
 				}
 			}
 		}
-		
-	
 		
 		for(int i = 0; i < World.SIZE; i++)
 			for(int j = 0; j < World.SIZE; j++)
