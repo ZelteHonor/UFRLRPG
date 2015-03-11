@@ -21,7 +21,7 @@ public class Player extends Entity{
 		vx = 0;
 		vy = 0;
 
-		key = new Controller.KEYSTATE[4];
+		key = new Controller.KEYSTATE[6];
 		for(int i = 0; i < key.length ; i++)
 		{
 			key[i] = Controller.KEYSTATE.UP;

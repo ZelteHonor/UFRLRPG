@@ -161,7 +161,7 @@ public class Controller implements Initializable {
 			
 		});
 		
-		gamePane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		gamePane.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent mou) {
