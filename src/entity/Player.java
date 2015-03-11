@@ -64,8 +64,8 @@ public class Player extends Entity{
 		
 		if (xto != 0 && yto != 0) {
 			speed = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2)) + 1;
-			if (speed > 10)
-				speed = 10;
+			if (speed > 5)
+				speed = 5;
 
 			direction = Math.atan2(yto,xto);
 		}
