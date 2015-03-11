@@ -151,6 +151,7 @@ public class Controller implements Initializable {
 				}
 
 			}
+			
 		});
 
 		this.update = gameTask();
@@ -186,6 +187,7 @@ public class Controller implements Initializable {
         			} catch (InterruptedException e) {
         				e.printStackTrace();
         			}
+        			System.out.println("I live");
                 	
                     return null;
                 }
@@ -244,7 +246,8 @@ public class Controller implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 
-				Platform.runLater(new Runnable() {
+				
+					Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
 						
@@ -257,6 +260,8 @@ public class Controller implements Initializable {
 					}
 				});
 				return null;
+				
+				
 
 			};
 		};
