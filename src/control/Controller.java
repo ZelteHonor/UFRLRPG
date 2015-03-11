@@ -68,9 +68,9 @@ public class Controller implements Initializable {
 
 	private World world;
 	
-	private Task<Void> update;
+	private Service<Void> update;
 	
-	private Task<Void> screenRefresh;
+	private Service<Void> screenRefresh;
 
 	private Service<Void> timer;
 
@@ -156,9 +156,9 @@ public class Controller implements Initializable {
 			}
 		});
 
-		this.update = gameTask();
+		this.update = new GameTask();
 		
-		this.screenRefresh = gameRender();
+		this.screenRefresh = new GameRender();
 
 		timer = new GameTimer();
 		timer.start();
@@ -182,24 +182,26 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
                 protected Void call() throws Exception {
                 	
-                	
                     while(t){
+                    	
                 		Platform.runLater(
                 				()->{
-                						Thread thU = new Thread(update);
-                						thU.setDaemon(true);
-                						thU.start();
+                					
+                						update.cancel();
+                						update.reset();
+                						update.start();
+                					
                 						
-                						Thread thS = new Thread(screenRefresh);
-                						thS.setDaemon(true);
-                						thS.start();
-                						
+                						screenRefresh.cancel();
+                						screenRefresh.reset();
+                						screenRefresh.start();
         							});
                 		try {
                 			Thread.sleep(17);
                 		} catch (InterruptedException e) {
                 			e.printStackTrace();
                 		}
+                		
                     }
                     return null;
                 }
@@ -210,51 +212,59 @@ public class Controller implements Initializable {
 	/**
 	 * appelle la méthode update sur chaque élément de la liste des éléments du
 	 * jeu
-	 * 
-	 * @return null
+	 *
 	 */
-	private Task<Void> gameTask() {
-		return new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
+	class GameTask extends Service<Void>  {
+		
 
-				Platform.runLater(
-						()->{
-							try
-							{
-								for (GameObjects o : objects) {
-									o.update(world.getFloor(1));
-								}
-							}catch(NullPointerException e){}
-						
-						});
-				return null;
+		@Override
+		protected Task<Void> createTask() {
+			
+			return new Task<Void>() {
+                protected Void call() throws Exception {
+                   	
+                	Platform.runLater(
+                			()->{
+                					try
+                					{
+                						for (GameObjects o : objects) {
+                							o.update(world.getFloor(1));
+                						}
+                					}catch(NullPointerException e){}
+        						});
+                		
 
-			};
-		};
+                    return null;
+                }
+            };
+		}
 	}
 	
-	private Task<Void> gameRender() {
-		return new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
+	class GameRender extends Service<Void>  {
+		
 
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						
-						try
-						{
-							render.drawWorld(player.getX(), player.getY());
-							render.draw(player);
-						}catch(NullPointerException e){}
-					}
-				});
-				return null;
+		@Override
+		protected Task<Void> createTask() {
+			
+			return new Task<Void>() {
+                protected Void call() throws Exception {
+                   	
+                	Platform.runLater(
+                			()->{
+                					try
+                					{
+                						render.drawWorld(player.getX(), player.getY());
+                						render.draw(player);
+                					}catch(NullPointerException e){}
+        						});
+                		
 
-			};
-		};
+                    return null;
+                }
+            };
+		}
 	}
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
