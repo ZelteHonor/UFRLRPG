@@ -13,6 +13,8 @@ import java.util.Map;
 
 
 
+
+import entity.Player;
 import sun.tools.jar.Main;
 import gameObjects.GameObjects;
 import world.Generator;
@@ -151,7 +153,16 @@ public class Render {
 		
 		Image sprite = getSprite(obj);
 		
-		GUI.getGraphicsContext2D().translate(obj.getX(),obj.getY());
+		if(obj instanceof Player)
+		{
+			GUI.getGraphicsContext2D().translate(GUI.getWidth()/2,GUI.getHeight()/2);
+		}
+		else
+		{
+			GUI.getGraphicsContext2D().translate(obj.getX(),obj.getY());
+		}
+		
+		
 		
 		GUI.getGraphicsContext2D().rotate(obj.getAngle());
 		
