@@ -133,7 +133,7 @@ public class Controller implements Initializable {
 
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
-					System.out.println("w down");
+					System.out.println("W down");
 
 					player.setKeyState(0, KEYSTATE.DOWN);
 				} else if (ke.getCode() == KeyCode.A) {
@@ -155,7 +155,7 @@ public class Controller implements Initializable {
 
 		this.update = gameTask();
 
-		timer = gameTimer();
+		timer = new GameTimer();
 		timer.start();
 	}
 
@@ -165,34 +165,73 @@ public class Controller implements Initializable {
 	 * 
 	 * @return null
 	 */
-	private Service<Void> gameTimer() {
+	class GameTimer extends Service<Void>  {
+		
+		public GameTimer() {}
 
-		return new Service<Void>() {
-			@Override
-			protected Task<Void> createTask() {
+		@Override
+		protected Task<Void> createTask() {
+			
+			return new Task<Void>() {
+                protected Void call() throws Exception {
+                    
+                	Platform.runLater(
+        					()->{
+        							Thread th = new Thread(update);
+        							th.setDaemon(true);
+        							th.start();
+        						});
+        			try {
+        				Thread.sleep(17);
+        			} catch (InterruptedException e) {
+        				e.printStackTrace();
+        			}
+                	
+                    return null;
+                }
+            };
+		}
+		/*@Override
+		protected javafx.concurrent.Task<Void> createTask() {
+			
+			 return new Task<Void>() {
+	                @Override
+	                protected Void call() throws Exception {
 
-				Platform.runLater(new Runnable() {
+	                		//thread start
+	                		Platform.runLater(new Runnable() {
+	                			@Override
+	                			public void run() {
 
-					@Override
-					public void run() {
-						Thread th = new Thread(update);
-						th.setDaemon(true);
-						th.start();
-					}
-				});
-				try {
-					Thread.sleep(17);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	                				Platform.runLater(new Runnable() {
 
-				return null;
+	                					@Override
+	                					public void run() {
+	                						Thread th = new Thread(update);
+	                						th.setDaemon(true);
+	                						th.start();
+	                					}
+	                				});
+	                				try {
+	                					Thread.sleep(17);
+	                				} catch (InterruptedException e) {
+	                					// TODO Auto-generated catch block
+	                					e.printStackTrace();
+	                				}
 
-			}
+	                			}
+	                		});	
 
-		};
-	}
+	                }
+	                	
+	                	
+	                	
+	                return null;
+	                
+	                }
+			 };*/
+
+}
 
 	/**
 	 * appelle la méthode update sur chaque élément de la liste des éléments du
@@ -208,9 +247,13 @@ public class Controller implements Initializable {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						for (GameObjects o : objects) {
-							o.update(world.getFloor(1));
-						}
+						
+						try
+						{
+							for (GameObjects o : objects) {
+								o.update(world.getFloor(1));
+							}
+						}catch(NullPointerException e){}
 					}
 				});
 				return null;
