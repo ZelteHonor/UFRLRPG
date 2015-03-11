@@ -203,7 +203,7 @@ public class Generator {
 	 */
 	private void connect() {
 		int[][] map = new int[World.SIZE][World.SIZE];
-		int map_count = 10;
+		int map_count = 1;
 		
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
