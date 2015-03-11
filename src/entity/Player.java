@@ -10,8 +10,8 @@ import gameObjects.Items;
 public class Player extends Entity{
 	
 	/* Movement */
-	private Controller.KEYSTATE[] key; //WSAD
-	private double vx, vy;
+	private Controller.KEYSTATE[] key; //WSAD,right click, left clock
+ 	private double vx, vy;
 
 	public Player(int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception,ArrayList<Items> inventory) {

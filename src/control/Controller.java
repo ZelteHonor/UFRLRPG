@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -83,6 +84,7 @@ public class Controller implements Initializable {
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
 	};
+	
 
 	@FXML
 	public void quit() {
@@ -153,6 +155,27 @@ public class Controller implements Initializable {
 					player.setKeyState(3, KEYSTATE.DOWN);
 				}
 
+			}
+			
+			
+			
+		});
+		
+		gamePane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mou) {
+				if(mou.getButton() == MouseButton.PRIMARY)
+				{
+					System.out.println("left click");
+					player.setKeyState(4, KEYSTATE.DOWN);
+				}
+				else if(mou.getButton() == MouseButton.SECONDARY)
+				{
+					System.out.println("right click");
+					player.setKeyState(5, KEYSTATE.DOWN);
+				}
+				
 			}
 			
 		});
