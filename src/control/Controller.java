@@ -195,8 +195,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la méthode update sur chaque élément de la liste des éléments du
-	 * jeu
+	 * appelle la méthode update sur chaque élément de la liste des
+	 * éléments du jeu
 	 * 
 	 * @return null
 	 */
