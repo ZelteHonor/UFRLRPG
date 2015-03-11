@@ -54,7 +54,7 @@ public class Node implements Comparable<Node> {
 		 */
 		public Node getFirst(){
 			Node temp = this;
-			while(temp.lastNode != null){
+			while(this.lastNode != null){
 				temp = temp.lastNode;
 			}
 			return temp;
