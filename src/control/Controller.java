@@ -155,9 +155,6 @@ public class Controller implements Initializable {
 				}
 
 			}
-
-			
-			
 			
 		});
 		
@@ -184,6 +181,10 @@ public class Controller implements Initializable {
 		this.update = new GameTask();
 		
 		this.screenRefresh = new GameRender();
+		
+		objects = new ArrayList<GameObjects>();
+		
+		objects.add(player);
 
 		timer = new GameTimer();
 		timer.start();
@@ -252,6 +253,7 @@ public class Controller implements Initializable {
                 			()->{
                 					try
                 					{
+                						player.update(world.getFloor(1));
                 						for (GameObjects o : objects) {
                 							o.update(world.getFloor(1)); 
                 						}
@@ -279,7 +281,7 @@ public class Controller implements Initializable {
                 					try
                 					{
                 						render.drawWorld(player.getX(), player.getY());
-                						render.draw(player);
+                						render.draw(objects);
                 					}catch(NullPointerException e){}
         						});
                 		

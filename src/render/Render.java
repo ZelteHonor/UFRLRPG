@@ -36,12 +36,12 @@ public class Render {
 	//Interface Graphique
 	private Canvas GUI;
 	
-	//Dimension et résolution d'affichage
+	//Dimension et rï¿½solution d'affichage
 	private final int DH;
 	private final int DW;
 	private final int RESOLUTION;
 
-	//À afficher
+	//ï¿½ afficher
 	private World.TILE[][] world;
 	private GameObjects objects[];
 	
@@ -64,9 +64,9 @@ public class Render {
 		DW = 20;//20
 		RESOLUTION = 64;
 		
-		//GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
+		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		//initSpriteMap();
+		initSpriteMap();
 		
 		wall = new Wall(world);
 		wall.recalculate(0, 0);
@@ -164,11 +164,11 @@ public class Render {
 	 * 
 	 * @param obj[]
 	 */
-	public void draw(GameObjects obj[]){
+	public void draw(ArrayList<GameObjects> obj){
 		
-		for(int i = 0; i < obj.length; i++)
+		for(int i = 0; i < obj.size(); i++)
 		{
-			draw(obj[i]);
+			draw(obj.get(i));
 		}
 		
 	}
@@ -180,7 +180,7 @@ public class Render {
 		
 		GUI.getGraphicsContext2D().save();
 		
-		//Ombrage général
+		//Ombrage gï¿½nï¿½ral
 		//GUI.getGraphicsContext2D().setGlobalAlpha(0.3);
 		//GUI.getGraphicsContext2D().fillRect(0, 0, DW*RESOLUTION	,DH*RESOLUTION);
 		GUI.getGraphicsContext2D().restore();
@@ -254,7 +254,7 @@ public class Render {
 	}
 	
 	/**
-	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
+	 * Vï¿½rifie si le sprite existe dans spriteMap, sinon l'ajoute.
 	 * 
 	 * @param obj
 	 * @return L'image du sprite
@@ -341,7 +341,7 @@ public class Render {
 		
 		public void recalculate(int x, int y)
 		{
-			System.out.println("¤-"+(x - (DW/2))+" "+(y - (DH/2))+"-¤");
+			System.out.println("ï¿½-"+(x - (DW/2))+" "+(y - (DH/2))+"-ï¿½");
 			
 			afficher();
 			
@@ -353,11 +353,11 @@ public class Render {
 
 					try
 					{
-					//Vérifie si c'est un mur
+					//Vï¿½rifie si c'est un mur
 					if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
 					{
 						
-						//Vérifie si elle est seule ou non
+						//Vï¿½rifie si elle est seule ou non
 						if((world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK) || (world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK))
 						{
 							
@@ -411,11 +411,11 @@ public class Render {
 						if(mur.contains(new Point(i,j))){
 						affiche += "O";}
 						else{
-						affiche += "¤";}
+						affiche += "ï¿½";}
 					}
 					else
 					{
-						affiche += "¬";
+						affiche += "ï¿½";
 					}
 				}
 				
@@ -453,7 +453,7 @@ public class Render {
 		
 		private void deleteRepetitions()
 		{
-			//à faire
+			//ï¿½ faire
 		}
 	}
 	
