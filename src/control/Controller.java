@@ -195,7 +195,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @return null
 	 */
-	class GameTimer extends Service<Void>  {
+	private class GameTimer extends Service<Void>  {
 		boolean t = true;
 		
 		public GameTimer() {}
@@ -239,7 +239,7 @@ public class Controller implements Initializable {
 	 * jeu
 	 *
 	 */
-	class GameTask extends Service<Void>  {
+	private class GameTask extends Service<Void>  {
 		
 
 		@Override
@@ -265,7 +265,7 @@ public class Controller implements Initializable {
 		}
 	}
 	
-	class GameRender extends Service<Void>  {
+	private class GameRender extends Service<Void>  {
 		
 
 		@Override
