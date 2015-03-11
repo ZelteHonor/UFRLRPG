@@ -297,15 +297,19 @@ public class Generator {
 	 * @param val la valeur � �crire
 	 */
 	private void fill(int x, int y,int[][] map, int val) {
+		
+		if (x >= World.SIZE-1 || y >= World.SIZE-1)
+			return;
+		
 		map[x][y] = val;
 		
-		if (tiles[x-1][y] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x-1][y] == 0)
+		if (tiles[x-1][y] != World.TILE.WALL && map[x-1][y] == 0)
 			fill(x-1, y, map, val);
-		if (tiles[x+1][y] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x+1][y] == 0)
+		if (tiles[x+1][y] != World.TILE.WALL && map[x+1][y] == 0)
 			fill(x+1, y, map, val);
-		if (tiles[x][y-1] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x][y-1] == 0)
+		if (tiles[x][y-1] != World.TILE.WALL && map[x][y-1] == 0)
 			fill(x, y-1, map, val);
-		if (tiles[x][y+1] != World.TILE.WALL && tiles[x][y+1] != World.TILE.ROCK && map[x][y+1] == 0)
+		if (tiles[x][y+1] != World.TILE.WALL && map[x][y+1] == 0)
 			fill(x, y+1, map, val);
 	}
 	
