@@ -64,7 +64,7 @@ public class Player extends Entity{
 		System.out.println(getX());
 
 		
-		/*if (xto != 0 || yto != 0) {
+		if (xto != 0 || yto != 0) {
 			speed = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2)) + 1;
 			if (speed > 5)
 				speed = 5;
@@ -79,17 +79,8 @@ public class Player extends Entity{
 		}
 
 		vx = Math.cos(direction)*speed;
-		vy = Math.sin(direction)*speed;*/
+		vy = Math.sin(direction)*speed;
 
-		if(xto != 0 || yto != 0)
-		{
-			vx = 5;
-		}
-		else
-		{
-			vy = 0;
-		}
-		
 		x += vx;
 		y += vy;
 	}
