@@ -124,8 +124,8 @@ public class Controller implements Initializable {
 		// TEST GRAPHIQUES ICI
 
 		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
-		player.setX(100);
-		player.setY(100);
+		player.setX(640);
+		player.setY(384);
 		player.setSprite("img/dirt.png");
 		player.setAngle(90);
 
