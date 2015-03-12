@@ -71,9 +71,9 @@ public class Render {
 		
 		initSpriteMap();
 		
-		wall = new Wall(world);
-		wall.recalculate(0, 0);
-		wall.afficher();
+		//wall = new Wall(world);
+		//wall.recalculate(0, 0);
+		//wall.afficher();
 	}
 	/**
 	 * Constructeur
@@ -155,7 +155,7 @@ public class Render {
 		
 		if(obj instanceof Player)
 		{
-			GUI.getGraphicsContext2D().translate(GUI.getWidth()/2,GUI.getHeight()/2);
+			GUI.getGraphicsContext2D().translate(DW*RESOLUTION/2,DH*RESOLUTION/2);
 		}
 		else
 		{
@@ -218,24 +218,35 @@ public class Render {
 	 */
 	public void drawWorld(double x, double y){
 		
+		System.out.println("TAILLE ÉCRAN : " + "(" + DW + "," + DH + ")");
+		System.out.println("POSITION : " + "(" + x + "," + y + ")");
+		
 		//Screen position
-		double spx = (x - (DW*RESOLUTION/2));
-		double spy = (y - (DH*RESOLUTION/2));
+		int spx = (int)(x/RESOLUTION);
+		int spy = (int)(y/RESOLUTION);
+		
+		System.out.println("POSITION ÉCRAN : " + "(" + spx + "," + spy + ")");
 		
 		//Starting Case
-		int scx = (int)(spx/RESOLUTION);
-		int scy = (int)(spy/RESOLUTION);
+		int scx = (int)(spx - ((double)DW/2));
+		int scy = (int)(spy - ((double)DH/2));
+		
+		System.out.println("POSITION CASE DE DÉPART : " + "(" + scx + "," + scy + ")");
 		
 		//strafe
 		
-		double sx = (spx - scx);
-		double sy = (spy - scy);
+		double sx = (spx - scx)*RESOLUTION;
+		double sy = (spy - scy)*RESOLUTION;
+		
+		System.out.println("DÉCALAGE : " + "(" + sx + "," + sy + ")");
+		
+		System.out.println("POSITION CASE DÉPART SUR CANVAS : " + "(" + (((0 - scx)*RESOLUTION) - sx) + "," + (((0 - scy)*RESOLUTION) - sy )+ ")");
 		
 		clear();
 		
-		for(int j = scy; j < (scy + (DH+2)); j++)
+		for(int j = scy; j < (scy + (DH*2)); j++)
 		{
-			for(int i = scx; i < (scx + (DW+2)); i++)
+			for(int i = scx; i < (scx + (DW*2)); i++)
 			{
 				
 				try

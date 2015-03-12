@@ -61,7 +61,6 @@ public class Player extends Entity{
 			xto--;
 		if (key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN)
 			xto++;
-		System.out.println(getX());
 
 		
 		if (xto != 0 || yto != 0) {
