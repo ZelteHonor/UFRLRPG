@@ -235,8 +235,8 @@ public class Render {
 		
 		//strafe
 		
-		double sx = (spx - scx)*RESOLUTION;
-		double sy = (spy - scy)*RESOLUTION;
+		double sx =  (x/RESOLUTION - scx)*RESOLUTION;
+		double sy = (y/RESOLUTION - scy)*RESOLUTION;
 		
 		System.out.println("DÉCALAGE : " + "(" + sx + "," + sy + ")");
 		
