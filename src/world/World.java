@@ -12,7 +12,7 @@ public class World {
 	public World() {
 		floors = new ArrayList<Floor>();
 		for (int i = 0; i < LEVEL_COUNT; i++) {
-			floors.add(new Floor(i));
+			floors.add(new Floor());
 		}
 	}
 	
