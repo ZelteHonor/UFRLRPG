@@ -9,11 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
-
-
-
-
 import entity.Player;
 import sun.tools.jar.Main;
 import gameObjects.GameObjects;
@@ -69,10 +64,10 @@ public class Render {
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		initSpriteMap();
+		//initSpriteMap();
 		
-		//wall = new Wall(world);
-		//wall.recalculate(0, 0);
+		wall = new Wall(world);
+		wall.recalculate(10, 10);
 		//wall.afficher();
 	}
 	/**
@@ -235,8 +230,8 @@ public class Render {
 		
 		//strafe
 		
-		double sx =  (x/RESOLUTION - scx)*RESOLUTION;
-		double sy = (y/RESOLUTION - scy)*RESOLUTION;
+		double sx =  (x - scx*RESOLUTION);
+		double sy = (y - scy*RESOLUTION);
 		
 		System.out.println("DÉCALAGE : " + "(" + sx + "," + sy + ")");
 		
@@ -358,11 +353,15 @@ public class Render {
 	{
 		private World.TILE[][] world;
 		private ArrayList<Point[]> mur;
+		private ArrayList<Point[]> murH;
+		private ArrayList<Point[]> murV;
 		
 		public Wall(World.TILE[][] world) {
 			
 			this.world = world;
 			mur = new ArrayList<Point[]>();
+			murH = new ArrayList<Point[]>();
+			murV = new ArrayList<Point[]>();
 			
 		}
 		
@@ -372,6 +371,7 @@ public class Render {
 			
 			afficher();
 			
+			
 			//Parcoure les cases autour d'un point (x,y)
 			for(int j = y - (DH/2);j <= y + (DH/2);j++)
 			{
@@ -380,49 +380,65 @@ public class Render {
 
 					try
 					{
-					//V�rifie si c'est un mur
-					if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
-					{
-						
-						//V�rifie si elle est seule ou non
-						if((world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK) || (world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK))
+						//V�rifie si c'est un mur
+						if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
 						{
+						
+							//V�rifie si elle est seule ou non
+							if((world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK) || (world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK))
+							{
 							
 						
-							if(world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK)
-							{
+								if(world[i+1][j] == TILE.WALL || world[i+1][j] == TILE.ROCK)
+								{
 								
-								mur.add(new Point[]{new Point(i,j),leftBorder(i+1,j)});
+									murH.add(new Point[]{new Point(i,j),rightBorder(i+1,j)});
 							
-							}
+								}
 						
-							if(world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK)
+								if(world[i][j+1] == TILE.WALL || world[i][j+1] == TILE.ROCK)
+								{
+							
+									murV.add(new Point[]{new Point(i,j),underBorder(i,j+1)});
+							
+								}
+							}
+							else
 							{
-							
-								mur.add(new Point[]{new Point(i,j),underBorder(i,j+1)});
+								System.out.println(i);
+								mur.add( new Point[]{ new Point(i,j), new Point(i,j) });
 							
 							}
-						}
-						else
-						{
-							System.out.println(i);
-							mur.add( new Point[]{ new Point(i,j), new Point(i,j) });
-							
-						}
 						
 						
-					}
+						}
 					
 				}catch(ArrayIndexOutOfBoundsException e){}
 			}
 			}
 			
 			deleteRepetitions();
+			deleteRepetitions();
 			
-			for(int i = 0;i < mur.size(); i++)
-			{
-				System.out.println("("+mur.get(i)[0].x+","+mur.get(i)[0].y+")-("+mur.get(i)[1].x+","+mur.get(i)[1].y+")");
-			}
+			
+				System.out.println("APRES============================================================================================");
+				for(int i = 0;i < mur.size(); i++)
+				{
+					System.out.println("("+mur.get(i)[0].x+","+mur.get(i)[0].y+")-("+mur.get(i)[1].x+","+mur.get(i)[1].y+")");
+				}
+				
+				System.out.println("APRES H==========================================================================================");
+				for(int i = 0;i < murH.size(); i++)
+				{
+					System.out.println("("+murH.get(i)[0].x+","+murH.get(i)[0].y+")-("+murH.get(i)[1].x+","+murH.get(i)[1].y+")");
+				}
+				
+				System.out.println("APRES V==========================================================================================");
+				for(int i = 0;i < murV.size(); i++)
+				{
+					System.out.println("("+murV.get(i)[0].x+","+murV.get(i)[0].y+")-("+murV.get(i)[1].x+","+murV.get(i)[1].y+")");
+				}
+
 		}
 		
 		public void afficher()
@@ -435,14 +451,11 @@ public class Render {
 				{
 					if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
 					{
-						if(mur.contains(new Point(i,j))){
-						affiche += "O";}
-						else{
-						affiche += "�";}
+						affiche += "�";
 					}
 					else
 					{
-						affiche += "�";
+						affiche += " ";
 					}
 				}
 				
@@ -452,13 +465,13 @@ public class Render {
 			System.out.println(affiche);
 		}
 		
-		private Point leftBorder(int x, int y)
+		private Point rightBorder(int x, int y)
 		{
 			Point border = new Point(x,y);
 			
 			if(world[x+1][y] == TILE.WALL || world[x+1][y] == TILE.ROCK)
 			{
-				border = leftBorder(x+1,y);
+				border = rightBorder(x+1,y);
 			}
 			
 			return border;
@@ -480,7 +493,36 @@ public class Render {
 		
 		private void deleteRepetitions()
 		{
-			//� faire
+			//Horizontal
+			for(int i = 0; i < murH.size(); i++)
+			{
+				for(int j = 0; j < murH.size(); j++)
+				{
+					try
+					{
+						if(murH.get(i) != murH.get(j) && murH.get(i)[1].distance(murH.get(j)[1]) == 0)
+						{
+							murH.remove(j);
+						}
+					}catch(IndexOutOfBoundsException e){}
+				}
+			}
+			
+			//Vertical
+			for(int i = 0; i < murV.size(); i++)
+			{
+				for(int j = 0; j < murV.size(); j++)
+				{
+					try
+					{
+						if(murV.get(i) != murV.get(j) && murV.get(i)[1].distance(murV.get(j)[1]) == 0)
+						{
+							murV.remove(j);
+						}
+					}catch(IndexOutOfBoundsException e){}
+				}
+			}
+			
 		}
 	}
 	
@@ -490,6 +532,5 @@ public class Render {
 
 		Render render = new Render(gen.generate());
 
-		
 	}
 }
