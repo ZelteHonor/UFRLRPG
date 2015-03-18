@@ -121,8 +121,6 @@ public class Controller implements Initializable {
 	@FXML
 	public void initGame() {
 
-		// TEST GRAPHIQUES ICI
-
 		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
 		player.setX(640);
 		player.setY(384);
