@@ -64,7 +64,7 @@ public class Render {
 		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
-		//initSpriteMap();
+		initSpriteMap();
 		
 		wall = new Wall(world);
 		wall.recalculate(10, 10);
@@ -445,9 +445,9 @@ public class Render {
 		{
 			String affiche = "";
 			
-			for(int j = 0;j < 64;j++)
+			for(int j = 0;j < world[0].length;j++)
 			{
-				for(int i = 0;i < 64;i++)
+				for(int i = 0;i < world.length;i++)
 				{
 					if(world[i][j] == TILE.WALL || world[i][j] == TILE.ROCK)
 					{

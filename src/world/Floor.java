@@ -40,8 +40,8 @@ public class Floor {
 	 */
 	public Floor() {
 		tiles = PRE_MADE_FLOOR;
-		startx = -3;
-		starty = -3;
+		startx = 0;
+		starty = 0;
 	}
 
 	public ArrayList<GameObjects> getObjects() {
