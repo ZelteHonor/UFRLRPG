@@ -122,8 +122,8 @@ public class Controller implements Initializable {
 	public void initGame() {
 
 		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
-		player.setX(640);
-		player.setY(384);
+		player.setX(64);
+		player.setY(64);
 		player.setSprite("img/dirt.png");
 		player.setAngle(90);
 
