@@ -90,7 +90,7 @@ public class Player extends Entity {
 		int px = x/64;
 		int py = y/64;
 		
-		if (floor.getTiles()[px + cx][py + cy].equals(TILE.WALL)) {
+		if (floor.getTiles()[px + cx][py + cy].equals(TILE.WALL) || floor.getTiles()[px + cx][py + cy].equals(TILE.ROCK)) {
 			ans = true;
 			System.out.println("JE SUIS PRIT DANS UN MUR");
 		}
