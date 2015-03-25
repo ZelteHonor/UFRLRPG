@@ -6,11 +6,12 @@ import world.Floor;
 public class Projectile extends GameObjects{
 	private int damage, length, vx ,vy;
 	
-	public Projectile(int damage, int length, int vs, int vy){
+	public Projectile(int damage, int length, int vx, int vy, int angle){
 		this.damage = damage;
 		this.length = length;
 		this.vx = vx;
 		this.vy = vy;
+		this.angle = angle;
 	}
 
 	@Override
