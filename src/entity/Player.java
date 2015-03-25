@@ -87,6 +87,8 @@ public class Player extends Entity {
 	private boolean isWallCollisionning(Floor floor, int cx, int cy) {
 		boolean ans = false;
 		
+		
+		
 		//À partir du centre du joueur
 		int px = (x+16)/64;
 		int py = (y+16)/64;

@@ -374,6 +374,7 @@ public class Render {
 		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
 		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));//Exit up
+		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));//Exit up
 	}
 	
 	private class Wall

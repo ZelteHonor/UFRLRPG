@@ -128,7 +128,7 @@ public class Controller implements Initializable {
 		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
 		player.setX(64);
 		player.setY(64);
-		player.setSprite("img/dirt.png");
+		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 
 		render = new Render(world.getFloor(0).getTiles());
@@ -209,7 +209,7 @@ public class Controller implements Initializable {
 				relativeMousePY = (render.getDH()*render.getRESOLUTION()/2) - mou.getSceneY();
 				
 				//Mettre plus tard dans joueur.update()
-				player.setAngle(Math.toDegrees(Math.atan(relativeMousePY/relativeMousePX)));//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
+				player.setAngle(Math.toDegrees(Math.atan2(relativeMousePY,relativeMousePX))+180);//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
 			}
 			
 
@@ -225,7 +225,7 @@ public class Controller implements Initializable {
 				relativeMousePY = (render.getDH()*render.getRESOLUTION()/2) - mou.getSceneY();
 				
 				//Mettre plus tard dans joueur.update()
-				player.setAngle(Math.toDegrees(Math.atan(relativeMousePY/relativeMousePX)));//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
+				player.setAngle(Math.toDegrees(Math.atan2(relativeMousePY,relativeMousePX))+180);//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
 			}
 			
 
@@ -346,7 +346,8 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		world = new World();
+		if (location.toString().contains("Game.fxml"))
+			world = new World();
 	}
 
 }
