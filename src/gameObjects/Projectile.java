@@ -27,14 +27,14 @@ public class Projectile extends GameObjects{
 		}
 		
 		for(Mask m : floor.getWalls()){
-		if(exist && length <= 0 || Mask.collide(this.mask, m)){
-			floor.getObjects().remove(this);
-			exist = false;
+			if(exist && length <= 0 || Mask.collide(this.mask, m)){
+				floor.getObjects().remove(this);
+				exist = false;
+			}
+			else if(exist){
+				this.setX(getX() + vx);
+				this.setY(getY() + vy);
+			}
 		}
-		else if(exist){
-			this.setX(getX() + vx);
-			this.setY(getY() + vy);
-		}
-		
 	}
 }
