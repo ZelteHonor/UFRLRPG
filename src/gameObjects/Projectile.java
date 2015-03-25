@@ -4,7 +4,8 @@ import entity.Entity;
 import world.Floor;
 
 /**
- * @author gabriel Classe représentant un projectile
+ * @author gabriel 
+ * Classe représentant un projectile
  */
 public class Projectile extends GameObjects {
 	private int damage, distance;
