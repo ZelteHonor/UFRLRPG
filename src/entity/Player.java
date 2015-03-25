@@ -82,7 +82,6 @@ public class Player extends Entity {
 
 		x += vx;
 		y += vy;
-		//System.out.println("POSITION DU JOUEUR " + x / 64 + " " + y / 64);
 	}
 
 	private boolean isWallCollisionning(Floor floor, int cx, int cy) {

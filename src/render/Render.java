@@ -227,6 +227,7 @@ public class Render {
 		
 		cx = x;
 		cy = y;
+
 		
 		//Screen position
 		int spx = (int)(x/RESOLUTION);
@@ -256,11 +257,11 @@ public class Render {
 			for(int i = scx; i < (scx + (DW*2)); i++)
 			{
 				
-				
 				double scpx = (((i - scx)*RESOLUTION) - sx) + (GUI.getWidth()/2)-RESOLUTION/2;
 				double scpy = (((j - scy)*RESOLUTION) - sy) + (GUI.getHeight()/2)-RESOLUTION/2;
 				
 				//System.out.println("("+ scpx +" " + scpy + ")");
+				//System.out.println("("+(((i - scx)*RESOLUTION) - sx)+" " + (((j - scy)*RESOLUTION) - sy));
 				
 				try
 				{
@@ -495,10 +496,10 @@ public class Render {
 		public void afficher(int x,int y)
 		{
 			String affiche = "";
-			
 
 			
 				for(int j = y;j < y+DH;j++)
+
 				{
 					for(int i = x;i < x + DW;i++)
 					{
