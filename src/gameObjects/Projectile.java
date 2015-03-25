@@ -19,7 +19,7 @@ public class Projectile extends GameObjects{
 		boolean exist = true;
 		
 		for(GameObjects o : floor.getObjects()){
-			if(o instanceof Entity && exist && Mask.collide(this.mask, o.mask)){
+			if(o instanceof Entity && exist && Mask.collide(this.mask, o.getMask())){
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
 				floor.getObjects().remove(this);
 				exist = false;
