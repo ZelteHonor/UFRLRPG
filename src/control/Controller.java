@@ -302,9 +302,9 @@ public class Controller implements Initializable {
                 			()->{
                 					try
                 					{
-                						player.update(world.getFloor(1));
+                						player.update(world.getFloor(0));
                 						for (GameObjects o : objects) {
-                							o.update(world.getFloor(1)); 
+                							o.update(world.getFloor(0)); 
                 						}
                 					}catch(NullPointerException e){}
         						});
