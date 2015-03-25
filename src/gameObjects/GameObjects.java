@@ -10,12 +10,17 @@ public abstract class GameObjects {
 	protected double angle;
 
 	protected String sprite;
+	protected Mask mask;
 
 	public GameObjects() {
 		this.x = 0;
 		this.y = 0;
 		this.angle = 0.0;
 
+	}
+	
+	public Mask getMask() {
+		return mask;
 	}
 
 	public double getX() {

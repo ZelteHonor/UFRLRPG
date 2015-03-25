@@ -1,49 +1,49 @@
 package world;
 
 import gameObjects.GameObjects;
+import gameObjects.Mask;
 
 import java.util.ArrayList;
 
 import world.World.TILE;
 
 public class Floor {
-
-	public static final World.TILE[][] PRE_MADE_FLOOR = {
-			{ TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL},
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.WALL },
-			{ TILE.WALL, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON },
-			{ TILE.WALL, TILE.EXITUP, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.DONJON, TILE.EXITDOWN },
-			{ TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL, TILE.WALL }};
-			
+		
 	private World.TILE[][] tiles;
 	private ArrayList<GameObjects> objects;
+	private ArrayList<Mask> walls;
 	private int startx, starty;
 
 	private int depth;
 
 	public Floor(int depth) {
-		Generator gen = new Generator();
-		tiles = gen.generate();
-		startx = gen.getStartX();
-		starty = gen.getStartY();
+		if (depth == -1) {
+			tiles = new World.TILE[World.SIZE][World.SIZE];
+			for (int i = 0; i < World.SIZE; i++)
+				for (int j = 0; j < World.SIZE; j++)
+					if (i == 0 || j == 0 || i == World.SIZE-1 || j == World.SIZE-1)
+						tiles[i][j] = TILE.WALL;
+					else
+						tiles[i][j] = TILE.DONJON;
+						
+		} else {
+			Generator gen = new Generator();
+			tiles = gen.generate();
+			startx = gen.getStartX();
+			starty = gen.getStartY();
+		}
+		
+		for (int i = 0; i < World.SIZE; i++)
+			for (int j = 0; j < World.SIZE; j++)
+				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
+					walls.add(new Mask(i*64 + 32,j*64 + 32,64,64));
+					
 	}
 
-	/**
-	 * génère un floor qui est toujours pareil, principalement pour du testing
-	 */
-	public Floor() {
-		tiles = PRE_MADE_FLOOR;
-		startx = 0;
-		starty = 0;
+	public ArrayList<Mask> getWalls() {
+		return walls;
 	}
-
+	
 	public ArrayList<GameObjects> getObjects() {
 		return objects;
 	}
