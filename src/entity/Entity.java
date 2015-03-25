@@ -35,5 +35,5 @@ public abstract class Entity extends GameObjects {
 		this.health = health;
 	}
 	@Override
-	public abstract void update(Floor floor);
+	protected abstract void update(Floor floor);
 }

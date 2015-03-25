@@ -53,6 +53,6 @@ public abstract class GameObjects {
 		this.sprite = sprite;
 	}
 	
-	public abstract void update(Floor floor);
+	protected abstract void update(Floor floor);
 
 }
