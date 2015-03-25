@@ -125,7 +125,7 @@ public class Controller implements Initializable {
 	@FXML
 	public void initGame() {
 
-		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
+		player = new Player(1, 10, 0, 0, 0, 10, 10, 10, null);
 		player.setX(64);
 		player.setY(64);
 		player.setSprite("img/gabriel.png");
