@@ -237,6 +237,8 @@ public class Controller implements Initializable {
 
 		timer = new GameTimer();
 		timer.start();
+		
+		render.findWall();//TEMP
 	}
 
 	/**
@@ -329,6 +331,7 @@ public class Controller implements Initializable {
                 			()->{
                 					try
                 					{
+                						
                 						double cx = mouse.getSceneX() - (render.getGUI().getWidth()/2);
                 						double cy = mouse.getSceneY() - (render.getGUI().getHeight()/2);
                 						render.drawWorld(player.getX() + cx,player.getY() + cy);
@@ -348,6 +351,7 @@ public class Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		if (location.toString().contains("Game.fxml"))
 			world = new World();
+
 	}
 
 }
