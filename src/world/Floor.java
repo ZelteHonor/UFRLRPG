@@ -33,6 +33,7 @@ public class Floor {
 			starty = gen.getStartY();
 		}
 		
+		walls = new ArrayList<Mask>(0);
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
