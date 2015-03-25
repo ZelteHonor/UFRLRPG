@@ -238,7 +238,6 @@ public class Controller implements Initializable {
 		timer = new GameTimer();
 		timer.start();
 		
-		render.findWall();//TEMP
 	}
 
 	/**
