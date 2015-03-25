@@ -18,6 +18,7 @@ public class Floor {
 
 	public Floor(int depth) {
 		if (depth == -1) {
+			tiles = new World.TILE[World.SIZE][World.SIZE];
 			for (int i = 0; i < World.SIZE; i++)
 				for (int j = 0; j < World.SIZE; j++)
 					if (i == 0 || j == 0 || i == World.SIZE-1 || j == World.SIZE-1)
