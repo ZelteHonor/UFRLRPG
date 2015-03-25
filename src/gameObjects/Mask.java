@@ -5,15 +5,15 @@ public class Mask {
 	public enum SHAPE {BOX, CIRCLE}
 	
 	private SHAPE shape;
-	private int r, h, w;
-	private int x, y;
+	private double r, h, w;
+	private double x, y;
 	
-	public Mask(int r, int px, int py)
+	public Mask(int r, double x2, double y2)
 	{
 		shape = SHAPE.CIRCLE;
 		this.r = r;
-		this.x = px;
-		this.y = py;
+		this.x = x2;
+		this.y = y2;
 	}
 	
 	public Mask (int h, int l, int px, int py)
@@ -27,7 +27,7 @@ public class Mask {
 	}
 
 	/**
-	 * Vérifie s'il y a collision
+	 * Vï¿½rifie s'il y a collision
 	 * @param a, un mask 
 	 * @param b, un mask
 	 * @return
@@ -76,43 +76,43 @@ public class Mask {
 		return shape;
 	}
 	
-	public int getR() {
+	public double getR() {
 		return r;
 	}
 
-	public int getH() {
+	public double getH() {
 		return h;
 	}
 
-	public int getW() {
+	public double getW() {
 		return w;
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
-	public void setR(int rayon) {
+	public void setR(double rayon) {
 		this.r = rayon;
 	}
 
-	public void setH(int hauteur) {
+	public void setH(double hauteur) {
 		this.h = hauteur;
 	}
 
-	public void setW(int largeur) {
+	public void setW(double largeur) {
 		this.w = largeur;
 	}
 
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 

@@ -7,6 +7,7 @@ import world.World.TILE;
 import control.Controller;
 import control.Controller.KEYSTATE;
 import gameObjects.Items;
+import gameObjects.Mask;
 
 public class Player extends Entity {
 
@@ -28,6 +29,8 @@ public class Player extends Entity {
 		for (int i = 0; i < key.length; i++) {
 			key[i] = Controller.KEYSTATE.UP;
 		}
+		
+		mask = new Mask(16,x,y);
 	}
 
 	public void setKeyState(int index, Controller.KEYSTATE state) {
@@ -80,7 +83,26 @@ public class Player extends Entity {
 		vx = Math.cos(direction) * speed;
 		vy = Math.sin(direction) * speed;
 
-		x += vx;
-		y += vy;
+		boolean hcheck =  false;
+		boolean vcheck = false;
+		
+		ArrayList<Mask> walls = floor.getWalls();
+		for(Mask wall : walls) {
+			mask.setX(x+vx);
+			mask.setY(y+vy);
+			if (Mask.collide(mask, wall)) {
+				mask.setY(y);
+				if (Mask.collide(mask,wall))
+					hcheck = true;
+				mask.setX(x);
+				mask.setY(y+vy);
+				if (Mask.collide(mask,wall))
+					vcheck = true;		
+			}
+		}
+		if (hcheck == false)
+			x += vx;
+		if (vcheck == false)
+			y += vy;
 	}
 }
