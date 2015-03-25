@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 
 public abstract class GameObjects {
 
-	protected int x, y;
+	protected double x;
+	protected double y;
 	protected double angle;
 
 	protected String sprite;
@@ -17,11 +18,11 @@ public abstract class GameObjects {
 
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -33,13 +34,13 @@ public abstract class GameObjects {
 		return sprite;
 	}
 
-	public void setX(int x) {
+	public void setX(double x) {
 
 		this.x = x;
 
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 
@@ -53,6 +54,6 @@ public abstract class GameObjects {
 		this.sprite = sprite;
 	}
 	
-	protected abstract void update(Floor floor);
+	public abstract void update(Floor floor);
 
 }
