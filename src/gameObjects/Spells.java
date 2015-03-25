@@ -1,5 +1,7 @@
 package gameObjects;
 
+import world.Floor;
+
 public class Spells extends Weapons{
 
 	public Spells(int weight, boolean evil, int range, int damage, int cooldown) {
@@ -8,7 +10,7 @@ public class Spells extends Weapons{
 	}
 
 	@Override
-	protected void attack() {
+	public void attack(Floor floor) {
 		// TODO Auto-generated method stub
 		
 	}

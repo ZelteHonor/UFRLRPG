@@ -1,5 +1,7 @@
 package gameObjects;
 
+import world.Floor;
+
 public class Melees extends Weapons{
 
 	public Melees(int weight, boolean evil, int range, int damage, int speed) {
@@ -7,7 +9,7 @@ public class Melees extends Weapons{
 	}
 
 	@Override
-	protected void attack() {
+	public void attack(Floor floor) {
 		// TODO Auto-generated method stub
 		
 	}

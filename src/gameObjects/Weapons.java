@@ -1,8 +1,12 @@
 package gameObjects;
 
+import world.Floor;
+
 public abstract class Weapons extends Items{
 
-	private int range, damage ,cooldown;
+	protected int range;
+	protected int damage;
+	private int cooldown;
 	
 	public Weapons(int weight, boolean evil, int range, int damage, int cooldown) {
 		super(weight, evil);
@@ -11,6 +15,6 @@ public abstract class Weapons extends Items{
 		this.cooldown = cooldown;
 	}
 	
-	protected abstract void attack();
+	public abstract void attack(Floor floor);
 
 }
