@@ -10,6 +10,8 @@ public abstract class Entity extends GameObjects {
 
 	private int level, health, intellect, strenght, agility, mana, speed,
 			perception;
+	
+
 	private ArrayList<Items> inventory;
 
 	public Entity(int level, int health, int intellect, int strenght,
@@ -24,7 +26,14 @@ public abstract class Entity extends GameObjects {
 		this.perception = perception;
 		this.inventory = inventory;
 	}
+	
+	public int getHealth() {
+		return health;
+	}
 
+	public void setHealth(int health) {
+		this.health = health;
+	}
 	@Override
 	public abstract void update(Floor floor);
 }
