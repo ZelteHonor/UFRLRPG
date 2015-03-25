@@ -4,3 +4,6 @@
 *.stackdump
 *.rar
 *.prefs
+src/test/AiTest.java
+src/test/WeaponsTest.java
+src/entity/Entity.java

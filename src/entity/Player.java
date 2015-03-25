@@ -49,20 +49,19 @@ public class Player extends Entity {
 
 	}
 
-	private void move(Floor floor) {// move va prendre le floor pour vérifier
-									// s'il collisionne avec le mur
+	private void move(Floor floor) {
 
 		int xto = 0, yto = 0;
 		double direction, speed;
 
-		if (key[0] == KEYSTATE.PRESSED || key[0] == KEYSTATE.DOWN)
+		if ((key[0] == KEYSTATE.PRESSED || key[0] == KEYSTATE.DOWN) && !isWallCollisionning(floor, 0, -1))
 			yto--;
-		if (key[1] == KEYSTATE.PRESSED || key[1] == KEYSTATE.DOWN)
+		if ((key[1] == KEYSTATE.PRESSED || key[1] == KEYSTATE.DOWN) && !isWallCollisionning(floor, 0, 1))
 			yto++;
 
-		if (key[2] == KEYSTATE.PRESSED || key[2] == KEYSTATE.DOWN)
+		if ((key[2] == KEYSTATE.PRESSED || key[2] == KEYSTATE.DOWN) && !isWallCollisionning(floor, -1, 0))
 			xto--;
-		if (key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN)
+		if ((key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN) && !isWallCollisionning(floor, 1, 0))
 			xto++;
 
 		if (xto != 0 || yto != 0) {
@@ -83,13 +82,17 @@ public class Player extends Entity {
 
 		x += vx;
 		y += vy;
-
+		//System.out.println("POSITION DU JOUEUR " + x / 64 + " " + y / 64);
 	}
 
 	private boolean isWallCollisionning(Floor floor, int cx, int cy) {
 		boolean ans = false;
-		System.out.println("POSITION DU JOUEUR " + cx / 64 + " " + cy / 64);
-		if (floor.getTiles()[cx / 64][cy / 64].equals(TILE.WALL)) {
+		
+		//À partir du centre du joueur
+		int px = (x+16)/64;
+		int py = (y+16)/64;
+		
+		if (floor.getTiles()[px + cx][py + cy].equals(TILE.WALL) || floor.getTiles()[px + cx][py + cy].equals(TILE.ROCK)) {
 			ans = true;
 			System.out.println("JE SUIS PRIT DANS UN MUR");
 		}

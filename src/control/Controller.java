@@ -80,6 +80,10 @@ public class Controller implements Initializable {
 	private Player player;
 	
 	private Render render;
+	
+	private MouseEvent mouse;
+	private double relativeMousePX;
+	private double relativeMousePY;
 
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
@@ -122,10 +126,10 @@ public class Controller implements Initializable {
 	public void initGame() {
 
 		player = new Player(10, 10, 10, 10, 10, 10, 10, 10, null);
-		player.setX(640);
-		player.setY(384);
+		player.setX(64);
+		player.setY(64);
 		player.setSprite("img/dirt.png");
-		player.setAngle(90);
+		player.setAngle(0);
 
 		render = new Render(world.getFloor(0).getTiles());
 		
@@ -191,6 +195,37 @@ public class Controller implements Initializable {
 					player.setKeyState(5, KEYSTATE.DOWN);
 				}
 				
+			}
+			
+
+		});
+		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mou) {
+				
+				mouse = mou;
+				relativeMousePX = (render.getDW()*render.getRESOLUTION()/2) - mou.getSceneX();
+				relativeMousePY = (render.getDH()*render.getRESOLUTION()/2) - mou.getSceneY();
+				
+				//Mettre plus tard dans joueur.update()
+				player.setAngle(Math.toDegrees(Math.atan(relativeMousePY/relativeMousePX)));//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
+			}
+			
+
+		});
+		
+		gamePane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mou) {
+				
+				mouse = mou;
+				relativeMousePX = (render.getDW()*render.getRESOLUTION()/2) - mou.getSceneX();
+				relativeMousePY = (render.getDH()*render.getRESOLUTION()/2) - mou.getSceneY();
+				
+				//Mettre plus tard dans joueur.update()
+				player.setAngle(Math.toDegrees(Math.atan(relativeMousePY/relativeMousePX)));//====================================================================La classe joueur à le défaut de ne pas voir ce qu'il faut dans le contrôleur!(À CHANGER)
 			}
 			
 
@@ -294,7 +329,9 @@ public class Controller implements Initializable {
                 			()->{
                 					try
                 					{
-                						render.drawWorld(player.getX(), player.getY());
+                						double cx = mouse.getSceneX() - (render.getGUI().getWidth()/2);
+                						double cy = mouse.getSceneY() - (render.getGUI().getHeight()/2);
+                						render.drawWorld(player.getX() + cx,player.getY() + cy);
                 						render.draw(player);
                 					}catch(NullPointerException e){}
         						});
