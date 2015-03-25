@@ -3,13 +3,32 @@ package gameObjects;
 import entity.Entity;
 import world.Floor;
 
+/**
+ * @author gabriel 
+ * Classe représentant un projectile
+ */
 public class Projectile extends GameObjects {
-	private int damage, length;
+	private int damage, distance;
 	double vx, vy;
 
-	public Projectile(int damage, int length, double vx, double vy, double angle) {
+	/**
+	 * Constructeur de projectile
+	 * 
+	 * @param damage
+	 *            Les dégats s'il touche une cible
+	 * @param distance
+	 *            Sa distance maximal avant de disparaitre
+	 * @param vx
+	 *            Sa vitesse en X
+	 * @param vy
+	 *            Sa vitesse en Y
+	 * @param angle
+	 *            L'angle vers laquel il est tournée.
+	 */
+	public Projectile(int damage, int distance, double vx, double vy,
+			double angle) {
 		this.damage = damage;
-		this.length = length;
+		this.distance = distance;
 		this.vx = vx;
 		this.vy = vy;
 		this.angle = angle;
@@ -18,22 +37,25 @@ public class Projectile extends GameObjects {
 	@Override
 	public void update(Floor floor) {
 		boolean exist = true;
-		for(GameObjects o : floor.getObjects()){
-			if(o instanceof Entity && exist && Mask.collide(this.mask, o.getMask())){
+		for (GameObjects o : floor.getObjects()) { // Regarde s'il touche une
+													// entité
+			if (o instanceof Entity && exist
+					&& Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
 				floor.getObjects().remove(this);
 				exist = false;
 			}
 		}
-		for(Mask m : floor.getWalls()){
-			if(exist && length <= 0 || Mask.collide(this.mask, m)){
+		for (Mask m : floor.getWalls()) { //Regarde s'il touche un mur.
+			if (exist && distance <= 0 || Mask.collide(this.mask, m)) {
 				floor.getObjects().remove(this);
 				exist = false;
 			}
-			else if(exist){
-				this.setX(getX() + vx);
-				this.setY(getY() + vy);
-			}
+		}
+		if (exist) { //Déplace le projectile selon sa vitesse
+			this.setX(getX() + vx);
+			this.setY(getY() + vy);
+			distance--;
 		}
 	}
 }

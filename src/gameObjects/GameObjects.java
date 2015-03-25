@@ -59,6 +59,11 @@ public abstract class GameObjects {
 		this.sprite = sprite;
 	}
 	
+	/**
+	 * Explique comment l'objet doit agir dans un game tick.
+	 * @param floor
+	 * 	Le Floor dans lequel se trouve l'objet.
+	 */
 	public abstract void update(Floor floor);
 
 }

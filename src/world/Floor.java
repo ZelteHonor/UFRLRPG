@@ -6,7 +6,6 @@ import gameObjects.Mask;
 import java.util.ArrayList;
 
 import world.World.TILE;
-
 public class Floor {
 		
 	private World.TILE[][] tiles;
