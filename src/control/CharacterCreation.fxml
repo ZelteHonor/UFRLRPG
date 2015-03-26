@@ -18,7 +18,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label text="Total Point" />
+                  <Label text="Remaining Point" />
                   <Label fx:id="totalP" text="30" />
                </children>
             </HBox>
