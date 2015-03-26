@@ -271,6 +271,7 @@ public class Controller implements Initializable {
 
 		timer = new GameTimer();
 		timer.start();
+
 	}
 
 	/**
@@ -346,13 +347,10 @@ public class Controller implements Initializable {
 	}
 
 	private class GameRender extends Service<Void> {
-
 		@Override
 		protected Task<Void> createTask() {
-
 			return new Task<Void>() {
 				protected Void call() throws Exception {
-
 					Platform.runLater(() -> {
 						try {
 							double cx = mouse.getSceneX()
@@ -365,7 +363,6 @@ public class Controller implements Initializable {
 						} catch (NullPointerException e) {
 						}
 					});
-
 					return null;
 				}
 			};
