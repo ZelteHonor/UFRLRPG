@@ -152,8 +152,8 @@ public class Controller implements Initializable {
 		player = new Player(1, 10, Integer.parseInt(intP.getValue()),
 				Integer.parseInt(strP.getValue()), Integer.parseInt(aglP
 						.getValue()), 10, 10, 10, null);
-		player.setX(64);
-		player.setY(64);
+		player.setX(128);
+		player.setY(128);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 
