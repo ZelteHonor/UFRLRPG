@@ -57,6 +57,14 @@ public class Floor {
 		return tiles;
 	}
 	
+	public int getStartX() {
+		return startx;
+	}
+	
+	public int getStartY() {
+		return starty;
+	}
+	
 	private class Wall //======================================Reste à l'intégrer!
 	{
 		private World.TILE[][] world;
