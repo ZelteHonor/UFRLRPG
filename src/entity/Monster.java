@@ -2,7 +2,10 @@ package entity;
 
 import java.awt.Point;
 import java.util.ArrayList;
+
 import world.Floor;
+import world.World;
+import gameObjects.GameObjects;
 import gameObjects.Items;
 
 public class Monster extends Entity{
@@ -19,11 +22,51 @@ public class Monster extends Entity{
 
 	@Override
 	public void update(Floor floor) {
-		
+		if(seePlayer(floor)){
+			searching = true;
+			for(GameObjects o : floor.getObjects()){
+				if (o instanceof Player){
+					lastTarget = new Point((int)o.getY()/64,(int)o.getY()/64);
+				}
+			}
+		}
+		else if(this.searching){
+			moveTo();
+		}
 		
 	}
 	
+	private boolean seePlayer(Floor floor) {
+		double angle = getMonsPLayAngle();
+		Point pl = null;
+		boolean visible = true;
+		for(GameObjects o : floor.getObjects()){
+			if (o instanceof Player){
+				pl = new Point((int)o.getY()/64,(int)o.getY()/64);
+			}
+		}
+		double distance = pl.distance(this.x,this.y);
+		double nX;
+		double nY;
+		for(double d = 0; d < distance; d += distance / 100f){
+			nX = d * Math.sin(angle) + this.x;
+			nY = d * Math.cos(angle) + this.y;
+			if(floor.getTiles()[(int)nX][(int)nY] == World.TILE.WALL 
+					|| floor.getTiles()[(int)nX][(int)nY] ==  World.TILE.ROCK){
+				visible = false;
+			}
+		}
+		return visible;
+	}
+
+	private void moveTo(){
+		double angle = getMonsPLayAngle();
+		x += this.agility * Math.sin(angle);
+		x += this.agility * Math.cos(angle);
+	}
 	
-	
+	private double getMonsPLayAngle(){
+		return Math.atan2(lastTarget.getX() - this.x, lastTarget.getY() - this.y);
+	}
 
 }
