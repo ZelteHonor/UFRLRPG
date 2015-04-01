@@ -25,14 +25,14 @@ public class Ranges extends Weapons {
 	 * @param speed
 	 * 	Vitesse de ses projectiles
 	 */
-	public Ranges(int weight, boolean evil, int range, int damage, int cooldown, int speed) {
-		super(weight, evil, range, damage, cooldown);
+	public Ranges(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, int speed) {
+		super(x, y, weight, evil, range, damage, cooldown);
 		this.speed = speed;
 	}
 
 	@Override
 	public void attack(Floor floor) {
-		Projectile proj = new Projectile(this.damage, this.range, speed * Math.cos(angle), speed * Math.sin(angle), this.angle);
+		Projectile proj = new Projectile(x, y, this.damage, this.range, speed * Math.cos(angle), speed * Math.sin(angle), this.angle);
 		floor.getObjects().add(proj); //Crée un projectile et l'ajoute dans la liste des objets à updater.
 	}
 }

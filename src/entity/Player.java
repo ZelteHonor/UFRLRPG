@@ -15,10 +15,10 @@ public class Player extends Entity {
 	private Controller.KEYSTATE[] key; // WSAD
 	private double vx, vy;
 
-	public Player(int level, int health, int intellect, int strenght,
+	public Player(double x, double y, int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception,
 			ArrayList<Items> inventory) {
-		super(level, health, intellect, strenght, agility, mana, speed,
+		super(x, y, level, health, intellect, strenght, agility, mana, speed,
 				perception, inventory);
 
 		/* Movement */

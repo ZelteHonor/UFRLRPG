@@ -149,7 +149,7 @@ public class Controller implements Initializable {
 	@FXML
 	public void initGame() {
 
-		player = new Player(1, 10, Integer.parseInt(intP.getValue()),
+		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, Integer.parseInt(intP.getValue()),
 				Integer.parseInt(strP.getValue()), Integer.parseInt(aglP
 						.getValue()), 10, 10, 10, null);
 		player.setX(64);

@@ -2,13 +2,21 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import world.Floor;
+import entity.Entity;
+import entity.Monster;
+import entity.Player;
 
 public class EntityTest {
 
-	@Test
+	
+	@Before
 	public void testGameObjects() {
-		fail("Not yet implemented");
+		
+			
 	}
 
 	@Test

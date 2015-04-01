@@ -244,4 +244,8 @@ public class Floor {
 			
 		}
 	}
+
+	public int getDepth() {
+		return depth;
+	}
 }

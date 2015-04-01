@@ -4,8 +4,8 @@ import world.Floor;
 
 public class Spells extends Weapons{
 
-	public Spells(int weight, boolean evil, int range, int damage, int cooldown) {
-		super(weight, evil, range, damage, cooldown);
+	public Spells(double x, double y, int weight, boolean evil, int range, int damage, int cooldown) {
+		super(x, y, weight, evil, range, damage, cooldown);
 		// TODO Auto-generated constructor stub
 	}
 

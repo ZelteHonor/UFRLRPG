@@ -25,8 +25,9 @@ public class Projectile extends GameObjects {
 	 * @param angle
 	 *            L'angle vers laquel il est tournée.
 	 */
-	public Projectile(int damage, int distance, double vx, double vy,
+	public Projectile(double x, double y, int damage, int distance, double vx, double vy,
 			double angle) {
+		super(x, y);
 		this.damage = damage;
 		this.distance = distance;
 		this.vx = vx;

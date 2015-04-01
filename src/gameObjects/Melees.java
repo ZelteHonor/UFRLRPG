@@ -4,8 +4,8 @@ import world.Floor;
 
 public class Melees extends Weapons{
 
-	public Melees(int weight, boolean evil, int range, int damage, int speed) {
-		super(weight, evil, range, damage, speed);
+	public Melees(double x, double y, int weight, boolean evil, int range, int damage, int speed) {
+		super(x, y, weight, evil, range, damage, speed);
 	}
 
 	@Override
