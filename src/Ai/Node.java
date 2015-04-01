@@ -50,7 +50,7 @@ public class Node implements Comparable<Node> {
 		
 		/**
 		 * @return
-		 * 	Retourne le coût total du node
+		 * 	Retourne le premier node
 		 */
 		public Node getFirst(){
 			Node temp = this;
@@ -59,6 +59,22 @@ public class Node implements Comparable<Node> {
 			}
 			return temp;
 		}
+		
+		/**
+		 * @return
+		 * 	Retourne le premier Node et le retire
+		 */
+		public Node getDestructiveFirst(){
+			Node temp = this;
+			while(temp.lastNode != null){
+				if(this.lastNode.lastNode == null){
+					temp = this.lastNode;
+					this.lastNode = null;
+				}
+			}
+			return temp;
+		}
+		
 		/** 
 		 *Compare 2 node selon leur coût total
 		 */
