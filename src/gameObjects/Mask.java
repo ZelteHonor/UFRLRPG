@@ -38,8 +38,8 @@ public class Mask {
 				return true;
 			
 			if (a.getShape() == SHAPE.BOX && b.getShape() == SHAPE.BOX) {
-				return!((a.getX() > b.getX() + b.getW()) || (a.getY() > b.getY() + b.getH()) 
-					|| (b.getX() > a.getX() + a.getW()) || (b.getY() > a.getY() + a.getH()));		
+				return !((a.getX() - a.getW()/2 > b.getX() + b.getW()/2) || (a.getY() - a.getH()/2 > b.getY() + b.getH()/2) 
+					|| (b.getX() - b.getW()/2 > a.getX() + a.getW()/2) || (b.getY() - b.getH()/2 > a.getY() + a.getH()/2));		
 			}
 			
 			if (a.getShape() == SHAPE.CIRCLE)

@@ -37,7 +37,7 @@ public class Floor {
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
-					walls.add(new Mask(i*64 + 32,j*64 + 32,64,64));
+					walls.add(new Mask(64,64,i*64 + 32,j*64 + 32));
 					
 	}
 
@@ -55,6 +55,14 @@ public class Floor {
 
 	public World.TILE[][] getTiles() {
 		return tiles;
+	}
+	
+	public int getStartX() {
+		return startx;
+	}
+	
+	public int getStartY() {
+		return starty;
 	}
 	
 	private class Wall //======================================Reste à l'intégrer!

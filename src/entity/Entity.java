@@ -8,8 +8,19 @@ import gameObjects.Items;
 
 public abstract class Entity extends GameObjects {
 
-	private int level, health, intellect, strenght, agility, mana, speed,
-			perception;
+	private int level, health, intellect, strenght;
+
+
+	protected int agility;
+
+
+	private int mana;
+
+
+	private int speed;
+
+
+	private int perception;
 	
 
 	private ArrayList<Items> inventory;
