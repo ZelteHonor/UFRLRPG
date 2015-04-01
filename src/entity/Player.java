@@ -83,7 +83,7 @@ public class Player extends Entity {
 		vx = Math.cos(direction) * speed;
 		vy = Math.sin(direction) * speed;
 
-/*		boolean hcheck =  false;
+		boolean hcheck =  false;
 		boolean vcheck = false;
 		
 		ArrayList<Mask> walls = floor.getWalls();
@@ -100,9 +100,9 @@ public class Player extends Entity {
 					vcheck = true;		
 			}
 		}
-		if (hcheck == false)*/
+		if (hcheck == false)
 			x += vx;
-		//if (vcheck == false)
+		if (vcheck == false)
 			y += vy;
 	}
 }
