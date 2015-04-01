@@ -1,5 +1,6 @@
 package control;
 
+import entity.Monster;
 import entity.Player;
 import gameObjects.GameObjects;
 
@@ -152,11 +153,22 @@ public class Controller implements Initializable {
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, Integer.parseInt(intP.getValue()),
 				Integer.parseInt(strP.getValue()), Integer.parseInt(aglP
 						.getValue()), 10, 10, 10, null);
-		player.setX(128);
-		player.setY(128);
+		player.setX(256);
+		player.setY(256);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
+		
+		objects = new ArrayList<GameObjects>();
+		Monster m = new Monster(0, 0, 0, 0, 0, 0, 0, 0, null);
+		m.setX(128);
+		m.setY(128);
+		m.setAngle(0);
+		m.setSprite("img/gabriel.png");
+		
+		objects.add(m);
 
+		world.getFloor(0).setPlayer(player);
+		
 		render = new Render(world.getFloor(0).getTiles());
 
 		gamePane.getChildren().add(render.getGUI());
@@ -331,14 +343,17 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 
 					Platform.runLater(() -> {
-						try {
+
 							player.update(world.getFloor(0));
+							
 							for (GameObjects o : objects) {
+
 								o.update(world.getFloor(0));
+
 							}
-						} catch (NullPointerException e) {
+
 						}
-					});
+					);
 
 					return null;
 				}

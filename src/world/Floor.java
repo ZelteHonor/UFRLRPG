@@ -1,5 +1,6 @@
 package world;
 
+import entity.Player;
 import gameObjects.GameObjects;
 import gameObjects.Mask;
 
@@ -12,6 +13,7 @@ public class Floor {
 	private World.TILE[][] tiles;
 	private ArrayList<GameObjects> objects;
 	private ArrayList<Mask> walls;
+	private Player player;
 	private int startx, starty;
 
 	private int depth;
@@ -51,6 +53,16 @@ public class Floor {
 
 	public void setObjects(ArrayList<GameObjects> objects) {
 		this.objects = objects;
+	}
+	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
+	}
+	
+	public Player getPlayer()
+	{
+		return player;
 	}
 
 	public World.TILE[][] getTiles() {

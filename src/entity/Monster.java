@@ -49,22 +49,25 @@ public class Monster extends Entity{
 		double angle = getMonsPLayAngle();
 		Point pl = null;
 		boolean visible = true;
-		for(GameObjects o : floor.getObjects()){
-			if (o instanceof Player){
-				pl = new Point((int)o.getY()/64,(int)o.getY()/64);
-			}
-		}
+
+		pl = new Point((int)floor.getPlayer().getX()/64,(int)floor.getPlayer().getY()/64);
+
 		double distance = pl.distance(this.x,this.y);
 		double nX;
 		double nY;
 		for(double d = 0; d < distance; d += distance / 100f){
-			nX = d * Math.sin(angle) + this.x;
-			nY = d * Math.cos(angle) + this.y;
+			nX = (d * Math.sin(angle) + this.x)/64;
+			nY = (d * Math.cos(angle) + this.y)/64;
+		
 			if(floor.getTiles()[(int)nX][(int)nY] == World.TILE.WALL 
 					|| floor.getTiles()[(int)nX][(int)nY] ==  World.TILE.ROCK){
 				visible = false;
 			}
+			
+			System.out.println(nX);
+			System.out.println(nY);
 		}
+		
 		return visible;
 	}
 
