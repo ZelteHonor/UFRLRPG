@@ -3,6 +3,7 @@ package entity;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import pathfinding.Node;
 import world.Floor;
 import world.World;
 import gameObjects.GameObjects;
@@ -13,12 +14,14 @@ public class Monster extends Entity{
 	private String name;
 	private boolean searching;
 	private Point lastTarget;
-
+	private Node totalPath, nextNode;
+	
 	public Monster(double x, double y, int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception, ArrayList<Items> inventory) {
 		super(x, y, level, health, intellect, strenght, agility, mana, speed, perception, inventory);
 		searching = false;
 		lastTarget = new Point(-1, -1);
+		Node totalPath = null;
 	}
 
 	@Override
@@ -28,11 +31,23 @@ public class Monster extends Entity{
 			for(GameObjects o : floor.getObjects()){
 				if (o instanceof Player){
 					lastTarget = new Point((int)o.getY()/64,(int)o.getY()/64);
+					totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
 				}
 			}
 		}
 		else if(this.searching){
-			moveTo();
+			
+			if(new Point((int)this.x/control.Controller.get().getRender().getRESOLUTION(),(int)this.y/control.Controller.get().getRender().getRESOLUTION()).equals(lastTarget)){
+				searching = false;
+			}
+			else if(new Point((int)this.x/control.Controller.get().getRender().getRESOLUTION(),(int)this.y/control.Controller.get().getRender().getRESOLUTION()).equals(nextNode.getCoor())){
+				nextNode = totalPath.getDestructiveFirst();
+			}
+			else{
+				moveTo();
+			}
+			
+			
 		}
 		
 	}
@@ -67,7 +82,7 @@ public class Monster extends Entity{
 	}
 	
 	private double getMonsTargetAngle(){
-		return Math.atan2(lastTarget.getX() - this.x, lastTarget.getY() - this.y);
+		return Math.atan2(nextNode.getCoor().getX() - this.x, nextNode.getCoor().getY() - this.y);
 	}
 
 }
