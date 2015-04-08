@@ -275,8 +275,8 @@ public class Render {
 			for(int i = scx; i <= scx + DW + 1; i++)
 			{
 				
-				double px =RESOLUTION*(i-scx);
-				double py =RESOLUTION*(j-scy);
+				double px = -dx + RESOLUTION*(i-scx);
+				double py = -dy + RESOLUTION*(j-scy);
 				
 				try
 				{

@@ -62,7 +62,7 @@ public class Controller implements Initializable {
 
 	public void initGame() {
 
-		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 10, 10, 10, null);
+		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(), 1, 1, 1, 1, 1, 1, 1, 1, null);
 		player.setX(2.65);
 		player.setY(2.65);
 		player.setSprite("img/gabriel.png");
@@ -169,25 +169,17 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-<<<<<<< HEAD
+						
+						double cx = ((input.getMouse().getSceneX() / render.getRESOLUTION()) - player.getX())/2 + player.getX();
+						double cy = ((input.getMouse().getSceneY() / render.getRESOLUTION()) - player.getY())/2 + player.getY();
 							
-							double cx = ((input.getMouse().getSceneX() / render.getRESOLUTION()) - player.getX())/2 + player.getX();
-							double cy = ((input.getMouse().getSceneY() / render.getRESOLUTION()) - player.getY())/2 + player.getY();
+						render.drawWorld(player.getX(),player.getY());
 							
-							render.drawWorld(player.getX(),player.getY());
-							
-							render.draw(player);
+						render.draw(player);
 
-				 });
-=======
-						try {
-							double cx = input.getMouse().getSceneX() - (render.getGUI().getWidth() / 2);
-							double cy = input.getMouse().getSceneY() - (render.getGUI().getHeight() / 2);
-							render.drawWorld(player.getX() + cx, player.getY() + cy);
-							render.draw(player);
-						} catch (NullPointerException e) {}
+
 					});
->>>>>>> origin/master
+
 					return null;
 				}
 			};
