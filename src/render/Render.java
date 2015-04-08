@@ -183,7 +183,7 @@ public class Render {
 	 */
 	public void drawWorld(double x, double y){
 		
-		//System.out.println("TAILLE ÉCRAN : " + "(" + DW + "," + DH + ")");
+		/*//System.out.println("TAILLE ÉCRAN : " + "(" + DW + "," + DH + ")");
 		//System.out.println("POSITION : " + "(" + x + "," + y + ")");
 		
 		cx = x;
@@ -257,8 +257,61 @@ public class Render {
 				
 			}
 			
-		}
+		}*/
 		
+		clear();
+		
+		cx = x; cy = y;
+
+		
+		double dx = x - (int)x;
+		double dy = y - (int)y;
+		
+		int scx = (int)(x - DW/2);
+		int scy = (int)(y - DH/2);
+		
+		for(int j = scy ; j <= scy + DH + 1 ; j++)
+		{
+			for(int i = scx; i <= scx + DW + 1; i++)
+			{
+				
+				double px =RESOLUTION*(i-scx);
+				double py =RESOLUTION*(j-scy);
+				
+				try
+				{
+					switch(world[i][j].ordinal())
+					{
+					
+					case 0 :
+						break;
+					case 1 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), px, py);
+						break;
+					case 2 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), px, py);
+						break;
+					case 3 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), px, py);
+						break;
+					case 4 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), px, py);
+						break;
+					case 5 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), px, py);
+						break;
+					case 6 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitup.png"), px, py);
+						break;
+					case 7 :
+						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitdown.png"), px, py);
+						break;
+					}
+				}catch(ArrayIndexOutOfBoundsException e){}
+				
+			}
+			
+		}
 	}
 	
 	/**
