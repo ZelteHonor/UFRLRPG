@@ -7,8 +7,8 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 
+import pathfinding.Node;
 import world.Floor;
-import Ai.Node;
 
 public class AiTest {
 	
@@ -17,7 +17,7 @@ public class AiTest {
 	@Before
 	public void build(){
 		Floor floor = new Floor(-1);
-		n = Ai.Ai.getPath(new Point(6,6), new Point(8,8), floor);
+		n = pathfinding.Pathfinding.getPath(new Point(6,6), new Point(8,8), floor);
 	}
 	
 	@Test

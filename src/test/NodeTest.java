@@ -7,7 +7,7 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 
-import Ai.Node;
+import pathfinding.Node;
 
 public class NodeTest {
 
