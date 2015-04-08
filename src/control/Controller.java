@@ -56,23 +56,19 @@ public class Controller implements Initializable {
 		PRESSED, RELEASED, DOWN, UP
 	};
 
-
+	
 
 	@FXML
+	public void start() {
+		initGame();
+	}
 
 	public void initGame() {
-
-		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(), 1, 1, 1, 1, 1, 1, 1, 1, null);
-		player.setX(2.65);
-		player.setY(2.65);
-		player.setSprite("img/gabriel.png");
-		player.setAngle(0);
 
 		/* Modules */
 		input = new Input(pane);
 		world = new World();
-		render = new Render(world.getFloor(0).getTiles());
-
+		render = new Render(world.getFloor(0).getTiles());	
 		
 		/* FXML */
 		pane.getChildren().clear();
@@ -81,6 +77,10 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
+		player.setX(2.65);
+		player.setY(2.65);
+		player.setSprite("img/gabriel.png");
+		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
 		
 		objects = new ArrayList<GameObjects>();;
