@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane id="root" fx:id="mainRoot" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Controller">
+<BorderPane id="root" fx:id="root" prefHeight="720.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Controller">
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="525.0" layoutY="549.0" mnemonicParsing="false" onMouseClicked="#quit" prefHeight="86.0" prefWidth="230.0" text="Quit" />
-            <Button layoutX="525.0" layoutY="381.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="Option" />
-            <Button layoutX="525.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#createCharacter" prefHeight="86.0" prefWidth="230.0" text="New game" />
-            <Button layoutX="525.0" layoutY="68.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="230.0" text="Continue" />
+            <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/splash.png" />
+               </image>
+            </ImageView>
+            <Button focusTraversable="false" layoutX="512.0" layoutY="476.0" mnemonicParsing="false" onAction="#start" prefHeight="32.0" prefWidth="256.0" text="Jouer" />
+            <Button focusTraversable="false" layoutX="512.0" layoutY="534.0" mnemonicParsing="false" onAction="#quit" prefHeight="32.0" prefWidth="256.0" text="Quitter" />
          </children></Pane>
    </center>
 </BorderPane>

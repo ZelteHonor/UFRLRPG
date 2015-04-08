@@ -20,6 +20,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("UFRLRPG : Unoriginal till the end!");
+			primaryStage.setWidth(1280);
+			primaryStage.setHeight(720);
+			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

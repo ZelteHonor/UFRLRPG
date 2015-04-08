@@ -39,8 +39,7 @@ public class Floor {
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
-					walls.add(new Mask(64,64,i*64 + 32,j*64 + 32));
-					
+					walls.add(new Mask(1,1,i + 0.5,j + 0.5));				
 	}
 
 	public ArrayList<Mask> getWalls() {
