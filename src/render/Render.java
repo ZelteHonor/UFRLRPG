@@ -3,24 +3,14 @@
  */
 package render;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
 
 import entity.Player;
-import sun.tools.jar.Main;
 import gameObjects.GameObjects;
-import world.Generator;
 import world.World;
-import world.World.TILE;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 
 /**
  * Cette classe dessine sur un Canvas le monde et ces objets.
@@ -181,30 +171,6 @@ public class Render {
 		{
 			draw(obj.get(i));
 		}
-		
-	}
-
-	public void drawShadows()
-	{
-		/*Stop[] stops1 = {new Stop(0.6,Color.TRANSPARENT),new Stop(1.0,Color.BLACK)};
-		Stop[] stops2 = {new Stop(0.0,Color.BLACK),new Stop(1.0,Color.BLACK)};
-		
-		GUI.getGraphicsContext2D().save();
-		
-		//Ombrage g�n�ral
-		//GUI.getGraphicsContext2D().setGlobalAlpha(0.3);
-		//GUI.getGraphicsContext2D().fillRect(0, 0, DW*RESOLUTION	,DH*RESOLUTION);
-		GUI.getGraphicsContext2D().restore();
-		
-		
-		//Ombrage radial
-		GUI.getGraphicsContext2D().setFill(new RadialGradient(30, 0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops1));
-		GUI.getGraphicsContext2D().fillOval(0, 0, 1000, 1000);
-		GUI.getGraphicsContext2D().restore();
-		GUI.getGraphicsContext2D().setFill(new RadialGradient(0, 0, 0, 0, 0.7, true, CycleMethod.NO_CYCLE, stops2));
-		//GUI.getGraphicsContext2D().fillOval(0, 0, 1000, 1000);
-*/		
-		
 		
 	}
 	
@@ -370,13 +336,5 @@ public class Render {
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
 		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));//Exit up
 		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));//Exit up
-	}
-	
-	public static void main(String args[]) {
-		
-		Generator gen = new Generator();
-
-		Render render = new Render(gen.generate());
-
 	}
 }

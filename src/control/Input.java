@@ -8,14 +8,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Initialise tout les écouteurs et permet d'acceder à la sourie.
+ *
+ */
 public class Input {
 	
 	private MouseEvent mouse;
 	private double relativeMousePX;
 	private double relativeMousePY;
 	
+	
+	
+	/** Constructeur */
 	public Input(Node node) {
 		
+		//PRESSED
 		node.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
@@ -38,6 +46,7 @@ public class Input {
 			}
 		});
 
+		//RELEASSED
 		node.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
 				if (ke.getCode() == KeyCode.W) {
@@ -60,6 +69,7 @@ public class Input {
 			}
 		});
 
+		//MOUSE PRESSED
 		node.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -76,6 +86,8 @@ public class Input {
 			}
 
 		});
+		
+		//MOUSSE MOVED
 		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
 			@Override
