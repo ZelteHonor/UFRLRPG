@@ -53,31 +53,28 @@ public class Controller implements Initializable {
 
 	@FXML
 	public void start() {
+		/* Modules */
+		input = new Input(pane);
 		world = new World();
+		render = new Render(world.getFloor(0).getTiles());
+		
+		/* FXML */
 		pane.getChildren().clear();
 		pane.setFocusTraversable(true);
+		pane.getChildren().add(render.getGUI());
 		
+		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setSprite("img/gabriel.png");
-		player.setAngle(0);
-		
-		objects = new ArrayList<GameObjects>();;
-
 		world.getFloor(0).setPlayer(player);
 		
-		render = new Render(world.getFloor(0).getTiles());
-
-		pane.getChildren().add(render.getGUI());
-
-		input = new Input(pane);
-
+		objects = new ArrayList<GameObjects>();;
+		
+		/* Services */
 		this.update = new GameTask();
-
 		this.screenRefresh = new GameRender();
 
 		timer = new GameTimer();
 		timer.start();
-
 	}
 	
 	public Player getPlayer()
