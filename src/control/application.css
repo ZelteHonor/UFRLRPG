@@ -1,1 +1,20 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button {
+	-fx-background-color: #00000000;
+	-fx-background-radius: 0;
+	-fx-background-size: 32 256;
+	-fx-background-insets: 12 64 12 64;
+	-fx-text-fill: #FFFFFF;
+	-fx-font-family: "04b03";
+	-fx-font-size: 32px
+}
+
+.button:hover {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: #000000;
+}
+
+
+.button:armed {
+	-fx-text-fill: #ffffff;
+}
