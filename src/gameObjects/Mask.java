@@ -8,7 +8,7 @@ public class Mask {
 	private double r, h, w;
 	private double x, y;
 	
-	public Mask(int r, double x2, double y2)
+	public Mask(double r, double x2, double y2)
 	{
 		shape = SHAPE.CIRCLE;
 		this.r = r;
@@ -16,7 +16,7 @@ public class Mask {
 		this.y = y2;
 	}
 	
-	public Mask (int h, int l, int px, int py)
+	public Mask (double h, double l, double px, double py)
 	{
 		shape = SHAPE.BOX;
 		this.h = h;
