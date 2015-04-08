@@ -46,38 +46,27 @@ public class Monster extends Entity{
 	}
 	
 	private boolean seePlayer(Floor floor) {
-		double angle = getMonsPLayAngle();
+		double angle = getMonsTargetAngle();
 		Point pl = null;
 		boolean visible = true;
 
 		pl = new Point((int)floor.getPlayer().getX()/64,(int)floor.getPlayer().getY()/64);
 
 		double distance = pl.distance(this.x,this.y);
-		double nX;
-		double nY;
-		for(double d = 0; d < distance; d += distance / 100f){
-			nX = (d * Math.sin(angle) + this.x)/64;
-			nY = (d * Math.cos(angle) + this.y)/64;
-		
-			if(floor.getTiles()[(int)nX][(int)nY] == World.TILE.WALL 
-					|| floor.getTiles()[(int)nX][(int)nY] ==  World.TILE.ROCK){
-				visible = false;
-			}
-			
-			System.out.println(nX);
-			System.out.println(nY);
+		if (distance <= 2048){
+			visible = true;
 		}
 		
 		return visible;
 	}
 
 	private void moveTo(){
-		double angle = getMonsPLayAngle();
+		double angle = getMonsTargetAngle();
 		x += this.agility * Math.sin(angle);
 		x += this.agility * Math.cos(angle);
 	}
 	
-	private double getMonsPLayAngle(){
+	private double getMonsTargetAngle(){
 		return Math.atan2(lastTarget.getX() - this.x, lastTarget.getY() - this.y);
 	}
 
