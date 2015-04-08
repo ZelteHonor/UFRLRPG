@@ -1,6 +1,5 @@
 package control;
 
-import entity.Monster;
 import entity.Player;
 import gameObjects.GameObjects;
 
@@ -10,26 +9,17 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import render.Render;
-import world.Generator;
 import world.World;
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -155,8 +145,8 @@ public class Controller implements Initializable {
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, Integer.parseInt(intP.getValue()),
 				Integer.parseInt(strP.getValue()), Integer.parseInt(aglP
 						.getValue()), 10, 10, 10, null);
-		player.setX(256);
-		player.setY(256);
+		player.setX(2.65);
+		player.setY(2.65);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		
@@ -271,17 +261,15 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						try {
-							double cx = input.getMouse().getSceneX()
-									- (render.getGUI().getWidth() / 2);
-							double cy = input.getMouse().getSceneY()
-									- (render.getGUI().getHeight() / 2);
-							render.drawWorld(player.getX() + cx, player.getY()
-									+ cy);
+							
+							double cx = ((input.getMouse().getSceneX() / render.getRESOLUTION()) - player.getX())/2 + player.getX();
+							double cy = ((input.getMouse().getSceneY() / render.getRESOLUTION()) - player.getY())/2 + player.getY();
+							
+							render.drawWorld(player.getX(),player.getY());
+							
 							render.draw(player);
-						} catch (NullPointerException e) {
-						}
-					});
+
+				 });
 					return null;
 				}
 			};
