@@ -19,13 +19,16 @@ import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
 	
+	/* Singleton - like */
 	private static Controller controller;
 	
+	/* FXML */	
 	@FXML
 	private BorderPane root;
 	@FXML
 	private Pane pane;
 
+	/* IDK */
 	private static String gameState;
 
 	/* Modules */
@@ -42,14 +45,12 @@ public class Controller implements Initializable {
 	private Player player;
 	private ArrayList<GameObjects> objects;
 	
+	/* Clavier */
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
 	};
 
-	@FXML
-	public void quit() {
-		System.exit(0);
-	}
+
 
 	@FXML
 	public void start() {
@@ -77,19 +78,14 @@ public class Controller implements Initializable {
 		timer.start();
 	}
 	
-	public Player getPlayer()
-	{
-		return player;
-	}
-	
-	public Render getRender()
-	{
-		return render;
+	@FXML
+	public void quit() {
+		System.exit(0);
 	}
 
 	/**
-	 * g√®re le temps de rafraichisement du jeu appelant √† chaque 60√®me de
-	 * secondes la t√¢che gameTask
+	 * gËre le temps de rafraichisement du jeu appelant ‡†chaque 60Ëme de
+	 * secondes la t‚che gameTask
 	 * 
 	 * @return null
 	 */
@@ -131,31 +127,20 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la m√©thode update sur chaque √©l√©ment de la liste des √©l√©ments du
+	 * appelle la mÈthode update sur chaque ÈlÈ©ment de la liste des ÈlÈments du
 	 * jeu
-	 *
 	 */
 	private class GameTask extends Service<Void> {
-
 		@Override
 		protected Task<Void> createTask() {
-
 			return new Task<Void>() {
 				protected Void call() throws Exception {
-
 					Platform.runLater(() -> {
-
 							player.update(world.getFloor(0));
-							
-							for (GameObjects o : objects) {
-
+							for (GameObjects o : objects)
 								o.update(world.getFloor(0));
-
 							}
-
-						}
 					);
-
 					return null;
 				}
 			};
@@ -170,15 +155,11 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
 						try {
-							double cx = input.getMouse().getSceneX()
-									- (render.getGUI().getWidth() / 2);
-							double cy = input.getMouse().getSceneY()
-									- (render.getGUI().getHeight() / 2);
-							render.drawWorld(player.getX() + cx, player.getY()
-									+ cy);
+							double cx = input.getMouse().getSceneX() - (render.getGUI().getWidth() / 2);
+							double cy = input.getMouse().getSceneY() - (render.getGUI().getHeight() / 2);
+							render.drawWorld(player.getX() + cx, player.getY() + cy);
 							render.draw(player);
-						} catch (NullPointerException e) {
-						}
+						} catch (NullPointerException e) {}
 					});
 					return null;
 				}
@@ -190,6 +171,14 @@ public class Controller implements Initializable {
 		return controller;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public Render getRender() {
+		return render;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;
