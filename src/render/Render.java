@@ -252,8 +252,8 @@ public class Render {
 			for(int i = scx; i < (scx + (DW*2)); i++)
 			{
 				
-				double scpx = (((i - scx)*RESOLUTION) - sx) + (GUI.getWidth()/2)-RESOLUTION/2;
-				double scpy = (((j - scy)*RESOLUTION) - sy) + (GUI.getHeight()/2)-RESOLUTION/2;
+				double scpx = (((i - scx)*RESOLUTION) - sx) + (GUI.getWidth()/2);
+				double scpy = (((j - scy)*RESOLUTION) - sy) + (GUI.getHeight()/2);
 				
 				//System.out.println("("+ scpx +" " + scpy + ")");
 				//System.out.println("("+(((i - scx)*RESOLUTION) - sx)+" " + (((j - scy)*RESOLUTION) - sy));

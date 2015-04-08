@@ -36,6 +36,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+	
+	private static Controller controller;
+	
 	@FXML
 	private BorderPane mainRoot;
 	@FXML
@@ -84,9 +87,8 @@ public class Controller implements Initializable {
 
 	private Render render;
 
-	private MouseEvent mouse;
-	private double relativeMousePX;
-	private double relativeMousePY;
+
+	private Input input;
 
 	private static SimpleStringProperty intP, strP, aglP, remP;
 
@@ -158,14 +160,7 @@ public class Controller implements Initializable {
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		
-		objects = new ArrayList<GameObjects>();
-		Monster m = new Monster(0, 0, 0, 0, 0, 0, 0, 0, null);
-		m.setX(128);
-		m.setY(128);
-		m.setAngle(0);
-		m.setSprite("img/gabriel.png");
-		
-		objects.add(m);
+		objects = new ArrayList<GameObjects>();;
 
 		world.getFloor(0).setPlayer(player);
 		
@@ -173,109 +168,7 @@ public class Controller implements Initializable {
 
 		gamePane.getChildren().add(render.getGUI());
 
-		gamePane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent ke) {
-				if (ke.getCode() == KeyCode.W) {
-					System.out.println("W down");
-
-					player.setKeyState(0, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.A) {
-					System.out.println("A down");
-
-					player.setKeyState(2, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.S) {
-					System.out.println("S down");
-
-					player.setKeyState(1, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.D) {
-					System.out.println("D down");
-
-					player.setKeyState(3, KEYSTATE.DOWN);
-				}
-			}
-		});
-
-		gamePane.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent ke) {
-				if (ke.getCode() == KeyCode.W) {
-					System.out.println("W down");
-
-					player.setKeyState(0, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.A) {
-					System.out.println("A down");
-
-					player.setKeyState(2, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.S) {
-					System.out.println("S down");
-
-					player.setKeyState(1, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.D) {
-					System.out.println("D down");
-
-					player.setKeyState(3, KEYSTATE.RELEASED);
-				}
-			}
-		});
-
-		gamePane.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mou) {
-				if (mou.getButton() == MouseButton.PRIMARY) {
-					System.out.println("left click");
-					player.setKeyState(4, KEYSTATE.DOWN);
-					System.out.println(player.getX());
-				} else if (mou.getButton() == MouseButton.SECONDARY) {
-					System.out.println("right click");
-					player.setKeyState(5, KEYSTATE.DOWN);
-				}
-
-			}
-
-		});
-		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mou) {
-
-				mouse = mou;
-				relativeMousePX = (render.getDW() * render.getRESOLUTION() / 2)
-						- mou.getSceneX();
-				relativeMousePY = (render.getDH() * render.getRESOLUTION() / 2)
-						- mou.getSceneY();
-
-				// Mettre plus tard dans joueur.update()
-				player.setAngle(Math.toDegrees(Math.atan2(relativeMousePY,
-						relativeMousePX)) + 180);// ====================================================================La
-													// classe joueur à le défaut
-													// de ne pas voir ce qu'il
-													// faut dans le
-													// contrôleur!(À CHANGER)
-			}
-
-		});
-
-		gamePane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mou) {
-
-				mouse = mou;
-				relativeMousePX = (render.getDW() * render.getRESOLUTION() / 2)
-						- mou.getSceneX();
-				relativeMousePY = (render.getDH() * render.getRESOLUTION() / 2)
-						- mou.getSceneY();
-
-				// Mettre plus tard dans joueur.update()
-				player.setAngle(Math.toDegrees(Math.atan2(relativeMousePY,
-						relativeMousePX)) + 180);// ====================================================================La
-													// classe joueur à le défaut
-													// de ne pas voir ce qu'il
-													// faut dans le
-													// contrôleur!(À CHANGER)
-			}
-
-		});
+		input = new Input(gamePane);
 
 		this.update = new GameTask();
 
@@ -284,6 +177,16 @@ public class Controller implements Initializable {
 		timer = new GameTimer();
 		timer.start();
 
+	}
+	
+	public Player getPlayer()
+	{
+		return player;
+	}
+	
+	public Render getRender()
+	{
+		return render;
 	}
 
 	/**
@@ -360,6 +263,7 @@ public class Controller implements Initializable {
 			};
 		}
 	}
+	
 
 	private class GameRender extends Service<Void> {
 		@Override
@@ -368,9 +272,9 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
 						try {
-							double cx = mouse.getSceneX()
+							double cx = input.getMouse().getSceneX()
 									- (render.getGUI().getWidth() / 2);
-							double cy = mouse.getSceneY()
+							double cy = input.getMouse().getSceneY()
 									- (render.getGUI().getHeight() / 2);
 							render.drawWorld(player.getX() + cx, player.getY()
 									+ cy);
@@ -383,9 +287,15 @@ public class Controller implements Initializable {
 			};
 		}
 	}
+	
+	public static Controller get() {
+		return controller;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		controller = this;
+	
 		if (location.toString().contains("Game.fxml"))
 			world = new World();
 
