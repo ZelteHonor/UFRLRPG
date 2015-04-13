@@ -77,8 +77,8 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setX(10);
-		player.setY(4.5);
+		player.setX(0);
+		player.setY(0);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
@@ -196,6 +196,10 @@ public class Controller implements Initializable {
 	
 	public Render getRender() {
 		return render;
+	}
+	
+	public Input getInput(){
+		return input;
 	}
 	
 	@Override

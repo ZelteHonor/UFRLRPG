@@ -183,96 +183,39 @@ public class Render {
 	 */
 	public void drawWorld(double x, double y){
 		
-		/*//System.out.println("TAILLE ÉCRAN : " + "(" + DW + "," + DH + ")");
-		//System.out.println("POSITION : " + "(" + x + "," + y + ")");
-		
-		cx = x;
-		cy = y;
-
-		
-		//Screen position
-		int spx = (int)(x/RESOLUTION);
-		int spy = (int)(y/RESOLUTION);
-		
-		//System.out.println("POSITION ÉCRAN : " + "(" + spx + "," + spy + ")");
-		
-		//Starting Case
-		int scx = (int)(spx - ((double)DW/2));
-		int scy = (int)(spy - ((double)DH/2));
-		
-		//System.out.println("POSITION CASE DE DÉPART : " + "(" + scx + "," + scy + ")");
-		
-		//strafe
-		
-		double sx =  (x - scx*RESOLUTION);
-		double sy = (y - scy*RESOLUTION);
-		
-		//System.out.println("DÉCALAGE : " + "(" + sx + "," + sy + ")");
-		
-		//System.out.println("POSITION CASE DÉPART SUR CANVAS : " + "(" + (((0 - scx)*RESOLUTION) - sx) + "," + (((0 - scy)*RESOLUTION) - sy )+ ")");
-		
-		clear();
-		
-		for(int j = scy; j < (scy + (DH*2)); j++)
-		{
-			for(int i = scx; i < (scx + (DW*2)); i++)
-			{
-				
-				double scpx = (((i - scx)*RESOLUTION) - sx) + (GUI.getWidth()/2);
-				double scpy = (((j - scy)*RESOLUTION) - sy) + (GUI.getHeight()/2);
-				
-				//System.out.println("("+ scpx +" " + scpy + ")");
-				//System.out.println("("+(((i - scx)*RESOLUTION) - sx)+" " + (((j - scy)*RESOLUTION) - sy));
-				
-				try
-				{
-					switch(world[i][j].ordinal())
-					{
-					
-					case 0 :
-						break;
-					case 1 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), scpx, scpy);
-						break;
-					case 2 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), scpx, scpy);
-						break;
-					case 3 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), scpx, scpy);
-						break;
-					case 4 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), scpx, scpy);
-						break;
-					case 5 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), scpx, scpy);
-						break;
-					case 6 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitup.png"), scpx, scpy);
-						break;
-					case 7 :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitdown.png"), scpx, scpy);
-						break;
-					}
-				}catch(ArrayIndexOutOfBoundsException e){}
-				
-			}
-			
-		}*/
-		
 		clear();
 		
 		cx = x; cy = y;
 
 		//décalage
 		double dx = x - (int)x;
-		double dy = y - (int)y;
-		System.out.println("("+dx+" "+dy+")");
+		double dy = y - (int)y - 0.5;//trouver pourquoi
+		//System.out.println("("+dx+" "+dy+")");
+		
+		int scx;
+		int scy;
 		
 		//Case de départ haut/gauche
-		int scx = (int)Math.floor(x - DW/2);
-		int scy = (int)Math.floor(y - DH/2);
+		if(x >= 0)
+		{
+			scx = (int)Math.floor(x - DW/2);
+		}
+		else
+		{
+			scx = (int)Math.floor(x - DW/2 + 1);
+		}
+		if(y >= 0)
+		{
+			scy = (int)Math.floor(y - DH/2);
+		}
+		else
+		{
+			scy = (int)Math.floor(y - DH/2 + 1);
+		}
 		
-		System.out.println("("+scx+" "+scy+")");
+		
+		
+		//System.out.println("("+scx+" "+scy+")");
 		
 		for(int j = 0 ; j <= DH + 1 ; j++)
 		{
