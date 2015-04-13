@@ -263,24 +263,31 @@ public class Render {
 		
 		cx = x; cy = y;
 
-		
+		//décalage
 		double dx = x - (int)x;
 		double dy = y - (int)y;
+		System.out.println("("+dx+" "+dy+")");
 		
-		int scx = (int)(x - DW/2);
-		int scy = (int)(y - DH/2);
+		//Case de départ haut/gauche
+		int scx = (int)Math.floor(x - DW/2);
+		int scy = (int)Math.floor(y - DH/2);
 		
-		for(int j = scy ; j <= scy + DH + 1 ; j++)
+		System.out.println("("+scx+" "+scy+")");
+		
+		for(int j = 0 ; j <= DH + 1 ; j++)
 		{
-			for(int i = scx; i <= scx + DW + 1; i++)
+			for(int i = 0; i <= DW + 1; i++)
 			{
 				
-				double px = -dx + RESOLUTION*(i-scx);
-				double py = -dy + RESOLUTION*(j-scy);
+				//Position de l'image
+				double px = (-dx + i)*RESOLUTION;
+				double py = (-dy + j)*RESOLUTION;
+				
+				//System.out.println("("+px+" "+py+")");
 				
 				try
 				{
-					switch(world[i][j].ordinal())
+					switch(world[scx+i][scy+j].ordinal())
 					{
 					
 					case 0 :

@@ -77,8 +77,8 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setX(2.65);
-		player.setY(2.65);
+		player.setX(10);
+		player.setY(4.5);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
