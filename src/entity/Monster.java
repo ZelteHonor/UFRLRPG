@@ -31,10 +31,11 @@ public class Monster extends Entity{
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
 			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
 			nextNode = totalPath.getFirst();
+			angle = Math.atan2(x - Controller.get().getPlayer().getX(), y - Controller.get().getPlayer().getY());
 			moveTo();
 		}
 		else if(this.searching){
-			if(new Point((int)this.x,(int)this.y).equals(lastTarget)){
+			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1.5){
 				System.out.println("platghypus");
 				searching = false;
 			}
@@ -73,8 +74,8 @@ public class Monster extends Entity{
 
 	private void moveTo(){
 		double angle = getMonsTargetAngle();
-		x += (float)this.agility/10 * Math.sin(angle);
-		y += (float)this.agility/10 * Math.cos(angle);
+		x += 0.1 * Math.sin(angle);
+		y += 0.1 * Math.cos(angle);
 	}
 	
 	private double getMonsTargetAngle(){
