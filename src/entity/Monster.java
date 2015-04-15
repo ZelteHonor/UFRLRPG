@@ -9,6 +9,7 @@ import world.Floor;
 import world.World;
 import gameObjects.GameObjects;
 import gameObjects.Items;
+import gameObjects.Mask;
 
 public class Monster extends Entity{
 	
@@ -22,6 +23,8 @@ public class Monster extends Entity{
 		searching = false;
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
+		
+		mask = new Mask(0.25, 0.25,x,y);
 	}
 
 	@Override
@@ -31,11 +34,13 @@ public class Monster extends Entity{
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
 			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
 			nextNode = totalPath.getFirst();
-			angle = Math.atan2(x - Controller.get().getPlayer().getX(), y - Controller.get().getPlayer().getY());
+			angle = Math.toDegrees(Math.atan2(y - Controller.get().getPlayer().getY(),x - Controller.get().getPlayer().getX()))+180;
 			moveTo();
 		}
 		else if(this.searching){
-			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1.5){
+			System.out.println(new Point((int)this.x,(int)this.y).distance(lastTarget));
+			
+			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1){
 				System.out.println("platghypus");
 				searching = false;
 			}

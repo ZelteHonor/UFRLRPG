@@ -186,7 +186,12 @@ public class Controller implements Initializable {
 						render.drawWorld(cx,cy);
 						render.draw(player);
 						render.draw(objects);
-
+						
+						double tcx = (objects.get(0).getX() - (cx - render.getDW()/2))*render.getRESOLUTION();
+						double tcy = (objects.get(0).getY() - (cy - render.getDH()/2))*render.getRESOLUTION();
+						
+						render.getGUI().getGraphicsContext2D().strokeOval(tcx - 5*32, tcy - 5*32,5*64, 5*64);
+						render.getGUI().getGraphicsContext2D().strokeOval(tcx - 5*64, tcy - 5*64,5*128, 5*128);
 
 					});
 
