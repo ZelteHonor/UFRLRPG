@@ -1,5 +1,6 @@
 package control;
 
+import world.MonsterGenerator;
 import control.Controller.KEYSTATE;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -129,6 +130,8 @@ public class Input {
 													// de ne pas voir ce qu'il
 													// faut dans le
 													// contrôleur!(À CHANGER)
+				
+			
 			}
 
 		});

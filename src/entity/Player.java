@@ -18,8 +18,7 @@ public class Player extends Entity {
 	public Player(double x, double y, int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception,
 			ArrayList<Items> inventory) {
-		super(x, y, level, health, intellect, strenght, agility, mana, speed,
-				perception, inventory);
+		super(x, y, level, inventory);
 
 		/* Movement */
 		vx = 0;
