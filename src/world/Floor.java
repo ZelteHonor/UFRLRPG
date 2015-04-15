@@ -27,6 +27,8 @@ public class Floor {
 						tiles[i][j] = TILE.WALL;
 					else
 						tiles[i][j] = TILE.DONJON;
+					startx = 10;
+					starty = 10;
 						
 		} else {
 			Generator gen = new Generator();
@@ -35,6 +37,7 @@ public class Floor {
 			starty = gen.getStartY();
 		}
 		
+		objects = new ArrayList<GameObjects>();
 		walls = new ArrayList<Mask>(0);
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)

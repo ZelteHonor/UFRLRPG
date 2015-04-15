@@ -1,5 +1,6 @@
 package control;
 
+import entity.Monster;
 import entity.Player;
 import gameObjects.GameObjects;
 
@@ -83,16 +84,23 @@ public class Controller implements Initializable {
 		player.setY(world.getFloor().getStartY());
 		player.setSprite("img/jaypeg.png");
 		player.setAngle(0);
-		world.getFloor(0).setPlayer(player);
+		world.getFloor().setPlayer(player);
 		
-		objects = new ArrayList<GameObjects>();
+		
+		
+		objects = world.getFloor().getObjects();
+		Monster m = new Monster(20, 20, 1, null);
+		m.setAngle(0);
+		m.setSprite("img/gabriel.png");
+		objects.add(m);
 		
 		/* Services */
 		this.update = new GameTask();
 		this.screenRefresh = new GameRender();
 		
-		m = new MonsterGenerator();
-		m.generateMonster(world.getFloor());
+		
+		MonsterGenerator mg = new MonsterGenerator();
+		mg.generateMonster(world.getFloor());
 
 		timer = new GameTimer();
 		timer.start();
@@ -180,8 +188,8 @@ public class Controller implements Initializable {
 						double cy = player.getY() + (input.getMouse().getSceneY() / render.getRESOLUTION() - render.getDH()/2);
 							
 						render.drawWorld(cx,cy);
-							
 						render.draw(player);
+						render.draw(objects);
 
 
 					});

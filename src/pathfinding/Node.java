@@ -54,9 +54,8 @@ public class Node implements Comparable<Node> {
 		 */
 		public Node getFirst(){
 			Node temp = this;
-			while(this.lastNode != null){
+			while(temp.lastNode != null)
 				temp = temp.lastNode;
-			}
 			return temp;
 		}
 		
@@ -65,14 +64,15 @@ public class Node implements Comparable<Node> {
 		 * 	Retourne le premier Node et le retire
 		 */
 		public Node getDestructiveFirst(){
-			Node temp = this;
-			while(temp.lastNode != null){
-				if(this.lastNode.lastNode == null){
+			Node current = this;
+			Node temp = null;
+			if (current.lastNode != null)
+				while(current.lastNode.lastNode != null){
 					temp = this.lastNode;
-					this.lastNode = null;
+					current.lastNode = null;
+					current = temp;
 				}
-			}
-			return temp;
+			return current;
 		}
 		
 		/** 
