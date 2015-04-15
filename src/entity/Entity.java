@@ -25,16 +25,9 @@ public abstract class Entity extends GameObjects {
 
 	private ArrayList<Items> inventory;
 
-	public Entity(double x, double y, int level, ArrayList<Items> inventory) {
+	public Entity(double x, double y, int health, ArrayList<Items> inventory) {
 		super(x, y);
-		this.level = level;
 		this.health = health;
-		this.intellect = intellect;
-		this.strenght = strenght;
-		this.agility = agility;
-		this.mana = mana;
-		this.speed = speed;
-		this.perception = perception;
 		this.inventory = inventory;
 	}
 	

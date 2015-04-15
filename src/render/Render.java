@@ -333,5 +333,6 @@ public class Render {
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
 		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));//Exit up
 		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));//Exit up
+		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//Exit up
 	}
 }

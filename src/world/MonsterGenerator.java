@@ -21,7 +21,7 @@ public class MonsterGenerator {
 		ArrayList<Monster> monsters = new ArrayList<Monster>();
 
 		// génère le numbre d'enemie dans le floor prsent
-		int count = /*createCount(f)*/ 5;
+		int count = createCount(f);
 
 		// génère les monstres avec des attributs aléatoire et on les mets
 		// dans la liste
