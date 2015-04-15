@@ -38,8 +38,6 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
-			System.out.println(new Point((int)this.x,(int)this.y).distance(lastTarget));
-			
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1){
 				System.out.println("platghypus");
 				searching = false;
@@ -74,6 +72,16 @@ public class Monster extends Entity{
 		if (distance <= 5){
 			visible = true;
 		}
+		/*
+		 * En progression
+		 * 
+		 * boolean visible = false;
+		
+		double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
+		double b = y - m*x;
+		
+		for(int i = x; i < )*/
+		
 		return visible;
 	}
 
