@@ -68,13 +68,13 @@ public class Player extends Entity {
 			xto++;
 
 		if (xto != 0 || yto != 0) {
-			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) + 1;
-			if (speed > 5)
-				speed = 5;
+			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) + 0.05;
+			if (speed > 0.25)
+				speed = 0.25;
 
 			direction = Math.atan2(yto, xto);
 		} else {
-			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) - 1;
+			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) - 0.05;
 			if (speed < 0)
 				speed = 0;
 			direction = Math.atan2(vy, vx);

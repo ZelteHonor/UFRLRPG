@@ -26,7 +26,7 @@ public class MonsterGenerator {
 		for (int i = count; i <= 0; i--) {
 			Monster m = new Monster(createStat(), createStat(), createStat(),
 					createStat(), createStat(), createStat(), createStat(),
-					createStat(), null);
+					createStat(),createStat(), createStat(), null);
 			m.setName(createName());
 
 			m.setSprite(createImage());
