@@ -16,7 +16,7 @@ public class World {
 	public World() {
 		floors = new ArrayList<Floor>();
 		for (int i = 0; i < LEVEL_COUNT; i++) {
-			floors.add(new Floor(-1));
+			floors.add(new Floor(1));
 		}
 
 		floor = floors.get(0);

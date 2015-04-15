@@ -23,7 +23,7 @@ public class Mask {
 		this.w = l;
 		this.x = px;
 		this.y = py;
-		this.r = (int)(Math.sqrt(Math.pow(this.h/2, 2)+Math.pow(this.w/2,2)));
+		this.r = (Math.sqrt(Math.pow(this.h/2, 2)+Math.pow(this.w/2,2)));
 	}
 
 	/**

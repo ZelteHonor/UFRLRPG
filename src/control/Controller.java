@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import render.Render;
+import world.MonsterGenerator;
 import world.World;
 import javafx.application.Platform;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -51,6 +51,8 @@ public class Controller implements Initializable {
 	private Player player;
 	private ArrayList<GameObjects> objects;
 	
+	private MonsterGenerator m;
+	
 	/* Clavier */
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
@@ -77,17 +79,20 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setX(0);
-		player.setY(0);
+		player.setX(world.getFloor().getStartX());
+		player.setY(world.getFloor().getStartY());
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
 		
-		objects = new ArrayList<GameObjects>();;
+		objects = new ArrayList<GameObjects>();
 		
 		/* Services */
 		this.update = new GameTask();
 		this.screenRefresh = new GameRender();
+		
+		m = new MonsterGenerator();
+		m.generateMonster(world.getFloor());
 
 		timer = new GameTimer();
 		timer.start();

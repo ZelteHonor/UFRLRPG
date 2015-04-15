@@ -1,7 +1,9 @@
 package world;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
+import world.World.TILE;
 import javafx.scene.image.Image;
 import entity.Monster;
 
@@ -24,8 +26,12 @@ public class MonsterGenerator {
 		// génère les monstres avec des attributs aléatoire et on les mets
 		// dans la liste
 		for (int i = count; i <= 0; i--) {
-			Monster m = new Monster(createStat(), createStat(), createStat(),
-					null);
+			Point p = new Point();
+			
+			p = createLoc(f);
+			
+			Monster m = new Monster(p.getX(), p.getY(), 10,null);
+
 			m.setName(createName());
 
 			m.setSprite(createImage());
@@ -74,21 +80,19 @@ public class MonsterGenerator {
 	 * 
 	 * @return a number within 7, 11, 12 and 15
 	 */
-	private int createStat() {
-		int s = 10;
+	private Point createLoc(Floor f) {
+		
+		Point s = new Point();
 
-		double r = Math.random();
-
-		if (r <= 0.25) {
-			s += 1;
-		} else if (r > 0.25 && r <= 0.5) {
-			s -= 3;
-		} else if (r > 0.5 && r <= 0.75) {
-			s += 2;
-		} else {
-			s += 5;
+		double r1 = Math.random() * World.SIZE;
+		double r2 = Math.random() * World.SIZE;
+		
+		while(!(f.getTiles()[(int)r1][(int)r2].equals(TILE.DONJON)))
+		{
+			r1 = Math.random() * World.SIZE;
+			r2 = Math.random() * World.SIZE;
 		}
-
+		s.setLocation(r1, r2);
 		return s;
 	}
 
