@@ -89,18 +89,14 @@ public class Controller implements Initializable {
 		
 		
 		objects = world.getFloor().getObjects();
-		Monster m = new Monster(20, 20, 1, null);
-		m.setAngle(0);
-		m.setSprite("img/gabriel.png");
-		objects.add(m);
+//		Monster m = new Monster(20, 20, 1, null);
+//		m.setAngle(0);
+//		m.setSprite("img/gabriel.png");
+//		objects.add(m);
 		
 		/* Services */
 		this.update = new GameTask();
 		this.screenRefresh = new GameRender();
-		
-		
-		MonsterGenerator mg = new MonsterGenerator();
-		mg.generateMonster(world.getFloor());
 
 		timer = new GameTimer();
 		timer.start();

@@ -19,6 +19,7 @@ public class Floor {
 	private int depth;
 
 	public Floor(int depth) {
+		objects = new ArrayList<GameObjects>();
 		if (depth == -1) {
 			tiles = new World.TILE[World.SIZE][World.SIZE];
 			for (int i = 0; i < World.SIZE; i++)
@@ -35,9 +36,11 @@ public class Floor {
 			tiles = gen.generate();
 			startx = gen.getStartX();
 			starty = gen.getStartY();
+			MonsterGenerator mg = new MonsterGenerator();
+			mg.generateMonster(this);
 		}
 		
-		objects = new ArrayList<GameObjects>();
+		
 		walls = new ArrayList<Mask>(0);
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
