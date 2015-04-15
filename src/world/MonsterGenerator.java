@@ -21,11 +21,11 @@ public class MonsterGenerator {
 		ArrayList<Monster> monsters = new ArrayList<Monster>();
 
 		// génère le numbre d'enemie dans le floor prsent
-		int count = createCount(f);
+		int count = /*createCount(f)*/ 5;
 
 		// génère les monstres avec des attributs aléatoire et on les mets
 		// dans la liste
-		for (int i = count; i <= 0; i--) {
+		for (int i = count; i >= 0; i--) {
 			Point p = new Point();
 			
 			p = createLoc(f);
@@ -34,7 +34,7 @@ public class MonsterGenerator {
 
 			m.setName(createName());
 
-			m.setSprite(createImage());
+			m.setSprite(/*createImage()*/"gabriel.png");
 			monsters.add(m);
 		}
 
@@ -54,7 +54,7 @@ public class MonsterGenerator {
 				// par 5 pour représenté les 5 choix de la liste. on soustrait 1
 				// considérant que le premier élément de la liste est 0 et le dernier
 				// (dans ce cas) est 4
-				image = IMAGES[(int) (Math.random() * 5) - 1];
+				//image = IMAGES[(int) (Math.random() * 5) - 1];
 		return image;
 
 	}
@@ -70,7 +70,7 @@ public class MonsterGenerator {
 		// par 10 pour représenté les 10 choix de la liste. on soustrait 1
 		// considérant que le premier élément de la liste est 0 et le dernier
 		// (dans ce cas) est 9
-		name = NAMES[(int) (Math.random() * 10) - 1];
+		//name = NAMES[(int) (Math.random() * 10) - 1];
 
 		return name;
 
