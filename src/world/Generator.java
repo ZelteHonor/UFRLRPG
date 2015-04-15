@@ -188,7 +188,7 @@ public class Generator {
 	}
 	
 	/**
-	 * Génère l'entrée et la sortie du niveau
+	 * Gï¿½nï¿½re l'entrï¿½e et la sortie du niveau
 	 */
 	private void generatesExits() {
 		exitupx = (rooms.get(0).x + 1) + (int)(Math.random()*rooms.get(0).w);
@@ -433,9 +433,9 @@ public class Generator {
 	}
 	
 	public int getStartX() {
-		return exitupx * 64;
+		return exitupx;
 	}
 	public int getStartY() {
-		return exitupy * 64;
+		return exitupy;
 	}
 }

@@ -68,12 +68,12 @@ public class Floor {
 		return tiles;
 	}
 	
-	public int getStartX() {
-		return startx;
+	public double getStartX() {
+		return startx + 0.5;
 	}
 	
-	public int getStartY() {
-		return starty;
+	public double getStartY() {
+		return starty + 0.5;
 	}
 	
 	private class Wall //======================================Reste à l'intégrer!
