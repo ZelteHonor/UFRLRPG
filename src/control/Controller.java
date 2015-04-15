@@ -1,5 +1,6 @@
 package control;
 
+import entity.Monster;
 import entity.Player;
 import gameObjects.GameObjects;
 
@@ -10,7 +11,6 @@ import java.util.ResourceBundle;
 import render.Render;
 import world.World;
 import javafx.application.Platform;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -77,11 +77,17 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setSprite("img/gabriel.png");
+		player.setSprite("img/jaypeg.png");
 		player.setAngle(0);
-		world.getFloor(0).setPlayer(player);
+		world.getFloor().setPlayer(player);
 		
-		objects = new ArrayList<GameObjects>();
+		
+		
+		objects = world.getFloor().getObjects();
+		Monster m = new Monster(20, 20, 0, 0, 0, 0, 1, 0, 0, 0, null);
+		m.setAngle(0);
+		m.setSprite("img/gabriel.png");
+		objects.add(m);
 		
 		/* Services */
 		this.update = new GameTask();
@@ -173,8 +179,8 @@ public class Controller implements Initializable {
 						double cy = player.getY() + (input.getMouse().getSceneY() / render.getRESOLUTION() - render.getDH()/2);
 							
 						render.drawWorld(cx,cy);
-							
 						render.draw(player);
+						render.draw(objects);
 
 
 					});

@@ -3,6 +3,7 @@ package entity;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import control.Controller;
 import pathfinding.Node;
 import world.Floor;
 import world.World;
@@ -21,26 +22,24 @@ public class Monster extends Entity{
 		super(x, y, level, health, intellect, strenght, agility, mana, speed, perception, inventory);
 		searching = false;
 		lastTarget = new Point(-1, -1);
-		Node totalPath = null;
+		totalPath = null;
 	}
 
 	@Override
 	public void update(Floor floor) {
 		if(seePlayer(floor)){
 			searching = true;
-			for(GameObjects o : floor.getObjects()){
-				if (o instanceof Player){
-					lastTarget = new Point((int)o.getY()/64,(int)o.getY()/64);
-					totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
-				}
-			}
+			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
+			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
+			nextNode = totalPath.getFirst();
+			moveTo();
 		}
 		else if(this.searching){
-			
-			if(new Point((int)this.x/control.Controller.get().getRender().getRESOLUTION(),(int)this.y/control.Controller.get().getRender().getRESOLUTION()).equals(lastTarget)){
+			if(new Point((int)this.x,(int)this.y).equals(lastTarget)){
+				System.out.println("platghypus");
 				searching = false;
 			}
-			else if(new Point((int)this.x/control.Controller.get().getRender().getRESOLUTION(),(int)this.y/control.Controller.get().getRender().getRESOLUTION()).equals(nextNode.getCoor())){
+			else if(new Point((int)this.x,(int)this.y).equals(nextNode.getCoor())){
 				nextNode = totalPath.getDestructiveFirst();
 			}
 			else{
@@ -61,24 +60,22 @@ public class Monster extends Entity{
 	}
 	
 	private boolean seePlayer(Floor floor) {
-		double angle = getMonsTargetAngle();
 		Point pl = null;
-		boolean visible = true;
+		boolean visible = false;
 
-		pl = new Point((int)floor.getPlayer().getX()/64,(int)floor.getPlayer().getY()/64);
+		pl = new Point((int)floor.getPlayer().getX(),(int)floor.getPlayer().getY());
 
 		double distance = pl.distance(this.x,this.y);
-		if (distance <= 2048){
+		if (distance <= 5){
 			visible = true;
 		}
-		
 		return visible;
 	}
 
 	private void moveTo(){
 		double angle = getMonsTargetAngle();
-		x += this.agility * Math.sin(angle);
-		x += this.agility * Math.cos(angle);
+		x += (float)this.agility/10 * Math.sin(angle);
+		y += (float)this.agility/10 * Math.cos(angle);
 	}
 	
 	private double getMonsTargetAngle(){

@@ -139,13 +139,10 @@ public class Render {
 		double refx = cx - DW/2;
 		double refy = cy - DH/2;
 		
-		double px = obj.getX() - refx;
-		double py = obj.getY() - refy;
+		double px = (obj.getX() - refx)*RESOLUTION;
+		double py = (obj.getY() - refy)*RESOLUTION;
 
-		GUI.getGraphicsContext2D().translate(px*RESOLUTION,py*RESOLUTION);//Besoins de monstre pour connaître l'amélioration à faire!	
-
-		System.out.println("("+px+" "+py+")");
-		
+		GUI.getGraphicsContext2D().translate(px,py);//Besoins de monstre pour connaître l'amélioration à faire!	
 		
 		GUI.getGraphicsContext2D().rotate(obj.getAngle());
 		
@@ -332,6 +329,7 @@ public class Render {
 		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
 		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));//Exit up
-		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));//Exit up
+		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));
+		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//PLAYER
 	}
 }

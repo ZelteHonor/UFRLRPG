@@ -191,11 +191,11 @@ public class Generator {
 	 * G�n�re l'entr�e et la sortie du niveau
 	 */
 	private void generatesExits() {
-		exitupx = (rooms.get(0).x + 1) + (int)(Math.random()*rooms.get(0).w);
-		exitupy = (rooms.get(0).y + 1) + (int)(Math.random()*rooms.get(0).h);
+		exitupx = (rooms.get(0).x + 1) + (int)(Math.random()*(rooms.get(0).w - 1 ));
+		exitupy = (rooms.get(0).y + 1) + (int)(Math.random()*(rooms.get(0).h - 1));
 		
-		exitdownx = (rooms.get(rooms.size()-1).x + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).w);
-		exitdowny = (rooms.get(rooms.size()-1).y + 1) + (int)(Math.random()*rooms.get(rooms.size()-1).h);
+		exitdownx = (rooms.get(rooms.size()-1).x + 1) + (int)(Math.random()*(rooms.get(rooms.size()-1).w-1));
+		exitdowny = (rooms.get(rooms.size()-1).y + 1) + (int)(Math.random()*(rooms.get(rooms.size()-1).h-1));
 	}
 	
 	/**

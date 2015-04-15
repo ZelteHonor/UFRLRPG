@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="gameObjects.Melees" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Melees.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="203" x="696" y="3141"/>    
+    <position height="99" width="232" x="1499" y="2906"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="entity.Entity" project="UFRLRPG" file="/UFRLRPG/src/entity/Entity.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="674" y="2428"/>    
+    <position height="279" width="324" x="1563" y="1885"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="render.Render" project="UFRLRPG" file="/UFRLRPG/src/render/Render.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="556" width="279" x="907" y="683"/>    
+    <position height="495" width="205" x="1563" y="743"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="control.Controller" project="UFRLRPG" file="/UFRLRPG/src/control/Controller.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="576" width="275" x="907" y="67"/>    
+    <position height="333" width="197" x="1376" y="131"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <enumeration id="5" language="java" name="control.Controller.KEYSTATE" project="UFRLRPG" 
     file="/UFRLRPG/src/control/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="176" width="201" x="1423" y="2925"/>    
+    <position height="153" width="137" x="1386" y="2631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,383 +48,534 @@
   </enumeration>  
   <class id="6" language="java" name="gameObjects.Equipments" project="UFRLRPG" 
     file="/UFRLRPG/src/gameObjects/Equipments.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="280" x="619" y="2925"/>    
+    <position height="135" width="270" x="2055" y="2631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="entity.Monster" project="UFRLRPG" file="/UFRLRPG/src/entity/Monster.java" 
+  <class id="7" language="java" name="gameObjects.Projectile" project="UFRLRPG" 
+    file="/UFRLRPG/src/gameObjects/Projectile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="277" x="2192" y="1885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="entity.Monster" project="UFRLRPG" file="/UFRLRPG/src/entity/Monster.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="369" x="530" y="2669"/>    
+    <position height="243" width="337" x="1563" y="2348"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="world.Generator.Room" project="UFRLRPG" file="/UFRLRPG/src/world/Generator.java" 
+  <class id="9" language="java" name="world.Generator.Room" project="UFRLRPG" file="/UFRLRPG/src/world/Generator.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="176" width="154" x="580" y="1955"/>    
+    <position height="153" width="114" x="613" y="1885"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="gameObjects.Items" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Items.java" 
+  <class id="10" language="java" name="control.Input" project="UFRLRPG" file="/UFRLRPG/src/control/Input.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="153" x="939" y="2669"/>    
+    <position height="189" width="168" x="622" y="514"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="gameObjects.GameObjects" project="UFRLRPG" 
+  <class id="11" language="java" name="gameObjects.Items" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Items.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="181" x="1940" y="2348"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="gameObjects.GameObjects" project="UFRLRPG" 
     file="/UFRLRPG/src/gameObjects/GameObjects.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="357" width="177" x="867" y="1955"/>    
+    <position height="333" width="166" x="1789" y="1278"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="control.Main" project="UFRLRPG" file="/UFRLRPG/src/control/Main.java" 
+  <class id="13" language="java" name="control.Main" project="UFRLRPG" file="/UFRLRPG/src/control/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="152" x="154" y="67"/>    
+    <position height="117" width="113" x="641" y="131"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="control.Controller.GameRender" project="UFRLRPG" 
+  <class id="14" language="java" name="control.Controller.GameRender" project="UFRLRPG" 
     file="/UFRLRPG/src/control/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="198" x="151" y="683"/>    
+    <position height="99" width="145" x="851" y="514"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="gameObjects.Weapons" project="UFRLRPG" 
+  <class id="15" language="java" name="gameObjects.Mask" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Mask.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="204" x="1948" y="1885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="gameObjects.Weapons" project="UFRLRPG" 
     file="/UFRLRPG/src/gameObjects/Weapons.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="219" x="939" y="2925"/>    
+    <position height="153" width="244" x="1771" y="2631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="pathfinding.Node" project="UFRLRPG" file="/UFRLRPG/src/pathfinding/Node.java" 
+  <class id="17" language="java" name="world.Floor" project="UFRLRPG" file="/UFRLRPG/src/world/Floor.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="236" width="218" x="348" y="67"/>    
+    <position height="297" width="231" x="1208" y="743"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="world.Floor" project="UFRLRPG" file="/UFRLRPG/src/world/Floor.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="236" width="319" x="1167" y="1279"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="control.Controller.GameTask" project="UFRLRPG" 
+  <class id="18" language="java" name="control.Controller.GameTask" project="UFRLRPG" 
     file="/UFRLRPG/src/control/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="198" x="389" y="683"/>    
+    <position height="99" width="145" x="1036" y="514"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="gameObjects.Potions" project="UFRLRPG" 
+  <class id="19" language="java" name="gameObjects.Potions" project="UFRLRPG" 
     file="/UFRLRPG/src/gameObjects/Potions.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="185" x="1198" y="2925"/>    
+    <position height="99" width="205" x="2365" y="2631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="pathfinding.Pathfinding" project="UFRLRPG" 
+  <class id="20" language="java" name="pathfinding.Pathfinding" project="UFRLRPG" 
     file="/UFRLRPG/src/pathfinding/Pathfinding.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="248" x="618" y="67"/>    
+    <position height="99" width="174" x="823" y="131"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="control.Controller.GameTimer" project="UFRLRPG" 
-    file="/UFRLRPG/src/control/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="198" x="627" y="683"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="20" language="java" name="world.Generator" project="UFRLRPG" file="/UFRLRPG/src/world/Generator.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="636" width="245" x="580" y="1279"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="21" language="java" name="world.World.TILE" project="UFRLRPG" file="/UFRLRPG/src/world/World.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="256" width="171" x="1137" y="1955"/>    
+  <enumeration id="21" language="java" name="gameObjects.Mask.SHAPE" project="UFRLRPG" 
+    file="/UFRLRPG/src/gameObjects/Mask.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="119" x="2161" y="2348"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="22" language="java" name="gameObjects.Ranges" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Ranges.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="206" x="939" y="3141"/>    
+  <class id="22" language="java" name="world.MonsterGenerator" project="UFRLRPG" 
+    file="/UFRLRPG/src/world/MonsterGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="239" x="1067" y="131"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="entity.Player" project="UFRLRPG" file="/UFRLRPG/src/entity/Player.java" 
+  <class id="23" language="java" name="pathfinding.Node" project="UFRLRPG" file="/UFRLRPG/src/pathfinding/Node.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="216" width="357" x="1171" y="2669"/>    
+    <position height="225" width="158" x="1563" y="2631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="gameObjects.Spells" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Spells.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="195" x="1185" y="3141"/>    
+  <class id="24" language="java" name="control.Controller.GameTimer" project="UFRLRPG" 
+    file="/UFRLRPG/src/control/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="145" x="1376" y="514"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="world.World" project="UFRLRPG" file="/UFRLRPG/src/world/World.java" 
+  <class id="25" language="java" name="world.Generator" project="UFRLRPG" file="/UFRLRPG/src/world/Generator.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="163" x="1272" y="683"/>    
+    <position height="567" width="177" x="613" y="1278"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="26">    
-    <bendpoint x="948" y="2352"/>    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <association id="27">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="28" name="tiles"/>      
-      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="30">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <association id="31">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="32" name="tiles"/>      
-      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="35" name="tunnels"/>      
-      <multiplicity id="36" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="38" name="floors"/>      
-      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="40">    
-    <bendpoint x="855" y="683"/>    
-    <bendpoint x="855" y="1279"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="41" name="objects"/>      
-      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="43">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="12"/>  
-  </nesting>  
-  <generalization id="44">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="45">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <association id="46">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="47" name="inventory"/>      
-      <multiplicity id="48" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="49">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <nesting id="50">    
-    <end type="SOURCE" refId="4"/>    
+  <enumeration id="26" language="java" name="world.World.TILE" project="UFRLRPG" file="/UFRLRPG/src/world/World.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="119" x="1381" y="1885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="27" language="java" name="gameObjects.Ranges" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Ranges.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="249" x="1771" y="2906"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="entity.Player" project="UFRLRPG" file="/UFRLRPG/src/entity/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="328" x="1174" y="2348"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="world.Floor.Wall" project="UFRLRPG" file="/UFRLRPG/src/world/Floor.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="146" x="1214" y="1278"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="gameObjects.Spells" project="UFRLRPG" file="/UFRLRPG/src/gameObjects/Spells.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="227" x="2060" y="2906"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="world.World" project="UFRLRPG" file="/UFRLRPG/src/world/World.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="115" x="1221" y="514"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="16"/>  
-  </nesting>  
-  <association id="51">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="52" name="objects"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+  </generalization>  
+  <association id="33">    
+    <bendpoint x="1390" y="1278"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="34" name="tiles"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="38">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="39" name="inventory"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="42" name="input"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="54">    
-    <bendpoint x="1558" y="683"/>    
-    <bendpoint x="1558" y="1279"/>    
-    <bendpoint x="1558" y="1955"/>    
-    <bendpoint x="1558" y="2352"/>    
-    <bendpoint x="1558" y="2669"/>    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </nesting>  
-  <association id="55">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="56" name="lastNode"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="58">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="59">    
+  <association id="44">    
+    <bendpoint x="820" y="514"/>    
+    <bendpoint x="820" y="743"/>    
+    <bendpoint x="820" y="1278"/>    
+    <bendpoint x="820" y="1885"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="60" name="render"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
+      <attribute id="45" name="player"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="62">    
-    <bendpoint x="1516" y="1279"/>    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="21"/>  
-  </nesting>  
-  <association id="63">    
-    <bendpoint x="1537" y="683"/>    
-    <bendpoint x="1537" y="1279"/>    
-    <bendpoint x="1537" y="1955"/>    
-    <bendpoint x="1537" y="2352"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="64" name="player"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="66">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="67" name="world"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="69">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <association id="70">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="71" name="rooms"/>      
-      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="73">    
-    <bendpoint x="1136" y="1279"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="74" name="world"/>      
-      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="76">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="77">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="78" name="key"/>      
-      <multiplicity id="79" minimum="0" maximum="2147483647"/>    
+  <association id="47">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="48" name="key"/>      
+      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
-    <bendpoint x="876" y="1279"/>    
+  <generalization id="50">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="51">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="52" name="controller"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="55">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="56" name="world"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="58">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="60">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="81" name="objects"/>      
+      <attribute id="61" name="objects"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="63">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="29"/>  
+  </nesting>  
+  <association id="64">    
+    <bendpoint x="1798" y="514"/>    
+    <bendpoint x="1798" y="743"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="65" name="objects"/>      
+      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="67">    
+    <bendpoint x="1551" y="514"/>    
+    <bendpoint x="1532" y="743"/>    
+    <bendpoint x="1532" y="1278"/>    
+    <bendpoint x="1532" y="1885"/>    
+    <bendpoint x="1532" y="2348"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <association id="68">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="69" name="lastNode"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="72" name="shape"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="75" name="mask"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="78">    
+    <bendpoint x="1917" y="1885"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="80">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="81" name="tiles"/>      
       <multiplicity id="82" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <nesting id="83">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="19"/>  
+    <bendpoint x="1469" y="743"/>    
+    <bendpoint x="1469" y="1278"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="26"/>  
   </nesting>  
   <nesting id="84">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
   </nesting>  
   <generalization id="85">    
-    <end type="SOURCE" refId="23"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <nesting id="86">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </nesting>  
+  <association id="87">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="88" name="nextNode"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="91" name="totalPath"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="94" name="tunnels"/>      
+      <multiplicity id="95" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="97" name="objects"/>      
+      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="99">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <nesting id="100">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <association id="101">    
+    <bendpoint x="1183" y="1278"/>    
+    <bendpoint x="1183" y="1885"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="102" name="player"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <bendpoint x="1572" y="514"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="105" name="render"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="108" name="rooms"/>      
+      <multiplicity id="109" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <bendpoint x="1490" y="1278"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="111" name="walls"/>      
+      <multiplicity id="112" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="113">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="114" name="world"/>      
+      <multiplicity id="115" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="116">    
+    <bendpoint x="1511" y="1278"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="117" name="world"/>      
+      <multiplicity id="118" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="119">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="120" name="floors"/>      
+      <multiplicity id="121" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="86">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
+  <association id="123">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="124" name="floor"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
