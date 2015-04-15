@@ -10,10 +10,16 @@ import java.util.ResourceBundle;
 import render.Render;
 import world.World;
 import javafx.application.Platform;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -50,14 +56,19 @@ public class Controller implements Initializable {
 		PRESSED, RELEASED, DOWN, UP
 	};
 
-
+	
 
 	@FXML
 	public void start() {
+		initGame();
+	}
+
+	public void initGame() {
+
 		/* Modules */
 		input = new Input(pane);
 		world = new World();
-		render = new Render(world.getFloor(0).getTiles());
+		render = new Render(world.getFloor(0).getTiles());	
 		
 		/* FXML */
 		pane.getChildren().clear();
@@ -66,6 +77,10 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
+		player.setX(0);
+		player.setY(0);
+		player.setSprite("img/gabriel.png");
+		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
 		
 		objects = new ArrayList<GameObjects>();;
@@ -84,8 +99,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * gère le temps de rafraichisement du jeu appelant à chaque 60ème de
-	 * secondes la tâche gameTask
+	 * gï¿½re le temps de rafraichisement du jeu appelant ï¿½chaque 60ï¿½me de
+	 * secondes la tï¿½che gameTask
 	 * 
 	 * @return null
 	 */
@@ -127,7 +142,7 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la méthode update sur chaque élé©ment de la liste des éléments du
+	 * appelle la mï¿½thode update sur chaque ï¿½lï¿½ment de la liste des ï¿½lï¿½ments du
 	 * jeu
 	 */
 	private class GameTask extends Service<Void> {
@@ -154,13 +169,17 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						try {
-							double cx = input.getMouse().getSceneX() - (render.getGUI().getWidth() / 2);
-							double cy = input.getMouse().getSceneY() - (render.getGUI().getHeight() / 2);
-							render.drawWorld(player.getX() + cx, player.getY() + cy);
-							render.draw(player);
-						} catch (NullPointerException e) {}
+						
+						double cx = ((input.getMouse().getSceneX() / render.getRESOLUTION()) - player.getX())/2 + player.getX();
+						double cy = ((input.getMouse().getSceneY() / render.getRESOLUTION()) - player.getY())/2 + player.getY();
+							
+						render.drawWorld(player.getX(),player.getY());
+							
+						render.draw(player);
+
+
 					});
+
 					return null;
 				}
 			};
@@ -177,6 +196,10 @@ public class Controller implements Initializable {
 	
 	public Render getRender() {
 		return render;
+	}
+	
+	public Input getInput(){
+		return input;
 	}
 	
 	@Override

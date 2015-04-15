@@ -9,7 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 /**
- * Initialise tout les écouteurs et permet d'acceder à la sourie.
+ * Initialise tout les écouteurs et permet d'acceder à la souris.
  *
  */
 public class Input {
