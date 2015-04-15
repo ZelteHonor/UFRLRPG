@@ -136,21 +136,15 @@ public class Render {
 		
 		Image sprite = getSprite(obj);
 		
-		if(obj instanceof Player)
-		{
-			double centerX = cx - (cx - (DW*RESOLUTION)/2);
-			double centerY = cy - (cy - (DH*RESOLUTION)/2);
-			double playerX = obj.getX() - (cx - (DW*RESOLUTION)/2);
-			double playerY = obj.getY() - (cy - (DH*RESOLUTION)/2);
-			double translateX = centerX - playerX;
-			double translateY = centerY - playerY;
-			GUI.getGraphicsContext2D().translate(GUI.getWidth()/2 - translateX,GUI.getHeight()/2 - translateY);
-		}
-		else
-		{
-			GUI.getGraphicsContext2D().translate(obj.getX(),obj.getY());//Besoins de monstre pour connaître l'amélioration à faire!
-		}
+		double refx = cx - DW/2;
+		double refy = cy - DH/2;
 		
+		double px = obj.getX() - refx;
+		double py = obj.getY() - refy;
+
+		GUI.getGraphicsContext2D().translate(px*RESOLUTION,py*RESOLUTION);//Besoins de monstre pour connaître l'amélioration à faire!	
+
+		System.out.println("("+px+" "+py+")");
 		
 		
 		GUI.getGraphicsContext2D().rotate(obj.getAngle());
@@ -189,7 +183,7 @@ public class Render {
 
 		//décalage
 		double dx = x - (int)x;
-		double dy = y - (int)y - 0.5;//trouver pourquoi
+		double dy = y - (int)y;//trouver pourquoi
 		//System.out.println("("+dx+" "+dy+")");
 		
 		int scx;
@@ -217,9 +211,9 @@ public class Render {
 		
 		//System.out.println("("+scx+" "+scy+")");
 		
-		for(int j = 0 ; j <= DH + 1 ; j++)
+		for(int j = -1 ; j <= DH + 1 ; j++)
 		{
-			for(int i = 0; i <= DW + 1; i++)
+			for(int i = -1; i <= DW + 1; i++)
 			{
 				
 				//Position de l'image

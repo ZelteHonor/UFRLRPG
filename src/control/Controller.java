@@ -175,10 +175,11 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
 						
-						double cx = ((input.getMouse().getSceneX() / render.getRESOLUTION()) - player.getX())/2 + player.getX();
-						double cy = ((input.getMouse().getSceneY() / render.getRESOLUTION()) - player.getY())/2 + player.getY();
+						//Camera
+						double cx = player.getX() + (input.getMouse().getSceneX() / render.getRESOLUTION() - render.getDW()/2);
+						double cy = player.getY() + (input.getMouse().getSceneY() / render.getRESOLUTION() - render.getDH()/2);
 							
-						render.drawWorld(player.getX(),player.getY());
+						render.drawWorld(cx,cy);
 							
 						render.draw(player);
 
