@@ -30,7 +30,8 @@ public class Player extends Entity {
 			key[i] = Controller.KEYSTATE.UP;
 		}
 		
-		mask = new Mask(0.25,x,y);
+		mask = new Mask(0.25, 0.25,x,y);
+		
 	}
 
 	public void setKeyState(int index, Controller.KEYSTATE state) {

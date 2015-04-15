@@ -77,13 +77,13 @@ public class Controller implements Initializable {
 		
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
-		player.setX(0);
-		player.setY(0);
+		player.setX(2);
+		player.setY(2);
 		player.setSprite("img/gabriel.png");
 		player.setAngle(0);
 		world.getFloor(0).setPlayer(player);
 		
-		objects = new ArrayList<GameObjects>();;
+		objects = new ArrayList<GameObjects>();
 		
 		/* Services */
 		this.update = new GameTask();
