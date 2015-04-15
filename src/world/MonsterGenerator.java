@@ -16,9 +16,8 @@ public class MonsterGenerator {
 	public static final String[] IMAGES = { "goblin.png", "skeleton.png",
 			"ooze.png", "witch.png", "spider.png" };
 
-	public ArrayList<Monster> generateMonster(Floor f) {
+	public void generateMonster(Floor f) {
 
-		ArrayList<Monster> monsters = new ArrayList<Monster>();
 
 		// génère le numbre d'enemie dans le floor prsent
 		int count = createCount(f);
@@ -34,11 +33,11 @@ public class MonsterGenerator {
 
 			m.setName(createName());
 
-			m.setSprite(/*createImage()*/"gabriel.png");
-			monsters.add(m);
+			m.setSprite(/*createImage()*/"img/gabriel.png");
+			f.getObjects().add(m);
 		}
 
-		return null;
+		
 
 	}
 
