@@ -33,6 +33,7 @@ public class Projectile extends GameObjects {
 		this.vx = vx;
 		this.vy = vy;
 		this.angle = angle;
+		this.mask = new Mask(2, x, y);
 	}
 
 	@Override
@@ -56,6 +57,8 @@ public class Projectile extends GameObjects {
 		if (exist) { //Déplace le projectile selon sa vitesse
 			this.setX(getX() + vx);
 			this.setY(getY() + vy);
+			mask.setX(getX());
+			mask.setY(getY());
 			distance--;
 		}
 	}
