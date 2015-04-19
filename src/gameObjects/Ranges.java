@@ -8,7 +8,7 @@ import world.Floor;
  */
 public class Ranges extends Weapons {
 
-	private int speed;
+	private float speed;
 	
 	/** 
 	 * Constructeur d'arme à distance
@@ -22,17 +22,18 @@ public class Ranges extends Weapons {
 	 * 	Les dégats de ses projectiles
 	 * @param cooldown
 	 * 	Le temps à attendre entre chaque attaque
-	 * @param speed
+	 * @param d
 	 * 	Vitesse de ses projectiles
 	 */
-	public Ranges(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, int speed) {
+	public Ranges(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, float d) {
 		super(x, y, weight, evil, range, damage, cooldown);
-		this.speed = speed;
+		this.speed = d;
 	}
 
 	@Override
 	public void attack(Floor floor) {
 		Projectile proj = new Projectile(x, y, this.damage, this.range, speed * Math.cos(angle), speed * Math.sin(angle), this.angle);
+		proj.setSprite("img/arrow.png");
 		floor.getObjects().add(proj); //Crée un projectile et l'ajoute dans la liste des objets à updater.
 	}
 }

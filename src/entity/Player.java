@@ -8,6 +8,7 @@ import control.Controller;
 import control.Controller.KEYSTATE;
 import gameObjects.Items;
 import gameObjects.Mask;
+import gameObjects.Ranges;
 import gameObjects.Weapons;
 
 public class Player extends Entity {
@@ -15,6 +16,8 @@ public class Player extends Entity {
 	/* Movement */
 	private Controller.KEYSTATE[] key; // WSAD
 	private double vx, vy;
+
+	private Weapons currentWeapon;
 	
 
 	public Player(double x, double y, int level, int health, int intellect, int strenght,
@@ -32,7 +35,7 @@ public class Player extends Entity {
 		}
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		
+		currentWeapon = new Ranges(x, y, 10, false, 10, 5, 2, 0.2f);
 	}
 
 	public void setKeyState(int index, Controller.KEYSTATE state) {
@@ -59,6 +62,10 @@ public class Player extends Entity {
 
 		int xto = 0, yto = 0;
 		double direction, speed;
+		
+		currentWeapon.setX(this.x);
+		currentWeapon.setY(this.x);
+		currentWeapon.setAngle(this.angle);
 
 		if ((key[0] == KEYSTATE.PRESSED || key[0] == KEYSTATE.DOWN))
 			yto--;
@@ -69,7 +76,9 @@ public class Player extends Entity {
 			xto--;
 		if ((key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN))
 			xto++;
-
+		if ((key[4] == KEYSTATE.PRESSED || key[4] == KEYSTATE.DOWN))
+			currentWeapon.attack(floor);
+		
 		if (xto != 0 || yto != 0) {
 			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) + 0.05;
 			if (speed > 0.125)
