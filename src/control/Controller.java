@@ -25,11 +25,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
-	
+
 	/* Singleton - like */
 	private static Controller controller;
-	
-	/* FXML */	
+
+	/* FXML */
 	@FXML
 	private BorderPane root;
 	@FXML
@@ -42,7 +42,7 @@ public class Controller implements Initializable {
 	private Render render;
 	private Input input;
 	private World world;
-	
+
 	/* Services */
 	private Service<Void> update;
 	private Service<Void> screenRefresh;
@@ -51,15 +51,13 @@ public class Controller implements Initializable {
 	/* Objects */
 	private Player player;
 	private ArrayList<GameObjects> objects;
-	
+
 	private MonsterGenerator m;
-	
+
 	/* Clavier */
 	public enum KEYSTATE {
 		PRESSED, RELEASED, DOWN, UP
 	};
-
-	
 
 	@FXML
 	public void start() {
@@ -71,29 +69,28 @@ public class Controller implements Initializable {
 		/* Modules */
 		input = new Input(pane);
 		world = new World();
-		render = new Render(world.getFloor(0).getTiles());	
-		
+		render = new Render(world.getFloor(0).getTiles());
+
 		/* FXML */
 		pane.getChildren().clear();
 		pane.setFocusTraversable(true);
 		pane.getChildren().add(render.getGUI());
-		
+
 		/* Objects */
-		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY(),1, 10, 0,0,0, 10, 10, 10, null);
+		player = new Player(world.getFloor().getStartX(), world.getFloor()
+				.getStartY(), 1, 10, 0, 0, 0, 10, 10, 10, null);
 		player.setX(world.getFloor().getStartX());
 		player.setY(world.getFloor().getStartY());
 		player.setSprite("img/jaypeg.png");
 		player.setAngle(0);
 		world.getFloor().setPlayer(player);
-		
-		
-		
+
 		objects = world.getFloor().getObjects();
-//		Monster m = new Monster(20, 20, 1, null);
-//		m.setAngle(0);
-//		m.setSprite("img/gabriel.png");
-//		objects.add(m);
-		
+		// Monster m = new Monster(20, 20, 1, null);
+		// m.setAngle(0);
+		// m.setSprite("img/gabriel.png");
+		// objects.add(m);
+
 		/* Services */
 		this.update = new GameTask();
 		this.screenRefresh = new GameRender();
@@ -101,7 +98,7 @@ public class Controller implements Initializable {
 		timer = new GameTimer();
 		timer.start();
 	}
-	
+
 	@FXML
 	public void quit() {
 		System.exit(0);
@@ -151,8 +148,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la m�thode update sur chaque �l�ment de la liste des �l�ments du
-	 * jeu
+	 * appelle la m�thode update sur chaque �l�ment de la liste des
+	 * �l�ments du jeu
 	 */
 	private class GameTask extends Service<Void> {
 		@Override
@@ -160,17 +157,23 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-							player.update(world.getFloor(0));
-							for (GameObjects o : objects)
-								o.update(world.getFloor(0));
-							}
+						player.update(world.getFloor(0));
+						for (GameObjects o : objects)
+							o.update(world.getFloor(0));
+
+						if (world.reachedExit()) {
+							System.out.println("I've reached the exit");
+							initGame();
+						}
+						
+					}
+
 					);
 					return null;
 				}
 			};
 		}
 	}
-	
 
 	private class GameRender extends Service<Void> {
 		@Override
@@ -178,20 +181,34 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						
-						//Camera
-						double cx = player.getX() + (input.getMouse().getSceneX() / render.getRESOLUTION() - render.getDW()/2);
-						double cy = player.getY() + (input.getMouse().getSceneY() / render.getRESOLUTION() - render.getDH()/2);
-							
-						render.drawWorld(cx,cy);
+
+						// Camera
+						double cx = player.getX()
+								+ (input.getMouse().getSceneX()
+										/ render.getRESOLUTION() - render
+										.getDW() / 2);
+						double cy = player.getY()
+								+ (input.getMouse().getSceneY()
+										/ render.getRESOLUTION() - render
+										.getDH() / 2);
+
+						render.drawWorld(cx, cy);
 						render.draw(player);
 						render.draw(objects);
-						
-						double tcx = (objects.get(0).getX() - (cx - render.getDW()/2))*render.getRESOLUTION();
-						double tcy = (objects.get(0).getY() - (cy - render.getDH()/2))*render.getRESOLUTION();
-						
-						render.getGUI().getGraphicsContext2D().strokeOval(tcx - 5*32, tcy - 5*32,5*64, 5*64);
-						render.getGUI().getGraphicsContext2D().strokeOval(tcx - 5*64, tcy - 5*64,5*128, 5*128);
+
+						double tcx = (objects.get(0).getX() - (cx - render
+								.getDW() / 2)) * render.getRESOLUTION();
+						double tcy = (objects.get(0).getY() - (cy - render
+								.getDH() / 2)) * render.getRESOLUTION();
+
+						render.getGUI()
+								.getGraphicsContext2D()
+								.strokeOval(tcx - 5 * 32, tcy - 5 * 32, 5 * 64,
+										5 * 64);
+						render.getGUI()
+								.getGraphicsContext2D()
+								.strokeOval(tcx - 5 * 64, tcy - 5 * 64,
+										5 * 128, 5 * 128);
 
 					});
 
@@ -200,7 +217,7 @@ public class Controller implements Initializable {
 			};
 		}
 	}
-	
+
 	public static Controller get() {
 		return controller;
 	}
@@ -208,15 +225,15 @@ public class Controller implements Initializable {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public Render getRender() {
 		return render;
 	}
-	
-	public Input getInput(){
+
+	public Input getInput() {
 		return input;
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;

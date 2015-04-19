@@ -29,5 +29,19 @@ public class World {
 	public Floor getFloor() {
 		return floor;
 	}
+	
+	public boolean reachedExit()
+	{
+		double x = floor.getPlayer().getX();
+		double y = floor.getPlayer().getY();
+		if(floor.getTiles()[(int) x][(int)y].equals(TILE.EXITDOWN))
+		{
+			return true;
+			
+		}else
+		{
+			return false;
+		}
+	}
 
 }
