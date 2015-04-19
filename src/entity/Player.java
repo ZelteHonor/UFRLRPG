@@ -8,12 +8,14 @@ import control.Controller;
 import control.Controller.KEYSTATE;
 import gameObjects.Items;
 import gameObjects.Mask;
+import gameObjects.Weapons;
 
 public class Player extends Entity {
 
 	/* Movement */
 	private Controller.KEYSTATE[] key; // WSAD
 	private double vx, vy;
+	
 
 	public Player(double x, double y, int level, int health, int intellect, int strenght,
 			int agility, int mana, int speed, int perception,
@@ -49,6 +51,7 @@ public class Player extends Entity {
 				key[i] = KEYSTATE.DOWN;
 			else if (key[i] == KEYSTATE.RELEASED)
 				key[i] = KEYSTATE.UP;
+		
 
 	}
 
@@ -105,4 +108,5 @@ public class Player extends Entity {
 		if (vcheck == false)
 			y += vy;
 	}
+
 }

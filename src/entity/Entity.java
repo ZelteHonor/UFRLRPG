@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import world.Floor;
 import gameObjects.GameObjects;
 import gameObjects.Items;
+import gameObjects.Weapons;
 
 public abstract class Entity extends GameObjects {
 
