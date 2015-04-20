@@ -81,14 +81,12 @@ public class Monster extends Entity{
 			if(x <= (Controller.get().getPlayer().getX()))
 				for(double i = x; i < Controller.get().getPlayer().getX(); i = i + 0.1)
 				{
-					System.out.println("("+i+" "+Controller.get().getPlayer().getX()+")");
 					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
 						return false;
 				}
 			else
 				for(double i = x; i > Controller.get().getPlayer().getX(); i = i - 0.1)
 				{
-					System.out.println("-("+i+" "+Controller.get().getPlayer().getX()+")");
 					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
 						return false;
 				}

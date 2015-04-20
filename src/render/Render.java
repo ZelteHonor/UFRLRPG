@@ -5,9 +5,11 @@ package render;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import entity.Player;
 import gameObjects.GameObjects;
+import gameObjects.Projectile;
 import world.World;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -265,9 +267,10 @@ public class Render {
 	{
 		Image sprite = spriteMap.get(obj.getSprite());
 		
-		if(sprite == null)
+		if(!spriteMap.containsKey(obj.getSprite()))
 		{
 			spriteMap.put(obj.getSprite(), new Image(obj.getSprite()));
+			sprite = spriteMap.get(obj.getSprite());
 		}
 		
 		return sprite;
@@ -328,7 +331,5 @@ public class Render {
 		spriteMap.put("img/plank.png", new Image("img/plank.png"));//DONJON
 		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
-		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));
-		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//PLAYER
 	}
 }
