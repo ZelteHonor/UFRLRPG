@@ -84,12 +84,18 @@ public class Controller implements Initializable {
 		player.setSprite("img/jaypeg.png");
 		player.setAngle(0);
 		world.getFloor().setPlayer(player);
-
+		
 		objects = world.getFloor().getObjects();
-		// Monster m = new Monster(20, 20, 1, null);
-		// m.setAngle(0);
-		// m.setSprite("img/gabriel.png");
-		// objects.add(m);
+		
+		//++++++++++++++++++++++++++++++POUR TEST
+/*		player.setX(2);
+		player.setY(2);
+		
+		Monster m = new Monster(3, 3, 1, null);
+		m.setAngle(0);
+		m.setSprite("img/gabriel.png");
+		objects.add(m);*/
+		//+++++++++++++++++++++++++++++++
 
 		/* Services */
 		this.update = new GameTask();
@@ -196,19 +202,6 @@ public class Controller implements Initializable {
 						render.draw(player);
 						render.draw(objects);
 
-						double tcx = (objects.get(0).getX() - (cx - render
-								.getDW() / 2)) * render.getRESOLUTION();
-						double tcy = (objects.get(0).getY() - (cy - render
-								.getDH() / 2)) * render.getRESOLUTION();
-
-						render.getGUI()
-								.getGraphicsContext2D()
-								.strokeOval(tcx - 5 * 32, tcy - 5 * 32, 5 * 64,
-										5 * 64);
-						render.getGUI()
-								.getGraphicsContext2D()
-								.strokeOval(tcx - 5 * 64, tcy - 5 * 64,
-										5 * 128, 5 * 128);
 
 					});
 
