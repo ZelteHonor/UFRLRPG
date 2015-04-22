@@ -55,10 +55,18 @@ public class Controller implements Initializable {
 	private MonsterGenerator m;
 
 	/* Clavier */
-	public enum KEYSTATE {
-		PRESSED, RELEASED, DOWN, UP
-	};
-
+	public enum KEYSTATE { PRESSED, RELEASED, DOWN, UP };
+	
+	/* Camera */
+	private double cx, cy;
+	
+	
+	/* FXML */
+	public void initialize(URL location, ResourceBundle resources) {
+		controller = this;
+		input = new Input(pane);
+	}
+	
 	@FXML
 	public void start() {
 		initGame();
@@ -67,7 +75,6 @@ public class Controller implements Initializable {
 	public void initGame() {
 
 		/* Modules */
-		
 		world = new World();
 		render = new Render(world.getFloor(0).getTiles());
 
@@ -77,10 +84,7 @@ public class Controller implements Initializable {
 		pane.getChildren().add(render.getGUI());
 
 		/* Objects */
-		player = new Player(world.getFloor().getStartX(), world.getFloor()
-				.getStartY(), 1, 10, 0, 0, 0, 10, 10, 10, null);
-		player.setX(world.getFloor().getStartX());
-		player.setY(world.getFloor().getStartY());
+		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
 		player.setSprite("img/jaypeg.png");
 		player.setAngle(0);
 		world.getFloor().setPlayer(player);
@@ -153,24 +157,17 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la m�thode update sur chaque �l�ment de la liste des
-	 * �l�ments du jeu
+	 * appelle la méthode update sur chaque élément de la liste des
+	 * éléments du jeu
 	 */
 	private class GameTask extends Service<Void> {
-		@Override
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						player.update(world.getFloor(0));
+						player.update(world.getFloor());
 						for (GameObjects o : objects)
-							o.update(world.getFloor(0));
-
-						if (world.reachedExit()) {
-							System.out.println("I've reached the exit");
-							initGame();
-						}
-						
+							o.update(world.getFloor());						
 					}
 
 					);
@@ -188,13 +185,8 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 
 						// Camera
-						double cx = player.getX() + (
-								input.getMouse().getSceneX() / 
-								render.getRESOLUTION() - render.getDW() / 2);
-						double cy = player.getY() + (input.getMouse().getSceneY()/ render.getRESOLUTION() - render.getDH() / 2);
-
-						double mx = cx + input.getMouse().getSceneX();
-						double my = cy + input.getMouse().getSceneY();
+						double cx = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
+						double cy = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
 						
 						player.setAngle(Math.toDegrees(Math.atan2(cy-player.getY(), cx-player.getX())));
 						
@@ -211,26 +203,37 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/* Singleton-like */
 	public static Controller get() {
 		return controller;
 	}
 
+	/* Objects */
 	public Player getPlayer() {
 		return player;
 	}
+	public void setObjects(ArrayList<GameObjects> array) {
+		objects = array;
+	}
 
+	/* World */
+	public World getWorld() {
+		return world;
+	}
+	
+	/* Modules */
 	public Render getRender() {
 		return render;
 	}
-
 	public Input getInput() {
 		return input;
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		controller = this;
-		input = new Input(pane);
+	/* Camera */
+	public double getCX() {
+		return cx;
 	}
-
+	public double getCY() {
+		return cy;
+	}
 }

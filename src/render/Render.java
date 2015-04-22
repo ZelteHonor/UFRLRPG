@@ -27,9 +27,9 @@ public class Render {
 	private Canvas GUI;
 	
 	//Dimension et r�solution d'affichage
-	private final int DH = 11;
-	private final int DW = 20;
-	private final int RESOLUTION = 64;
+	public static final int DH = 11;
+	public static final int DW = 20;
+	public static final int RESOLUTION = 64;
 	
 	private double cx = 0;
 	private double cy = 0;
@@ -276,6 +276,9 @@ public class Render {
 	}
 	public void setObjects(GameObjects[] objects) {
 		this.objects = objects;
+	}
+	public void setWorld(World.TILE[][] world) {
+		this.world = world;
 	}
 	/**
 	 * 
