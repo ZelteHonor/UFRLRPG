@@ -8,6 +8,7 @@ public abstract class GameObjects {
 	protected double x;
 	protected double y;
 	protected double angle;
+	protected boolean destroy;
 
 	protected String sprite;
 	protected Mask mask;
@@ -16,7 +17,7 @@ public abstract class GameObjects {
 		this.x = x;
 		this.y = y;
 		this.angle = 0.0;
-
+		destroy = false;
 	}
 	
 	public Mask getMask() {
@@ -53,6 +54,10 @@ public abstract class GameObjects {
 
 		this.angle = 360*((nAngle/360) - (Math.toIntExact((long) (nAngle/360))));
 
+	}
+	
+	public boolean isDestroy(){
+		return destroy;
 	}
 
 	public void setSprite(String sprite) {

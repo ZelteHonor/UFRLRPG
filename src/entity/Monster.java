@@ -18,7 +18,7 @@ public class Monster extends Entity{
 	private boolean searching;
 	private Point lastTarget;
 	private Node totalPath, nextNode;
-	
+	public final static float SPEED = 0.09f;
 	public Monster(double x, double y,int health, ArrayList<Items> inventory) {
 		super(x, y, health, inventory);
 		searching = false;
@@ -40,7 +40,6 @@ public class Monster extends Entity{
 		}
 		else if(this.searching){
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
-				System.out.println("platghypus");
 				searching = false;
 			}
 			else if(new Point((int)this.x,(int)this.y).equals(nextNode.getCoor())){
@@ -95,12 +94,9 @@ public class Monster extends Entity{
 		
 		return visible;
 	}
-
-	private void moveTo(){
-		double angle = getMonsTargetAngle();
-		Double vx = 0.1 * Math.sin(angle);
-		Double vy = 0.1 * Math.cos(angle);
-		
+	
+	private void move(double vx, double vy)
+	{
 		boolean hCheckW =  false;
 		boolean vCheckW = false;
 		boolean hCheckE =  false;
@@ -118,6 +114,26 @@ public class Monster extends Entity{
 				mask.setY(y+vy);
 				if (Mask.collide(mask,wall))
 					vCheckW = true;		
+			}
+		}
+		
+		for(GameObjects o : Controller.get().getWorld().getFloor().getObjects()) {
+			if(o != this && o instanceof Monster){
+				
+				double dist = Math.sqrt(Math.pow(o.getX() - x,2) + Math.pow(o.getY() - y,2));
+				double limitDist = Math.sqrt(Math.pow(o.getMask().getW()/2 - this.mask.getW()/2 ,2) + Math.pow(o.getMask().getH()/2 - this.mask.getH()/2 ,2));
+				if(dist < (limitDist)){
+					double angle = Math.atan2(o.getY() - y, o.getX() - x);
+					double dp = limitDist - dist;
+					double dvx = dp * Math.cos(angle) + 0.01;
+					double dvy = dp * Math.sin(angle) + 0.01;
+							
+					System.out.println(true);
+					
+					((Monster)o).move(dvx,dvy);
+				}
+				
+				
 			}
 		}
 		
@@ -141,6 +157,14 @@ public class Monster extends Entity{
 			x += vx;
 		if (!vCheckW && !vCheckE)
 			y += vy;
+	}
+
+	private void moveTo(){
+		double angle = getMonsTargetAngle();
+		Double vx = SPEED * Math.sin(angle);
+		Double vy = SPEED * Math.cos(angle);
+		
+		move(vx,vy);
 	}
 	
 	private double getMonsTargetAngle(){

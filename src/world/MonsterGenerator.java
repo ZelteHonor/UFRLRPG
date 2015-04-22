@@ -19,7 +19,7 @@ public class MonsterGenerator {
 
 	public void generateMonster(Floor f) {
 
-		// génère le numbre d'enemie dans le floor prsent
+		// génère le numbre d'enemie dans le floor present
 		int count = createCount(f);
 
 		// génère les monstres avec des attributs aléatoire et on les mets
@@ -101,7 +101,7 @@ public class MonsterGenerator {
 			r1 = Math.random() * World.SIZE;
 			r2 = Math.random() * World.SIZE;
 		}
-		s.setLocation(r1, r2);
+		s.setLocation(r1 + 0.5, r2 + 0.5);
 		return s;
 	}
 
