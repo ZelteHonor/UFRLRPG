@@ -25,7 +25,7 @@ public class Monster extends Entity{
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
 		
-		mask = new Mask(0.25, 0.25,x,y);
+		mask = new Mask(0.15 ,x,y);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
-			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.2){
+			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
 				System.out.println("platghypus");
 				searching = false;
 			}
@@ -101,8 +101,10 @@ public class Monster extends Entity{
 		Double vx = 0.1 * Math.sin(angle);
 		Double vy = 0.1 * Math.cos(angle);
 		
-		boolean hcheck =  false;
-		boolean vcheck = false;
+		boolean hCheckW =  false;
+		boolean vCheckW = false;
+		boolean hCheckE =  false;
+		boolean vCheckE = false;
 		
 		ArrayList<Mask> walls = Controller.get().getWorld().getFloor().getWalls();
 		for(Mask wall : walls) {
@@ -111,16 +113,33 @@ public class Monster extends Entity{
 			if (Mask.collide(mask, wall)) {
 				mask.setY(y);
 				if (Mask.collide(mask,wall))
-					hcheck = true;
+					hCheckW = true;
 				mask.setX(x);
 				mask.setY(y+vy);
 				if (Mask.collide(mask,wall))
-					vcheck = true;		
+					vCheckW = true;		
 			}
 		}
-		if (hcheck == false)
+		
+		for(GameObjects o : Controller.get().getWorld().getFloor().getObjects()) {
+			if(o != this){
+				mask.setX(x+vx);
+				mask.setY(y+vy);
+				if (Mask.collide(mask, o.getMask())) {
+					mask.setY(y);
+					if (Mask.collide(mask,o.getMask()))
+						hCheckE = true;
+					mask.setX(x);
+					mask.setY(y+vy);
+					if (Mask.collide(mask,o.getMask()))
+						vCheckE = true;		
+				}
+			}
+		}
+		
+		if (!hCheckW && !hCheckE)
 			x += vx;
-		if (vcheck == false)
+		if (!vCheckW && !vCheckE)
 			y += vy;
 	}
 	
