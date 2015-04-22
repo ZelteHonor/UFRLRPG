@@ -2,24 +2,26 @@ package world;
 
 import java.util.ArrayList;
 
+import control.Controller;
+
 public class World {
 	public static enum TILE {
 		BLACK, WALL, ROCK, CAVE, DONJON, TUNNEL, EXITUP, EXITDOWN
 	};
 
 	public static final int SIZE = 64;
-	public static final int LEVEL_COUNT = 1;
+	public static final int LEVEL_COUNT = 2;
 
 	private ArrayList<Floor> floors;
-	private Floor floor;
+	private int current;
 
 	public World() {
 		floors = new ArrayList<Floor>();
-		for (int i = 0; i < LEVEL_COUNT; i++) {
+		
+		for (int i = 0; i < LEVEL_COUNT; i++)
 			floors.add(new Floor(i));
-		}
 
-		floor = floors.get(0);
+		current = 0;
 	}
 
 	public Floor getFloor(int depth) {
@@ -27,25 +29,26 @@ public class World {
 	}
 
 	public Floor getFloor() {
-		return floor;
+		return floors.get(current);
 	}
 	
-	public boolean reachedExit()
-	{
-		double x = floor.getPlayer().getX();
-		double y = floor.getPlayer().getY();
-		if(floor.getTiles()[(int) x][(int)y].equals(TILE.EXITDOWN))
-		{
-			return true;
-			
-		}else
-		{
-			return false;
+	public void changeFloor(int direction) {
+		if (direction + current < 0 || direction + current >= LEVEL_COUNT)
+			return;
+		
+		current += direction;
+		
+		Controller.get().setObjects(floors.get(current).getObjects());
+		floors.get(current).setPlayer(Controller.get().getPlayer());
+		Controller.get().getRender().setWorld(floors.get(current).getTiles());
+		
+		if (direction == -1) {
+			Controller.get().getPlayer().setX(floors.get(current).getEndX());
+			Controller.get().getPlayer().setY(floors.get(current).getEndY());
+		}
+		else {
+			Controller.get().getPlayer().setX(floors.get(current).getStartX());
+			Controller.get().getPlayer().setY(floors.get(current).getStartY());
 		}
 	}
-
-	public void setFloor(Floor floor) {
-		this.floor = floor;
-	}
-
 }

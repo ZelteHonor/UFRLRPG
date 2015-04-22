@@ -24,134 +24,97 @@ public class Input {
 	/** Constructeur */
 	public Input(Node node) {
 		
-		//PRESSED
+		//Keyboard Pressed
 		node.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
-				if (ke.getCode() == KeyCode.W) {
-					Controller.get().getPlayer().setKeyState(0, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.A) {
-					Controller.get().getPlayer().setKeyState(2, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.S) {
-					Controller.get().getPlayer().setKeyState(1, KEYSTATE.DOWN);
-				} else if (ke.getCode() == KeyCode.D) {
-					Controller.get().getPlayer().setKeyState(3, KEYSTATE.DOWN);
+				switch(ke.getCode()) {
+				case W:
+					Controller.get().getPlayer().setKeyState(0, KEYSTATE.PRESSED); break;
+				case S:
+					Controller.get().getPlayer().setKeyState(1, KEYSTATE.PRESSED); break;
+				case A:
+					Controller.get().getPlayer().setKeyState(2, KEYSTATE.PRESSED); break;
+				case D:
+					Controller.get().getPlayer().setKeyState(3, KEYSTATE.PRESSED); break;
+				case SPACE:
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED); break;
+				default:
+					break;
 				}
 			}
 		});
 
-		//RELEASSED
+		//Keyboard Released
 		node.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
-				if (ke.getCode() == KeyCode.W) {
-
-					Controller.get().getPlayer().setKeyState(0, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.A) {
-					Controller.get().getPlayer().setKeyState(2, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.S) {
-
-					Controller.get().getPlayer().setKeyState(1, KEYSTATE.RELEASED);
-				} else if (ke.getCode() == KeyCode.D) {
-
-					Controller.get().getPlayer().setKeyState(3, KEYSTATE.RELEASED);
+				switch(ke.getCode()) {
+				case W:
+					Controller.get().getPlayer().setKeyState(0, KEYSTATE.RELEASED); break;
+				case S:
+					Controller.get().getPlayer().setKeyState(1, KEYSTATE.RELEASED); break;
+				case A:
+					Controller.get().getPlayer().setKeyState(2, KEYSTATE.RELEASED); break;
+				case D:
+					Controller.get().getPlayer().setKeyState(3, KEYSTATE.RELEASED); break;
+				case SPACE:
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED); break;
+				default:
+					break;
 				}
 			}
 		});
 
-		//MOUSE PRESSED
-		node.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mou) {
-				if (mou.getButton() == MouseButton.PRIMARY) {
-					Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED);
-				} else if (mou.getButton() == MouseButton.SECONDARY) {
-					Controller.get().getPlayer().setKeyState(5, KEYSTATE.PRESSED);
-				}
-
-			}
-			
-			
-
-		});
-		
-		//MOUSE RELEASED
-				node.setOnMouseReleased(new EventHandler<MouseEvent>() {
-
-					@Override
-					public void handle(MouseEvent mou) {
-						if (mou.getButton() == MouseButton.PRIMARY) {
-							System.out.println("left click");
-							Controller.get().getPlayer().setKeyState(4, KEYSTATE.UP);
-							System.out.println(Controller.get().getPlayer().getX());
-						} else if (mou.getButton() == MouseButton.SECONDARY) {
-							System.out.println("right click");
-							Controller.get().getPlayer().setKeyState(5, KEYSTATE.UP);
-						}
-
-					}
-					
-					
-
-				});
-		
-		
-		
-
-		//MOUSE PRESSED
+		//MouseButton Pressed
 		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mou) {
-				if (mou.getButton() == MouseButton.PRIMARY) {
-					Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED);
-				} else if (mou.getButton() == MouseButton.SECONDARY) {
-					Controller.get().getPlayer().setKeyState(5, KEYSTATE.RELEASED);
+			public void handle(MouseEvent me) {
+				switch(me.getButton()) {
+				case PRIMARY: 
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED); break;
+				case SECONDARY: 
+					Controller.get().getPlayer().setKeyState(5, KEYSTATE.PRESSED); break;
+				default:
+					break;
 				}
-
 			}
-
 		});
 		
-		//MOUSSE MOVED
+		//MouseButton Released	
+		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent me) {
+				switch(me.getButton()) {
+				case PRIMARY: 
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED); break;
+				case SECONDARY: 
+					Controller.get().getPlayer().setKeyState(5, KEYSTATE.RELEASED); break;
+				default:
+					break;
+				}
+			}
+		});
+		
+		//Mouse movement
 		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(MouseEvent mou) {
-				mouse = mou;
+			public void handle(MouseEvent me) {
+				mouse = me;
 			}
-
 		});	
-		
-		//MOUSSE MOVED
 		node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent mou) {
-						mouse = mou;
-						mx = (Controller.get().getRender().getDW() * Controller.get().getRender().getRESOLUTION() / 2)
-								- mou.getSceneX();
-						my = (Controller.get().getRender().getDH() * Controller.get().getRender().getRESOLUTION() / 2)
-								- mou.getSceneY();
-
-						// Mettre plus tard dans joueur.update()
-						Controller.get().getPlayer().setAngle(Math.toDegrees(Math.atan2(my,mx)));
-						// ====================================================================La
-															// classe joueur à le défaut
-															// de ne pas voir ce qu'il
-															// faut dans le
-															// contrôleur!(À CHANGER)
-					}
-
-				});	
+			@Override
+			public void handle(MouseEvent me) {
+				mouse = me;
+			}
+		});	
 	}
 
 	public MouseEvent getMouse() {
 		return mouse;
 	}
-
-
-	public double getRelativeMousePX() {
-		return mx;
-	}
-
-	public double getRelativeMousePY() {
-		return my;
-	}
 	
+	public double getMX() {
+		return Controller.get().getCX() + mouse.getSceneX();
+	}
+	public double getMY() {
+		return Controller.get().getCY() + mouse.getSceneY();
+	}
 }

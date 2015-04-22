@@ -14,16 +14,14 @@ import gameObjects.Weapons;
 public class Player extends Entity {
 
 	/* Movement */
-	private Controller.KEYSTATE[] key; // WSAD
+	private Controller.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
 	private double vx, vy;
 
 	private Weapons currentWeapon;
 	
 
-	public Player(double x, double y, int level, int health, int intellect, int strenght,
-			int agility, int mana, int speed, int perception,
-			ArrayList<Items> inventory) {
-		super(x, y, level, inventory);
+	public Player(double x, double y) {
+		super(x, y, 100, null);
 
 		/* Movement */
 		vx = 0;
@@ -46,11 +44,14 @@ public class Player extends Entity {
 	public void update(Floor floor) {
 		move(floor);
 		
+		if (key[4] == KEYSTATE.RELEASED)
+			checkFloorChange();
+		
 		currentWeapon.setX(this.x);
 		currentWeapon.setY(this.y);
 		currentWeapon.setAngle(this.angle);
 		
-		if (key[4] == KEYSTATE.PRESSED)
+		if (key[5] == KEYSTATE.PRESSED)
 			currentWeapon.attack(floor);
 		
 		/* Update input state */
@@ -114,5 +115,21 @@ public class Player extends Entity {
 		if (vcheck == false)
 			y += vy;
 	}
-
+	
+	private void checkFloorChange() {
+		double ex, ey;
+		ex = Controller.get().getWorld().getFloor().getStartX();
+		ey = Controller.get().getWorld().getFloor().getStartY();
+		
+		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
+			Controller.get().getWorld().changeFloor(-1);
+			return;
+		}
+		
+		ex = Controller.get().getWorld().getFloor().getEndX();
+		ey = Controller.get().getWorld().getFloor().getEndY();
+		
+		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1)
+			Controller.get().getWorld().changeFloor(+1);
+	}
 }

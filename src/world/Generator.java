@@ -438,4 +438,11 @@ public class Generator {
 	public int getStartY() {
 		return exitupy;
 	}
+	
+	public int getEndX() {
+		return exitdownx;
+	}
+	public int getEndY() {
+		return exitdowny;
+	}
 }

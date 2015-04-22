@@ -27,9 +27,9 @@ public class Render {
 	private Canvas GUI;
 	
 	//Dimension et r�solution d'affichage
-	private final int DH = 11;
-	private final int DW = 20;
-	private final int RESOLUTION = 64;
+	public static final int DH = 11;
+	public static final int DW = 20;
+	public static final int RESOLUTION = 64;
 	
 	private double cx = 0;
 	private double cy = 0;
@@ -277,6 +277,9 @@ public class Render {
 	public void setObjects(GameObjects[] objects) {
 		this.objects = objects;
 	}
+	public void setWorld(World.TILE[][] world) {
+		this.world = world;
+	}
 	/**
 	 * 
 	 * @return GUI
@@ -326,6 +329,7 @@ public class Render {
 		spriteMap.put("img/plank.png", new Image("img/plank.png"));//DONJON
 		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
+		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));//Exit down
 		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));
 		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//PLAYER
 		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
