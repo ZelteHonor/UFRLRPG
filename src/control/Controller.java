@@ -221,6 +221,10 @@ public class Controller implements Initializable {
 	public Player getPlayer() {
 		return player;
 	}
+	
+	public World getWorld(){
+		return world;
+	}
 
 	public Render getRender() {
 		return render;

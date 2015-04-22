@@ -39,7 +39,7 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
-			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1){
+			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.2){
 				System.out.println("platghypus");
 				searching = false;
 			}
@@ -98,12 +98,34 @@ public class Monster extends Entity{
 
 	private void moveTo(){
 		double angle = getMonsTargetAngle();
-		x += 0.1 * Math.sin(angle);
-		y += 0.1 * Math.cos(angle);
+		Double vx = 0.1 * Math.sin(angle);
+		Double vy = 0.1 * Math.cos(angle);
+		
+		boolean hcheck =  false;
+		boolean vcheck = false;
+		
+		ArrayList<Mask> walls = Controller.get().getWorld().getFloor().getWalls();
+		for(Mask wall : walls) {
+			mask.setX(x+vx);
+			mask.setY(y+vy);
+			if (Mask.collide(mask, wall)) {
+				mask.setY(y);
+				if (Mask.collide(mask,wall))
+					hcheck = true;
+				mask.setX(x);
+				mask.setY(y+vy);
+				if (Mask.collide(mask,wall))
+					vcheck = true;		
+			}
+		}
+		if (hcheck == false)
+			x += vx;
+		if (vcheck == false)
+			y += vy;
 	}
 	
 	private double getMonsTargetAngle(){
-		return Math.atan2(nextNode.getCoor().getX() - this.x, nextNode.getCoor().getY() - this.y);
+		return Math.atan2(nextNode.getCoor().getX() - this.x + 0.5, nextNode.getCoor().getY() - this.y + 0.5);
 	}
 
 }
