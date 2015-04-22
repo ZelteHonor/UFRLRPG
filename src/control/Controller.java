@@ -77,7 +77,7 @@ public class Controller implements Initializable {
 
 		/* Modules */
 		world = new World();
-		render = new Render(world.getFloor(0).getTiles());
+		render = new Render(world.getFloor().getTiles());
 
 		/* FXML */
 		pane.getChildren().clear();
@@ -91,16 +91,6 @@ public class Controller implements Initializable {
 		world.getFloor().setPlayer(player);
 		
 		objects = world.getFloor().getObjects();
-		
-		//++++++++++++++++++++++++++++++POUR TEST
-/*		player.setX(2);
-		player.setY(2);
-		
-		Monster m = new Monster(3, 3, 1, null);
-		m.setAngle(0);
-		m.setSprite("img/gabriel.png");
-		objects.add(m);*/
-		//+++++++++++++++++++++++++++++++
 
 		/* Services */
 		this.update = new GameTask();

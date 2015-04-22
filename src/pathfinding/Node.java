@@ -9,7 +9,7 @@ import java.awt.Point;
  */
 public class Node implements Comparable<Node> {
 		private Point coor;
-		private Node lastNode;
+		private Node next;
 		private float fromB, toE;
 		
 		
@@ -24,10 +24,10 @@ public class Node implements Comparable<Node> {
 		 * @param toE
 		 * 	Distance "estimé" jusqu'a l'objectif
 		 */
-		public Node(Point p, Node lastNode,float fromB,float toE)
+		public Node(Point p, Node lastNode, float fromB, float toE)
 		{
 			coor = p;
-			this.lastNode = lastNode;
+			this.next = lastNode;
 			this.fromB = fromB;
 			this.toE = toE;
 		}
@@ -53,26 +53,28 @@ public class Node implements Comparable<Node> {
 		 * 	Retourne le premier node
 		 */
 		public Node getFirst(){
-			Node temp = this;
-			while(temp.lastNode != null)
-				temp = temp.lastNode;
-			return temp;
+			Node current = this;
+			while(current.next != null)
+				current = current.next;
+			return current;
 		}
 		
 		/**
 		 * @return
 		 * 	Retourne le premier Node et le retire
 		 */
-		public Node getDestructiveFirst(){
-			Node current = this;
-			Node temp = null;
-			if (current.lastNode != null)
-				while(current.lastNode.lastNode != null){
-					temp = this.lastNode;
-					current.lastNode = null;
-					current = temp;
-				}
-			return current;
+		public Node getDestructiveFirst(){		
+			if (next == null)
+				return this;
+			
+			Node current = this;			
+			while(current.next.next != null) {
+				current = current.next;
+			}
+			
+			Node temp = current.next;
+			current.next = null;
+			return temp;
 		}
 		
 		/** 
