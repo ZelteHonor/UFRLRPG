@@ -76,12 +76,26 @@ public class Input {
 			@Override
 			public void handle(MouseEvent mou) {
 				if (mou.getButton() == MouseButton.PRIMARY) {
-					System.out.println("left click");
-					Controller.get().getPlayer().setKeyState(4, KEYSTATE.DOWN);
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED);
 					System.out.println(Controller.get().getPlayer().getX());
 				} else if (mou.getButton() == MouseButton.SECONDARY) {
-					System.out.println("right click");
-					Controller.get().getPlayer().setKeyState(5, KEYSTATE.DOWN);
+					Controller.get().getPlayer().setKeyState(5, KEYSTATE.PRESSED);
+				}
+
+			}
+
+		});
+		
+		//MOUSE PRESSED
+		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mou) {
+				if (mou.getButton() == MouseButton.PRIMARY) {
+					Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED);
+					System.out.println(Controller.get().getPlayer().getX());
+				} else if (mou.getButton() == MouseButton.SECONDARY) {
+					Controller.get().getPlayer().setKeyState(5, KEYSTATE.RELEASED);
 				}
 
 			}
@@ -109,34 +123,7 @@ public class Input {
 													// contrôleur!(À CHANGER)
 			}
 
-		});
-
-		node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mou) {
-
-				Controller.get();
-				mouse = mou;
-				relativeMousePX = (Controller.get().getRender().getDW() * Controller.get().getRender().getRESOLUTION() / 2)
-						- mou.getSceneX();
-				relativeMousePY = (Controller.get().getRender().getDH() * Controller.get().getRender().getRESOLUTION() / 2)
-						- mou.getSceneY();
-
-				// Mettre plus tard dans joueur.update()
-				Controller.get().getPlayer().setAngle(Math.toDegrees(Math.atan2(relativeMousePY,
-						relativeMousePX)) + 180);// ====================================================================La
-													// classe joueur à le défaut
-													// de ne pas voir ce qu'il
-													// faut dans le
-													// contrôleur!(À CHANGER)
-				
-			
-			}
-
-		});
-
-		
+		});		
 	}
 
 	public MouseEvent getMouse() {
