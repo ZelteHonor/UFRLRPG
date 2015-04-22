@@ -160,7 +160,7 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 						player.update(world.getFloor());
 						for (GameObjects o : objects)
-							o.update(world.getFloor(0));
+							o.update(world.getFloor());
 						
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())

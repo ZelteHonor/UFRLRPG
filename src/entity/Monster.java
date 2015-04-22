@@ -73,9 +73,7 @@ public class Monster extends Entity{
 		double distance = pl.distance(this.x,this.y);
 		if (distance <= 5){
 			visible = true;
-			
-			
-			
+
 			double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
 			double b = y - m*x;
 			
