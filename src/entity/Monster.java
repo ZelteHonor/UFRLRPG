@@ -7,6 +7,7 @@ import control.Controller;
 import pathfinding.Node;
 import world.Floor;
 import world.World;
+import world.World.TILE;
 import gameObjects.GameObjects;
 import gameObjects.Items;
 import gameObjects.Mask;
@@ -29,7 +30,7 @@ public class Monster extends Entity{
 
 	@Override
 	public void update(Floor floor) {
-		if(seePlayer(floor)){
+		if(seePlayer(floor)){		
 			searching = true;
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
 			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
@@ -71,16 +72,26 @@ public class Monster extends Entity{
 		double distance = pl.distance(this.x,this.y);
 		if (distance <= 5){
 			visible = true;
+			
+			
+			
+			double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
+			double b = y - m*x;
+			
+			if(x <= (Controller.get().getPlayer().getX()))
+				for(double i = x; i < Controller.get().getPlayer().getX(); i = i + 0.1)
+				{
+					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
+						return false;
+				}
+			else
+				for(double i = x; i > Controller.get().getPlayer().getX(); i = i - 0.1)
+				{
+					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
+						return false;
+				}
 		}
-		/*
-		 * En progression
-		 * 
-		 * boolean visible = false;
 		
-		double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
-		double b = y - m*x;
-		
-		for(int i = x; i < )*/
 		
 		return visible;
 	}

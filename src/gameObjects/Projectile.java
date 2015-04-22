@@ -1,6 +1,7 @@
 package gameObjects;
 
 import entity.Entity;
+import entity.Monster;
 import world.Floor;
 
 /**
@@ -41,7 +42,7 @@ public class Projectile extends GameObjects {
 		boolean exist = true;
 		for (GameObjects o : floor.getObjects()) { // Regarde s'il touche une
 													// entité
-			if (o instanceof Entity && exist
+			if (o instanceof Monster && exist
 					&& Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
 				floor.getObjects().remove(this);

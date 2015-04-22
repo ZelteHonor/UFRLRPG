@@ -45,27 +45,26 @@ public class Player extends Entity {
 	@Override
 	public void update(Floor floor) {
 		move(floor);
-
-		/* Angle */
-
+		
+		currentWeapon.setX(this.x);
+		currentWeapon.setY(this.y);
+		currentWeapon.setAngle(this.angle);
+		
+		if (key[4] == KEYSTATE.PRESSED)
+			currentWeapon.attack(floor);
+		
 		/* Update input state */
 		for (int i = 0; i < key.length; i++)
 			if (key[i] == KEYSTATE.PRESSED)
 				key[i] = KEYSTATE.DOWN;
 			else if (key[i] == KEYSTATE.RELEASED)
 				key[i] = KEYSTATE.UP;
-		
-
 	}
 
 	private void move(Floor floor) {
 
 		int xto = 0, yto = 0;
 		double direction, speed;
-		
-		currentWeapon.setX(this.x);
-		currentWeapon.setY(this.x);
-		currentWeapon.setAngle(this.angle);
 
 		if ((key[0] == KEYSTATE.PRESSED || key[0] == KEYSTATE.DOWN))
 			yto--;
@@ -76,9 +75,7 @@ public class Player extends Entity {
 			xto--;
 		if ((key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN))
 			xto++;
-		if ((key[4] == KEYSTATE.PRESSED || key[4] == KEYSTATE.DOWN))
-			currentWeapon.attack(floor);
-		
+
 		if (xto != 0 || yto != 0) {
 			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) + 0.05;
 			if (speed > 0.125)

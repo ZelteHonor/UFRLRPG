@@ -5,9 +5,11 @@ package render;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import entity.Player;
 import gameObjects.GameObjects;
+import gameObjects.Projectile;
 import world.World;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -25,9 +27,9 @@ public class Render {
 	private Canvas GUI;
 	
 	//Dimension et r�solution d'affichage
-	private final int DH;
-	private final int DW;
-	private final int RESOLUTION;
+	private final int DH = 11;
+	private final int DW = 20;
+	private final int RESOLUTION = 64;
 	
 	private double cx = 0;
 	private double cy = 0;
@@ -48,11 +50,6 @@ public class Render {
 	public Render(World.TILE[][] world) {
 		
 		this.world = world;
-		
-		DH = 11;//11
-		DW = 20;//20
-		RESOLUTION = 64;
-		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
 		initSpriteMap();
@@ -64,7 +61,7 @@ public class Render {
 	 * @param world[]
 	 * @param largeur dimension
 	 * @param hauteur dimension
-	 */
+	 *//*
 	public Render(World.TILE[][] world, int DW, int DH) {
 		this.world = world;
 		
@@ -83,7 +80,7 @@ public class Render {
 	 * @param Width dimension
 	 * @param Height dimension
 	 * @param resolution
-	 */
+	 *//*
 	public Render(World.TILE[][] world, int DW, int DH, int resolution) {
 		this.world = world;
 		
@@ -103,7 +100,7 @@ public class Render {
 	 * @param Width dimension
 	 * @param Height dimension
 	 * @param resolution
-	 */
+	 *//*
 	public Render(World.TILE[][] world, Canvas GUI, int DW, int DH, int resolution) {
 		this.world = world;
 		
@@ -265,9 +262,10 @@ public class Render {
 	{
 		Image sprite = spriteMap.get(obj.getSprite());
 		
-		if(sprite == null)
+		if(!spriteMap.containsKey(obj.getSprite()))
 		{
 			spriteMap.put(obj.getSprite(), new Image(obj.getSprite()));
+			sprite = spriteMap.get(obj.getSprite());
 		}
 		
 		return sprite;
@@ -331,5 +329,6 @@ public class Render {
 		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));
 		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//PLAYER
 		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
+
 	}
 }
