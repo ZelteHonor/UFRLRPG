@@ -30,6 +30,7 @@ public class Monster extends Entity{
 
 	@Override
 	public void update(Floor floor) {
+		
 		if(seePlayer(floor)){		
 			searching = true;
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
@@ -39,6 +40,8 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
+			System.out.println("ds");
+			
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
 				searching = false;
 			}
@@ -48,9 +51,8 @@ public class Monster extends Entity{
 			else{
 				moveTo();
 			}
-			
-			
 		}
+
 		
 	}
 
