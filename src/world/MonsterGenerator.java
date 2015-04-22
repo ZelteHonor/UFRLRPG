@@ -90,7 +90,7 @@ public class MonsterGenerator {
 			r1 = Math.random() * World.SIZE;
 			r2 = Math.random() * World.SIZE;
 		}
-		s.setLocation(r1, r2);
+		s.setLocation(r1 + 0.5, r2 + 0.5);
 		return s;
 	}
 
