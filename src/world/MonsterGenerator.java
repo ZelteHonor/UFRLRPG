@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import world.World.TILE;
 import javafx.scene.image.Image;
 import entity.Monster;
+import gameObjects.GameObjects;
 
 public class MonsterGenerator {
 
@@ -34,6 +35,16 @@ public class MonsterGenerator {
 
 			m.setSprite(/* createImage() */"img/gabriel.png");
 			f.getObjects().add(m);
+		}
+
+		for (GameObjects m : f.getObjects()) {
+			if (m instanceof Monster) {
+				if (m.getX() <= f.getStartX() + 3
+						|| m.getX() <= f.getStartX() - 3
+						|| m.getY() <= f.getStartY() - 3
+						|| m.getY() <= f.getStartY() + 3) {
+				}
+			}
 		}
 
 	}
