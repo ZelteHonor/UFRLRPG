@@ -329,5 +329,9 @@ public class Render {
 		spriteMap.put("img/plank.png", new Image("img/plank.png"));//DONJON
 		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));//TUNNEL
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));//Exit down
+		spriteMap.put("img/gabriel.png", new Image("img/gabriel.png"));
+		spriteMap.put("img/jaypeg.png", new Image("img/jaypeg.png"));//PLAYER
+		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
+
 	}
 }

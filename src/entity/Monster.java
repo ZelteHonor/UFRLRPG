@@ -25,7 +25,7 @@ public class Monster extends Entity{
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
 		
-		mask = new Mask(0.25, 0.25,x,y);
+		mask = new Mask(0.15 ,x,y);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
-			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 1){
+			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
 				System.out.println("platghypus");
 				searching = false;
 			}
@@ -98,12 +98,53 @@ public class Monster extends Entity{
 
 	private void moveTo(){
 		double angle = getMonsTargetAngle();
-		x += 0.1 * Math.sin(angle);
-		y += 0.1 * Math.cos(angle);
+		Double vx = 0.1 * Math.sin(angle);
+		Double vy = 0.1 * Math.cos(angle);
+		
+		boolean hCheckW =  false;
+		boolean vCheckW = false;
+		boolean hCheckE =  false;
+		boolean vCheckE = false;
+		
+		ArrayList<Mask> walls = Controller.get().getWorld().getFloor().getWalls();
+		for(Mask wall : walls) {
+			mask.setX(x+vx);
+			mask.setY(y+vy);
+			if (Mask.collide(mask, wall)) {
+				mask.setY(y);
+				if (Mask.collide(mask,wall))
+					hCheckW = true;
+				mask.setX(x);
+				mask.setY(y+vy);
+				if (Mask.collide(mask,wall))
+					vCheckW = true;		
+			}
+		}
+		
+		for(GameObjects o : Controller.get().getWorld().getFloor().getObjects()) {
+			if(o != this){
+				mask.setX(x+vx);
+				mask.setY(y+vy);
+				if (Mask.collide(mask, o.getMask())) {
+					mask.setY(y);
+					if (Mask.collide(mask,o.getMask()))
+						hCheckE = true;
+					mask.setX(x);
+					mask.setY(y+vy);
+					if (Mask.collide(mask,o.getMask()))
+						vCheckE = true;		
+				}
+			}
+		}
+		
+		if (!hCheckW && !hCheckE)
+			x += vx;
+		if (!vCheckW && !vCheckE)
+			y += vy;
 	}
 	
 	private double getMonsTargetAngle(){
-		return Math.atan2(nextNode.getCoor().getX() - this.x, nextNode.getCoor().getY() - this.y);
+		return Math.atan2(nextNode.getCoor().getX() - this.x + 0.5, nextNode.getCoor().getY() - this.y + 0.5);
 	}
 
 }

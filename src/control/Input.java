@@ -1,8 +1,7 @@
 package control;
 
-import render.Render;
-import world.MonsterGenerator;
 import control.Controller.KEYSTATE;
+import world.MonsterGenerator;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -79,7 +78,7 @@ public class Input {
 			}
 		});
 		
-		//MouseButton Released
+		//MouseButton Released	
 		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				switch(me.getButton()) {

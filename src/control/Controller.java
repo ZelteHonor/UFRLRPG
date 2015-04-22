@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import render.Render;
+import world.Floor;
 import world.MonsterGenerator;
 import world.World;
 import javafx.application.Platform;
@@ -120,7 +121,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @return null
 	 */
-	private class GameTimer extends Service<Void> {
+	private  class GameTimer extends Service<Void> {
 		boolean t = true;
 
 		public GameTimer() {
@@ -133,11 +134,13 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					while (t) {
 						Platform.runLater(() -> {
+
 							if(!update.isRunning()) {
 								update.cancel();
 								update.reset();
 								update.start();
 							}
+
 							if(!screenRefresh.isRunning()) {
 								screenRefresh.cancel();
 								screenRefresh.reset();
@@ -167,7 +170,7 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 						player.update(world.getFloor());
 						for (GameObjects o : objects)
-							o.update(world.getFloor());						
+							o.update(world.getFloor());
 					}
 
 					);
@@ -212,6 +215,7 @@ public class Controller implements Initializable {
 	public Player getPlayer() {
 		return player;
 	}
+
 	public void setObjects(ArrayList<GameObjects> array) {
 		objects = array;
 	}
