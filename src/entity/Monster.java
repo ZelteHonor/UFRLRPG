@@ -40,7 +40,6 @@ public class Monster extends Entity{
 		}
 		else if(this.searching){
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
-				System.out.println("platghypus");
 				searching = false;
 			}
 			else if(new Point((int)this.x,(int)this.y).equals(nextNode.getCoor())){

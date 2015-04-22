@@ -18,7 +18,7 @@ public class MonsterGenerator {
 
 	public void generateMonster(Floor f) {
 
-		// génère le numbre d'enemie dans le floor prsent
+		// génère le numbre d'enemie dans le floor present
 		int count = createCount(f);
 
 		// génère les monstres avec des attributs aléatoire et on les mets
