@@ -168,7 +168,12 @@ public class Controller implements Initializable {
 						player.update(world.getFloor(0));
 						for (GameObjects o : objects)
 							o.update(world.getFloor(0));
-
+						
+						for(int i = 0; i < objects.size(); i++)
+							if(objects.get(i).isDestroy())
+								objects.remove(i);
+						
+						
 						if (world.reachedExit()) {
 							System.out.println("I've reached the exit");
 							Floor newFloor = new Floor(world.getFloor()

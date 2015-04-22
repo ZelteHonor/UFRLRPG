@@ -35,7 +35,7 @@ public class Player extends Entity {
 		}
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		currentWeapon = new Ranges(x, y, 10, false, 10, 5, 2, 0.2f);
+		currentWeapon = new Ranges(x, y, 10, false, 20, 5, 2, 0.2f);
 	}
 
 	public void setKeyState(int index, Controller.KEYSTATE state) {

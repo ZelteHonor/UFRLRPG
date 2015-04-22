@@ -45,13 +45,13 @@ public class Projectile extends GameObjects {
 			if (o instanceof Monster && exist
 					&& Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
-				floor.getObjects().remove(this);
+				this.destroy = true;
 				exist = false;
 			}
 		}
 		for (Mask m : floor.getWalls()) { //Regarde s'il touche un mur.
 			if (exist && distance <= 0 || Mask.collide(this.mask, m)) {
-				floor.getObjects().remove(this);
+				this.destroy = true;
 				exist = false;
 			}
 		}
