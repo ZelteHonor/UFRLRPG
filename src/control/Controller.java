@@ -170,27 +170,11 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 						player.update(world.getFloor());
 						for (GameObjects o : objects)
-<<<<<<< HEAD
 							o.update(world.getFloor(0));
 						
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())
 								objects.remove(i);
-						
-						
-						if (world.reachedExit()) {
-							System.out.println("I've reached the exit");
-							Floor newFloor = new Floor(world.getFloor()
-									.getDepth() + 1);
-							world.setFloor(newFloor);
-							player.setX(world.getFloor().getStartX());
-							player.setY(world.getFloor().getStartY());
-							// initGame();
-						}
-
-=======
-							o.update(world.getFloor());
->>>>>>> ec92a90327ec163b0739c2dbe66a150143bcd25f
 					}
 
 					);
