@@ -67,7 +67,7 @@ public class Controller implements Initializable {
 	public void initGame() {
 
 		/* Modules */
-		input = new Input(pane);
+		
 		world = new World();
 		render = new Render(world.getFloor(0).getTiles());
 
@@ -127,28 +127,24 @@ public class Controller implements Initializable {
 
 			return new Task<Void>() {
 				protected Void call() throws Exception {
-
 					while (t) {
-
 						Platform.runLater(() -> {
-
-							if(!update.isRunning())
-							{
+							if(!update.isRunning()) {
 								update.cancel();
 								update.reset();
 								update.start();
 							}
-
-							screenRefresh.cancel();
-							screenRefresh.reset();
-							screenRefresh.start();
+							if(!screenRefresh.isRunning()) {
+								screenRefresh.cancel();
+								screenRefresh.reset();
+								screenRefresh.start();
+							}
 						});
 						try {
 							Thread.sleep(17);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-
 					}
 					return null;
 				}
@@ -192,15 +188,16 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 
 						// Camera
-						double cx = player.getX()
-								+ (input.getMouse().getSceneX()
-										/ render.getRESOLUTION() - render
-										.getDW() / 2);
-						double cy = player.getY()
-								+ (input.getMouse().getSceneY()
-										/ render.getRESOLUTION() - render
-										.getDH() / 2);
+						double cx = player.getX() + (
+								input.getMouse().getSceneX() / 
+								render.getRESOLUTION() - render.getDW() / 2);
+						double cy = player.getY() + (input.getMouse().getSceneY()/ render.getRESOLUTION() - render.getDH() / 2);
 
+						double mx = cx + input.getMouse().getSceneX();
+						double my = cy + input.getMouse().getSceneY();
+						
+						player.setAngle(Math.toDegrees(Math.atan2(cy-player.getY(), cx-player.getX())));
+						
 						render.drawWorld(cx, cy);
 						render.draw(player);
 						render.draw(objects);
@@ -233,6 +230,7 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;
+		input = new Input(pane);
 	}
 
 }
