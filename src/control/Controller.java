@@ -132,9 +132,12 @@ public class Controller implements Initializable {
 
 						Platform.runLater(() -> {
 
-							update.cancel();
-							update.reset();
-							update.start();
+							if(!update.isRunning())
+							{
+								update.cancel();
+								update.reset();
+								update.start();
+							}
 
 							screenRefresh.cancel();
 							screenRefresh.reset();
