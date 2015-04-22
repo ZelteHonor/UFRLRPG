@@ -10,7 +10,7 @@ import world.Floor;
  */
 public class Projectile extends GameObjects {
 	private int damage, distance;
-	double vx, vy;
+	private double vx, vy;
 
 	/**
 	 * Constructeur de projectile

@@ -1,7 +1,7 @@
 package control;
 
-import world.MonsterGenerator;
 import control.Controller.KEYSTATE;
+import world.MonsterGenerator;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -68,9 +68,34 @@ public class Input {
 				}
 
 			}
+			
+			
 
 		});
 		
+		//MOUSE RELEASED
+				node.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent mou) {
+						if (mou.getButton() == MouseButton.PRIMARY) {
+							System.out.println("left click");
+							Controller.get().getPlayer().setKeyState(4, KEYSTATE.UP);
+							System.out.println(Controller.get().getPlayer().getX());
+						} else if (mou.getButton() == MouseButton.SECONDARY) {
+							System.out.println("right click");
+							Controller.get().getPlayer().setKeyState(5, KEYSTATE.UP);
+						}
+
+					}
+					
+					
+
+				});
+		
+		
+		
+
 		//MOUSE PRESSED
 		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
