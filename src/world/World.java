@@ -44,4 +44,8 @@ public class World {
 		}
 	}
 
+	public void setFloor(Floor floor) {
+		this.floor = floor;
+	}
+
 }

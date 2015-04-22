@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import render.Render;
+import world.Floor;
 import world.MonsterGenerator;
 import world.World;
 import javafx.application.Platform;
@@ -126,9 +127,11 @@ public class Controller implements Initializable {
 
 						Platform.runLater(() -> {
 
-							update.cancel();
-							update.reset();
-							update.start();
+							if (!update.isRunning()) {
+								update.cancel();
+								update.reset();
+								update.start();
+							}
 
 							screenRefresh.cancel();
 							screenRefresh.reset();
@@ -163,9 +166,14 @@ public class Controller implements Initializable {
 
 						if (world.reachedExit()) {
 							System.out.println("I've reached the exit");
-							initGame();
+							Floor newFloor = new Floor(world.getFloor()
+									.getDepth() + 1);
+							world.setFloor(newFloor);
+							player.setX(world.getFloor().getStartX());
+							player.setY(world.getFloor().getStartY());
+							// initGame();
 						}
-						
+
 					}
 
 					);

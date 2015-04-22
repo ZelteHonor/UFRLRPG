@@ -85,8 +85,32 @@ public class Input {
 				}
 
 			}
+			
+			
 
 		});
+		
+		//MOUSE RELEASED
+				node.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent mou) {
+						if (mou.getButton() == MouseButton.PRIMARY) {
+							System.out.println("left click");
+							Controller.get().getPlayer().setKeyState(4, KEYSTATE.UP);
+							System.out.println(Controller.get().getPlayer().getX());
+						} else if (mou.getButton() == MouseButton.SECONDARY) {
+							System.out.println("right click");
+							Controller.get().getPlayer().setKeyState(5, KEYSTATE.UP);
+						}
+
+					}
+					
+					
+
+				});
+		
+		
 		
 		//MOUSSE MOVED
 		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
