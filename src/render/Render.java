@@ -27,9 +27,9 @@ public class Render {
 	private Canvas GUI;
 	
 	//Dimension et r�solution d'affichage
-	private final int DH;
-	private final int DW;
-	private final int RESOLUTION;
+	private final int DH = 11;
+	private final int DW = 20;
+	private final int RESOLUTION = 64;
 	
 	private double cx = 0;
 	private double cy = 0;
@@ -50,11 +50,6 @@ public class Render {
 	public Render(World.TILE[][] world) {
 		
 		this.world = world;
-		
-		DH = 11;//11
-		DW = 20;//20
-		RESOLUTION = 64;
-		
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
 		
 		initSpriteMap();
@@ -66,7 +61,7 @@ public class Render {
 	 * @param world[]
 	 * @param largeur dimension
 	 * @param hauteur dimension
-	 */
+	 *//*
 	public Render(World.TILE[][] world, int DW, int DH) {
 		this.world = world;
 		
@@ -85,7 +80,7 @@ public class Render {
 	 * @param Width dimension
 	 * @param Height dimension
 	 * @param resolution
-	 */
+	 *//*
 	public Render(World.TILE[][] world, int DW, int DH, int resolution) {
 		this.world = world;
 		
@@ -105,7 +100,7 @@ public class Render {
 	 * @param Width dimension
 	 * @param Height dimension
 	 * @param resolution
-	 */
+	 *//*
 	public Render(World.TILE[][] world, Canvas GUI, int DW, int DH, int resolution) {
 		this.world = world;
 		
