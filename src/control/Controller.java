@@ -2,13 +2,12 @@ package control;
 
 import entity.Monster;
 import entity.Player;
-import gameObjects.GameObjects;
+import gameobject.GameObject;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import render.Render;
 import world.Floor;
 import world.MonsterGenerator;
 import world.World;
@@ -49,12 +48,9 @@ public class Controller implements Initializable {
 
 	/* Objects */
 	private Player player;
-	private ArrayList<GameObjects> objects;
+	private ArrayList<GameObject> objects;
 
 	private MonsterGenerator m;
-
-	/* Clavier */
-	public enum KEYSTATE { PRESSED, RELEASED, DOWN, UP };
 	
 	/* Camera */
 	private double cx, cy;
@@ -152,7 +148,7 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
 						player.update(world.getFloor());
-						for (GameObjects o : objects)
+						for (GameObject o : objects)
 							o.update(world.getFloor());
 						
 						for(int i = 0; i < objects.size(); i++)
@@ -200,7 +196,7 @@ public class Controller implements Initializable {
 		return player;
 	}
 
-	public void setObjects(ArrayList<GameObjects> array) {
+	public void setObjects(ArrayList<GameObject> array) {
 		objects = array;
 	}
 

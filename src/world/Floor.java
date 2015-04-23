@@ -1,8 +1,8 @@
 package world;
 
 import entity.Player;
-import gameObjects.GameObjects;
-import gameObjects.Mask;
+import gameobject.GameObject;
+import gameobject.Mask;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import world.World.TILE;
 public class Floor {
 		
 	private World.TILE[][] tiles;
-	private ArrayList<GameObjects> objects;
+	private ArrayList<GameObject> objects;
 	private ArrayList<Mask> walls;
 	private Player player;
 	private int startx, starty;
@@ -20,7 +20,7 @@ public class Floor {
 	private int depth;
 
 	public Floor(int depth) {
-		objects = new ArrayList<GameObjects>();
+		objects = new ArrayList<GameObject>();
 		if (depth == -1) {
 			tiles = new World.TILE[World.SIZE][World.SIZE];
 			for (int i = 0; i < World.SIZE; i++)
@@ -56,11 +56,11 @@ public class Floor {
 		return walls;
 	}
 	
-	public ArrayList<GameObjects> getObjects() {
+	public ArrayList<GameObject> getObjects() {
 		return objects;
 	}
 
-	public void setObjects(ArrayList<GameObjects> objects) {
+	public void setObjects(ArrayList<GameObject> objects) {
 		this.objects = objects;
 	}
 	

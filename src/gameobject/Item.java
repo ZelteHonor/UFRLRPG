@@ -1,12 +1,12 @@
-package gameObjects;
+package gameobject;
 
 import world.Floor;
 
-public class Items extends GameObjects{
+public class Item extends GameObject{
 	private int weight;
 	private boolean evil;
 	
-	public Items(double x, double y, int weight, boolean evil)
+	public Item(double x, double y, int weight, boolean evil)
 	{
 		super(x, y);
 		this.weight = weight;

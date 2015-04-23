@@ -1,6 +1,5 @@
 package control;
 
-import control.Controller.KEYSTATE;
 import world.MonsterGenerator;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -19,7 +18,8 @@ public class Input {
 	private double mx;
 	private double my;
 	
-	
+	/* Clavier */
+	public enum KEYSTATE { PRESSED, RELEASED, DOWN, UP };
 	
 	/** Constructeur */
 	public Input(Node node) {

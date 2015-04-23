@@ -8,9 +8,9 @@ import pathfinding.Node;
 import world.Floor;
 import world.World;
 import world.World.TILE;
-import gameObjects.GameObjects;
-import gameObjects.Items;
-import gameObjects.Mask;
+import gameobject.GameObject;
+import gameobject.Item;
+import gameobject.Mask;
 
 public class Monster extends Entity{
 	
@@ -19,8 +19,9 @@ public class Monster extends Entity{
 	private Point lastTarget;
 	private Node totalPath, nextNode;
 	public final static float SPEED = 0.09f;
-	public Monster(double x, double y,int health, ArrayList<Items> inventory) {
-		super(x, y, health, inventory);
+	
+	public Monster(double x, double y,int health) {
+		super(x, y, health);
 		searching = false;
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
@@ -110,7 +111,7 @@ public class Monster extends Entity{
 			}
 		}
 		
-		for(GameObjects o : Controller.get().getWorld().getFloor().getObjects()) {
+		for(GameObject o : Controller.get().getWorld().getFloor().getObjects()) {
 			if(o != this && o instanceof Monster){
 				
 				double dist = Math.sqrt(Math.pow(o.getX() - x,2) + Math.pow(o.getY() - y,2));
@@ -130,7 +131,7 @@ public class Monster extends Entity{
 			}
 		}
 		
-		for(GameObjects o : Controller.get().getWorld().getFloor().getObjects()) {
+		for(GameObject o : Controller.get().getWorld().getFloor().getObjects()) {
 			if(o != this){
 				mask.setX(x+vx);
 				mask.setY(y+vy);
