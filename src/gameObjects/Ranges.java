@@ -32,7 +32,7 @@ public class Ranges extends Weapons {
 
 	@Override
 	public void attack(Floor floor) {
-		Projectile proj = new Projectile(x, y, this.damage, this.range, speed * Math.cos(angle), speed * Math.sin(angle), this.angle);
+		Projectile proj = new Projectile(x, y, damage, speed, floor.getPlayer().getAngle());
 		proj.setSprite("img/arrow.png");
 		floor.getObjects().add(proj); //Crée un projectile et l'ajoute dans la liste des objets à updater.
 	}

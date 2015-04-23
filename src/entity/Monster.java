@@ -36,7 +36,7 @@ public class Monster extends Entity{
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
 			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
 			nextNode = totalPath.getFirst();
-			angle = Math.toDegrees(Math.atan2(y - Controller.get().getPlayer().getY(),x - Controller.get().getPlayer().getX()))+180;
+			angle = Math.atan2(Controller.get().getPlayer().getY() - y,Controller.get().getPlayer().getX() - x);
 			moveTo();
 		}
 		else if(this.searching){

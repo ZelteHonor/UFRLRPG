@@ -47,11 +47,14 @@ public abstract class GameObjects {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public void setPosition(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
 
-	public void setAngle(double nAngle) {
-
-		this.angle = 360*((nAngle/360) - (Math.toIntExact((long) (nAngle/360))));
-
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
 	
 	public boolean isDestroy(){
