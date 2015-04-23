@@ -41,13 +41,14 @@ public class Pathfinding {
 			
 			
 		}
-		System.out.println("Start");
+		//System.out.println("Start");
 
 		while (!current.getCoor().equals(end) && searchLimit >= 0) {
 			//The current Node is the one with the lowest cost
 			current = Collections.min(openList);
 			openList.remove(current);
 			closedList.add(current);
+			
 			//Take all node around the current node
 			for (int i = (int) (current.getCoor().getX() - 1); i <= current
 					.getCoor().getX() + 1; i++) {
@@ -71,7 +72,7 @@ public class Pathfinding {
 			searchLimit--;
 		}
 
-		System.out.println("END");
+		//System.out.println("END");
 		return current;
 	}
 

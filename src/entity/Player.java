@@ -22,6 +22,7 @@ public class Player extends Entity {
 
 	public Player(double x, double y) {
 		super(x, y, 100, null);
+		sprite = "img/player.png";
 
 		/* Movement */
 		vx = 0;

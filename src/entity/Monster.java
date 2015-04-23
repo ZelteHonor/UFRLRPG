@@ -40,7 +40,7 @@ public class Monster extends Entity{
 			moveTo();
 		}
 		else if(this.searching){
-			System.out.println("ds");
+			//System.out.println("ds");
 			
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
 				searching = false;

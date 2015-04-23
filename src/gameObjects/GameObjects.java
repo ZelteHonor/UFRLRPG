@@ -41,9 +41,7 @@ public abstract class GameObjects {
 	}
 
 	public void setX(double x) {
-
 		this.x = x;
-
 	}
 
 	public void setY(double y) {
