@@ -11,6 +11,9 @@ import world.Floor;
 public class Projectile extends GameObjects {
 	private int damage;
 	private double vx, vy;
+	
+	private boolean stuck;
+	private int ticksToDeath;
 
 	/**
 	 * Constructeur de projectile
@@ -27,7 +30,7 @@ public class Projectile extends GameObjects {
 	public Projectile(double x, double y, int damage, double speed, double angle) {
 		super(x, y);
 		
-		this.mask = new Mask(0.2, x, y);
+		this.mask = new Mask(0.05, x + Math.cos(angle)*0.01, y + Math.sin(angle)*0.01);
 		this.damage = damage;
 		
 		this.vx = Math.cos(angle) * speed;
@@ -37,23 +40,32 @@ public class Projectile extends GameObjects {
 
 	@Override
 	public void update(Floor floor) {
-		/* Monstres *//*
+		/* Monstres */
 		for (GameObjects o : floor.getObjects()) {
 			if (o instanceof Monster && Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
 				this.destroy = true;
 			}
-		}*/
+		}
 		
 		/* Mouvement */
-		for (Mask m : floor.getWalls())
-			if (Mask.collide(this.mask, m))
-				this.destroy = true;
-		x += vx;
-		y += vy;
+		if (!stuck) {
+			for (Mask m : floor.getWalls()) {
+				if (Mask.collide(this.mask, m)) {
+					stuck = true;
+					ticksToDeath = 120;
+				}
+			}
 		
-		mask.setX(getX());
-		mask.setY(getY());
-		
+			x += vx;
+			y += vy;
+			
+			mask.setPosition(x + Math.cos(angle)*0.01, y + Math.sin(angle)*0.01);
+		}
+		else {
+			ticksToDeath--;
+			if (ticksToDeath <= 0)
+				destroy = true;
+		}
 	}
 }

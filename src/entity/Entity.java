@@ -9,7 +9,16 @@ import gameObjects.Weapons;
 
 public abstract class Entity extends GameObjects {
 
-	private int level, health, intellect, strenght;
+	private int level;
+
+
+	protected int health;
+
+
+	private int intellect;
+
+
+	private int strenght;
 
 
 	protected int agility;
