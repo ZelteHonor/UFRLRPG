@@ -65,13 +65,13 @@ public class Input {
 		});
 
 		//MouseButton Pressed
-		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		node.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				switch(me.getButton()) {
 				case PRIMARY: 
-					Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED); break;
-				case SECONDARY: 
 					Controller.get().getPlayer().setKeyState(5, KEYSTATE.PRESSED); break;
+				case SECONDARY: 
+					Controller.get().getPlayer().setKeyState(6, KEYSTATE.PRESSED); break;
 				default:
 					break;
 				}
@@ -83,9 +83,9 @@ public class Input {
 			public void handle(MouseEvent me) {
 				switch(me.getButton()) {
 				case PRIMARY: 
-					Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED); break;
-				case SECONDARY: 
 					Controller.get().getPlayer().setKeyState(5, KEYSTATE.RELEASED); break;
+				case SECONDARY: 
+					Controller.get().getPlayer().setKeyState(6, KEYSTATE.RELEASED); break;
 				default:
 					break;
 				}
