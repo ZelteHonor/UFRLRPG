@@ -17,7 +17,7 @@ public class Player extends Entity {
 	private Controller.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
 	private double vx, vy;
 
-	private Weapons weapon;
+	private Weapons currentWeapon;
 	
 
 	public Player(double x, double y) {
@@ -29,11 +29,12 @@ public class Player extends Entity {
 		vy = 0;
 
 		key = new Controller.KEYSTATE[6];
-		for (int i = 0; i < key.length; i++)
+		for (int i = 0; i < key.length; i++) {
 			key[i] = Controller.KEYSTATE.UP;
+		}
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		weapon = new Ranges(x, y, 10, false, 20, 5, 2, 0.2f);
+		currentWeapon = new Ranges(x, y, 10, false, 20, 5, 2, 0.2f);
 	}
 
 	public void setKeyState(int index, Controller.KEYSTATE state) {
@@ -42,17 +43,24 @@ public class Player extends Entity {
 
 	@Override
 	public void update(Floor floor) {
-		/* Movement */
 		move(floor);
-		mask.setPosition(x,y);
+		
 		if (key[4] == KEYSTATE.RELEASED)
 			checkFloorChange();
 		
-		/* Combat */
-		weapon.setPosition(x, y);
-		weapon.setAngle(angle);
+		currentWeapon.setX(this.x);
+		currentWeapon.setY(this.y);
+		currentWeapon.setAngle(this.angle);
+		
 		if (key[5] == KEYSTATE.PRESSED)
-			weapon.attack(floor);
+			currentWeapon.attack(floor);
+		
+		/* Update input state */
+		for (int i = 0; i < key.length; i++)
+			if (key[i] == KEYSTATE.PRESSED)
+				key[i] = KEYSTATE.DOWN;
+			else if (key[i] == KEYSTATE.RELEASED)
+				key[i] = KEYSTATE.UP;
 	}
 
 	private void move(Floor floor) {
@@ -60,7 +68,6 @@ public class Player extends Entity {
 		int xto = 0, yto = 0;
 		double direction, speed;
 
-		/* Define direction */
 		if ((key[0] == KEYSTATE.PRESSED || key[0] == KEYSTATE.DOWN))
 			yto--;
 		if ((key[1] == KEYSTATE.PRESSED || key[1] == KEYSTATE.DOWN))
@@ -71,7 +78,6 @@ public class Player extends Entity {
 		if ((key[3] == KEYSTATE.PRESSED || key[3] == KEYSTATE.DOWN))
 			xto++;
 
-		/* Define speed */
 		if (xto != 0 || yto != 0) {
 			speed = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)) + 0.05;
 			if (speed > 0.125)
@@ -88,7 +94,6 @@ public class Player extends Entity {
 		vx = Math.cos(direction) * speed;
 		vy = Math.sin(direction) * speed;
 
-		/* Check for collision */
 		boolean hcheck =  false;
 		boolean vcheck = false;
 		
@@ -106,8 +111,6 @@ public class Player extends Entity {
 					vcheck = true;		
 			}
 		}
-		
-		/* Apply movement */
 		if (hcheck == false)
 			x += vx;
 		if (vcheck == false)
@@ -116,8 +119,6 @@ public class Player extends Entity {
 	
 	private void checkFloorChange() {
 		double ex, ey;
-		
-		/* Going up */
 		ex = Controller.get().getWorld().getFloor().getStartX();
 		ey = Controller.get().getWorld().getFloor().getStartY();
 		
@@ -126,20 +127,10 @@ public class Player extends Entity {
 			return;
 		}
 		
-		/* Going down */
 		ex = Controller.get().getWorld().getFloor().getEndX();
 		ey = Controller.get().getWorld().getFloor().getEndY();
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1)
 			Controller.get().getWorld().changeFloor(+1);
-	}
-	
-	public void updateInputState() {
-		/* Update input state */
-		for (int i = 0; i < key.length; i++)
-			if (key[i] == KEYSTATE.PRESSED)
-				key[i] = KEYSTATE.DOWN;
-			else if (key[i] == KEYSTATE.RELEASED)
-				key[i] = KEYSTATE.UP;
 	}
 }

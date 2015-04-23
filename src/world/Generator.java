@@ -236,6 +236,7 @@ public class Generator {
 			
 			// NOT SUPPOSED TO HAPPEN
 			if (!(from == null || target == null)) {
+				System.out.println(from + " " + target);
 				createTunnel(from, target);
 				carve();
 				connect();

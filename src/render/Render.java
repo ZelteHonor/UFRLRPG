@@ -81,7 +81,7 @@ public class Render {
 
 		GUI.getGraphicsContext2D().translate(px,py);//Besoins de monstre pour connaître l'amélioration à faire!	
 		
-		GUI.getGraphicsContext2D().rotate(Math.toDegrees(obj.getAngle()));
+		GUI.getGraphicsContext2D().rotate(obj.getAngle());
 		
 		GUI.getGraphicsContext2D().drawImage(sprite, - (sprite.getWidth()/2), - (sprite.getHeight()/2));
 		

@@ -178,7 +178,7 @@ public class Controller implements Initializable {
 						double cx = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
 						double cy = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
 						
-						player.setAngle(Math.atan2(cy-player.getY(), cx-player.getX()));
+						player.setAngle(Math.toDegrees(Math.atan2(cy-player.getY(), cx-player.getX())));
 						
 						render.drawWorld(cx, cy);
 						render.draw(player);
