@@ -17,11 +17,16 @@ public class Monster extends Entity {
 	public static int RANGE = 20;
 	public static int ATTACK = 1;
 	private String name;
+	
+	/* Pathfinding */
 	private boolean searching;
 	private Point lastTarget;
 	private Node totalPath, nextNode;
+	
+	/* Movement */
 	public final static float SPEED = 0.09f;
 
+	private int cooldown;
 	
 	public Monster(double x, double y,int health) {
 		super(x, y, health);
@@ -29,7 +34,8 @@ public class Monster extends Entity {
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
 
-		mask = new Mask(0.15, x, y);
+		mask = new Mask(0.1875, x, y);
+		cooldown = 0;
 	}
 
 	@Override
@@ -48,9 +54,8 @@ public class Monster extends Entity {
 			angle = Math.atan2(Controller.get().getPlayer().getY() - y,
 					Controller.get().getPlayer().getX() - x);
 			moveTo();
-		} else if (this.searching) {
-			// System.out.println("ds");
-
+		} 
+		else if (this.searching) {
 			if (new Point((int) this.x, (int) this.y).distance(lastTarget) <= 0.1) {
 				searching = false;
 			} else if (new Point((int) this.x, (int) this.y).equals(nextNode
@@ -61,11 +66,13 @@ public class Monster extends Entity {
 			}
 		}
 
-		if ((int)getX() == (int)floor.getPlayer().getX()
-				&& (int)getY() == (int)floor.getPlayer().getY()) {
-			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - ATTACK);
-			System.out.println("the player got hit!" + floor.getPlayer().getHealth());
+		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 1 && cooldown == 0) {
+			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - 2);
+			cooldown = 5;
 		}
+		
+		if (cooldown > 0)
+			cooldown --;
 
 	}
 

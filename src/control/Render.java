@@ -12,7 +12,11 @@ import gameobject.GameObject;
 import weapons.Arrow;
 import world.World;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Cette classe dessine sur un Canvas le monde et ces objets.
@@ -22,8 +26,10 @@ import javafx.scene.image.Image;
  *
  */
 public class Render {
-		/* Canvas */
+
+	/* Canvas */
 	private Canvas GUI;
+	private GraphicsContext gc;
 	
 	/* Display size and resolution */
 	public static final int DH = 11;
@@ -40,6 +46,7 @@ public class Render {
 	
 	//Lien des Images
 	private HashMap<String,Image> spriteMap;
+	private Font f04b03;
 
 	/**
 	 * Constructeur
@@ -51,15 +58,18 @@ public class Render {
 		
 		this.world = world;
 		GUI = new Canvas(DW*RESOLUTION, DH*RESOLUTION);
-		
+		gc = GUI.getGraphicsContext2D();
 		loadSprites();
+		
+		f04b03 = Font.loadFont(getClass().getResourceAsStream("/img/04b03.ttf"),16);
 	}
 	
 	/**
 	 * Remplis de noir le canvas
 	 */
 	public void clear(){
-		GUI.getGraphicsContext2D().fillRect(0, 0, DW*RESOLUTION, DH*RESOLUTION);
+		gc.setFill(Color.BLACK);
+		gc.fillRect(0, 0, DW*RESOLUTION, DH*RESOLUTION);
 	}
 	
 	/**
@@ -69,7 +79,7 @@ public class Render {
 	 */
 	public void draw(GameObject obj){
 		
-		GUI.getGraphicsContext2D().save();
+		gc.save();
 		
 		Image sprite = getSprite(obj);
 		
@@ -79,13 +89,13 @@ public class Render {
 		double px = (obj.getX() - refx)*RESOLUTION;
 		double py = (obj.getY() - refy)*RESOLUTION;
 
-		GUI.getGraphicsContext2D().translate(px,py);//Besoins de monstre pour connaître l'amélioration à faire!	
+		gc.translate(px,py);//Besoins de monstre pour connaître l'amélioration à faire!	
 		
-		GUI.getGraphicsContext2D().rotate(Math.toDegrees(obj.getAngle()));
+		gc.rotate(Math.toDegrees(obj.getAngle()));
 		
-		GUI.getGraphicsContext2D().drawImage(sprite, - (sprite.getWidth()/2), - (sprite.getHeight()/2));
+		gc.drawImage(sprite, - (sprite.getWidth()/2), - (sprite.getHeight()/2));
 		
-		GUI.getGraphicsContext2D().restore();
+		gc.restore();
 	}
 	
 	/**
@@ -139,19 +149,19 @@ public class Render {
 				try {
 					switch(world[scx+i][scy+j]) {
 					case WALL :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/wall.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/wall.png"), px, py); break;
 					case ROCK :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/stone.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/stone.png"), px, py); break;
 					case CAVE :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/dirt.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/dirt.png"), px, py); break;
 					case DONJON :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/plank.png"), px, py); break;
 					case TUNNEL :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/plank_alt.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/plank_alt.png"), px, py); break;
 					case EXITUP :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitup.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/exitup.png"), px, py); break;
 					case EXITDOWN :
-						GUI.getGraphicsContext2D().drawImage(spriteMap.get("img/exitdown.png"), px, py); break;
+						gc.drawImage(spriteMap.get("img/exitdown.png"), px, py); break;
 					case BLACK :
 					default:
 						break;
@@ -162,6 +172,26 @@ public class Render {
 		}
 	}
 	
+	
+	public void drawHUD() {
+		Player player = Controller.get().getPlayer();
+		// Shadow
+		gc.setFill(Color.DARKRED);
+		gc.fillRect(514, 658, (player.getHealth()/100.0) * 256.0, 16);
+		gc.setFill(Color.GREY);
+		gc.fillRect(514 + (player.getHealth()/100.0) * 256.0, 658, 256 - (player.getHealth()/100.0) * 256.0, 16);
+		
+		// Health
+		gc.setFill(Color.RED);
+		gc.fillRect(512, 656, (player.getHealth()/100.0) * 256.0, 16);
+		gc.setFill(Color.DARKGREY);
+		gc.fillRect(512 + (player.getHealth()/100.0) * 256.0, 656, 256 - (player.getHealth()/100.0) * 256.0, 16);
+		
+		gc.setFill(Color.WHITE);
+		gc.setFont(f04b03);
+		gc.setTextAlign(TextAlignment.CENTER);
+		gc.fillText(Integer.toString(player.getHealth()), 640, 670);
+	}
 	/**
 	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
 	 * 

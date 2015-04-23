@@ -22,7 +22,7 @@ public class Player extends Entity {
 	
 
 	public Player(double x, double y) {
-		super(x, y, 250);
+		super(x, y, 100);
 		sprite = "img/player.png";
 
 		/* Movement */
@@ -59,7 +59,7 @@ public class Player extends Entity {
 		updateInputState();
 		
 		
-		if(health <= 0)
+		if (health <= 0)
 			System.out.println("i'm dead");
 	}
 

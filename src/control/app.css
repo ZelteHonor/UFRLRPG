@@ -1,4 +1,7 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@font-face {
+    font-family: '04b03';
+    src: url('../img/04b03.ttf');
+}
 .button {
 	-fx-background-color: #00000000;
 	-fx-background-radius: 0;

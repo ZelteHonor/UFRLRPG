@@ -179,8 +179,7 @@ public class Controller implements Initializable {
 						render.drawWorld(cx, cy);
 						render.draw(player);
 						render.draw(objects);
-
-
+						render.drawHUD();
 					});
 
 					return null;
