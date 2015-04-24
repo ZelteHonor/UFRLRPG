@@ -304,7 +304,7 @@ public class Render {
 		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
 		
 		/* Death*/
-		switch((int) (Math.random()*6)) {
+		switch((int) (Math.random()*7)) {
 		case 0: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_01.png")); break;
 		case 1: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_02.png")); break;
 		case 2: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_03.png")); break;

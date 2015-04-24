@@ -24,6 +24,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Controller implements Initializable {
 
@@ -36,6 +39,8 @@ public class Controller implements Initializable {
 	/* FXML */
 	@FXML private BorderPane root;
 	@FXML private Pane pane;
+	
+	private AudioClip mus;
 	
 	/* Modules */
 	private Render render;
@@ -54,7 +59,7 @@ public class Controller implements Initializable {
 	private MonsterGenerator m;
 	
 	/* Camera */
-	private double cxTarget, cyTarget;
+	private double cxto, cyto;
 	private double cx, cy;
 	
 	
@@ -87,10 +92,10 @@ public class Controller implements Initializable {
 		objects = world.getFloor().getObjects();
 		
 		/* Camera */
-		cxTarget = player.getX();
-		cyTarget = player.getY();
-		cx = cxTarget;
-		cy = cyTarget;
+		cxto = player.getX();
+		cyto= player.getY();
+		cx = cxto;
+		cy = cyto;
 
 		/* Services */
 		if (timer == null) {
@@ -181,15 +186,15 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 
 						// Camera
-						cxTarget = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
-						cyTarget = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
+						cxto = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
+						cyto = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
 						
-						if (Math.sqrt(Math.pow(cxTarget - cx, 2) + Math.pow(cyTarget - cy,  2)) < 1) {
-							cx = cxTarget;
-							cy = cyTarget;
+						if (Math.sqrt(Math.pow(cxto - cx, 2) + Math.pow(cyto - cy,  2)) < 1) {
+							cx = cxto;
+							cy = cyto;
 						}
 						else {
-							double angle = Math.atan2(cyTarget - cy, cxTarget - cx);
+							double angle = Math.atan2(cyto - cy, cxto - cx);
 							cx += Math.cos(angle);
 							cy += Math.sin(angle);
 						}
