@@ -14,17 +14,18 @@ public class Main extends Application {
 	}
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage stage) throws Exception {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("app.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("UFRLRPG : Unoriginal till the end!");
-			primaryStage.setWidth(1280);
-			primaryStage.setHeight(720);
-			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			
+			stage.setTitle("UFRLRPG : Unoriginal till the end!");
+			stage.setWidth(1280);
+			stage.setHeight(720);
+			stage.setResizable(false);
+			
+			stage.setScene(scene);
+			stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

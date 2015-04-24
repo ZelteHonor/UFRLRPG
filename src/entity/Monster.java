@@ -30,15 +30,18 @@ public class Monster extends Entity{
 
 	@Override
 	public void update(Floor floor) {
+		
 		if(seePlayer(floor)){		
 			searching = true;
 			lastTarget = new Point((int)Controller.get().getPlayer().getX(),(int)Controller.get().getPlayer().getY());
 			totalPath = pathfinding.Pathfinding.getPath(new Point((int)this.x,(int)this.y), lastTarget, floor);
 			nextNode = totalPath.getFirst();
-			angle = Math.toDegrees(Math.atan2(y - Controller.get().getPlayer().getY(),x - Controller.get().getPlayer().getX()))+180;
+			angle = Math.atan2(Controller.get().getPlayer().getY() - y,Controller.get().getPlayer().getX() - x);
 			moveTo();
 		}
 		else if(this.searching){
+			//System.out.println("ds");
+			
 			if(new Point((int)this.x,(int)this.y).distance(lastTarget) <= 0.1){
 				searching = false;
 			}
@@ -48,9 +51,8 @@ public class Monster extends Entity{
 			else{
 				moveTo();
 			}
-			
-			
 		}
+
 		
 	}
 
@@ -71,9 +73,7 @@ public class Monster extends Entity{
 		double distance = pl.distance(this.x,this.y);
 		if (distance <= 5){
 			visible = true;
-			
-			
-			
+
 			double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
 			double b = y - m*x;
 			

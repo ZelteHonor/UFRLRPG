@@ -27,27 +27,25 @@ import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
 
-	/* Singleton - like */
+	/* Singleton-like */
 	private static Controller controller;
+	public static Controller get() {
+		return controller;
+	}
 
 	/* FXML */
-	@FXML
-	private BorderPane root;
-	@FXML
-	private Pane pane;
-
-	/* IDK */
-	private static String gameState;
-
+	@FXML private BorderPane root;
+	@FXML private Pane pane;
+	
 	/* Modules */
 	private Render render;
 	private Input input;
 	private World world;
 
 	/* Services */
-	private Service<Void> update;
-	private Service<Void> screenRefresh;
 	private Service<Void> timer;
+	private Service<Void> updater;
+	private Service<Void> refresher;
 
 	/* Objects */
 	private Player player;
@@ -86,17 +84,15 @@ public class Controller implements Initializable {
 
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
-		player.setSprite("img/jaypeg.png");
-		player.setAngle(0);
 		world.getFloor().setPlayer(player);
 		
 		objects = world.getFloor().getObjects();
 
 		/* Services */
-		this.update = new GameTask();
-		this.screenRefresh = new GameRender();
-
-		timer = new GameTimer();
+		timer = new Timer();
+		updater = new Updater();
+		refresher = new Renderer();
+		
 		timer.start();
 	}
 
@@ -106,35 +102,33 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * g�re le temps de rafraichisement du jeu appelant �chaque 60�me de
-	 * secondes la t�che gameTask
+	 * Gère le temps de rafraichisement du jeu appelant à chaque 60ème de
+	 * secondes la tâche Updater
 	 * 
 	 * @return null
 	 */
-	private  class GameTimer extends Service<Void> {
-		boolean t = true;
+	private  class Timer extends Service<Void> {
+		boolean run = true;
 
-		public GameTimer() {
+		public Timer() {
 		}
 
 		@Override
 		protected Task<Void> createTask() {
-
 			return new Task<Void>() {
 				protected Void call() throws Exception {
-					while (t) {
+					while (run) {
 						Platform.runLater(() -> {
-
-							if(!update.isRunning()) {
-								update.cancel();
-								update.reset();
-								update.start();
+							if(!updater.isRunning()) {
+								updater.cancel();
+								updater.reset();
+								updater.start();
 							}
 
-							if(!screenRefresh.isRunning()) {
-								screenRefresh.cancel();
-								screenRefresh.reset();
-								screenRefresh.start();
+							if(!refresher.isRunning()) {
+								refresher.cancel();
+								refresher.reset();
+								refresher.start();
 							}
 						});
 						try {
@@ -150,17 +144,16 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * appelle la méthode update sur chaque élément de la liste des
-	 * éléments du jeu
+	 * Appelle la méthode update sur chaque GameObject de objects<>
 	 */
-	private class GameTask extends Service<Void> {
+	private class Updater extends Service<Void> {
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
 						player.update(world.getFloor());
 						for (GameObjects o : objects)
-							o.update(world.getFloor(0));
+							o.update(world.getFloor());
 						
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())
@@ -174,7 +167,7 @@ public class Controller implements Initializable {
 		}
 	}
 
-	private class GameRender extends Service<Void> {
+	private class Renderer extends Service<Void> {
 		@Override
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
@@ -185,7 +178,7 @@ public class Controller implements Initializable {
 						double cx = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
 						double cy = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
 						
-						player.setAngle(Math.toDegrees(Math.atan2(cy-player.getY(), cx-player.getX())));
+						player.setAngle(Math.atan2(cy-player.getY(), cx-player.getX()));
 						
 						render.drawWorld(cx, cy);
 						render.draw(player);
@@ -200,10 +193,7 @@ public class Controller implements Initializable {
 		}
 	}
 
-	/* Singleton-like */
-	public static Controller get() {
-		return controller;
-	}
+
 
 	/* Objects */
 	public Player getPlayer() {

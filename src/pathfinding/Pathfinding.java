@@ -21,6 +21,7 @@ public class Pathfinding {
 	 * 	Retourne une suite de node avec le précédent attacher a la queue.
 	 */
 	public static Node getPath(Point start, Point end, Floor floor) {
+		int searchLimit = 200;
 		HashSet<Node> openList = new HashSet<Node>();
 		HashSet<Node> closedList = new HashSet<Node>();
 		Node current = new Node(start, null, 0f, (float) start.distance(end));
@@ -37,13 +38,17 @@ public class Pathfinding {
 					}
 				}
 			}
+			
+			
 		}
+		//System.out.println("Start");
 
-		while (!current.getCoor().equals(end)) {
+		while (!current.getCoor().equals(end) && searchLimit >= 0) {
 			//The current Node is the one with the lowest cost
 			current = Collections.min(openList);
 			openList.remove(current);
 			closedList.add(current);
+			
 			//Take all node around the current node
 			for (int i = (int) (current.getCoor().getX() - 1); i <= current
 					.getCoor().getX() + 1; i++) {
@@ -64,8 +69,10 @@ public class Pathfinding {
 					}
 				}
 			}
+			searchLimit--;
 		}
 
+		//System.out.println("END");
 		return current;
 	}
 
