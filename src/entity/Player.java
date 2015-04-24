@@ -53,6 +53,9 @@ public class Player extends Entity {
 		weapon.setAngle(angle);
 		if (key[5] == KEYSTATE.PRESSED)
 			weapon.attack(floor);
+		
+		/* Input */
+		updateInputState();
 	}
 
 	private void move(Floor floor) {

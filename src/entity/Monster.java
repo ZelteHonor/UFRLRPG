@@ -30,6 +30,9 @@ public class Monster extends Entity{
 
 	@Override
 	public void update(Floor floor) {
+		if (health <= 0) {
+			destroy = true;
+		}
 		
 		if(seePlayer(floor)){		
 			searching = true;
@@ -65,34 +68,24 @@ public class Monster extends Entity{
 	}
 	
 	private boolean seePlayer(Floor floor) {
-		Point pl = null;
-		boolean visible = false;
+		Point player = new Point((int)floor.getPlayer().getX(),(int)floor.getPlayer().getY());
 
-		pl = new Point((int)floor.getPlayer().getX(),(int)floor.getPlayer().getY());
+		if (Math.sqrt(Math.pow(floor.getPlayer().getX() - x, 2) + Math.pow(floor.getPlayer().getY() - y, 2)) > 5)
+			return false;
 
-		double distance = pl.distance(this.x,this.y);
-		if (distance <= 5){
-			visible = true;
-
-			double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
-			double b = y - m*x;
+		double m = (Controller.get().getPlayer().getY() - y) / (Controller.get().getPlayer().getX() - x);
+		double b = y - m*x;
 			
-			if(x <= (Controller.get().getPlayer().getX()))
-				for(double i = x; i < Controller.get().getPlayer().getX(); i = i + 0.1)
-				{
-					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
-						return false;
-				}
-			else
-				for(double i = x; i > Controller.get().getPlayer().getX(); i = i - 0.1)
-				{
-					if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
-						return false;
-				}
+		if(x <= (Controller.get().getPlayer().getX())) {
+			for(double i = x; i < Controller.get().getPlayer().getX(); i = i + 0.1)
+				if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
+					return false;
+		} else {
+			for(double i = x; i > Controller.get().getPlayer().getX(); i = i - 0.1)
+				if(floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.WALL || floor.getTiles()[(int)i][(int)(m*i+b)] == TILE.ROCK )
+					return false;
 		}
-		
-		
-		return visible;
+		return true;
 	}
 	
 	private void move(double vx, double vy)
