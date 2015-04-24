@@ -30,7 +30,7 @@ public class Player extends Entity {
 		vx = 0;
 		vy = 0;
 
-		key = new KEYSTATE[6];
+		key = new KEYSTATE[7];
 		for (int i = 0; i < key.length; i++)
 			key[i] = KEYSTATE.UP;
 		
@@ -56,6 +56,12 @@ public class Player extends Entity {
 		weapon.update();
 		if (key[5] == KEYSTATE.PRESSED)
 			weapon.attack(floor);
+		/* Change weapon*/
+		if (key[6] == KEYSTATE.PRESSED)
+			if(weapon instanceof Bow)
+				weapon = new Sword(x, y, 10, 10);
+			else
+				weapon = new Bow(x, y, 10, 5, 0.3f);
 		
 		/* Input */
 		updateInputState();
