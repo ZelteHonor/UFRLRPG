@@ -53,6 +53,7 @@ public class Controller implements Initializable {
 	private MonsterGenerator m;
 	
 	/* Camera */
+	private double cxTarget, cyTarget;
 	private double cx, cy;
 	
 	
@@ -81,8 +82,13 @@ public class Controller implements Initializable {
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
 		world.getFloor().setPlayer(player);
-		
 		objects = world.getFloor().getObjects();
+		
+		/* Camera */
+		cxTarget = player.getX();
+		cyTarget = player.getY();
+		cx = cxTarget;
+		cy = cyTarget;
 
 		/* Services */
 		if (timer == null) {
@@ -173,8 +179,18 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 
 						// Camera
-						double cx = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
-						double cy = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
+						cxTarget = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
+						cyTarget = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
+						
+						if (Math.sqrt(Math.pow(cxTarget - cx, 2) + Math.pow(cyTarget - cy,  2)) < 1) {
+							cx = cxTarget;
+							cy = cyTarget;
+						}
+						else {
+							double angle = Math.atan2(cyTarget - cy, cxTarget - cx);
+							cx += Math.cos(angle);
+							cy += Math.sin(angle);
+						}
 						
 						player.setAngle(Math.atan2(cy-player.getY(), cx-player.getX()));
 						
