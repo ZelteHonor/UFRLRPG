@@ -1,4 +1,4 @@
-package gameObjects;
+package weapons;
 
 import world.Floor;
 
@@ -6,7 +6,7 @@ import world.Floor;
  * @author gabriel
  *	Classe représentent une arme a distance
  */
-public class Ranges extends Weapons {
+public class Bow extends Weapon {
 
 	private float speed;
 	
@@ -25,14 +25,14 @@ public class Ranges extends Weapons {
 	 * @param d
 	 * 	Vitesse de ses projectiles
 	 */
-	public Ranges(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, float d) {
+	public Bow(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, float d) {
 		super(x, y, weight, evil, range, damage, cooldown);
 		this.speed = d;
 	}
 
 	@Override
 	public void attack(Floor floor) {
-		Projectile proj = new Projectile(x, y, damage, speed, floor.getPlayer().getAngle());
+		Arrow proj = new Arrow(x, y, damage, speed, floor.getPlayer().getAngle());
 		proj.setSprite("img/arrow.png");
 		floor.getObjects().add(proj); //Crée un projectile et l'ajoute dans la liste des objets à updater.
 	}

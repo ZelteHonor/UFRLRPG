@@ -1,14 +1,16 @@
-package gameObjects;
+package weapons;
 
 import entity.Entity;
 import entity.Monster;
+import gameobject.GameObject;
+import gameobject.Mask;
 import world.Floor;
 
 /**
  * @author gabriel 
  * Classe représentant un projectile
  */
-public class Projectile extends GameObjects {
+public class Arrow extends GameObject {
 	private int damage;
 	private double vx, vy;
 	
@@ -27,7 +29,7 @@ public class Projectile extends GameObjects {
 	 * @param angle
 	 *            L'angle vers laquel il est tournée.
 	 */
-	public Projectile(double x, double y, int damage, double speed, double angle) {
+	public Arrow(double x, double y, int damage, double speed, double angle) {
 		super(x, y);
 		
 		this.mask = new Mask(0.05, x + Math.cos(angle)*0.01, y + Math.sin(angle)*0.01);
@@ -41,7 +43,7 @@ public class Projectile extends GameObjects {
 	@Override
 	public void update(Floor floor) {
 		/* Monstres */
-		for (GameObjects o : floor.getObjects()) {
+		for (GameObject o : floor.getObjects()) {
 			if (o instanceof Monster && Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
 				this.destroy = true;

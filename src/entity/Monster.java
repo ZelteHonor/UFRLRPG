@@ -8,9 +8,9 @@ import pathfinding.Node;
 import world.Floor;
 import world.World;
 import world.World.TILE;
-import gameObjects.GameObjects;
-import gameObjects.Items;
-import gameObjects.Mask;
+import gameobject.GameObject;
+import gameobject.Item;
+import gameobject.Mask;
 
 public class Monster extends Entity {
 
@@ -22,8 +22,9 @@ public class Monster extends Entity {
 	private Node totalPath, nextNode;
 	public final static float SPEED = 0.09f;
 
-	public Monster(double x, double y, int health, ArrayList<Items> inventory) {
-		super(x, y, health, inventory);
+	
+	public Monster(double x, double y,int health) {
+		super(x, y, health);
 		searching = false;
 		lastTarget = new Point(-1, -1);
 		totalPath = null;
@@ -124,17 +125,13 @@ public class Monster extends Entity {
 			}
 		}
 
-		for (GameObjects o : Controller.get().getWorld().getFloor()
-				.getObjects()) {
-			if (o != this && o instanceof Monster) {
-
-				double dist = Math.sqrt(Math.pow(o.getX() - x, 2)
-						+ Math.pow(o.getY() - y, 2));
-				double limitDist = Math.sqrt(Math.pow(o.getMask().getW() / 2
-						- this.mask.getW() / 2, 2)
-						+ Math.pow(o.getMask().getH() / 2 - this.mask.getH()
-								/ 2, 2));
-				if (dist < (limitDist)) {
+		
+		for(GameObject o : Controller.get().getWorld().getFloor().getObjects()) {
+			if(o != this && o instanceof Monster){
+				
+				double dist = Math.sqrt(Math.pow(o.getX() - x,2) + Math.pow(o.getY() - y,2));
+				double limitDist = Math.sqrt(Math.pow(o.getMask().getW()/2 - this.mask.getW()/2 ,2) + Math.pow(o.getMask().getH()/2 - this.mask.getH()/2 ,2));
+				if(dist < (limitDist)){
 					double angle = Math.atan2(o.getY() - y, o.getX() - x);
 					double dp = limitDist - dist;
 					double dvx = dp * Math.cos(angle) + 0.01;
@@ -148,11 +145,11 @@ public class Monster extends Entity {
 			}
 		}
 
-		for (GameObjects o : Controller.get().getWorld().getFloor()
-				.getObjects()) {
-			if (o != this) {
-				mask.setX(x + vx);
-				mask.setY(y + vy);
+		
+		for(GameObject o : Controller.get().getWorld().getFloor().getObjects()) {
+			if(o != this){
+				mask.setX(x+vx);
+				mask.setY(y+vy);
 				if (Mask.collide(mask, o.getMask())) {
 					mask.setY(y);
 					if (Mask.collide(mask, o.getMask()))

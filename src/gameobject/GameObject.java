@@ -1,9 +1,9 @@
-package gameObjects;
+package gameobject;
 
 import world.Floor;
 import javafx.scene.image.Image;
 
-public abstract class GameObjects {
+public abstract class GameObject {
 
 	protected double x;
 	protected double y;
@@ -13,7 +13,7 @@ public abstract class GameObjects {
 	protected String sprite;
 	protected Mask mask;
 
-	public GameObjects(double x, double y) {
+	public GameObject(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.angle = 0.0;

@@ -1,13 +1,13 @@
-package gameObjects;
+package gameobject;
 
-public class Equipments extends Items{
+public class Armor extends Item{
 
 	private int protection;
 	private int attBonus;
 	private String att;
 	
 	
-	public Equipments(double x, double y, int weight, boolean evil, int protection, int attBonus, String att) {
+	public Armor(double x, double y, int weight, boolean evil, int protection, int attBonus, String att) {
 		super(x, y, weight, evil);
 		this.protection = protection;
 		this.attBonus = attBonus;

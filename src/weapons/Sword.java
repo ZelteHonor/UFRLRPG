@@ -1,10 +1,10 @@
-package gameObjects;
+package weapons;
 
 import world.Floor;
 
-public class Melees extends Weapons{
+public class Sword extends Weapon{
 
-	public Melees(double x, double y, int weight, boolean evil, int range, int damage, int speed) {
+	public Sword(double x, double y, int weight, boolean evil, int range, int damage, int speed) {
 		super(x, y, weight, evil, range, damage, speed);
 	}
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import world.World.TILE;
 import javafx.scene.image.Image;
 import entity.Monster;
-import gameObjects.GameObjects;
 
 public class MonsterGenerator {
 
@@ -32,7 +31,7 @@ public class MonsterGenerator {
 		for (int i = 0; i < count; i++) {
 			Point point = chooseLocation();
 
-			Monster m = new Monster(point.getX() + 0.5, point.getY() + 0.5, 10, null);
+			Monster m = new Monster(point.getX() + 0.5, point.getY() + 0.5, 10);
 			m.setName(chooseName());
 			m.setSprite(chooseImage());
 			f.getObjects().add(m);

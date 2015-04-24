@@ -1,4 +1,4 @@
-package gameObjects;
+package gameobject;
 
 public class Mask {
 	

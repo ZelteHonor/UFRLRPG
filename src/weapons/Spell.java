@@ -1,10 +1,10 @@
-package gameObjects;
+package weapons;
 
 import world.Floor;
 
-public class Spells extends Weapons{
+public class Spell extends Weapon{
 
-	public Spells(double x, double y, int weight, boolean evil, int range, int damage, int cooldown) {
+	public Spell(double x, double y, int weight, boolean evil, int range, int damage, int cooldown) {
 		super(x, y, weight, evil, range, damage, cooldown);
 		// TODO Auto-generated constructor stub
 	}

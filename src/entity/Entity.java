@@ -2,43 +2,18 @@ package entity;
 
 import java.util.ArrayList;
 
+import weapons.Weapon;
 import world.Floor;
-import gameObjects.GameObjects;
-import gameObjects.Items;
-import gameObjects.Weapons;
+import gameobject.GameObject;
+import gameobject.Item;
 
-public abstract class Entity extends GameObjects {
-
-	private int level;
-
+public abstract class Entity extends GameObject {
 
 	protected int health;
-
-
-	private int intellect;
-
-
-	private int strenght;
-
-
-	protected int agility;
-
-
-	private int mana;
-
-
-	private int speed;
-
-
-	private int perception;
 	
-
-	private ArrayList<Items> inventory;
-
-	public Entity(double x, double y, int health, ArrayList<Items> inventory) {
+	public Entity(double x, double y, int health) {
 		super(x, y);
 		this.health = health;
-		this.inventory = inventory;
 	}
 	
 	public int getHealth() {
@@ -48,6 +23,7 @@ public abstract class Entity extends GameObjects {
 	public void setHealth(int health) {
 		this.health = health;
 	}
+	
 	@Override
 	public abstract void update(Floor floor);
 }

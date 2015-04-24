@@ -2,41 +2,42 @@ package entity;
 
 import java.util.ArrayList;
 
+import weapons.Bow;
+import weapons.Weapon;
 import world.Floor;
 import world.World.TILE;
 import control.Controller;
-import control.Controller.KEYSTATE;
-import gameObjects.Items;
-import gameObjects.Mask;
-import gameObjects.Ranges;
-import gameObjects.Weapons;
+import control.Input.KEYSTATE;
+import control.Input;
+import gameobject.Item;
+import gameobject.Mask;
 
 public class Player extends Entity {
 
 	/* Movement */
-	private Controller.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
+	private Input.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
 	private double vx, vy;
 
-	private Weapons weapon;
+	private Weapon weapon;
 	
 
 	public Player(double x, double y) {
-		super(x, y, 250, null);
+		super(x, y, 250);
 		sprite = "img/player.png";
 
 		/* Movement */
 		vx = 0;
 		vy = 0;
 
-		key = new Controller.KEYSTATE[6];
+		key = new KEYSTATE[6];
 		for (int i = 0; i < key.length; i++)
-			key[i] = Controller.KEYSTATE.UP;
+			key[i] = KEYSTATE.UP;
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		weapon = new Ranges(x, y, 10, false, 20, 5, 2, 0.2f);
+		weapon = new Bow(x, y, 10, false, 20, 5, 2, 0.2f);
 	}
 
-	public void setKeyState(int index, Controller.KEYSTATE state) {
+	public void setKeyState(int index, KEYSTATE state) {
 		key[index] = state;
 	}
 
