@@ -66,7 +66,7 @@ public class Monster extends Entity {
 			}
 		}
 
-		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 1 && cooldown == 0) {
+		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 0.75 && cooldown == 0) {
 			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - 2);
 			cooldown = 5;
 		}

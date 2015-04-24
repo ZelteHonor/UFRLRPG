@@ -177,6 +177,7 @@ public class Controller implements Initializable {
 						player.setAngle(Math.atan2(cy-player.getY(), cx-player.getX()));
 						
 						render.drawWorld(cx, cy);
+						render.draw(player.getWeapon());
 						render.draw(player);
 						render.draw(objects);
 						render.drawHUD();
@@ -195,6 +196,10 @@ public class Controller implements Initializable {
 		return player;
 	}
 
+	public ArrayList<GameObject> getObjects() {
+		return objects;
+	}
+	
 	public void setObjects(ArrayList<GameObject> array) {
 		objects = array;
 	}
