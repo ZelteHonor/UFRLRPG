@@ -59,6 +59,11 @@ public abstract class GameObjects {
 	public boolean isDestroy(){
 		return destroy;
 	}
+	
+	public void destroy()
+	{
+		this.destroy = true;
+	}
 
 	public void setSprite(String sprite) {
 		this.sprite = sprite;
