@@ -2,7 +2,10 @@ package control;
 
 import javafx.application.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -18,6 +21,8 @@ public class Main extends Application {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("app.fxml"));
 			Scene scene = new Scene(root);
+			Image image = new Image("img/cursor.png");  //pass in the image path
+			scene.setCursor(new ImageCursor(image));
 			
 			stage.setTitle("UFRLRPG : Unoriginal till the end!");
 			stage.setWidth(1280);
