@@ -68,7 +68,7 @@ public class Player extends Entity {
 					weapon = new Sword(x, y, 10, 10);
 					Controller.get().getPane().setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
 				} else {
-					weapon = new Bow(x, y, 10, 5, 0.3f);
+					weapon = new Bow(x, y, 5, 5, 0.3f);
 					Controller.get().getPane().setCursor(Cursor.NONE);
 				}
 			}

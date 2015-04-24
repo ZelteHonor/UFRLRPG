@@ -26,18 +26,19 @@ public class Sword extends Weapon{
 			animate = true;
 			anglediff = startangle;
 			cooldown = attackspeed;
-			
-			for (GameObject o : Controller.get().getObjects())
-				if (o instanceof Monster)
-					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
-						((Monster) o).setHealth(((Monster) o).getHealth() - damage);
 		}
 	}
 	
 	@Override
 	public void update() {
-		if (animate)
+		if (animate) {
 			anglediff += 15;
+			
+			for (GameObject o : Controller.get().getObjects())
+				if (o instanceof Monster)
+					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
+						((Monster) o).setHealth(((Monster) o).getHealth() - damage / (attackspeed/2));
+		}
 		
 		if (anglediff >= endangle) {
 			animate = false;

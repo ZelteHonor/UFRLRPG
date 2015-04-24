@@ -12,7 +12,7 @@ public class MonsterGenerator {
 	// liste de noms pour les monstres
 	public static final String[] NAMES = { "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett" };
 
-	public static final String[] IMAGES = { "spider_green", "spider_grey", "spider_purple", "spider_red" };
+	public static final String[] IMAGES = { "spider_green", "spider_grey", "spider_purple", "spider_red", "zombie" };
 
 	private ArrayList<Point> locationList;
 	
@@ -31,9 +31,15 @@ public class MonsterGenerator {
 		for (int i = 0; i < count; i++) {
 			Point point = chooseLocation();
 
-			Monster m = new Monster(point.getX() + 0.5, point.getY() + 0.5, 10);
-			m.setName(chooseName());
-			m.setSprite(chooseImage());
+			String sprite = chooseImage();
+			
+			Monster m;
+			if (sprite.contains("zombie"))
+				m = new Monster(point.getX() + 0.5, point.getY() + 0.5, 20, 10, 10, 0.03f);
+			else
+				m = new Monster(point.getX() + 0.5, point.getY() + 0.5, 10, 2, 5, 0.09f);
+			m.setName(chooseName());	
+			m.setSprite(sprite);
 			f.getObjects().add(m);
 		}
 

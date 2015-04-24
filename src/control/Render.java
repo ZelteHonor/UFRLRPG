@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+import entity.Monster;
 import entity.Player;
 import gameobject.GameObject;
 import weapons.Arrow;
@@ -182,13 +183,30 @@ public class Render {
 		if (player.getHealth() < 0)
 			player.setHealth(0);
 		
-		// Shadow
+		/* Monster healthbar */
+		for (GameObject o : Controller.get().getObjects()) {
+			if (o instanceof Monster) {
+				Monster m = (Monster) (o);
+				if (m.getHealth() != m.getMaxHealth()) {
+					gc.setFill(Color.RED);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.setFill(Color.DARKRED);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					
+					gc.setFill(Color.DARKGREY);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8 + 16*(m.getHealth()/(m.getMaxHealth()*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16 - 16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.setFill(Color.GREY);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8 + 16*(m.getHealth()/(m.getMaxHealth()*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16 - 16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+				}
+			}
+		}
+		
+		/* Player healthbar */
 		gc.setFill(Color.DARKRED);
 		gc.fillRect(514, 658, (player.getHealth()/100.0) * 256.0, 16);
 		gc.setFill(Color.GREY);
 		gc.fillRect(514 + (player.getHealth()/100.0) * 256.0, 658, 256 - (player.getHealth()/100.0) * 256.0, 16);
 		
-		// Health
 		gc.setFill(Color.RED);
 		gc.fillRect(512, 656, (player.getHealth()/100.0) * 256.0, 16);
 		gc.setFill(Color.DARKGREY);
@@ -199,9 +217,11 @@ public class Render {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.fillText(Integer.toString(player.getHealth()), 640, 670);
 		
+		/* Cursor */
 		if (player.getWeapon() instanceof Bow)
 			gc.drawImage(getSprite("img/crosshair.png"), Controller.get().getInput().getMouse().getSceneX() - 16, Controller.get().getInput().getMouse().getSceneY() - 16);
 		
+		/* Mort */
 		if (player.getHealth() == 0) {
 			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
@@ -213,12 +233,10 @@ public class Render {
 	 * @param obj
 	 * @return L'image du sprite
 	 */
-	public Image getSprite(GameObject obj)
-	{
+	public Image getSprite(GameObject obj) {
 		return spriteMap.get(obj.getSprite());	
 	}
-	public Image getSprite(String img)
-	{
+	public Image getSprite(String img) {
 		return spriteMap.get(img);	
 	}
 	
@@ -274,7 +292,6 @@ public class Render {
 		/* Player */
 		spriteMap.put("img/player.png", new Image("img/player.png"));
 		spriteMap.put("img/playerdead.png", new Image("img/playerdead.png"));
-		spriteMap.put("img/deathscreen.png", new Image("img/deathscreen.png"));
 		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
 		spriteMap.put("img/bow.png", new Image("img/bow.png"));
 		spriteMap.put("img/sword.png", new Image("img/sword.png"));
@@ -284,5 +301,17 @@ public class Render {
 		spriteMap.put("img/spider_grey.png", new Image("img/spider_grey.png"));
 		spriteMap.put("img/spider_purple.png", new Image("img/spider_purple.png"));
 		spriteMap.put("img/spider_red.png", new Image("img/spider_red.png"));
+		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
+		
+		/* Death*/
+		switch((int) (Math.random()*6)) {
+		case 0: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_01.png")); break;
+		case 1: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_02.png")); break;
+		case 2: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_03.png")); break;
+		case 3: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_04.png")); break;
+		case 4: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_05.png")); break;
+		case 5: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_06.png")); break;
+		case 6: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_07.png")); break;
+		}
 	}
 }
