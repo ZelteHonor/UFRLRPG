@@ -17,6 +17,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -78,6 +79,7 @@ public class Controller implements Initializable {
 		pane.getChildren().clear();
 		pane.setFocusTraversable(true);
 		pane.getChildren().add(render.getGUI());
+		pane.setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
 
 		/* Objects */
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
@@ -233,6 +235,9 @@ public class Controller implements Initializable {
 	}
 	public Input getInput() {
 		return input;
+	}
+	public Pane getPane() {
+		return pane;
 	}
 
 	/* Camera */

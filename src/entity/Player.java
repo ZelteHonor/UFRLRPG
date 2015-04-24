@@ -2,6 +2,8 @@ package entity;
 
 import java.util.ArrayList;
 
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import weapons.Bow;
 import weapons.Sword;
 import weapons.Weapon;
@@ -61,11 +63,15 @@ public class Player extends Entity {
 			if (key[5] == KEYSTATE.PRESSED)
 				weapon.attack(floor);
 			/* Change weapon*/
-			if (key[6] == KEYSTATE.PRESSED)
-				if(weapon instanceof Bow)
+			if (key[6] == KEYSTATE.PRESSED) {
+				if(weapon instanceof Bow) { 
 					weapon = new Sword(x, y, 10, 10);
-				else
+					Controller.get().getPane().setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
+				} else {
 					weapon = new Bow(x, y, 10, 5, 0.3f);
+					Controller.get().getPane().setCursor(Cursor.NONE);
+				}
+			}
 			
 			if (health <= 0) {
 				dead = true;

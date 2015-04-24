@@ -21,8 +21,6 @@ public class Main extends Application {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("app.fxml"));
 			Scene scene = new Scene(root);
-			Image image = new Image("img/cursor.png");
-			scene.setCursor(new ImageCursor(image));
 			
 			stage.setTitle("UFRLRPG : Unoriginal till the end!");
 			stage.setWidth(1280);

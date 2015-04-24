@@ -10,6 +10,7 @@ import java.util.Objects;
 import entity.Player;
 import gameobject.GameObject;
 import weapons.Arrow;
+import weapons.Bow;
 import weapons.Sword;
 import world.World;
 import javafx.scene.canvas.Canvas;
@@ -198,6 +199,9 @@ public class Render {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.fillText(Integer.toString(player.getHealth()), 640, 670);
 		
+		if (player.getWeapon() instanceof Bow)
+			gc.drawImage(getSprite("img/crosshair.png"), Controller.get().getInput().getMouse().getSceneX() - 16, Controller.get().getInput().getMouse().getSceneY() - 16);
+		
 		if (player.getHealth() == 0) {
 			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
@@ -212,6 +216,10 @@ public class Render {
 	public Image getSprite(GameObject obj)
 	{
 		return spriteMap.get(obj.getSprite());	
+	}
+	public Image getSprite(String img)
+	{
+		return spriteMap.get(img);	
 	}
 	
 	public GameObject[] getObjects() {
@@ -249,6 +257,10 @@ public class Render {
 	private void loadSprites()
 	{
 		spriteMap = new HashMap<>();
+		
+		/* Cursor */
+		spriteMap.put("img/cursor.png", new Image("img/cursor.png"));
+		spriteMap.put("img/crosshair.png", new Image("img/crosshair.png"));
 		
 		/* Donjon */
 		spriteMap.put("img/wall.png", new Image("img/wall.png"));
