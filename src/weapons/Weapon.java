@@ -4,18 +4,21 @@ import gameobject.Item;
 import world.Floor;
 
 public abstract class Weapon extends Item{
-
-	protected int range;
 	protected int damage;
-	private int cooldown;
+	protected int attackspeed;
+	protected int cooldown;
 	
-	public Weapon(double x, double y, int weight, boolean evil, int range, int damage, int cooldown) {
-		super(x, y, weight, evil);
-		this.range = range;
+	public Weapon(double x, double y, int damage, int attackspeed) {
+		super(x, y);
 		this.damage = damage;
-		this.cooldown = cooldown;
+		this.attackspeed = attackspeed;
+		cooldown = 0;
 	}
 	
 	public abstract void attack(Floor floor);
 
+	public void update() {
+		if (cooldown > 0)
+			cooldown--;
+	}
 }

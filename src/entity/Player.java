@@ -34,7 +34,7 @@ public class Player extends Entity {
 			key[i] = KEYSTATE.UP;
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		weapon = new Bow(x, y, 10, false, 20, 5, 2, 0.2f);
+		weapon = new Bow(x, y, 5, 30, 0.2f);
 	}
 
 	public void setKeyState(int index, KEYSTATE state) {
@@ -52,6 +52,7 @@ public class Player extends Entity {
 		/* Combat */
 		weapon.setPosition(x, y);
 		weapon.setAngle(angle);
+		weapon.update();
 		if (key[5] == KEYSTATE.PRESSED)
 			weapon.attack(floor);
 		

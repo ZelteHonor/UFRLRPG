@@ -25,15 +25,16 @@ public class Bow extends Weapon {
 	 * @param d
 	 * 	Vitesse de ses projectiles
 	 */
-	public Bow(double x, double y, int weight, boolean evil, int range, int damage, int cooldown, float d) {
-		super(x, y, weight, evil, range, damage, cooldown);
-		this.speed = d;
+	public Bow(double x, double y, int damage, int attackspeed, float speed) {
+		super(x, y, damage, attackspeed);
+		this.speed = speed;
 	}
 
 	@Override
 	public void attack(Floor floor) {
-		Arrow proj = new Arrow(x, y, damage, speed, floor.getPlayer().getAngle());
-		proj.setSprite("img/arrow.png");
-		floor.getObjects().add(proj); //Crée un projectile et l'ajoute dans la liste des objets à updater.
+		if (cooldown == 0) {
+			floor.getObjects().add(new Arrow(x, y, damage, speed, floor.getPlayer().getAngle()));
+			cooldown = attackspeed;
+		}
 	}
 }

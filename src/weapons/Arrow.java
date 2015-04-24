@@ -31,8 +31,9 @@ public class Arrow extends GameObject {
 	 */
 	public Arrow(double x, double y, int damage, double speed, double angle) {
 		super(x, y);
-		
 		this.mask = new Mask(0.039, x + Math.cos(angle)*0.01, y + Math.sin(angle)*0.01);
+		sprite = "img/arrow.png";
+		
 		this.damage = damage;
 		
 		this.vx = Math.cos(angle) * speed;
