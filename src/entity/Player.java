@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 import weapons.Bow;
+import weapons.Sword;
 import weapons.Weapon;
 import world.Floor;
 import world.World.TILE;
@@ -34,7 +35,7 @@ public class Player extends Entity {
 			key[i] = KEYSTATE.UP;
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		weapon = new Bow(x, y, 5, 30, 0.2f);
+		weapon = new Sword(x, y, 10, 10);
 	}
 
 	public void setKeyState(int index, KEYSTATE state) {
@@ -150,5 +151,9 @@ public class Player extends Entity {
 				key[i] = KEYSTATE.DOWN;
 			else if (key[i] == KEYSTATE.RELEASED)
 				key[i] = KEYSTATE.UP;
+	}
+	
+	public Weapon getWeapon() {
+		return weapon;
 	}
 }

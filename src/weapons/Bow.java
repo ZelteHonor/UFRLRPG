@@ -28,6 +28,7 @@ public class Bow extends Weapon {
 	public Bow(double x, double y, int damage, int attackspeed, float speed) {
 		super(x, y, damage, attackspeed);
 		this.speed = speed;
+		sprite = "img/bow.png"; 
 	}
 
 	@Override

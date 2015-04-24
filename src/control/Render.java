@@ -10,6 +10,7 @@ import java.util.Objects;
 import entity.Player;
 import gameobject.GameObject;
 import weapons.Arrow;
+import weapons.Sword;
 import world.World;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -91,10 +92,12 @@ public class Render {
 
 		gc.translate(px,py);//Besoins de monstre pour connaître l'amélioration à faire!	
 		
-		gc.rotate(Math.toDegrees(obj.getAngle()));
-		
+		if (obj instanceof Sword)
+			gc.rotate(Math.toDegrees(obj.getAngle())+((Sword)obj).getAngleDiff());
+		else
+			gc.rotate(Math.toDegrees(obj.getAngle()));
+				
 		gc.drawImage(sprite, - (sprite.getWidth()/2), - (sprite.getHeight()/2));
-		
 		gc.restore();
 	}
 	
@@ -252,6 +255,7 @@ public class Render {
 		spriteMap.put("img/player.png", new Image("img/player.png"));
 		spriteMap.put("img/spider.png", new Image("img/spider.png"));
 		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
-
+		spriteMap.put("img/bow.png", new Image("img/bow.png"));
+		spriteMap.put("img/sword.png", new Image("img/sword.png"));
 	}
 }
