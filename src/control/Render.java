@@ -304,14 +304,20 @@ public class Render {
 		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
 		
 		/* Death*/
-		switch((int) (Math.random()*7)) {
-		case 0: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_01.png")); break;
-		case 1: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_02.png")); break;
-		case 2: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_03.png")); break;
-		case 3: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_04.png")); break;
-		case 4: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_05.png")); break;
-		case 5: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_06.png")); break;
-		case 6: spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_07.png")); break;
-		}
+		int percent = (int) (Math.random()*100);
+		if (percent < 20)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_01.png"));
+		else if (percent < 40)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_02.png"));
+		else if (percent < 60)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_03.png"));
+		else if (percent < 80)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_04.png"));
+		else if (percent < 87)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_05.png"));
+		else if (percent < 94)
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_06.png"));
+		else
+			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_07.png"));
 	}
 }
