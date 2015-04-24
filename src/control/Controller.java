@@ -85,11 +85,13 @@ public class Controller implements Initializable {
 		objects = world.getFloor().getObjects();
 
 		/* Services */
-		timer = new Timer();
-		updater = new Updater();
-		refresher = new Renderer();
+		if (timer == null) {
+			timer = new Timer();
+			updater = new Updater();
+			refresher = new Renderer();
 		
-		timer.start();
+			timer.start();
+		}
 	}
 
 	@FXML
