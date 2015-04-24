@@ -12,7 +12,7 @@ public class MonsterGenerator {
 	// liste de noms pour les monstres
 	public static final String[] NAMES = { "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett" };
 
-	public static final String[] IMAGES = { "img/spider.png" };
+	public static final String[] IMAGES = { "spider_green", "spider_grey", "spider_purple", "spider_red" };
 
 	private ArrayList<Point> locationList;
 	
@@ -48,7 +48,7 @@ public class MonsterGenerator {
 	 *         "définir quelle banque utiliser"
 	 */
 	private String chooseImage() {
-		return IMAGES[(int) (Math.random() * IMAGES.length)];
+		return "img/" + IMAGES[(int) (Math.random() * IMAGES.length)] + ".png";
 
 	}
 

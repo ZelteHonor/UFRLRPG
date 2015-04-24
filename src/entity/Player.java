@@ -21,10 +21,13 @@ public class Player extends Entity {
 
 	private Weapon weapon;
 	
+	private boolean dead;
+	
 
 	public Player(double x, double y) {
 		super(x, y, 100);
 		sprite = "img/player.png";
+		dead = false;
 
 		/* Movement */
 		vx = 0;
@@ -44,31 +47,40 @@ public class Player extends Entity {
 
 	@Override
 	public void update(Floor floor) {
-		/* Movement */
-		move(floor);
-		mask.setPosition(x,y);
-		if (key[4] == KEYSTATE.RELEASED)
-			checkFloorChange();
-		
-		/* Combat */
-		weapon.setPosition(x, y);
-		weapon.setAngle(angle);
-		weapon.update();
-		if (key[5] == KEYSTATE.PRESSED)
-			weapon.attack(floor);
-		/* Change weapon*/
-		if (key[6] == KEYSTATE.PRESSED)
-			if(weapon instanceof Bow)
-				weapon = new Sword(x, y, 10, 10);
-			else
-				weapon = new Bow(x, y, 10, 5, 0.3f);
+		if (!dead) {
+			/* Movement */
+			move(floor);
+			mask.setPosition(x,y);
+			if (key[4] == KEYSTATE.RELEASED)
+				checkFloorChange();
+			
+			/* Combat */
+			weapon.setPosition(x, y);
+			weapon.setAngle(angle);
+			weapon.update();
+			if (key[5] == KEYSTATE.PRESSED)
+				weapon.attack(floor);
+			/* Change weapon*/
+			if (key[6] == KEYSTATE.PRESSED)
+				if(weapon instanceof Bow)
+					weapon = new Sword(x, y, 10, 10);
+				else
+					weapon = new Bow(x, y, 10, 5, 0.3f);
+			
+			if (health <= 0) {
+				dead = true;
+				sprite = "img/playerdead.png";
+				angle = 0;
+			}
+		}
+		else {
+			health = 0;
+			if (key[4] == KEYSTATE.RELEASED)
+				Controller.get().initGame();
+		}
 		
 		/* Input */
 		updateInputState();
-		
-		
-		if (health <= 0)
-			System.out.println("i'm dead");
 	}
 
 	private void move(Floor floor) {
@@ -161,5 +173,10 @@ public class Player extends Entity {
 	
 	public Weapon getWeapon() {
 		return weapon;
+	}
+	
+	public void setAngle(double angle) {
+		if (!dead)
+			this.angle = angle;
 	}
 }

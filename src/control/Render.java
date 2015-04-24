@@ -178,6 +178,9 @@ public class Render {
 	
 	public void drawHUD() {
 		Player player = Controller.get().getPlayer();
+		if (player.getHealth() < 0)
+			player.setHealth(0);
+		
 		// Shadow
 		gc.setFill(Color.DARKRED);
 		gc.fillRect(514, 658, (player.getHealth()/100.0) * 256.0, 16);
@@ -194,6 +197,11 @@ public class Render {
 		gc.setFont(f04b03);
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.fillText(Integer.toString(player.getHealth()), 640, 670);
+		
+		if (player.getHealth() == 0) {
+			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
+		}
 	}
 	/**
 	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
@@ -251,11 +259,18 @@ public class Render {
 		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));
 		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));
 		
-		/* GameObjects */
+		/* Player */
 		spriteMap.put("img/player.png", new Image("img/player.png"));
-		spriteMap.put("img/spider.png", new Image("img/spider.png"));
+		spriteMap.put("img/playerdead.png", new Image("img/playerdead.png"));
+		spriteMap.put("img/deathscreen.png", new Image("img/deathscreen.png"));
 		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
 		spriteMap.put("img/bow.png", new Image("img/bow.png"));
 		spriteMap.put("img/sword.png", new Image("img/sword.png"));
+		
+		/* Monster */
+		spriteMap.put("img/spider_green.png", new Image("img/spider_green.png"));
+		spriteMap.put("img/spider_grey.png", new Image("img/spider_grey.png"));
+		spriteMap.put("img/spider_purple.png", new Image("img/spider_purple.png"));
+		spriteMap.put("img/spider_red.png", new Image("img/spider_red.png"));
 	}
 }
