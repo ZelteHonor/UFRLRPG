@@ -1,5 +1,8 @@
 package weapons;
 
+import java.applet.AudioClip;
+
+import control.Audio;
 import control.Controller;
 import entity.Monster;
 import gameobject.GameObject;
@@ -7,6 +10,7 @@ import world.Floor;
 
 public class Sword extends Weapon{
 	
+	public static final String SWORD_SWOOSH = "sfx/sword_swoosh.wav";
 	public static final int startangle = -105;
 	public static final int endangle = 50;
 
@@ -38,6 +42,8 @@ public class Sword extends Weapon{
 				if (o instanceof Monster)
 					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
 						((Monster) o).setHealth(((Monster) o).getHealth() - damage / (attackspeed/2));
+						Audio.playSound(SWORD_SWOOSH);
+						
 		}
 		
 		if (anglediff >= endangle) {
