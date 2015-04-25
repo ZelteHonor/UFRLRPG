@@ -183,6 +183,11 @@ public class Controller implements Initializable {
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())
 								objects.remove(i);
+						
+						if(player.hasArtefact())
+						{
+							
+						}
 					}
 
 					);
