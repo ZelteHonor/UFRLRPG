@@ -1,5 +1,7 @@
 package pickups;
 
+import control.Audio;
+import entity.Player;
 import gameobject.Mask;
 import world.Floor;
 
@@ -17,7 +19,15 @@ public class HpUp extends PickUps {
 	@Override
 	protected void activateEffect(Floor floor) {
 		
+		
 		floor.getPlayer().setHealth(floor.getPlayer().getHealth() + healthGain);
+		Audio.play("HpUp.wav");
+		if(floor.getPlayer().getHealth() > Player.MAX_HEALTH)
+		{
+			floor.getPlayer().setHealth(Player.MAX_HEALTH);
+		}
+		
+		
 	}
 	
 	

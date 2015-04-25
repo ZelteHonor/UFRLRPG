@@ -58,7 +58,7 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
-			if(/*Math.random() <= 0.2*/true)
+			if(Math.random() <= 0.2)
 			{
 				dropLoot(floor);
 			}

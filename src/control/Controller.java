@@ -172,10 +172,13 @@ public class Controller implements Initializable {
 						for (GameObject o : objects)
 							o.update(world.getFloor());
 						
-						if(!objectsToLoad.isEmpty())
-							for(GameObject o : objectsToLoad)
+						if(!objectsToLoad.isEmpty()){
+							for(GameObject o : objectsToLoad){
 								objects.add(o);
-						
+							}
+							objectsToLoad.clear();
+							
+						}
 						
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())

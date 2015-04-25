@@ -21,6 +21,8 @@ public class Player extends Entity {
 	/* Movement */
 	private Input.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
 	private double vx, vy;
+	
+	public static final int MAX_HEALTH = 100;
 
 	private Weapon weapon;
 	
