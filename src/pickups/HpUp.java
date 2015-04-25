@@ -12,7 +12,6 @@ public class HpUp extends PickUps {
 	public HpUp(double x, double y) {
 		super(x, y);
 		sprite = "img/HpUp.png";
-		mask = new Mask(0.10, x, y);
 		healthGain = 15;
 	}
 	

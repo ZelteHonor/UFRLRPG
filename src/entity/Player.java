@@ -8,6 +8,7 @@ import weapons.Bow;
 import weapons.Sword;
 import weapons.Weapon;
 import world.Floor;
+import world.World;
 import world.World.TILE;
 import control.Audio;
 import control.Controller;
@@ -167,7 +168,13 @@ public class Player extends Entity {
 		ey = Controller.get().getWorld().getFloor().getStartY();
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
-			Controller.get().getWorld().changeFloor(-1);
+			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact)
+			{
+				System.out.println("you won the video Game!");
+			}else
+			{
+				Controller.get().getWorld().changeFloor(-1);
+			}
 			Audio.play("ladder");
 			return;
 		}

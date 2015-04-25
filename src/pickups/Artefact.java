@@ -1,5 +1,6 @@
 package pickups;
 
+import gameobject.Mask;
 import control.Audio;
 import world.Floor;
 

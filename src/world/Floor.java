@@ -7,6 +7,7 @@ import gameobject.Mask;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import pickups.Artefact;
 import world.World.TILE;
 public class Floor {
 		
@@ -42,8 +43,11 @@ public class Floor {
 			endx = gen.getEndX();
 			endy = gen.getEndY();
 			
+			this.depth = depth;
+			
 			MonsterGenerator mg = new MonsterGenerator();
 			mg.generateMonster(this);
+			
 		}
 		
 		
@@ -53,6 +57,8 @@ public class Floor {
 				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
 					walls.add(new Mask(1,1,i + 0.5,j + 0.5));				
 	}
+
+	
 
 	public ArrayList<Mask> getWalls() {
 		return walls;
