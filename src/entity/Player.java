@@ -23,6 +23,8 @@ public class Player extends Entity {
 	private double vx, vy;
 	
 	public static final int MAX_HEALTH = 100;
+	
+	private boolean artefact;
 
 	private Weapon weapon;
 	
@@ -33,6 +35,8 @@ public class Player extends Entity {
 		super(x, y, 100);
 		sprite = "img/player.png";
 		dead = false;
+		
+		artefact = false;
 
 		/* Movement */
 		vx = 0;
@@ -194,5 +198,13 @@ public class Player extends Entity {
 	public void setAngle(double angle) {
 		if (!dead)
 			this.angle = angle;
+	}
+
+	public boolean hasArtefact() {
+		return artefact;
+	}
+
+	public void setArtefact(boolean artefact) {
+		this.artefact = artefact;
 	}
 }

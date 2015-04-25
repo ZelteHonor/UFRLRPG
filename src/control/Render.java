@@ -309,7 +309,7 @@ public class Render {
 		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
 		
 		/*droped items*/
-		
+		spriteMap.put("img/artefact.png", new Image("img/artefact.png"));
 		spriteMap.put("img/HpUp.png", new Image("img/HpUp.png"));
 		
 		/* Death*/
