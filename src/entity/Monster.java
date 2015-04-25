@@ -53,10 +53,10 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
-			if(sprite.equals("img/zombie.png"))
-				Audio.playSound(14);//TODO
+			if(sprite.contains("zombie"))
+				Audio.play("zombie_death");//TODO
 			else
-				Audio.playSound(9);//TODO
+				Audio.play("spider_death");//TODO
 		}
 
 		if (seePlayer(floor)) {
@@ -78,10 +78,11 @@ public class Monster extends Entity {
 
 		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 0.6 && cooldown == 0) {
 			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - damage);
-			if(sprite.equals("img/zombie.png") && !(floor.getPlayer().getHealth() <= 0))
-				Audio.playSound(13);//TODO
-			else if(!(floor.getPlayer().getHealth() <= 0))
-				Audio.playSound(8);//TODO
+			if (floor.getPlayer().getHealth() > 0)
+				if(sprite.equals("img/zombie.png"))
+					Audio.play("zombie_attack");
+				else
+					Audio.play("spider_attack");
 			cooldown = attackspeed;
 		}
 		

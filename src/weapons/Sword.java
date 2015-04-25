@@ -29,7 +29,7 @@ public class Sword extends Weapon{
 			animate = true;
 			anglediff = startangle;
 			cooldown = attackspeed;
-			Audio.playSound((int)(Math.random()*3)+10);//TODO
+			Audio.play("sword_swoosh"+Integer.toString(((int)(Math.random()*3+1))));//TODO
 		}
 	}
 	
