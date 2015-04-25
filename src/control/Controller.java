@@ -4,7 +4,10 @@ import entity.Monster;
 import entity.Player;
 import gameobject.GameObject;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -67,6 +70,17 @@ public class Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;
 		input = new Input(pane);
+		Audio.setSounds(new ArrayList<AudioClip>());
+		
+		try {
+			Files.walk(Paths.get("src/sfx")).forEach(filePath -> {
+			    if (Files.isRegularFile(filePath)) {
+			        Audio.getSounds().add(new AudioClip(filePath.toUri().toString()));
+			    }
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
