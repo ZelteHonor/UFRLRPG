@@ -30,10 +30,15 @@ public class Audio {
 	}
 	
 	public static void play(String sound){
+		play(sound, 1);		
+	}
+	
+	public static void play(String sound, double volume){
 		if (!sound.contains(".wav"))
 			sound += ".wav";
-		sounds.get(sound).play();		
+		sounds.get(sound).play(volume);		
 	}
+
 
 	public static HashMap<String, AudioClip> getSounds() {
 		return sounds;

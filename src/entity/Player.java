@@ -80,6 +80,9 @@ public class Player extends Entity {
 				angle = 0;
 				Audio.play("death");
 			}
+			if (health > 100) {
+				health = 100;
+			}
 		}
 		else {
 			health = 0;

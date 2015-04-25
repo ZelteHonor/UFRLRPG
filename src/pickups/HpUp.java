@@ -16,7 +16,6 @@ public class HpUp extends PickUps {
 	
 	@Override
 	protected void activateEffect(Floor floor) {
-		
 		floor.getPlayer().setHealth(floor.getPlayer().getHealth() + healthGain);
 	}
 	

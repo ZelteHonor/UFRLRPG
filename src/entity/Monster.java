@@ -58,15 +58,14 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
-			if(/*Math.random() <= 0.2*/true)
-			{
+			
+			if(Math.random() <= 0.1)
 				dropLoot(floor);
-			}
 			
 			if(sprite.contains("zombie"))
-				Audio.play("zombie_death");//TODO
+				Audio.play("zombie_death", 0.40);
 			else
-				Audio.play("spider_death");//TODO
+				Audio.play("spider_death" + Integer.toString(((int)(Math.random()*3+1))), 0.40);
 		}
 
 		if (seePlayer(floor)) {
@@ -106,11 +105,7 @@ public class Monster extends Entity {
 	}
 
 	private void dropLoot(Floor floor) {
-		HpUp hp = new HpUp(this.x, this.y);
-		floor.getObjectsToLoad().add(hp);
-		
-		
-		
+		floor.getObjectsToLoad().add(new HpUp(x, y));		
 	}
 
 	public String getName() {
