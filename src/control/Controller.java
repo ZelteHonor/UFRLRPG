@@ -58,6 +58,7 @@ public class Controller implements Initializable {
 	/* Objects */
 	private Player player;
 	private ArrayList<GameObject> objects;
+	private ArrayList<GameObject> objectsToLoad;
 
 	private MonsterGenerator m;
 	
@@ -94,6 +95,7 @@ public class Controller implements Initializable {
 		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
 		world.getFloor().setPlayer(player);
 		objects = world.getFloor().getObjects();
+		objectsToLoad = world.getFloor().getObjectsToLoad();
 		
 		/* Camera */
 		cxto = player.getX();
@@ -169,6 +171,11 @@ public class Controller implements Initializable {
 						player.update(world.getFloor());	
 						for (GameObject o : objects)
 							o.update(world.getFloor());
+						
+						if(!objectsToLoad.isEmpty())
+							for(GameObject o : objectsToLoad)
+								objects.add(o);
+						
 						
 						for(int i = 0; i < objects.size(); i++)
 							if(objects.get(i).isDestroy())
@@ -255,5 +262,9 @@ public class Controller implements Initializable {
 	}
 	public double getCY() {
 		return cy;
+	}
+
+	public ArrayList<GameObject> getObjectsToLoad() {
+		return objectsToLoad;
 	}
 }

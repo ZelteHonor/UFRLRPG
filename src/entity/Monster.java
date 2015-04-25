@@ -60,7 +60,7 @@ public class Monster extends Entity {
 			destroy = true;
 			if(/*Math.random() <= 0.2*/true)
 			{
-				//dropLoot(floor);
+				dropLoot(floor);
 			}
 			
 			if(sprite.contains("zombie"))
@@ -107,7 +107,7 @@ public class Monster extends Entity {
 
 	private void dropLoot(Floor floor) {
 		HpUp hp = new HpUp(this.x, this.y);
-		floor.getObjects().add(hp);
+		floor.getObjectsToLoad().add(hp);
 		
 		
 		

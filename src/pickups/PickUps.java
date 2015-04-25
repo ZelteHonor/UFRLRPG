@@ -11,8 +11,10 @@ public abstract class PickUps extends Item{
 	
 	public void update(Floor floor)
 	{
-		if(x == floor.getPlayer().getX() && y == floor.getPlayer().getY())
+		if((int)x == (int)floor.getPlayer().getX() && (int)y == (int)floor.getPlayer().getY())
 			activateEffect(floor);
+		
+		destroy = true;
 	
 		
 	}
