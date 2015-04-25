@@ -9,6 +9,7 @@ import weapons.Sword;
 import weapons.Weapon;
 import world.Floor;
 import world.World.TILE;
+import control.Audio;
 import control.Controller;
 import control.Input.KEYSTATE;
 import control.Input;
@@ -77,6 +78,7 @@ public class Player extends Entity {
 				dead = true;
 				sprite = "img/playerdead.png";
 				angle = 0;
+				Audio.playSound(6);//TODO
 			}
 		}
 		else {
@@ -157,6 +159,7 @@ public class Player extends Entity {
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
 			Controller.get().getWorld().changeFloor(-1);
+			Audio.playSound(7);//TODO
 			return;
 		}
 		
@@ -164,8 +167,10 @@ public class Player extends Entity {
 		ex = Controller.get().getWorld().getFloor().getEndX();
 		ey = Controller.get().getWorld().getFloor().getEndY();
 		
+		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1)
 			Controller.get().getWorld().changeFloor(+1);
+			Audio.playSound(7);//TODO
 	}
 	
 	public void updateInputState() {

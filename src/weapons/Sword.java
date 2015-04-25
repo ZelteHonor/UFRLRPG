@@ -29,7 +29,7 @@ public class Sword extends Weapon{
 			animate = true;
 			anglediff = startangle;
 			cooldown = attackspeed;
-			Audio.playSound(0);
+			Audio.playSound((int)(Math.random()*3)+10);//TODO
 		}
 	}
 	
@@ -42,6 +42,7 @@ public class Sword extends Weapon{
 				if (o instanceof Monster)
 					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
 						((Monster) o).setHealth(((Monster) o).getHealth() - damage / (attackspeed/2));
+						//Audio.playSound(10);//TODO
 						
 		}
 		

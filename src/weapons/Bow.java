@@ -1,5 +1,6 @@
 package weapons;
 
+import control.Audio;
 import world.Floor;
 
 /**
@@ -29,6 +30,7 @@ public class Bow extends Weapon {
 		super(x, y, damage, attackspeed);
 		this.speed = speed;
 		sprite = "img/bow.png"; 
+		
 	}
 
 	@Override
@@ -36,6 +38,7 @@ public class Bow extends Weapon {
 		if (cooldown == 0) {
 			floor.getObjects().add(new Arrow(x, y, damage, speed, floor.getPlayer().getAngle()));
 			cooldown = attackspeed;
+			Audio.playSound((int)((Math.random() * 3) + 3));//TODO
 		}
 	}
 }
