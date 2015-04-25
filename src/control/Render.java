@@ -98,6 +98,11 @@ public class Render {
 			gc.rotate(Math.toDegrees(obj.getAngle())+((Sword)obj).getAngleDiff());
 		else
 			gc.rotate(Math.toDegrees(obj.getAngle()));
+		
+		if(sprite==null)
+		{
+			System.out.println(sprite);
+		}
 				
 		gc.drawImage(sprite, - (sprite.getWidth()/2), - (sprite.getHeight()/2));
 		gc.restore();
@@ -302,6 +307,10 @@ public class Render {
 		spriteMap.put("img/spider_purple.png", new Image("img/spider_purple.png"));
 		spriteMap.put("img/spider_red.png", new Image("img/spider_red.png"));
 		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
+		
+		/*droped items*/
+		
+		spriteMap.put("img/HpUp.png", new Image("img/HpUp.png"));
 		
 		/* Death*/
 		int percent = (int) (Math.random()*100);

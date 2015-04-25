@@ -38,7 +38,7 @@ public class Bow extends Weapon {
 		if (cooldown == 0) {
 			floor.getObjects().add(new Arrow(x, y, damage, speed, floor.getPlayer().getAngle()));
 			cooldown = attackspeed;
-			Audio.playSound((int)((Math.random() * 3) + 3));//TODO
+			Audio.playSound(/*(int)((Math.random() * 3) + 3)*/"	bow_launch1.wav");//TODO
 		}
 	}
 }

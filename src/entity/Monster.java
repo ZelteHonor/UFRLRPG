@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import control.Audio;
 import control.Controller;
 import pathfinding.Node;
+import pickups.HpUp;
+import weapons.Sword;
 import world.Floor;
 import world.World;
 import world.World.TILE;
@@ -53,10 +55,18 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
+			if(/*Math.random() <= 0.2*/true)
+			{
+				//dropLoot(floor);
+			}
+			
 			if(sprite.equals("img/zombie.png"))
-				Audio.playSound(14);//TODO
+				Audio.playSound("zombie_death.wav");
+			//TODO
 			else
-				Audio.playSound(9);//TODO
+				Audio.playSound("spider_death.wav");//TODO
+			
+				
 		}
 
 		if (seePlayer(floor)) {
@@ -79,15 +89,23 @@ public class Monster extends Entity {
 		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 0.6 && cooldown == 0) {
 			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - damage);
 			if(sprite.equals("img/zombie.png") && !(floor.getPlayer().getHealth() <= 0))
-				Audio.playSound(13);//TODO
+				Audio.playSound("zombie_attack.wav");//TODO
 			else if(!(floor.getPlayer().getHealth() <= 0))
-				Audio.playSound(8);//TODO
+				Audio.playSound("spider_attack.wav");//TODO
 			cooldown = attackspeed;
 		}
 		
 		if (cooldown > 0)
 			cooldown --;
 
+	}
+
+	private void dropLoot(Floor floor) {
+		HpUp hp = new HpUp(this.x, this.y);
+		floor.getObjects().add(hp);
+		
+		
+		
 	}
 
 	public String getName() {

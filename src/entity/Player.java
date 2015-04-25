@@ -78,7 +78,7 @@ public class Player extends Entity {
 				dead = true;
 				sprite = "img/playerdead.png";
 				angle = 0;
-				Audio.playSound(6);//TODO
+				Audio.playSound("death.wav");//TODO
 			}
 		}
 		else {
@@ -159,7 +159,7 @@ public class Player extends Entity {
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
 			Controller.get().getWorld().changeFloor(-1);
-			Audio.playSound(7);//TODO
+			Audio.playSound("ladder.wav");//TODO
 			return;
 		}
 		
@@ -170,7 +170,7 @@ public class Player extends Entity {
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1)
 			Controller.get().getWorld().changeFloor(+1);
-			Audio.playSound(7);//TODO
+			Audio.playSound("ladder.wav");//TODO
 	}
 	
 	public void updateInputState() {

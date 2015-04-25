@@ -176,7 +176,7 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						player.update(world.getFloor());
+						player.update(world.getFloor());	
 						for (GameObject o : objects)
 							o.update(world.getFloor());
 						

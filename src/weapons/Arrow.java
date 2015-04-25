@@ -48,7 +48,7 @@ public class Arrow extends GameObject {
 		for (GameObject o : floor.getObjects()) {
 			if (o instanceof Monster && Mask.collide(this.mask, o.getMask())) {
 				((Entity) o).setHealth(((Entity) o).getHealth() - damage);
-				Audio.playSound(0);//TODO
+				Audio.playSound("bow_hit1.wav");//TODO
 				this.destroy = true;
 			}
 		}
@@ -58,7 +58,7 @@ public class Arrow extends GameObject {
 			for (Mask m : floor.getWalls()) {
 				if (Mask.collide(this.mask, m)) {
 					stuck = true;
-					Audio.playSound((int)((Math.random() * 3)));//TODO
+					Audio.playSound(/*(int)((Math.random() * 3))*/"bow_hit1.wav");//TODO
 					ticksToDeath = 120;
 				}
 			}

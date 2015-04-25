@@ -9,9 +9,16 @@ public class Audio {
 
 	private static ArrayList<AudioClip> sounds;
 	
-	public static void playSound(int i){
+	public static void playSound(String i){
 		
-		sounds.get(i).play();
+		for(AudioClip a : sounds)
+		{
+			if(a.getSource().contains(i))
+			{
+				a.play();
+			}
+		}
+		
 		
 	}
 
