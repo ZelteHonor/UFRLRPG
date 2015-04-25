@@ -35,16 +35,19 @@ public class Controller implements Initializable {
 
 	/* Singleton-like */
 	private static Controller controller;
+
 	public static Controller get() {
 		return controller;
 	}
 
 	/* FXML */
-	@FXML private BorderPane root;
-	@FXML private Pane pane;
-	
+	@FXML
+	private BorderPane root;
+	@FXML
+	private Pane pane;
+
 	private AudioClip mus;
-	
+
 	/* Modules */
 	private Render render;
 	private Input input;
@@ -61,19 +64,18 @@ public class Controller implements Initializable {
 	private ArrayList<GameObject> objectsToLoad;
 
 	private MonsterGenerator m;
-	
+
 	/* Camera */
 	private double cxto, cyto;
 	private double cx, cy;
-	
-	
+
 	/* FXML */
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;
 		input = new Input(pane);
 		Audio.load();
 	}
-	
+
 	@FXML
 	public void start() {
 		initGame();
@@ -89,17 +91,19 @@ public class Controller implements Initializable {
 		pane.getChildren().clear();
 		pane.setFocusTraversable(true);
 		pane.getChildren().add(render.getGUI());
-		pane.setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
+		pane.setCursor(new ImageCursor(Controller.get().getRender()
+				.getSprite("img/cursor.png")));
 
 		/* Objects */
-		player = new Player(world.getFloor().getStartX(), world.getFloor().getStartY());
+		player = new Player(world.getFloor().getStartX(), world.getFloor()
+				.getStartY());
 		world.getFloor().setPlayer(player);
 		objects = world.getFloor().getObjects();
 		objectsToLoad = world.getFloor().getObjectsToLoad();
-		
+
 		/* Camera */
 		cxto = player.getX();
-		cyto= player.getY();
+		cyto = player.getY();
 		cx = cxto;
 		cy = cyto;
 
@@ -108,7 +112,7 @@ public class Controller implements Initializable {
 			timer = new Timer();
 			updater = new Updater();
 			refresher = new Renderer();
-		
+
 			timer.start();
 		}
 	}
@@ -124,7 +128,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @return null
 	 */
-	private  class Timer extends Service<Void> {
+	private class Timer extends Service<Void> {
 		boolean run = true;
 
 		public Timer() {
@@ -136,13 +140,13 @@ public class Controller implements Initializable {
 				protected Void call() throws Exception {
 					while (run) {
 						Platform.runLater(() -> {
-							if(!updater.isRunning()) {
+							if (!updater.isRunning()) {
 								updater.cancel();
 								updater.reset();
 								updater.start();
 							}
 
-							if(!refresher.isRunning()) {
+							if (!refresher.isRunning()) {
 								refresher.cancel();
 								refresher.reset();
 								refresher.start();
@@ -168,26 +172,21 @@ public class Controller implements Initializable {
 			return new Task<Void>() {
 				protected Void call() throws Exception {
 					Platform.runLater(() -> {
-						player.update(world.getFloor());	
+						player.update(world.getFloor());
 						for (GameObject o : objects)
 							o.update(world.getFloor());
-						
-						if(!objectsToLoad.isEmpty()){
-							for(GameObject o : objectsToLoad){
+
+						if (!world.getFloor().getObjectsToLoad().isEmpty()) {
+							for (GameObject o : world.getFloor().getObjectsToLoad()) {
 								objects.add(o);
 							}
-							objectsToLoad.clear();
-							
+							world.getFloor().getObjectsToLoad().clear();
+
 						}
-						
-						for(int i = 0; i < objects.size(); i++)
-							if(objects.get(i).isDestroy())
+
+						for (int i = 0; i < objects.size(); i++)
+							if (objects.get(i).isDestroy())
 								objects.remove(i);
-						
-						if(player.hasArtefact())
-						{
-							
-						}
 					}
 
 					);
@@ -205,21 +204,26 @@ public class Controller implements Initializable {
 					Platform.runLater(() -> {
 
 						// Camera
-						cxto = player.getX() + (input.getMouse().getSceneX() / render.RESOLUTION - render.DW / 2);
-						cyto = player.getY() + (input.getMouse().getSceneY()/ render.RESOLUTION - render.DH / 2);
-						
-						if (Math.sqrt(Math.pow(cxto - cx, 2) + Math.pow(cyto - cy,  2)) < 1) {
+						cxto = player.getX()
+								+ (input.getMouse().getSceneX()
+										/ render.RESOLUTION - render.DW / 2);
+						cyto = player.getY()
+								+ (input.getMouse().getSceneY()
+										/ render.RESOLUTION - render.DH / 2);
+
+						if (Math.sqrt(Math.pow(cxto - cx, 2)
+								+ Math.pow(cyto - cy, 2)) < 1) {
 							cx = cxto;
 							cy = cyto;
-						}
-						else {
+						} else {
 							double angle = Math.atan2(cyto - cy, cxto - cx);
 							cx += Math.cos(angle);
 							cy += Math.sin(angle);
 						}
-						
-						player.setAngle(Math.atan2(cy-player.getY(), cx-player.getX()));
-						
+
+						player.setAngle(Math.atan2(cy - player.getY(), cx
+								- player.getX()));
+
 						render.drawWorld(cx, cy);
 						render.draw(player.getWeapon());
 						render.draw(player);
@@ -233,8 +237,6 @@ public class Controller implements Initializable {
 		}
 	}
 
-
-
 	/* Objects */
 	public Player getPlayer() {
 		return player;
@@ -243,7 +245,7 @@ public class Controller implements Initializable {
 	public ArrayList<GameObject> getObjects() {
 		return objects;
 	}
-	
+
 	public void setObjects(ArrayList<GameObject> array) {
 		objects = array;
 	}
@@ -252,14 +254,16 @@ public class Controller implements Initializable {
 	public World getWorld() {
 		return world;
 	}
-	
+
 	/* Modules */
 	public Render getRender() {
 		return render;
 	}
+
 	public Input getInput() {
 		return input;
 	}
+
 	public Pane getPane() {
 		return pane;
 	}
@@ -268,6 +272,7 @@ public class Controller implements Initializable {
 	public double getCX() {
 		return cx;
 	}
+
 	public double getCY() {
 		return cy;
 	}
