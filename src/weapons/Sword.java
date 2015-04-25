@@ -1,6 +1,5 @@
 package weapons;
 
-import java.applet.AudioClip;
 
 import control.Audio;
 import control.Controller;
@@ -34,7 +33,7 @@ public class Sword extends Weapon{
 	}
 	
 	@Override
-	public void update() {
+	public void update(){
 		if (animate) {
 			anglediff += 15;
 			
