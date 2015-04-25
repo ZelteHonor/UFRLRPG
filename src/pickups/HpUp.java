@@ -18,8 +18,6 @@ public class HpUp extends PickUps {
 	
 	@Override
 	protected void activateEffect(Floor floor) {
-		
-		
 		floor.getPlayer().setHealth(floor.getPlayer().getHealth() + healthGain);
 		Audio.play("HpUp.wav");
 		if(floor.getPlayer().getHealth() > Player.MAX_HEALTH)
