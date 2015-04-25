@@ -41,7 +41,6 @@ public class Sword extends Weapon{
 				if (o instanceof Monster)
 					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
 						((Monster) o).setHealth(((Monster) o).getHealth() - damage / (attackspeed/2));
-						Audio.play("sword_swoosh1.wav");//TODO
 						
 		}
 		
