@@ -35,6 +35,8 @@ public class Monster extends Entity {
 	
 	private int cooldown;
 	
+	private int tickTillSound;
+	
 	public Monster(double x, double y,int health, int damage, int attackspeed, float speed) {
 		super(x, y, health);
 		
@@ -49,6 +51,7 @@ public class Monster extends Entity {
 
 		mask = new Mask(0.1875, x, y);
 		cooldown = 0;
+		tickTillSound = 0;
 	}
 
 	@Override
@@ -85,16 +88,20 @@ public class Monster extends Entity {
 
 		if (Math.sqrt(Math.pow(x - floor.getPlayer().getX(), 2) + Math.pow(y - floor.getPlayer().getY(), 2)) < 0.6 && cooldown == 0) {
 			floor.getPlayer().setHealth(floor.getPlayer().getHealth() - damage);
-			if (floor.getPlayer().getHealth() > 0)
+			if (floor.getPlayer().getHealth() > 0 && tickTillSound == 0) {
 				if(sprite.equals("img/zombie.png"))
-					Audio.play("zombie_attack");
+					Audio.play("zombie_attack" + Integer.toString(((int)(Math.random()*3+1))));
 				else
-					Audio.play("spider_attack");
+					Audio.play("spider_attack" + Integer.toString(((int)(Math.random()*3+1))));
+				tickTillSound = 20;
+			}
 			cooldown = attackspeed;
 		}
 		
 		if (cooldown > 0)
 			cooldown --;
+		if (tickTillSound > 0)
+			tickTillSound--;
 
 	}
 
