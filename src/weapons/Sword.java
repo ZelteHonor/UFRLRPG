@@ -9,7 +9,6 @@ import world.Floor;
 
 public class Sword extends Weapon{
 	
-	public static final String SWORD_SWOOSH = "sword_swoosh.wav";
 	public static final int startangle = -105;
 	public static final int endangle = 50;
 
@@ -29,7 +28,7 @@ public class Sword extends Weapon{
 			animate = true;
 			anglediff = startangle;
 			cooldown = attackspeed;
-			Audio.playSound(/*(int)(Math.random()*3)+10*/SWORD_SWOOSH);//TODO
+			Audio.play("sword_swoosh"+Integer.toString(((int)(Math.random()*3+1))));//TODO
 		}
 	}
 	
@@ -42,7 +41,7 @@ public class Sword extends Weapon{
 				if (o instanceof Monster)
 					if (Math.sqrt(Math.pow(o.getX() - x, 2) + Math.pow(o.getY() - y, 2)) < 1 && Math.abs(Math.atan2(o.getY()-y,o.getX()-x) - angle) < Math.PI/2)
 						((Monster) o).setHealth(((Monster) o).getHealth() - damage / (attackspeed/2));
-						Audio.playSound("sword_swoosh1.wav");//TODO
+						Audio.play("sword_swoosh1.wav");//TODO
 						
 		}
 		
