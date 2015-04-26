@@ -281,36 +281,14 @@ public class Render {
 	{
 		spriteMap = new HashMap<>();
 		
-		/* Cursor */
-		spriteMap.put("img/cursor.png", new Image("img/cursor.png"));
-		spriteMap.put("img/crosshair.png", new Image("img/crosshair.png"));
+		// contient les liens des images
+		String[] dir = new java.io.File("./src/img").list();
 		
-		/* Donjon */
-		spriteMap.put("img/wall.png", new Image("img/wall.png"));
-		spriteMap.put("img/stone.png", new Image("img/stone.png"));
-		spriteMap.put("img/dirt.png", new Image("img/dirt.png"));
-		spriteMap.put("img/plank.png", new Image("img/plank.png"));
-		spriteMap.put("img/plank_alt.png", new Image("img/plank_alt.png"));
-		spriteMap.put("img/exitdown.png", new Image("img/exitdown.png"));
-		spriteMap.put("img/exitup.png", new Image("img/exitup.png"));
-		
-		/* Player */
-		spriteMap.put("img/player.png", new Image("img/player.png"));
-		spriteMap.put("img/playerdead.png", new Image("img/playerdead.png"));
-		spriteMap.put("img/arrow.png", new Image("img/arrow.png"));
-		spriteMap.put("img/bow.png", new Image("img/bow.png"));
-		spriteMap.put("img/sword.png", new Image("img/sword.png"));
-		
-		/* Monster */
-		spriteMap.put("img/spider_green.png", new Image("img/spider_green.png"));
-		spriteMap.put("img/spider_grey.png", new Image("img/spider_grey.png"));
-		spriteMap.put("img/spider_purple.png", new Image("img/spider_purple.png"));
-		spriteMap.put("img/spider_red.png", new Image("img/spider_red.png"));
-		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
-		
-		/*droped items*/
-		spriteMap.put("img/artefact.png", new Image("img/artefact.png"));
-		spriteMap.put("img/HpUp.png", new Image("img/HpUp.png"));
+		// ajout des sprite dans spriteMap
+		for(int i = 0; i < dir.length; i++)
+		{
+			spriteMap.put("img/"+dir[i], new Image("img/"+dir[i]));
+		}
 		
 		/* Death*/
 		int percent = (int) (Math.random()*100);
