@@ -102,7 +102,7 @@ public class Monster extends Entity {
 	}
 
 	private void dropLoot(Floor floor) {
-		floor.getObjects().add(new HpUp(x, y));
+		Controller.get().getObjectsToLoad().add(new HpUp(x, y));
 	}
 
 	public String getName() {
