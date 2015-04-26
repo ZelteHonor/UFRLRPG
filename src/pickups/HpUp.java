@@ -19,8 +19,6 @@ public class HpUp extends PickUps {
 	protected void activateEffect(Floor floor) {
 		floor.getPlayer().setHealth(floor.getPlayer().getHealth() + healthGain);
 		Audio.play("HpUp.wav");
-	
-		destroy = true;
 	}
 	
 	

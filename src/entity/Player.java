@@ -26,6 +26,8 @@ public class Player extends Entity {
 	public static final int MAX_HEALTH = 100;
 	
 	private boolean artefact;
+	
+	private Weapon[] weapons;
 
 	private Weapon weapon;
 	
@@ -48,7 +50,11 @@ public class Player extends Entity {
 			key[i] = KEYSTATE.UP;
 		
 		mask = new Mask(0.25, 0.25,x,y);
-		weapon = new Sword(x, y, 10, 10);
+		
+		weapons = new Weapon[2];
+		weapons[0] = new Sword(x, y, 10, 10);
+		weapons[1] = new Bow(x, y, 5, 30, 0.3f);
+		weapon = weapons[0];
 	}
 
 	public void setKeyState(int index, KEYSTATE state) {
@@ -73,10 +79,10 @@ public class Player extends Entity {
 			/* Change weapon*/
 			if (key[6] == KEYSTATE.PRESSED) {
 				if(weapon instanceof Bow) { 
-					weapon = new Sword(x, y, 10, 10);
+					weapon = weapons[0];
 					Controller.get().getPane().setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
 				} else {
-					weapon = new Bow(x, y, 5, 5, 0.3f);
+					weapon = weapons[1];
 					Controller.get().getPane().setCursor(Cursor.NONE);
 				}
 			}
