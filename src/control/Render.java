@@ -282,7 +282,7 @@ public class Render {
 		spriteMap = new HashMap<>();
 		
 		// contient les liens des images
-		String[] dir = new java.io.File("./src/img").list();
+		String[] dir = new java.io.File("./img").list();
 		
 		// ajout des sprite dans spriteMap
 		for(int i = 0; i < dir.length; i++)
