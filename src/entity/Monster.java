@@ -31,8 +31,6 @@ public class Monster extends Entity {
 	private float speed;
 	private int damage;
 	private int attackspeed;
-
-	private int maxhealth;
 	
 	private int cooldown;
 	
@@ -41,7 +39,6 @@ public class Monster extends Entity {
 	public Monster(double x, double y,int health, int damage, int attackspeed, float speed) {
 		super(x, y, health);
 		
-		this.maxhealth = health;
 		this.damage = damage;
 		this.attackspeed = attackspeed;
 		this.speed = speed;
@@ -217,7 +214,7 @@ public class Monster extends Entity {
 	}
 	
 	public int getMaxHealth() {
-		return maxhealth;
+		return MAX_HEALTH;
 	}
 
 }

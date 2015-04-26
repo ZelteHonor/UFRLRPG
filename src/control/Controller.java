@@ -184,10 +184,14 @@ public class Controller implements Initializable {
 
 						}
 
+						/* Supressions */
 						for (int i = 0; i < objects.size(); i++)
 							if (objects.get(i).isDestroy())
 								objects.remove(i);
+
 					}
+					
+					
 
 					);
 					return null;
