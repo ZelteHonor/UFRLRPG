@@ -177,9 +177,6 @@ public class Player extends Entity {
 			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact)
 			{
 				System.out.println("you won the video Game!");
-			}else
-			{
-				Controller.get().getWorld().changeFloor(-1);
 			}
 			Audio.play("ladder");
 			return;
