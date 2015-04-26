@@ -178,6 +178,11 @@ public class Player extends Entity {
 			{
 				System.out.println("you won the video Game!");
 			}
+		else
+		{
+			Controller.get().getWorld().changeFloor(-1);
+		}
+			
 			Audio.play("ladder");
 			return;
 		}
