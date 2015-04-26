@@ -1,6 +1,6 @@
 @font-face {
     font-family: '04b03';
-    src: url('../img/04b03.ttf');
+    src: url('04b03.ttf');
 }
 .button {
 	-fx-background-color: #00000000;

@@ -3,6 +3,9 @@
  */
 package control;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -17,6 +20,7 @@ import world.World;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -64,7 +68,7 @@ public class Render {
 		gc = GUI.getGraphicsContext2D();
 		loadSprites();
 		
-		f04b03 = Font.loadFont(getClass().getResourceAsStream("/img/04b03.ttf"),16);
+		f04b03 = Font.loadFont(getClass().getResourceAsStream("../control/04b03.ttf"),16);
 	}
 	
 	/**
@@ -281,30 +285,31 @@ public class Render {
 	{
 		spriteMap = new HashMap<>();
 		
-		// contient les liens des images
-		String[] dir = new java.io.File("./img").list();
-		
-		// ajout des sprite dans spriteMap
-		for(int i = 0; i < dir.length; i++)
-		{
-			spriteMap.put("img/"+dir[i], new Image("img/"+dir[i]));
+		try {
+			Files.walk(Paths.get("img")).forEach(filePath -> {
+			    if (Files.isRegularFile(filePath))
+			        spriteMap.put("img/" + filePath.getFileName().toString(), new Image(filePath.toUri().toString()));
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 		
 		/* Death*/
 		int percent = (int) (Math.random()*100);
 		if (percent < 20)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_01.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_01.png"));
 		else if (percent < 40)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_02.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_02.png"));
 		else if (percent < 60)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_03.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_03.png"));
 		else if (percent < 80)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_04.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_04.png"));
 		else if (percent < 87)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_05.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_05.png"));
 		else if (percent < 94)
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_06.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_06.png"));
 		else
-			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_07.png"));
+			spriteMap.put("img/deathscreen.png", spriteMap.get("img/deathscreen_07.png"));
 	}
 }
