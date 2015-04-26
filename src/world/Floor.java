@@ -13,7 +13,6 @@ public class Floor {
 		
 	private World.TILE[][] tiles;
 	private ArrayList<GameObject> objects;
-	private ArrayList<GameObject> objectsToLoad;
 	private ArrayList<Mask> walls;
 	private Player player;
 	private int startx, starty;
@@ -23,7 +22,6 @@ public class Floor {
 
 	public Floor(int depth) {
 		objects = new ArrayList<GameObject>();
-		objectsToLoad = new ArrayList<GameObject>();
 		if (depth == -1) {
 			tiles = new World.TILE[World.SIZE][World.SIZE];
 			for (int i = 0; i < World.SIZE; i++)
@@ -66,11 +64,6 @@ public class Floor {
 	
 	public ArrayList<GameObject> getObjects() {
 		return objects;
-	}
-	
-	public ArrayList<GameObject> getObjectsToLoad()
-	{
-		return objectsToLoad;
 	}
 
 	public void setObjects(ArrayList<GameObject> objects) {
