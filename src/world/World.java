@@ -39,7 +39,7 @@ public class World {
 		
 		Artefact art = new Artefact(f.getEndX(), f.getEndY());
 		f.getObjects().add(art);
-
+		f.getTiles()[(int)art.getX()][(int)art.getY()] = TILE.DONJON;
 	}
 
 	public Floor getFloor(int depth) {

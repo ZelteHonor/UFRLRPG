@@ -16,7 +16,6 @@ public class Artefact extends PickUps {
 	protected void activateEffect(Floor floor) {
 		floor.getPlayer().setArtefact(true);
 		Audio.play("artefact_acquired.wav");
-		floor.getTiles()[(int)x][(int)y] = TILE.DONJON;
 	}
 
 }
