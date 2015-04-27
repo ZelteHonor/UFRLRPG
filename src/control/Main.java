@@ -1,14 +1,8 @@
 package control;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import javafx.application.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 

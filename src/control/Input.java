@@ -1,11 +1,8 @@
 package control;
 
-import world.MonsterGenerator;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -15,8 +12,6 @@ import javafx.scene.input.MouseEvent;
 public class Input {
 	
 	private MouseEvent mouse;
-	private double mx;
-	private double my;
 	
 	/* Clavier */
 	public enum KEYSTATE { PRESSED, RELEASED, DOWN, UP };

@@ -1,8 +1,6 @@
 package pickups;
 
 import control.Audio;
-import entity.Player;
-import gameobject.Mask;
 import world.Floor;
 
 public class HpUp extends PickUps {

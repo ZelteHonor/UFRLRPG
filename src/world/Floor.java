@@ -3,12 +3,9 @@ package world;
 import entity.Player;
 import gameobject.GameObject;
 import gameobject.Mask;
-
-import java.awt.Point;
 import java.util.ArrayList;
-
-import pickups.Artefact;
 import world.World.TILE;
+
 public class Floor {
 		
 	private World.TILE[][] tiles;

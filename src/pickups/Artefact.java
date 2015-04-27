@@ -1,9 +1,7 @@
 package pickups;
 
-import gameobject.Mask;
 import control.Audio;
 import world.Floor;
-import world.World.TILE;
 
 public class Artefact extends PickUps {
 
