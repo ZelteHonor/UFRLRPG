@@ -34,7 +34,6 @@ public class Player extends Entity {
 	private boolean dead;
 	private boolean victory;
 	
-
 	public Player(double x, double y) {
 		super(x, y, 100);
 		sprite = "img/player.png";
@@ -176,16 +175,14 @@ public class Player extends Entity {
 		ey = Controller.get().getWorld().getFloor().getStartY();
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
-			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact)
-			{
+			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact) {
 				System.out.println("you won the video Game!");
-				victory = true;
-			}else
-			{
-			Controller.get().getWorld().changeFloor(-1);
+			}else {
+				Audio.play("ladder");
+				Controller.get().getWorld().changeFloor(-1);
 			}
 			
-			//Audio.play("ladder");
+			
 			return;
 		}
 		
@@ -194,9 +191,10 @@ public class Player extends Entity {
 		ey = Controller.get().getWorld().getFloor().getEndY();
 		
 		
-		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1)
+		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
+			Audio.play("ladder");
 			Controller.get().getWorld().changeFloor(+1);
-			//Audio.play("ladder");
+		}
 	}
 	
 	public void updateInputState() {

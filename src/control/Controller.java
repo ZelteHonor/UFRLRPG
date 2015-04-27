@@ -99,6 +99,7 @@ public class Controller implements Initializable {
 				.getStartY());
 		world.getFloor().setPlayer(player);
 		objects = world.getFloor().getObjects();
+		objectsToLoad = new ArrayList<GameObject>();
 
 		/* Camera */
 		cxto = player.getX();
@@ -179,12 +180,11 @@ public class Controller implements Initializable {
 						for (int i = 0; i < objects.size(); i++)
 							if (objects.get(i).isDestroy())
 								objects.remove(i);
-
-					}
-					
-					
-
-					);
+						
+						if (objectsToLoad != null)
+							objects.addAll(objectsToLoad);
+						objectsToLoad.clear();
+					});
 					return null;
 				}
 			};

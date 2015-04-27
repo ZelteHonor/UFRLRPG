@@ -26,6 +26,7 @@ public class Monster extends Entity {
 	private boolean searching;
 	private Point lastTarget;
 	private Node totalPath, nextNode;
+	private int tickTillAI;
 	
 	/* Movement */
 	private float speed;
@@ -48,8 +49,10 @@ public class Monster extends Entity {
 		totalPath = null;
 
 		mask = new Mask(0.1875, x, y);
+		
 		cooldown = 0;
 		tickTillSound = 0;
+		tickTillAI = 0;
 	}
 
 	@Override
@@ -68,7 +71,12 @@ public class Monster extends Entity {
 		if (seePlayer(floor)) {
 			searching = true;
 			lastTarget = new Point((int) Controller.get().getPlayer().getX(), (int) Controller.get().getPlayer().getY());
-			totalPath = pathfinding.Pathfinding.getPath(new Point((int) this.x, (int) this.y), lastTarget, floor);
+			
+			if (tickTillAI == 0) {
+				totalPath = pathfinding.Pathfinding.getPath(new Point((int) this.x, (int) this.y), lastTarget, floor);
+				tickTillAI = 10;
+			}
+			
 			nextNode = totalPath.getFirst();
 			angle = Math.atan2(Controller.get().getPlayer().getY() - y, Controller.get().getPlayer().getX() - x);
 			moveTo();
@@ -98,11 +106,13 @@ public class Monster extends Entity {
 			cooldown --;
 		if (tickTillSound > 0)
 			tickTillSound--;
+		if (tickTillAI > 0)
+			tickTillAI = 0;
 
 	}
 
 	private void dropLoot(Floor floor) {
-		floor.getObjects().add(new HpUp(x, y));
+		Controller.get().getObjectsToLoad().add(new HpUp(x, y));
 	}
 
 	public String getName() {
