@@ -231,6 +231,8 @@ public class Render {
 			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
 		}
+		
+		
 	}
 	/**
 	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
@@ -308,7 +310,7 @@ public class Render {
 		spriteMap.put("img/spider_red.png", new Image("img/spider_red.png"));
 		spriteMap.put("img/zombie.png", new Image("img/zombie.png"));
 		
-		/*droped items*/
+		/*dropped items*/
 		spriteMap.put("img/artefact.png", new Image("img/artefact.png"));
 		spriteMap.put("img/HpUp.png", new Image("img/HpUp.png"));
 		
@@ -328,5 +330,8 @@ public class Render {
 			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_06.png"));
 		else
 			spriteMap.put("img/deathscreen.png", new Image("img/deathscreen_07.png"));
+		
+		
+		
 	}
 }

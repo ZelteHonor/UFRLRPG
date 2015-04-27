@@ -30,12 +30,14 @@ public class Player extends Entity {
 	private Weapon weapon;
 	
 	private boolean dead;
+	private boolean victory;
 	
 
 	public Player(double x, double y) {
 		super(x, y, 100);
 		sprite = "img/player.png";
 		dead = false;
+		victory = false;
 		
 		artefact = false;
 
@@ -171,6 +173,7 @@ public class Player extends Entity {
 			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact)
 			{
 				System.out.println("you won the video Game!");
+				victory = true;
 			}else
 			{
 				Controller.get().getWorld().changeFloor(-1);
@@ -213,5 +216,13 @@ public class Player extends Entity {
 
 	public void setArtefact(boolean artefact) {
 		this.artefact = artefact;
+	}
+
+	public boolean isVictorious() {
+		return victory;
+	}
+
+	public void setVictory(boolean victory) {
+		this.victory = victory;
 	}
 }
