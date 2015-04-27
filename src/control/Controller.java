@@ -99,7 +99,6 @@ public class Controller implements Initializable {
 				.getStartY());
 		world.getFloor().setPlayer(player);
 		objects = world.getFloor().getObjects();
-		objectsToLoad = world.getFloor().getObjectsToLoad();
 
 		/* Camera */
 		cxto = player.getX();
@@ -176,18 +175,14 @@ public class Controller implements Initializable {
 						for (GameObject o : objects)
 							o.update(world.getFloor());
 
-						if (!world.getFloor().getObjectsToLoad().isEmpty()) {
-							for (GameObject o : world.getFloor().getObjectsToLoad()) {
-								objects.add(o);
-							}
-							world.getFloor().getObjectsToLoad().clear();
-
-						}
-
+						/* Supressions */
 						for (int i = 0; i < objects.size(); i++)
 							if (objects.get(i).isDestroy())
 								objects.remove(i);
+
 					}
+					
+					
 
 					);
 					return null;

@@ -13,12 +13,6 @@ public class Bow extends Weapon {
 	
 	/** 
 	 * Constructeur d'arme à distance
-	 * @param weight
-	 * 	Poids de l'arme
-	 * @param evil
-	 * 	S'il est maudit
-	 * @param range
-	 * 	La porté de ses projectiles
 	 * @param damage
 	 * 	Les dégats de ses projectiles
 	 * @param cooldown

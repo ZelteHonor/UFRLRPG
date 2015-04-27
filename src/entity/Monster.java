@@ -31,8 +31,6 @@ public class Monster extends Entity {
 	private float speed;
 	private int damage;
 	private int attackspeed;
-
-	private int maxhealth;
 	
 	private int cooldown;
 	
@@ -41,7 +39,6 @@ public class Monster extends Entity {
 	public Monster(double x, double y,int health, int damage, int attackspeed, float speed) {
 		super(x, y, health);
 		
-		this.maxhealth = health;
 		this.damage = damage;
 		this.attackspeed = attackspeed;
 		this.speed = speed;
@@ -59,7 +56,7 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
-			if(Math.random() <= 0.2)
+			if((int)(Math.random()*100) <= 10)
 				dropLoot(floor);
 			
 			if(sprite.contains("zombie"))
@@ -105,7 +102,7 @@ public class Monster extends Entity {
 	}
 
 	private void dropLoot(Floor floor) {
-		floor.getObjectsToLoad().add(new HpUp(x, y));
+		floor.getObjects().add(new HpUp(x, y));
 	}
 
 	public String getName() {
@@ -217,7 +214,7 @@ public class Monster extends Entity {
 	}
 	
 	public int getMaxHealth() {
-		return maxhealth;
+		return MAX_HEALTH;
 	}
 
 }

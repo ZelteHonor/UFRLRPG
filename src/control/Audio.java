@@ -36,9 +36,13 @@ public class Audio {
 	public static void play(String sound, double volume){
 		if (!sound.contains(".wav"))
 			sound += ".wav";
-		sounds.get(sound).play(volume);		
+		
+		try
+		{
+		if(!sounds.get(sound).isPlaying())
+			sounds.get(sound).play(volume);			
+		}catch(NullPointerException e){}
 	}
-
 
 	public static HashMap<String, AudioClip> getSounds() {
 		return sounds;
