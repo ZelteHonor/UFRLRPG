@@ -226,11 +226,13 @@ public class Render {
 			gc.drawImage(getSprite("img/crosshair.png"), Controller.get().getInput().getMouse().getSceneX() - 16, Controller.get().getInput().getMouse().getSceneY() - 16);
 		
 		/* Mort */
-		if (player.getHealth() == 0) {
-			if (player.hasArtefact())
-				gc.drawImage(spriteMap.get("img/winscreen.png"), 0, 0);
-			else
-				gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+		if (player.getDead()) {
+			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
+		}
+		
+		if (player.getWin()) {
+			gc.drawImage(spriteMap.get("img/winscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
 		}
 	}
