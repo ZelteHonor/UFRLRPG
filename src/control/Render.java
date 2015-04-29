@@ -1,6 +1,3 @@
-/**
- * 
- */
 package control;
 
 import java.io.IOException;
@@ -46,7 +43,6 @@ public class Render {
 
 	//� afficher
 	private World.TILE[][] world;
-	private GameObject objects[];
 	
 	//Lien des Images
 	private HashMap<String,Image> spriteMap;
@@ -183,7 +179,9 @@ public class Render {
 		}
 	}
 	
-	
+	/**
+	 * Affichage des barres de vie, curseurs et écran de mort/victoire
+	 */
 	public void drawHUD() {
 		Player player = Controller.get().getPlayer();
 		if (player.getHealth() < 0) 
@@ -245,16 +243,14 @@ public class Render {
 	public Image getSprite(GameObject obj) {
 		return spriteMap.get(obj.getSprite());	
 	}
+	/**
+	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
+	 * 
+	 * @param String
+	 * @return L'image du sprite
+	 */
 	public Image getSprite(String img) {
 		return spriteMap.get(img);	
-	}
-	
-	public GameObject[] getObjects() {
-		return objects;
-	}
-	
-	public void setObjects(GameObject[] objects) {
-		this.objects = objects;
 	}
 	
 	public void setWorld(World.TILE[][] world) {
