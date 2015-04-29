@@ -11,7 +11,7 @@ public class World {
 	};
 
 	public static final int SIZE = 64;
-	public static final int LEVEL_COUNT = 4;
+	public static final int LEVEL_COUNT = 1;
 
 	private ArrayList<Floor> floors;
 	private int current;

@@ -94,7 +94,6 @@ public class Player extends Entity {
 			}
 		}
 		else {
-			health = 0;
 			if (key[4] == KEYSTATE.RELEASED)
 				Controller.get().initGame();
 		}
@@ -171,7 +170,7 @@ public class Player extends Entity {
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
 			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact) {
-				System.out.println("you won the video Game!");
+				dead = true;
 			}else {
 				Audio.play("ladder");
 				Controller.get().getWorld().changeFloor(-1);
