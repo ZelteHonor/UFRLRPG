@@ -65,7 +65,7 @@ public class Render {
 		gc = GUI.getGraphicsContext2D();
 		loadSprites();
 		
-		f04b03 = Font.loadFont(getClass().getResourceAsStream("../control/04b03.ttf"),16);
+		f04b03 = Font.loadFont(getClass().getResourceAsStream("04b03.ttf"),16);
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class Render {
 	
 	public void drawHUD() {
 		Player player = Controller.get().getPlayer();
-		if (player.getHealth() < 0)
+		if (player.getHealth() < 0) 
 			player.setHealth(0);
 		
 		/* Monster healthbar */
@@ -229,7 +229,10 @@ public class Render {
 		
 		/* Mort */
 		if (player.getHealth() == 0) {
-			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+			if (player.hasArtefact())
+				gc.drawImage(spriteMap.get("img/winscreen.png"), 0, 0);
+			else
+				gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
 		}
 		

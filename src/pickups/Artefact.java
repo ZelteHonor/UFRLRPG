@@ -13,7 +13,7 @@ public class Artefact extends PickUps {
 	@Override
 	protected void activateEffect(Floor floor) {
 		floor.getPlayer().setArtefact(true);
-		Audio.play("artefact_acquired.wav");
+		Audio.play("artefact"+Integer.toString((int)(Math.random()*4+1)));
 	}
 
 }
