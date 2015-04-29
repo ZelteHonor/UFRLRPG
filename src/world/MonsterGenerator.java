@@ -2,9 +2,7 @@ package world;
 
 import java.awt.Point;
 import java.util.ArrayList;
-
 import world.World.TILE;
-import javafx.scene.image.Image;
 import entity.Monster;
 
 public class MonsterGenerator {

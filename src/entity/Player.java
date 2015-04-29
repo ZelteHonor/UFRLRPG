@@ -8,13 +8,10 @@ import weapons.Bow;
 import weapons.Sword;
 import weapons.Weapon;
 import world.Floor;
-import world.World;
-import world.World.TILE;
 import control.Audio;
 import control.Controller;
 import control.Input.KEYSTATE;
 import control.Input;
-import gameobject.Item;
 import gameobject.Mask;
 
 public class Player extends Entity {

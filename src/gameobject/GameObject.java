@@ -1,7 +1,6 @@
 package gameobject;
 
 import world.Floor;
-import javafx.scene.image.Image;
 
 public abstract class GameObject {
 

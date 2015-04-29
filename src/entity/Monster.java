@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import control.Audio;
 import control.Controller;
 import pathfinding.Node;
-import pickups.Artefact;
 import pickups.HpUp;
-import weapons.Sword;
 import world.Floor;
-import world.World;
 import world.World.TILE;
 import gameobject.GameObject;
-import gameobject.Item;
 import gameobject.Mask;
 
 public class Monster extends Entity {

@@ -1,8 +1,5 @@
 package world;
 
-import gameobject.GameObject;
-
-import java.awt.Point;
 import java.util.ArrayList;
 
 import pickups.Artefact;

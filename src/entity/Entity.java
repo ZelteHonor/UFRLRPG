@@ -1,11 +1,7 @@
 package entity;
 
-import java.util.ArrayList;
-
-import weapons.Weapon;
 import world.Floor;
 import gameobject.GameObject;
-import gameobject.Item;
 
 public abstract class Entity extends GameObject {
 
