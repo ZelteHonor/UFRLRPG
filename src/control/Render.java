@@ -65,7 +65,7 @@ public class Render {
 		gc = GUI.getGraphicsContext2D();
 		loadSprites();
 		
-		f04b03 = Font.loadFont(getClass().getResourceAsStream("../control/04b03.ttf"),16);
+		f04b03 = Font.loadFont(getClass().getResourceAsStream("04b03.ttf"),16);
 	}
 	
 	/**
