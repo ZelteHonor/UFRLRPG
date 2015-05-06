@@ -65,4 +65,12 @@ public class World {
 			Controller.get().getPlayer().setY(floors.get(current).getStartY());
 		}
 	}
+	
+	public void regenMonster() {
+		for (int i = 0; i < LEVEL_COUNT - 1; i++) {
+			floors.get(i).getObjects().clear();
+			MonsterGenerator m = new MonsterGenerator();
+			m.generateMonster(floors.get(i));
+		}
+	}
 }
