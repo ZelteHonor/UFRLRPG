@@ -23,6 +23,7 @@ public class Player extends Entity {
 	public static final int MAX_HEALTH = 100;
 	
 	private boolean artefact;
+	private boolean win;
 	
 	private Weapon[] weapons;
 
@@ -38,6 +39,7 @@ public class Player extends Entity {
 		victory = false;
 		
 		artefact = false;
+		win = false;
 
 		/* Movement */
 		vx = 0;
@@ -61,7 +63,7 @@ public class Player extends Entity {
 
 	@Override
 	public void update(Floor floor) {
-		if (!dead) {
+		if (!dead && !win) {
 			/* Movement */
 			move(floor);
 			mask.setPosition(x,y);
@@ -91,9 +93,8 @@ public class Player extends Entity {
 				angle = 0;
 				Audio.play("death");
 			}
-			if (health > 100) {
+			if (health > 100)
 				health = 100;
-			}
 		}
 		else {
 			if (key[4] == KEYSTATE.RELEASED)
@@ -172,7 +173,7 @@ public class Player extends Entity {
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
 			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact) {
-				dead = true;
+				win = true;
 			}else {
 				Audio.play("ladder");
 				Controller.get().getWorld().changeFloor(-1);
@@ -218,12 +219,12 @@ public class Player extends Entity {
 	public void setArtefact(boolean artefact) {
 		this.artefact = artefact;
 	}
-
-	public boolean isVictorious() {
-		return victory;
+	
+	public boolean getDead() {
+		return dead;
 	}
-
-	public void setVictory(boolean victory) {
-		this.victory = victory;
+	
+	public boolean getWin() {
+		return win;
 	}
 }

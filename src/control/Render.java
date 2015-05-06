@@ -1,6 +1,3 @@
-/**
- * 
- */
 package control;
 
 import java.io.IOException;
@@ -46,7 +43,6 @@ public class Render {
 
 	//� afficher
 	private World.TILE[][] world;
-	private GameObject objects[];
 	
 	//Lien des Images
 	private HashMap<String,Image> spriteMap;
@@ -183,7 +179,9 @@ public class Render {
 		}
 	}
 	
-	
+	/**
+	 * Affichage des barres de vie, curseurs et écran de mort/victoire
+	 */
 	public void drawHUD() {
 		Player player = Controller.get().getPlayer();
 		if (player.getHealth() < 0) 
@@ -228,11 +226,13 @@ public class Render {
 			gc.drawImage(getSprite("img/crosshair.png"), Controller.get().getInput().getMouse().getSceneX() - 16, Controller.get().getInput().getMouse().getSceneY() - 16);
 		
 		/* Mort */
-		if (player.getHealth() == 0) {
-			if (player.hasArtefact())
-				gc.drawImage(spriteMap.get("img/winscreen.png"), 0, 0);
-			else
-				gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+		if (player.getDead()) {
+			gc.drawImage(spriteMap.get("img/deathscreen.png"), 0, 0);
+			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
+		}
+		
+		if (player.getWin()) {
+			gc.drawImage(spriteMap.get("img/winscreen.png"), 0, 0);
 			gc.fillText("Appuyer Espace pour rejouer", 640, 500);
 		}
 		
@@ -247,16 +247,14 @@ public class Render {
 	public Image getSprite(GameObject obj) {
 		return spriteMap.get(obj.getSprite());	
 	}
+	/**
+	 * Vérifie si le sprite existe dans spriteMap, sinon l'ajoute.
+	 * 
+	 * @param String
+	 * @return L'image du sprite
+	 */
 	public Image getSprite(String img) {
 		return spriteMap.get(img);	
-	}
-	
-	public GameObject[] getObjects() {
-		return objects;
-	}
-	
-	public void setObjects(GameObject[] objects) {
-		this.objects = objects;
 	}
 	
 	public void setWorld(World.TILE[][] world) {
