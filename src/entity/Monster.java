@@ -55,7 +55,7 @@ public class Monster extends Entity {
 	public void update(Floor floor) {
 		if (health <= 0) {
 			destroy = true;
-			if((int)(Math.random()*100) <= 10)
+			if((int)(Math.random()*100) <= 1)
 				dropLoot(floor);
 			
 			if(sprite.contains("zombie"))
