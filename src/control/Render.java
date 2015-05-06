@@ -147,8 +147,8 @@ public class Render {
 		else
 			scy = (int)Math.floor(y - DH/2 + 1);
 				
-		for(int j = -1 ; j <= DH + 1 ; j++)	{
-			for(int i = -1; i <= DW + 1; i++) {		
+		for(int j = -1 ; j <= DH ; j++)	{
+			for(int i = -1; i <= DW; i++) {		
 				//Position de l'image
 				double px = (-dx + i)*RESOLUTION;
 				double py = (-dy + j)*RESOLUTION;
