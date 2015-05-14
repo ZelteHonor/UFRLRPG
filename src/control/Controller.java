@@ -90,6 +90,9 @@ public class Controller implements Initializable {
 	private ArrayList<GameObject> objects;
 	private ArrayList<GameObject> objectsToLoad;
 
+	/**
+	 * Instance du Générateur de monstre.
+	 */
 	private MonsterGenerator m;
 
 	/* Camera */
@@ -218,6 +221,9 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/**
+	 * S'occupe de rafraichir l'écran.
+	 */
 	private class Renderer extends Service<Void> {
 		@Override
 		protected Task<Void> createTask() {
