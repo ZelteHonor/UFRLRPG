@@ -7,9 +7,15 @@ import java.util.HashMap;
 
 import javafx.scene.media.AudioClip;
 
+/**
+ *Classe de gestion du son.
+ */
 public class Audio {
 	
 
+	/**
+	 * HashMap de tous les son dans le dossier sfx
+	 */
 	private static HashMap<String, AudioClip> sounds;
 	
 
