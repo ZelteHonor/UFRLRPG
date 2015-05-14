@@ -7,6 +7,10 @@ import java.util.Collections;
 import world.Floor;
 import world.World;
 
+/**
+ * Classe de PathFinding pour les monstres
+ * @author gabriel
+ */
 public class Pathfinding {
 
 	/**
