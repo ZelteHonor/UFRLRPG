@@ -19,38 +19,80 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 
+/**
+ * Controlleur principal du jeux.
+ * Contiens la boucle du jeux.
+ *
+ */
 public class Controller implements Initializable {
 
 	/* Singleton-like */
 	private static Controller controller;
 
+	/**
+	 * Permet au reste du programme d'acceder au controlleur.
+	 * @return
+	 * 	Retourne le controleur
+	 */
 	public static Controller get() {
 		return controller;
 	}
 
 	/* FXML */
+	/**
+	 * Racine de la fenêtre JavaFX
+	 */
 	@FXML
 	private BorderPane root;
+	
+	/**
+	 * Racine une fois le jeux lancé.
+	 */
 	@FXML
 	private Pane pane;
 
-	private AudioClip mus;
-
 	/* Modules */
+	/**
+	 * Instance de la classe de rendu.
+	 */
 	private Render render;
+	/**
+	 * Instance de la classe d'input.
+	 */
 	private Input input;
+	/**
+	 * Instance du monde
+	 */
 	private World world;
 
 	/* Services */
+	/**
+	 * Instance du Timer (Voir la classe Interne Timer)
+	 */
 	private Service<Void> timer;
+	/**
+	 * Instance du Updater. (Voir la Classe Interne Updater)
+	 */
 	private Service<Void> updater;
+	/**
+	 * Instance du Renderer. (Voir la classe Interne Renderer)
+	 */
 	private Service<Void> refresher;
 
 	/* Objects */
+	/**
+	 * Instance du Joueur
+	 */
 	private Player player;
+	/**
+	 * ArrayList qui contiens tous les objets en jeux.
+	 */
 	private ArrayList<GameObject> objects;
 	private ArrayList<GameObject> objectsToLoad;
 
+	/**
+	 * Instance du Générateur de monstre.
+	 */
 	private MonsterGenerator m;
 
 	/* Camera */
@@ -179,6 +221,9 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/**
+	 * S'occupe de rafraichir l'écran.
+	 */
 	private class Renderer extends Service<Void> {
 		@Override
 		protected Task<Void> createTask() {
