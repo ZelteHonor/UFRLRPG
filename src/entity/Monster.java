@@ -12,32 +12,86 @@ import world.World.TILE;
 import gameobject.GameObject;
 import gameobject.Mask;
 
+/**
+ *	Classe pour les monstres.
+ */
 public class Monster extends Entity {
 
+	/**
+	 * Porté de la vision du Monstre
+	 */
 	public static int RANGE = 20;
-	public static int ATTACK = 1;
+	/**
+	 * Nom du monstre (Non utilisé dans le jeux)
+	 */
 	private String name;
 	
 	/* Pathfinding */
+	/**
+	 * Vrai si le monstre a vue le joueur et le suis
+	 */
 	private boolean searching;
+	/**
+	 * Dernière position ou il a vue le joueur.
+	 */
 	private Point lastTarget;
+	/**
+	 * totalPath
+	 * 	Chemin jusqu'au joueur
+	 * nextNode
+	 * 	Prochain objectif pour le chemin
+	 */
 	private Node totalPath, nextNode;
+	/**
+	 * Latence de 1/6 de seconde avant que le monstre ne cherche de nouveau le joueur
+	 * au lieu de 1/60 comme le déroulement du jeux.
+	 */
 	private int tickTillAI;
 	
 	/* Movement */
+	/**
+	 * Vitesse du monstre
+	 */
 	private float speed;
+	/**
+	 * Dégàt du monstre
+	 */
 	private int damage;
-	private int attackspeed;
+	/**
+	 * Vitesse d'attaque du monstre
+	 */
+	private int attackSpeed;
 	
+	/**
+	 * Limite avant de pouvoir attaqué a nouveau (déterminer par attackSpeed)
+	 */
 	private int cooldown;
 	
+	/**
+	 * Fréquence à laquel le monstre émet son bruit.
+	 */
 	private int tickTillSound;
 	
+	/**
+	 * Constructeur de monstre
+	 * @param x
+	 * 	X d'origine
+	 * @param y
+	 * 	Y d'origine
+	 * @param health
+	 * 	Vie d'origine (Et donx maximal)
+	 * @param damage
+	 * 	Dégat du monstre
+	 * @param attackspeed
+	 * 	Vitesse d'attaque
+	 * @param speed
+	 * 	Vitesse de déplacement
+	 */
 	public Monster(double x, double y,int health, int damage, int attackspeed, float speed) {
 		super(x, y, health);
 		
 		this.damage = damage;
-		this.attackspeed = attackspeed;
+		this.attackSpeed = attackspeed;
 		this.speed = speed;
 		
 		searching = false;
@@ -56,7 +110,7 @@ public class Monster extends Entity {
 		if (health <= 0) {
 			destroy = true;
 			if((int)(Math.random()*100) <= 3)
-				dropLoot(floor);
+				dropLoot();
 			
 			if(sprite.contains("zombie"))
 				Audio.play("zombie_death", 0.40);
@@ -95,7 +149,7 @@ public class Monster extends Entity {
 					Audio.play("spider_attack" + Integer.toString(((int)(Math.random()*3+1))));
 				tickTillSound = 20;
 			}
-			cooldown = attackspeed;
+			cooldown = attackSpeed;
 		}
 		
 		if (cooldown > 0)
@@ -107,18 +161,36 @@ public class Monster extends Entity {
 
 	}
 
-	private void dropLoot(Floor floor) {
+	/**
+	 * Fais que le monstre lache une caisse de vie par terre.
+	 */
+	private void dropLoot() {
 		Controller.get().getObjectsToLoad().add(new HpUp(x, y));
 	}
 
+	/**
+	 * Retourne le nom du Monstre
+	 * @return
+	 * 	Le nom du Monstre
+	 * 
+	 */
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	/**
+	 * Change le nom du Monstre
+	 * @param chooseName
+	 * 	Le nouveau nom.
+	 */
+	public void setName(String chooseName) {
+		name = chooseName;
 	}
-
+	/**
+	 * 	Détermine si le Monstre vois le joueur.
+	 * @return
+	 * 	Vrai si le Monstre vois le joueur
+	 */
 	private boolean seePlayer(Floor floor) {
 		Point player = new Point((int) floor.getPlayer().getX(), (int) floor
 				.getPlayer().getY());
@@ -145,6 +217,13 @@ public class Monster extends Entity {
 		return true;
 	}
 
+	/**
+	 * Déplace le monstre s'il n'y a pas de collision
+	 * @param vx
+	 * 	Vitesse en X
+	 * @param vy
+	 * 	Vitesse en Y
+	 */
 	private void move(double vx, double vy) {
 		boolean hCheckW = false;
 		boolean vCheckW = false;
@@ -210,17 +289,23 @@ public class Monster extends Entity {
 			y += vy;
 	}
 
+	/**
+	 * déplace le monstre selon son angle avec ça cible.
+	 */
 	private void moveTo() {
 		double angle = getMonsTargetAngle();
 		move(speed * Math.cos(angle), speed * Math.sin(angle));
 	}
 
+	/**
+	 * Retourne l'angle entre le monstre et sa cible
+	 * @return
+	 * 	L'angle avec sa cible.
+	 */
 	private double getMonsTargetAngle() {
 		return Math.atan2(nextNode.getCoor().getY() - y + 0.5, nextNode.getCoor().getX() - x + 0.5);
 	}
+
 	
-	public int getMaxHealth() {
-		return MAX_HEALTH;
-	}
 
 }
