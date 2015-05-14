@@ -16,7 +16,7 @@ public abstract class Entity extends GameObject {
 	/**
 	 * Vie maximal de l'entité
 	 */
-	protected final int MAX_HEALTH;
+	public final int MAX_HEALTH;
 	
 	/**
 	 * Constructeur pour les entité.

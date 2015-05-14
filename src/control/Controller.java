@@ -20,8 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 
 /**
- * Controlleur principal du jeux.
- * Contiens la boucle du jeux.
+ * Controlleur principal du jeux. Contiens la boucle du jeux.
  *
  */
 public class Controller implements Initializable {
@@ -31,8 +30,8 @@ public class Controller implements Initializable {
 
 	/**
 	 * Permet au reste du programme d'acceder au controlleur.
-	 * @return
-	 * 	Retourne le controleur
+	 * 
+	 * @return Retourne le controleur
 	 */
 	public static Controller get() {
 		return controller;
@@ -44,7 +43,7 @@ public class Controller implements Initializable {
 	 */
 	@FXML
 	private BorderPane root;
-	
+
 	/**
 	 * Racine une fois le jeux lancÃ©.
 	 */
@@ -88,10 +87,15 @@ public class Controller implements Initializable {
 	 * ArrayList qui contiens tous les objets en jeux.
 	 */
 	private ArrayList<GameObject> objects;
+
+	/**
+	 * ArrayList temporaire pour ajouter des objets à "objects" pendant que la
+	 * boucle du jeu la parcours (et ainsi empêcher les ConcurrentException)
+	 */
 	private ArrayList<GameObject> objectsToLoad;
 
 	/**
-	 * Instance du GÃ©nÃ©rateur de monstre.
+	 * Instance du Générateur de monstre.
 	 */
 	private MonsterGenerator m;
 
@@ -210,7 +214,7 @@ public class Controller implements Initializable {
 						for (int i = 0; i < objects.size(); i++)
 							if (objects.get(i).isDestroy())
 								objects.remove(i);
-						
+
 						if (objectsToLoad != null)
 							objects.addAll(objectsToLoad);
 						objectsToLoad.clear();
@@ -266,19 +270,34 @@ public class Controller implements Initializable {
 	}
 
 	/* Objects */
+	/**
+	 * @return renvoie l'instance du joueur
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * 
+	 * @return renvoir tout les GameObjets présent dans la partie
+	 */
 	public ArrayList<GameObject> getObjects() {
 		return objects;
 	}
 
+	/**
+	 * 
+	 * @param redéfinie
+	 *            le contenue de objects
+	 */
 	public void setObjects(ArrayList<GameObject> array) {
 		objects = array;
 	}
 
-	/* World */
+	/**
+	 * 
+	 * @return l'intégralité de tout les floors de la partie
+	 */
 	public World getWorld() {
 		return world;
 	}
@@ -305,6 +324,11 @@ public class Controller implements Initializable {
 		return cy;
 	}
 
+	/**
+	 * 
+	 * @return renvoi la liste temporaire de GameObjects à ajouter à la liste
+	 *         principale (objects)
+	 */
 	public ArrayList<GameObject> getObjectsToLoad() {
 		return objectsToLoad;
 	}

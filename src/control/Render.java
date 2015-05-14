@@ -191,16 +191,16 @@ public class Render {
 		for (GameObject o : Controller.get().getObjects()) {
 			if (o instanceof Monster) {
 				Monster m = (Monster) (o);
-				if (m.getHealth() != m.getMaxHealth()) {
+				if (m.getHealth() != m.MAX_HEALTH) {
 					gc.setFill(Color.RED);
-					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16*(m.getHealth()/(m.MAX_HEALTH*1.0)),4);
 					gc.setFill(Color.DARKRED);
-					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8, (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16*(m.getHealth()/(m.MAX_HEALTH*1.0)),4);
 					
 					gc.setFill(Color.DARKGREY);
-					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8 + 16*(m.getHealth()/(m.getMaxHealth()*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16 - 16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 640 - 8 + 16*(m.getHealth()/(m.MAX_HEALTH*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 360 - 64,16 - 16*(m.getHealth()/(m.MAX_HEALTH*1.0)),4);
 					gc.setFill(Color.GREY);
-					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8 + 16*(m.getHealth()/(m.getMaxHealth()*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16 - 16*(m.getHealth()/(m.getMaxHealth()*1.0)),4);
+					gc.fillRect((m.getX()-Controller.get().getCX())*RESOLUTION + 641 - 8 + 16*(m.getHealth()/(m.MAX_HEALTH*1.0)), (m.getY()-Controller.get().getCY())*RESOLUTION + 361 - 64,16 - 16*(m.getHealth()/(m.MAX_HEALTH*1.0)),4);
 				}
 			}
 		}

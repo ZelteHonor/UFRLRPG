@@ -8,13 +8,34 @@ import world.World.TILE;
 
 public class Floor {
 		
+	/**
+	 *liste statique des tuiles qui forme le floor
+	 */
 	private World.TILE[][] tiles;
+	/**
+	 * les GameObjects contenu dans le floor
+	 */
 	private ArrayList<GameObject> objects;
+	/**
+	 * 
+	 */
 	private ArrayList<Mask> walls;
+	/**
+	 * le player présent dans le floor
+	 */
 	private Player player;
+	/**
+	 * les coordonnées du point d'entrée du floor
+	 */
 	private int startx, starty;
+	/**
+	 * le point de sortie du floor
+	 */
 	private int endx, endy;
 
+	/**
+	 * la profondeur du floor relatif aux autres floors
+	 */
 	private int depth;
 
 	public Floor(int depth) {
@@ -59,6 +80,10 @@ public class Floor {
 		return walls;
 	}
 	
+	/**
+	 * 
+	 * @return les GameObjects présent sur le floor
+	 */
 	public ArrayList<GameObject> getObjects() {
 		return objects;
 	}
