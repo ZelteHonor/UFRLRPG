@@ -87,7 +87,7 @@ public class MonsterGenerator {
 	 * @return 20 + 5 * "numéro de l'étage"
 	 */
 	private int createCount(Floor f) {
-		return 20 + 5 * f.getDepth();
+		return 30 + 10 * f.getDepth();
 	}
 
 }

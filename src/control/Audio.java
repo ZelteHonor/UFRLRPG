@@ -13,6 +13,9 @@ public class Audio {
 	private static HashMap<String, AudioClip> sounds;
 	
 
+	/**
+	 * À partir du répertoire depuis lequel le programme est lancé il charge tous les fichier audio.
+	 */
 	public static void load() {		
 		
 		if (Audio.sounds == null)
@@ -28,10 +31,22 @@ public class Audio {
 		}
 	}
 	
+	/**
+	 * Joue le son demandé
+	 * @param sound
+	 * 	Nom du son (Nom utilisé dans le fichier)
+	 */
 	public static void play(String sound){
 		play(sound, 1);		
 	}
 	
+	/**
+	 * Joue un son avec un volume donnée.
+	 * @param sound
+	 * 	Nom du son (Nom utilisé dans le fichier)
+	 * @param volume
+	 * 	Volume du son
+	 */
 	public static void play(String sound, double volume){
 		if (!sound.contains(".wav"))
 			sound += ".wav";
@@ -41,14 +56,6 @@ public class Audio {
 		if(!sounds.get(sound).isPlaying())
 			sounds.get(sound).play(volume);			
 		}catch(NullPointerException e){}
-	}
-
-	public static HashMap<String, AudioClip> getSounds() {
-		return sounds;
-	}
-
-	public static void setSounds(HashMap<String, AudioClip> sounds) {
-		Audio.sounds = sounds;
 	}
 
 }
