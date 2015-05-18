@@ -290,7 +290,7 @@ public class Monster extends Entity {
 	}
 
 	/**
-	 * déplace le monstre selon son angle avec ça cible.
+	 * Déplace le monstre selon son angle avec ça cible.
 	 */
 	private void moveTo() {
 		double angle = getMonsTargetAngle();

@@ -14,31 +14,62 @@ import control.Input.KEYSTATE;
 import control.Input;
 import gameobject.Mask;
 
+/**
+ * Classe du joueur
+ */
 public class Player extends Entity {
 
 	/* Movement */
+	/**
+	 * Liste contenant l'état des touches clavier
+	 */
 	private Input.KEYSTATE[] key; // W S A D SPACE MBLEFT MBRIGHT
+	/**
+	 * Vitesse en X et vitesse en Y
+	 */
 	private double vx, vy;
 	
+	/**
+	 * Constante de vie maximal
+	 */
 	public static final int MAX_HEALTH = 100;
 	
-	private boolean artefact;
+	/**
+	 * S'il le joueur posssède l'Artefact
+	 */
+	private boolean haveArtefact;
+	/**
+	 * Si le joueur a gagné
+	 */
 	private boolean win;
 	
+	/**
+	 * La liste des armes
+	 */
 	private Weapon[] weapons;
 
-	private Weapon weapon;
+	/**
+	 * L'arme que le joueur a en main
+	 */
+	private Weapon currentWeapon;
 	
-	private boolean dead;
-	private boolean victory;
+	/**
+	 * Si le joueur est mort
+	 */
+	private boolean isDead;
 	
+	/**
+	 * Constructeur du joueur
+	 * @param x
+	 * 	Origine en X
+	 * @param y
+	 * 	Origine en Y
+	 */
 	public Player(double x, double y) {
 		super(x, y, 100);
 		sprite = "img/player.png";
-		dead = false;
-		victory = false;
-		
-		artefact = false;
+		isDead = false;
+		haveArtefact = false;
 		win = false;
 
 		/* Movement */
@@ -54,16 +85,23 @@ public class Player extends Entity {
 		weapons = new Weapon[2];
 		weapons[0] = new Sword(x, y, 10, 10);
 		weapons[1] = new Bow(x, y, 5, 30, 0.3f);
-		weapon = weapons[0];
+		currentWeapon = weapons[0];
 	}
 
+	/**
+	 * Change l'état d'une touche
+	 * @param index
+	 * 	Index de la touche
+	 * @param state
+	 * 	Nouvelle état
+	 */
 	public void setKeyState(int index, KEYSTATE state) {
 		key[index] = state;
 	}
 
 	@Override
 	public void update(Floor floor) {
-		if (!dead && !win) {
+		if (!isDead && !win) {
 			/* Movement */
 			move(floor);
 			mask.setPosition(x,y);
@@ -71,24 +109,24 @@ public class Player extends Entity {
 				checkFloorChange();
 			
 			/* Combat */
-			weapon.setPosition(x, y);
-			weapon.setAngle(angle);
-			weapon.update();
+			currentWeapon.setPosition(x, y);
+			currentWeapon.setAngle(angle);
+			currentWeapon.update();
 			if (key[5] == KEYSTATE.PRESSED)
-				weapon.attack(floor);
+				currentWeapon.attack(floor);
 			/* Change weapon*/
 			if (key[6] == KEYSTATE.PRESSED) {
-				if(weapon instanceof Bow) { 
-					weapon = weapons[0];
+				if(currentWeapon instanceof Bow) { 
+					currentWeapon = weapons[0];
 					Controller.get().getPane().setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
 				} else {
-					weapon = weapons[1];
+					currentWeapon = weapons[1];
 					Controller.get().getPane().setCursor(Cursor.NONE);
 				}
 			}
 			
 			if (health <= 0) {
-				dead = true;
+				isDead = true;
 				sprite = "img/playerdead.png";
 				angle = 0;
 				Audio.play("death");
@@ -105,6 +143,11 @@ public class Player extends Entity {
 		updateInputState();
 	}
 
+	/**
+	 * Déplace le joueur dans l'étage courant
+	 * @param floor
+	 * 	Étage courant
+	 */
 	private void move(Floor floor) {
 
 		int xto = 0, yto = 0;
@@ -164,6 +207,9 @@ public class Player extends Entity {
 			y += vy;
 	}
 	
+	/**
+	 * Vérifie le changement d'étage. (Et provoque une victoire s'il y a lieu)
+	 */
 	private void checkFloorChange() {
 		double ex, ey;
 		
@@ -172,7 +218,7 @@ public class Player extends Entity {
 		ey = Controller.get().getWorld().getFloor().getStartY();
 		
 		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
-			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.artefact) {
+			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.haveArtefact) {
 				win = true;
 			}else {
 				Audio.play("ladder");
@@ -194,6 +240,9 @@ public class Player extends Entity {
 		}
 	}
 	
+	/**
+	 * Mets a jour le changement de touche.
+	 */
 	public void updateInputState() {
 		/* Update input state */
 		for (int i = 0; i < key.length; i++)
@@ -203,25 +252,48 @@ public class Player extends Entity {
 				key[i] = KEYSTATE.UP;
 	}
 	
+	/**
+	 * Retourne l'arme courante
+	 * @return
+	 * 	L'arme courante
+	 */
 	public Weapon getWeapon() {
-		return weapon;
+		return currentWeapon;
 	}
 	
+	/**
+	 * Change l'angle du joueur.
+	 */
 	public void setAngle(double angle) {
-		if (!dead)
+		if (!isDead)
 			this.angle = angle;
 	}
 
+	/**
+	 * Retourne vrai si le joueur à l'Artefact.
+	 * @return
+	 * 	Vrai s'il a l'artefact
+	 */
 	public boolean hasArtefact() {
-		return artefact;
+		return haveArtefact;
 	}
 
+	/**
+	 * Change si le joueur à l'Artefact
+	 * @param artefact
+	 * 	Vrai s'il vient d'obtenir l'artefacté
+	 */
 	public void setArtefact(boolean artefact) {
-		this.artefact = artefact;
+		this.haveArtefact = artefact;
 	}
 	
+	/**
+	 * Retourne si le joueur est mort
+	 * @return
+	 * 	Vrai s'il est mort
+	 */
 	public boolean getDead() {
-		return dead;
+		return isDead;
 	}
 	
 	public boolean getWin() {
