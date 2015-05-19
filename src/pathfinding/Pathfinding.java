@@ -9,20 +9,21 @@ import world.World;
 
 /**
  * Classe de PathFinding pour les monstres
+ * 
  * @author gabriel
  */
 public class Pathfinding {
 
 	/**
 	 * A* search algorithm.
+	 * 
 	 * @param start
-	 * 	Point de départ
+	 *            Point de départ
 	 * @param end
-	 * 	Point d'arriver
+	 *            Point d'arriver
 	 * @param floor
-	 * 	L'étage courant
-	 * @return
-	 * 	Retourne une suite de node avec le précédent attacher a la queue.
+	 *            L'étage courant
+	 * @return Retourne une suite de node avec le précédent attacher a la queue.
 	 */
 	public static Node getPath(Point start, Point end, Floor floor) {
 		int searchLimit = 200;
@@ -30,7 +31,7 @@ public class Pathfinding {
 		HashSet<Node> closedList = new HashSet<Node>();
 		Node current = new Node(start, null, 0f, (float) start.distance(end));
 		closedList.add(current);
-		//Take all valid node around the start
+		// Take all valid node around the start
 		for (int i = (int) (start.getX() - 1); i <= start.getX() + 1; i++) {
 			for (int j = (int) (start.getY() - 1); j <= start.getY() + 1; j++) {
 				if (i != start.getX() || j != start.getY()) {
@@ -42,18 +43,17 @@ public class Pathfinding {
 					}
 				}
 			}
-			
-			
+
 		}
-		//System.out.println("Start");
+		// System.out.println("Start");
 
 		while (!current.getCoor().equals(end) && searchLimit >= 0) {
-			//The current Node is the one with the lowest cost
+			// The current Node is the one with the lowest cost
 			current = Collections.min(openList);
 			openList.remove(current);
 			closedList.add(current);
-			
-			//Take all node around the current node
+
+			// Take all node around the current node
 			for (int i = (int) (current.getCoor().getX() - 1); i <= current
 					.getCoor().getX() + 1; i++) {
 				for (int j = (int) (current.getCoor().getY() - 1); j <= current
@@ -76,7 +76,7 @@ public class Pathfinding {
 			searchLimit--;
 		}
 
-		//System.out.println("END");
+		// System.out.println("END");
 		return current;
 	}
 

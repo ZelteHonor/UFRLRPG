@@ -4,33 +4,34 @@ import control.Audio;
 import world.Floor;
 
 public class HpUp extends PickUps {
-	
+
 	/**
-	 * La quantitée de point de vie regagnée
+	 * La quantitï¿½e de point de vie regagnï¿½e
 	 */
 	private final int HEALTH_GAIN = 15;
 
-	/**Constructeur
+	/**
+	 * Constructeur
 	 * 
-	 * @param position x
-	 * @param position y
+	 * @param position
+	 *            x
+	 * @param position
+	 *            y
 	 */
 	public HpUp(double x, double y) {
 		super(x, y);
 		sprite = "img/HpUp.png";
 	}
-	
+
 	@Override
 	/**Ajoute la vie au joueur
 	 * 
 	 * @param Floor
 	 */
 	protected void activateEffect(Floor floor) {
-		floor.getPlayer().setHealth(floor.getPlayer().getHealth() + HEALTH_GAIN);
+		floor.getPlayer()
+				.setHealth(floor.getPlayer().getHealth() + HEALTH_GAIN);
 		Audio.play("HpUp.wav");
 	}
-	
-	
-	
 
 }
