@@ -2,11 +2,13 @@ package gameobject;
 
 import world.Floor;
 
-public class Item extends GameObject {
+/**
+ * Classe générique pour les objets
+ */
+public abstract class Item extends GameObject {
 	public Item(double x, double y) {
 		super(x, y);
 	}
 
-	public void update(Floor floor) {
-	}
+	public abstract void update(Floor floor);
 }
