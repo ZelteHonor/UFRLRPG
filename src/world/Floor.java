@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import world.World.TILE;
 
 public class Floor {
-		
+
 	/**
-	 *liste statique des tuiles qui forme le floor
+	 * liste statique des tuiles qui forme le floor
 	 */
 	private World.TILE[][] tiles;
 	/**
@@ -21,11 +21,11 @@ public class Floor {
 	 */
 	private ArrayList<Mask> walls;
 	/**
-	 * le player présent dans le floor
+	 * le player prï¿½sent dans le floor
 	 */
 	private Player player;
 	/**
-	 * les coordonnées du point d'entrée du floor
+	 * les coordonnï¿½es du point d'entrï¿½e du floor
 	 */
 	private int startx, starty;
 	/**
@@ -39,7 +39,7 @@ public class Floor {
 	private int depth;
 
 	/**
-	 * Génère un étage à la profondeur depth
+	 * Gï¿½nï¿½re un ï¿½tage ï¿½ la profondeur depth
 	 * 
 	 * @param depth
 	 */
@@ -49,37 +49,36 @@ public class Floor {
 			tiles = new World.TILE[World.SIZE][World.SIZE];
 			for (int i = 0; i < World.SIZE; i++)
 				for (int j = 0; j < World.SIZE; j++)
-					if (i == 0 || j == 0 || i == World.SIZE-1 || j == World.SIZE-1)
+					if (i == 0 || j == 0 || i == World.SIZE - 1
+							|| j == World.SIZE - 1)
 						tiles[i][j] = TILE.WALL;
 					else
 						tiles[i][j] = TILE.DONJON;
-					startx = 10;
-					starty = 10;						
+			startx = 10;
+			starty = 10;
 		} else {
 			Generator gen = new Generator();
 			tiles = gen.generate();
 			startx = gen.getStartX();
 			starty = gen.getStartY();
-			
+
 			endx = gen.getEndX();
 			endy = gen.getEndY();
-			
+
 			this.depth = depth;
-			
+
 			MonsterGenerator mg = new MonsterGenerator();
 			mg.generateMonster(this);
-			
+
 		}
-		
-		
+
 		walls = new ArrayList<Mask>(0);
 		for (int i = 0; i < World.SIZE; i++)
 			for (int j = 0; j < World.SIZE; j++)
 				if (tiles[i][j] == TILE.WALL || tiles[i][j] == TILE.ROCK)
-					walls.add(new Mask(1,1,i + 0.5,j + 0.5));				
+					walls.add(new Mask(1, 1, i + 0.5, j + 0.5));
 	}
 
-	
 	/**
 	 * 
 	 * @return La liste des masques des murs
@@ -87,10 +86,10 @@ public class Floor {
 	public ArrayList<Mask> getWalls() {
 		return walls;
 	}
-	
+
 	/**
 	 * 
-	 * @return les GameObjects présent sur le floor
+	 * @return les GameObjects prï¿½sent sur le floor
 	 */
 	public ArrayList<GameObject> getObjects() {
 		return objects;
@@ -98,27 +97,27 @@ public class Floor {
 
 	/**
 	 * 
-	 * @param Redéfinie la liste des objets
+	 * @param Red
+	 *            ï¿½finie la liste des objets
 	 */
 	public void setObjects(ArrayList<GameObject> objects) {
 		this.objects = objects;
 	}
-	
+
 	/**
 	 * 
-	 * @param Redéfinie le joueur
+	 * @param Red
+	 *            ï¿½finie le joueur
 	 */
-	public void setPlayer(Player player)
-	{
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
+
 	/**
 	 * 
 	 * @return renvoi le joueur
 	 */
-	public Player getPlayer()
-	{
+	public Player getPlayer() {
 		return player;
 	}
 
@@ -129,34 +128,34 @@ public class Floor {
 	public World.TILE[][] getTiles() {
 		return tiles;
 	}
-	
+
 	/**
 	 * 
-	 * @return renvoi le point d'entré de l'étage en x
+	 * @return renvoi le point d'entrï¿½ de l'ï¿½tage en x
 	 */
 	public double getStartX() {
 		return startx + 0.5;
 	}
-	
+
 	/**
 	 * 
-	 * @return renvoi le point d'entré de l'étage en y
+	 * @return renvoi le point d'entrï¿½ de l'ï¿½tage en y
 	 */
 	public double getStartY() {
 		return starty + 0.5;
 	}
-	
+
 	/**
 	 * 
-	 * @return renvoi le point de sortie de l'étage en x
+	 * @return renvoi le point de sortie de l'ï¿½tage en x
 	 */
 	public double getEndX() {
 		return endx + 0.5;
 	}
-	
+
 	/**
 	 * 
-	 * @return renvoi le point de sortie de l'étage en y
+	 * @return renvoi le point de sortie de l'ï¿½tage en y
 	 */
 	public double getEndY() {
 		return endy + 0.5;
@@ -164,7 +163,7 @@ public class Floor {
 
 	/**
 	 * 
-	 * @return renvoi l'étage du Floor
+	 * @return renvoi l'ï¿½tage du Floor
 	 */
 	public int getDepth() {
 		return depth;

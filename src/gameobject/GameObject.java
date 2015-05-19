@@ -3,7 +3,7 @@ package gameobject;
 import world.Floor;
 
 /**
- *Classe de base a tous les objets interactifs sur la carte
+ * Classe de base a tous les objets interactifs sur la carte
  */
 public abstract class GameObject {
 
@@ -35,10 +35,11 @@ public abstract class GameObject {
 
 	/**
 	 * Constructeur générique d'objet
+	 * 
 	 * @param x
-	 * 	Origine en X
+	 *            Origine en X
 	 * @param y
-	 * 	Origine en Y
+	 *            Origine en Y
 	 */
 	public GameObject(double x, double y) {
 		this.x = x;
@@ -46,11 +47,11 @@ public abstract class GameObject {
 		this.angle = 0.0;
 		destroy = false;
 	}
-	
+
 	/**
 	 * Retourne le mask de l'objet
-	 * @return
-	 * 	Le mask
+	 * 
+	 * @return Le mask
 	 */
 	public Mask getMask() {
 		return mask;
@@ -58,8 +59,8 @@ public abstract class GameObject {
 
 	/**
 	 * Retourne la position en X
-	 * @return
-	 * 	La position en X
+	 * 
+	 * @return La position en X
 	 */
 	public double getX() {
 		return x;
@@ -67,8 +68,8 @@ public abstract class GameObject {
 
 	/**
 	 * Retourne la position en Y
-	 * @return
-	 * 	La position en Y
+	 * 
+	 * @return La position en Y
 	 */
 	public double getY() {
 		return y;
@@ -76,8 +77,8 @@ public abstract class GameObject {
 
 	/**
 	 * Retourne l'angle pour le 0 trigonométrique
-	 * @return
-	 * 	L'angle
+	 * 
+	 * @return L'angle
 	 */
 	public double getAngle() {
 		return angle;
@@ -85,8 +86,8 @@ public abstract class GameObject {
 
 	/**
 	 * Retourne le sprite
-	 * @return
-	 * 	Le sprite
+	 * 
+	 * @return Le sprite
 	 */
 	public String getSprite() {
 		return sprite;
@@ -94,8 +95,9 @@ public abstract class GameObject {
 
 	/**
 	 * Change la position en X
+	 * 
 	 * @param x
-	 * 	La nouvelle position en X
+	 *            La nouvelle position en X
 	 */
 	public void setX(double x) {
 		this.x = x;
@@ -103,19 +105,21 @@ public abstract class GameObject {
 
 	/**
 	 * Change la position en Y
+	 * 
 	 * @param y
-	 * 	La nouvelle position en Y
+	 *            La nouvelle position en Y
 	 */
 	public void setY(double y) {
 		this.y = y;
 	}
-	
+
 	/**
 	 * Change la position X et Y en même temps
+	 * 
 	 * @param x
-	 * 	La nouvelle position en X
+	 *            La nouvelle position en X
 	 * @param y
-	 * 	La nouvelle position en Y
+	 *            La nouvelle position en Y
 	 */
 	public void setPosition(double x, double y) {
 		this.x = x;
@@ -124,43 +128,45 @@ public abstract class GameObject {
 
 	/**
 	 * Change l'angle
+	 * 
 	 * @param angle
-	 * 	Le nouvel angle
+	 *            Le nouvel angle
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
-	
+
 	/**
 	 * Vérifie si l'objet doit être détruit
-	 * @return
-	 * 	Vrai s'il doit être détruit.
+	 * 
+	 * @return Vrai s'il doit être détruit.
 	 */
-	public boolean isDestroy(){
+	public boolean isDestroy() {
 		return destroy;
 	}
-	
+
 	/**
 	 * Tag l'objet pour qu'il doit détruit
 	 */
-	public void destroy()
-	{
+	public void destroy() {
 		this.destroy = true;
 	}
 
 	/**
 	 * Change le sprite de l'objet
+	 * 
 	 * @param sprite
-	 * 	Le nouveau sprite
+	 *            Le nouveau sprite
 	 */
 	public void setSprite(String sprite) {
 		this.sprite = sprite;
 	}
-	
+
 	/**
 	 * Explique comment l'objet doit agir dans un game tick.
+	 * 
 	 * @param floor
-	 * 	Le Floor dans lequel se trouve l'objet.
+	 *            Le Floor dans lequel se trouve l'objet.
 	 */
 	public abstract void update(Floor floor);
 

@@ -10,7 +10,7 @@ public abstract class Item extends GameObject {
 		super(x, y);
 	}
 
-	public void update(Floor floor){
-		
+	public void update(Floor floor) {
+
 	}
 }

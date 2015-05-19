@@ -21,7 +21,7 @@ public class MonsterGenerator {
 
 	private ArrayList<Point> locationList;
 
-	/**Constructeur par défaut	 */
+	/** Constructeur par dï¿½faut */
 	public MonsterGenerator() {
 		locationList = new ArrayList<Point>();
 	}
@@ -61,8 +61,7 @@ public class MonsterGenerator {
 	/**
 	 * 
 	 * @return String reprÃ©sentant l'URL alÃ©atiorement chisit dans la banque
-	 *         d'image allouÃ© Ã  cette excercice
-	 *         "dÃ©finir quelle banque utiliser"
+	 *         d'image allouÃ© Ã  cette excercice "dÃ©finir quelle banque utiliser"
 	 */
 	private String chooseImage() {
 		return "img/" + IMAGES[(int) (Math.random() * IMAGES.length)] + ".png";
@@ -78,7 +77,8 @@ public class MonsterGenerator {
 	}
 
 	/**
-	 * ajoute à une liste toutes les positions possible pour qu'un monstre apparaît
+	 * ajoute ï¿½ une liste toutes les positions possible pour qu'un monstre
+	 * apparaï¿½t
 	 * 
 	 * @param Floor
 	 */
@@ -94,8 +94,8 @@ public class MonsterGenerator {
 
 	/**
 	 * choisit un point dans la liste de position possible pour les monstres et
-	 * l'enlève de la liste pour empècher que les monstre soit crée plusieurs
-	 * fois sur le même point
+	 * l'enlï¿½ve de la liste pour empï¿½cher que les monstre soit crï¿½e plusieurs
+	 * fois sur le mï¿½me point
 	 * 
 	 * @return un point dans la liste
 	 */

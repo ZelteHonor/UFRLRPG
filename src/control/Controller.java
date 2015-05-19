@@ -89,13 +89,13 @@ public class Controller implements Initializable {
 	private ArrayList<GameObject> objects;
 
 	/**
-	 * ArrayList temporaire pour ajouter des objets à "objects" pendant que la
-	 * boucle du jeu la parcours (et ainsi empêcher les ConcurrentException)
+	 * ArrayList temporaire pour ajouter des objets ï¿½ "objects" pendant que la
+	 * boucle du jeu la parcours (et ainsi empï¿½cher les ConcurrentException)
 	 */
 	private ArrayList<GameObject> objectsToLoad;
 
 	/**
-	 * Instance du Générateur de monstre.
+	 * Instance du Gï¿½nï¿½rateur de monstre.
 	 */
 	private MonsterGenerator m;
 
@@ -104,7 +104,7 @@ public class Controller implements Initializable {
 	 * Centre de la camera en (x,y) pour les transition lente
 	 */
 	private double cxto, cyto;
-	
+
 	/**
 	 * centre de la camera (x,y)
 	 */
@@ -292,7 +292,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * 
-	 * @return renvoir tout les GameObjets présent dans la partie
+	 * @return renvoir tout les GameObjets prï¿½sent dans la partie
 	 */
 	public ArrayList<GameObject> getObjects() {
 		return objects;
@@ -300,8 +300,8 @@ public class Controller implements Initializable {
 
 	/**
 	 * 
-	 * @param redéfinie
-	 *            le contenue de objects
+	 * @param red
+	 *            ï¿½finie le contenue de objects
 	 */
 	public void setObjects(ArrayList<GameObject> array) {
 		objects = array;
@@ -309,14 +309,14 @@ public class Controller implements Initializable {
 
 	/**
 	 * 
-	 * @return l'intégralité de tout les floors de la partie
+	 * @return l'intï¿½gralitï¿½ de tout les floors de la partie
 	 */
 	public World getWorld() {
 		return world;
 	}
 
 	/* Modules */
-	
+
 	/**
 	 * 
 	 * @return renvoi le render qui affiche tout ce qui est visible
@@ -327,7 +327,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * 
-	 * @return renvoi l'objet contenant les entrés des touches et de la sourie
+	 * @return renvoi l'objet contenant les entrï¿½s des touches et de la sourie
 	 */
 	public Input getInput() {
 		return input;
@@ -344,7 +344,7 @@ public class Controller implements Initializable {
 	/* Camera */
 	/**
 	 * 
-	 * @return renvoi le  centre de la camera en x
+	 * @return renvoi le centre de la camera en x
 	 */
 	public double getCX() {
 		return cx;
@@ -360,7 +360,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * 
-	 * @return renvoi la liste temporaire de GameObjects à ajouter à la liste
+	 * @return renvoi la liste temporaire de GameObjects ï¿½ ajouter ï¿½ la liste
 	 *         principale (objects)
 	 */
 	public ArrayList<GameObject> getObjectsToLoad() {

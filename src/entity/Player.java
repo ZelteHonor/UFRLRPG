@@ -28,12 +28,12 @@ public class Player extends Entity {
 	 * Vitesse en X et vitesse en Y
 	 */
 	private double vx, vy;
-	
+
 	/**
 	 * Constante de vie maximal
 	 */
 	public static final int MAX_HEALTH = 100;
-	
+
 	/**
 	 * S'il le joueur posssède l'Artefact
 	 */
@@ -42,7 +42,7 @@ public class Player extends Entity {
 	 * Si le joueur a gagné
 	 */
 	private boolean win;
-	
+
 	/**
 	 * La liste des armes
 	 */
@@ -52,18 +52,19 @@ public class Player extends Entity {
 	 * L'arme que le joueur a en main
 	 */
 	private Weapon currentWeapon;
-	
+
 	/**
 	 * Si le joueur est mort
 	 */
 	private boolean isDead;
-	
+
 	/**
 	 * Constructeur du joueur
+	 * 
 	 * @param x
-	 * 	Origine en X
+	 *            Origine en X
 	 * @param y
-	 * 	Origine en Y
+	 *            Origine en Y
 	 */
 	public Player(double x, double y) {
 		super(x, y, 100);
@@ -79,9 +80,9 @@ public class Player extends Entity {
 		key = new KEYSTATE[7];
 		for (int i = 0; i < key.length; i++)
 			key[i] = KEYSTATE.UP;
-		
-		mask = new Mask(0.25, 0.25,x,y);
-		
+
+		mask = new Mask(0.25, 0.25, x, y);
+
 		weapons = new Weapon[2];
 		weapons[0] = new Sword(x, y, 10, 10);
 		weapons[1] = new Bow(x, y, 5, 30, 0.3f);
@@ -90,10 +91,11 @@ public class Player extends Entity {
 
 	/**
 	 * Change l'état d'une touche
+	 * 
 	 * @param index
-	 * 	Index de la touche
+	 *            Index de la touche
 	 * @param state
-	 * 	Nouvelle état
+	 *            Nouvelle état
 	 */
 	public void setKeyState(int index, KEYSTATE state) {
 		key[index] = state;
@@ -104,27 +106,33 @@ public class Player extends Entity {
 		if (!isDead && !win) {
 			/* Movement */
 			move(floor);
-			mask.setPosition(x,y);
+			mask.setPosition(x, y);
 			if (key[4] == KEYSTATE.RELEASED)
 				checkFloorChange();
-			
+
 			/* Combat */
 			currentWeapon.setPosition(x, y);
 			currentWeapon.setAngle(angle);
 			currentWeapon.update();
 			if (key[5] == KEYSTATE.PRESSED)
 				currentWeapon.attack(floor);
-			/* Change weapon*/
+			/* Change weapon */
 			if (key[6] == KEYSTATE.PRESSED) {
-				if(currentWeapon instanceof Bow) { 
+				if (currentWeapon instanceof Bow) {
 					currentWeapon = weapons[0];
-					Controller.get().getPane().setCursor(new ImageCursor(Controller.get().getRender().getSprite("img/cursor.png")));
+					Controller
+							.get()
+							.getPane()
+							.setCursor(
+									new ImageCursor(Controller.get()
+											.getRender()
+											.getSprite("img/cursor.png")));
 				} else {
 					currentWeapon = weapons[1];
 					Controller.get().getPane().setCursor(Cursor.NONE);
 				}
 			}
-			
+
 			if (health <= 0) {
 				isDead = true;
 				sprite = "img/playerdead.png";
@@ -133,20 +141,20 @@ public class Player extends Entity {
 			}
 			if (health > 100)
 				health = 100;
-		}
-		else {
+		} else {
 			if (key[4] == KEYSTATE.RELEASED)
 				Controller.get().initGame();
 		}
-		
+
 		/* Input */
 		updateInputState();
 	}
 
 	/**
 	 * Déplace le joueur dans l'étage courant
+	 * 
 	 * @param floor
-	 * 	Étage courant
+	 *            Étage courant
 	 */
 	private void move(Floor floor) {
 
@@ -182,64 +190,63 @@ public class Player extends Entity {
 		vy = Math.sin(direction) * speed;
 
 		/* Check for collision */
-		boolean hcheck =  false;
+		boolean hcheck = false;
 		boolean vcheck = false;
-		
+
 		ArrayList<Mask> walls = floor.getWalls();
-		for(Mask wall : walls) {
-			mask.setX(x+vx);
-			mask.setY(y+vy);
+		for (Mask wall : walls) {
+			mask.setX(x + vx);
+			mask.setY(y + vy);
 			if (Mask.collide(mask, wall)) {
 				mask.setY(y);
-				if (Mask.collide(mask,wall))
+				if (Mask.collide(mask, wall))
 					hcheck = true;
 				mask.setX(x);
-				mask.setY(y+vy);
-				if (Mask.collide(mask,wall))
-					vcheck = true;		
+				mask.setY(y + vy);
+				if (Mask.collide(mask, wall))
+					vcheck = true;
 			}
 		}
-		
+
 		/* Apply movement */
 		if (hcheck == false)
 			x += vx;
 		if (vcheck == false)
 			y += vy;
 	}
-	
+
 	/**
 	 * Vérifie le changement d'étage. (Et provoque une victoire s'il y a lieu)
 	 */
 	private void checkFloorChange() {
 		double ex, ey;
-		
+
 		/* Going up */
 		ex = Controller.get().getWorld().getFloor().getStartX();
 		ey = Controller.get().getWorld().getFloor().getStartY();
-		
-		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
-			if(Controller.get().getWorld().getFloor().getDepth() == 0 && this.haveArtefact) {
+
+		if (Math.sqrt(Math.pow(x - ex, 2) + Math.pow(y - ey, 2)) < 1) {
+			if (Controller.get().getWorld().getFloor().getDepth() == 0
+					&& this.haveArtefact) {
 				win = true;
-			}else {
+			} else {
 				Audio.play("ladder");
 				Controller.get().getWorld().changeFloor(-1);
 			}
-			
-			
+
 			return;
 		}
-		
+
 		/* Going down */
 		ex = Controller.get().getWorld().getFloor().getEndX();
 		ey = Controller.get().getWorld().getFloor().getEndY();
-		
-		
-		if (Math.sqrt(Math.pow(x-ex,2)+Math.pow(y-ey,2)) < 1) {
+
+		if (Math.sqrt(Math.pow(x - ex, 2) + Math.pow(y - ey, 2)) < 1) {
 			Audio.play("ladder");
 			Controller.get().getWorld().changeFloor(+1);
 		}
 	}
-	
+
 	/**
 	 * Mets a jour le changement de touche.
 	 */
@@ -251,16 +258,16 @@ public class Player extends Entity {
 			else if (key[i] == KEYSTATE.RELEASED)
 				key[i] = KEYSTATE.UP;
 	}
-	
+
 	/**
 	 * Retourne l'arme courante
-	 * @return
-	 * 	L'arme courante
+	 * 
+	 * @return L'arme courante
 	 */
 	public Weapon getWeapon() {
 		return currentWeapon;
 	}
-	
+
 	/**
 	 * Change l'angle du joueur.
 	 */
@@ -271,8 +278,8 @@ public class Player extends Entity {
 
 	/**
 	 * Retourne vrai si le joueur à l'Artefact.
-	 * @return
-	 * 	Vrai s'il a l'artefact
+	 * 
+	 * @return Vrai s'il a l'artefact
 	 */
 	public boolean hasArtefact() {
 		return haveArtefact;
@@ -280,22 +287,23 @@ public class Player extends Entity {
 
 	/**
 	 * Change si le joueur à l'Artefact
+	 * 
 	 * @param artefact
-	 * 	Vrai s'il vient d'obtenir l'artefacté
+	 *            Vrai s'il vient d'obtenir l'artefacté
 	 */
 	public void setArtefact(boolean artefact) {
 		this.haveArtefact = artefact;
 	}
-	
+
 	/**
 	 * Retourne si le joueur est mort
-	 * @return
-	 * 	Vrai s'il est mort
+	 * 
+	 * @return Vrai s'il est mort
 	 */
 	public boolean getDead() {
 		return isDead;
 	}
-	
+
 	public boolean getWin() {
 		return win;
 	}

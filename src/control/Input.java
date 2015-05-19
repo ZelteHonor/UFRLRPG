@@ -10,109 +10,140 @@ import javafx.scene.input.MouseEvent;
  *
  */
 public class Input {
-	
+
 	private MouseEvent mouse;
-	
+
 	/* Clavier */
-	public enum KEYSTATE { PRESSED, RELEASED, DOWN, UP };
-	
+	public enum KEYSTATE {
+		PRESSED, RELEASED, DOWN, UP
+	};
+
 	/** Constructeur */
 	public Input(Node node) {
-		
-		//Keyboard Pressed
+
+		// Keyboard Pressed
 		node.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
 				if (Controller.get().getPlayer() != null)
-					switch(ke.getCode()) {
+					switch (ke.getCode()) {
 					case W:
-						Controller.get().getPlayer().setKeyState(0, KEYSTATE.PRESSED); break;
+						Controller.get().getPlayer()
+								.setKeyState(0, KEYSTATE.PRESSED);
+						break;
 					case S:
-						Controller.get().getPlayer().setKeyState(1, KEYSTATE.PRESSED); break;
+						Controller.get().getPlayer()
+								.setKeyState(1, KEYSTATE.PRESSED);
+						break;
 					case A:
-						Controller.get().getPlayer().setKeyState(2, KEYSTATE.PRESSED); break;
+						Controller.get().getPlayer()
+								.setKeyState(2, KEYSTATE.PRESSED);
+						break;
 					case D:
-						Controller.get().getPlayer().setKeyState(3, KEYSTATE.PRESSED); break;
+						Controller.get().getPlayer()
+								.setKeyState(3, KEYSTATE.PRESSED);
+						break;
 					case SPACE:
-						Controller.get().getPlayer().setKeyState(4, KEYSTATE.PRESSED); break;
+						Controller.get().getPlayer()
+								.setKeyState(4, KEYSTATE.PRESSED);
+						break;
 					default:
 						break;
 					}
 			}
 		});
 
-		//Keyboard Released
+		// Keyboard Released
 		node.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent ke) {
 				if (Controller.get().getPlayer() != null)
-					switch(ke.getCode()) {
+					switch (ke.getCode()) {
 					case W:
-						Controller.get().getPlayer().setKeyState(0, KEYSTATE.RELEASED); break;
+						Controller.get().getPlayer()
+								.setKeyState(0, KEYSTATE.RELEASED);
+						break;
 					case S:
-						Controller.get().getPlayer().setKeyState(1, KEYSTATE.RELEASED); break;
+						Controller.get().getPlayer()
+								.setKeyState(1, KEYSTATE.RELEASED);
+						break;
 					case A:
-						Controller.get().getPlayer().setKeyState(2, KEYSTATE.RELEASED); break;
+						Controller.get().getPlayer()
+								.setKeyState(2, KEYSTATE.RELEASED);
+						break;
 					case D:
-						Controller.get().getPlayer().setKeyState(3, KEYSTATE.RELEASED); break;
+						Controller.get().getPlayer()
+								.setKeyState(3, KEYSTATE.RELEASED);
+						break;
 					case SPACE:
-						Controller.get().getPlayer().setKeyState(4, KEYSTATE.RELEASED); break;
+						Controller.get().getPlayer()
+								.setKeyState(4, KEYSTATE.RELEASED);
+						break;
 					default:
 						break;
 					}
 			}
 		});
 
-		//MouseButton Pressed
+		// MouseButton Pressed
 		node.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (Controller.get().getPlayer() != null)
-					switch(me.getButton()) {
-					case PRIMARY: 
-						Controller.get().getPlayer().setKeyState(5, KEYSTATE.PRESSED); break;
-					case SECONDARY: 
-						Controller.get().getPlayer().setKeyState(6, KEYSTATE.PRESSED); break;
+					switch (me.getButton()) {
+					case PRIMARY:
+						Controller.get().getPlayer()
+								.setKeyState(5, KEYSTATE.PRESSED);
+						break;
+					case SECONDARY:
+						Controller.get().getPlayer()
+								.setKeyState(6, KEYSTATE.PRESSED);
+						break;
 					default:
 						break;
 					}
 			}
 		});
-		
-		//MouseButton Released	
+
+		// MouseButton Released
 		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (Controller.get().getPlayer() != null)
-					switch(me.getButton()) {
-					case PRIMARY: 
-						Controller.get().getPlayer().setKeyState(5, KEYSTATE.RELEASED); break;
-					case SECONDARY: 
-						Controller.get().getPlayer().setKeyState(6, KEYSTATE.RELEASED); break;
+					switch (me.getButton()) {
+					case PRIMARY:
+						Controller.get().getPlayer()
+								.setKeyState(5, KEYSTATE.RELEASED);
+						break;
+					case SECONDARY:
+						Controller.get().getPlayer()
+								.setKeyState(6, KEYSTATE.RELEASED);
+						break;
 					default:
 						break;
 					}
 			}
 		});
-		
-		//Mouse movement
+
+		// Mouse movement
 		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
 				mouse = me;
 			}
-		});	
+		});
 		node.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
 				mouse = me;
 			}
-		});	
+		});
 	}
 
 	public MouseEvent getMouse() {
 		return mouse;
 	}
-	
+
 	public double getMX() {
 		return Controller.get().getCX() + mouse.getSceneX();
 	}
+
 	public double getMY() {
 		return Controller.get().getCY() + mouse.getSceneY();
 	}

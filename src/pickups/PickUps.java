@@ -4,9 +4,10 @@ import world.Floor;
 import gameobject.Item;
 import gameobject.Mask;
 
-public abstract class PickUps extends Item{
+public abstract class PickUps extends Item {
 
-	/**Constructeur
+	/**
+	 * Constructeur
 	 * 
 	 * @param x
 	 * @param y
@@ -15,22 +16,22 @@ public abstract class PickUps extends Item{
 		super(x, y);
 		mask = new Mask(0.10, x, y);
 	}
-	
+
 	/**
-	 * vérifie si les conditions nécéssaires sont présents pour que le joueur
+	 * vï¿½rifie si les conditions nï¿½cï¿½ssaires sont prï¿½sents pour que le joueur
 	 * utilise l'objet
 	 */
-	public void update(Floor floor)
-	{
-		if((int)x == (int)floor.getPlayer().getX() && (int)y == (int)floor.getPlayer().getY()) {
+	public void update(Floor floor) {
+		if ((int) x == (int) floor.getPlayer().getX()
+				&& (int) y == (int) floor.getPlayer().getY()) {
 			activateEffect(floor);
 			this.destroy = true;
 		}
-		
+
 	}
-	
+
 	/**
-	 * Active l'éffet propre au PickUp
+	 * Active l'ï¿½ffet propre au PickUp
 	 * 
 	 * @param floor
 	 */
