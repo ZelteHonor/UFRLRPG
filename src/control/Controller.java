@@ -100,10 +100,20 @@ public class Controller implements Initializable {
 	private MonsterGenerator m;
 
 	/* Camera */
+	/**
+	 * Centre de la camera en (x,y) pour les transition lente
+	 */
 	private double cxto, cyto;
+	
+	/**
+	 * centre de la camera (x,y)
+	 */
 	private double cx, cy;
 
 	/* FXML */
+	/**
+	 * Initialise le programme
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = this;
 		input = new Input(pane);
@@ -115,6 +125,9 @@ public class Controller implements Initializable {
 		initGame();
 	}
 
+	/**
+	 * Initialise le jeu
+	 */
 	public void initGame() {
 
 		/* Modules */
@@ -303,23 +316,44 @@ public class Controller implements Initializable {
 	}
 
 	/* Modules */
+	
+	/**
+	 * 
+	 * @return renvoi le render qui affiche tout ce qui est visible
+	 */
 	public Render getRender() {
 		return render;
 	}
 
+	/**
+	 * 
+	 * @return renvoi l'objet contenant les entrés des touches et de la sourie
+	 */
 	public Input getInput() {
 		return input;
 	}
 
+	/**
+	 * 
+	 * @return renvoi le pane
+	 */
 	public Pane getPane() {
 		return pane;
 	}
 
 	/* Camera */
+	/**
+	 * 
+	 * @return renvoi le  centre de la camera en x
+	 */
 	public double getCX() {
 		return cx;
 	}
 
+	/**
+	 * 
+	 * @return renvoi le centre de la camera en y
+	 */
 	public double getCY() {
 		return cy;
 	}

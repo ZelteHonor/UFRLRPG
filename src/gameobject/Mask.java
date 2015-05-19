@@ -4,10 +4,25 @@ public class Mask {
 	
 	public enum SHAPE {BOX, CIRCLE}
 	
+	/**
+	 * Forme du collider
+	 */
 	private SHAPE shape;
+	/**
+	 * rayon,hauteur,largeur
+	 */
 	private double r, h, w;
+	/**
+	 * position (x,y)
+	 */
 	private double x, y;
 	
+	/**Constructeur
+	 * 
+	 * @param rayon
+	 * @param position x
+	 * @param position y
+	 */
 	public Mask(double r, double x2, double y2)
 	{
 		shape = SHAPE.CIRCLE;
@@ -16,6 +31,13 @@ public class Mask {
 		this.y = y2;
 	}
 	
+	/**Constructeur
+	 * 
+	 * @param hauteur
+	 * @param largeur
+	 * @param position x
+	 * @param position y
+	 */
 	public Mask (double h, double l, double px, double py)
 	{
 		shape = SHAPE.BOX;
@@ -30,7 +52,7 @@ public class Mask {
 	 * V�rifie s'il y a collision
 	 * @param a, un mask 
 	 * @param b, un mask
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean collide(Mask a, Mask b) {
 		if (Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(),2)) < a.getR() + b.getR()) {
@@ -53,7 +75,7 @@ public class Mask {
 	 * Check for a collision between a circle mask and a box mask
 	 * @param a The circle mask
 	 * @param b The box mask
-	 * @return
+	 * @return boolean
 	 */
 	private static boolean collideCircleBox(Mask a, Mask b) {
 		// Distance x, y entre le cercle et le rectangle (centres)
@@ -72,50 +94,99 @@ public class Mask {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return shape
+	 */
 	public SHAPE getShape() {
 		return shape;
 	}
 	
+	/**
+	 * 
+	 * @return rayon
+	 */
 	public double getR() {
 		return r;
 	}
 
+	/**
+	 * 
+	 * @return hauteur
+	 */
 	public double getH() {
 		return h;
 	}
 
+	/**
+	 * 
+	 * @return largeur
+	 */
 	public double getW() {
 		return w;
 	}
 
+	/**
+	 * 
+	 * @return position x
+	 */
 	public double getX() {
 		return x;
 	}
 
+	/**
+	 * 
+	 * @return position y
+	 */
 	public double getY() {
 		return y;
 	}
 
+	/**
+	 * 
+	 * @param rayon
+	 */
 	public void setR(double rayon) {
 		this.r = rayon;
 	}
 
+	/**
+	 * 
+	 * @param hauteur
+	 */
 	public void setH(double hauteur) {
 		this.h = hauteur;
 	}
-
+	
+	/**
+	 * 
+	 * @param largeur
+	 */
 	public void setW(double largeur) {
 		this.w = largeur;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
+	/**
+	 * 
+	 * @param y
+	 */
 	public void setY(double y) {
 		this.y = y;
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void setPosition(double x, double y) {
 		this.x = x;
 		this.y = y;

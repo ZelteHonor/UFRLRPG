@@ -17,7 +17,7 @@ public class Floor {
 	 */
 	private ArrayList<GameObject> objects;
 	/**
-	 * 
+	 * les masques des murs
 	 */
 	private ArrayList<Mask> walls;
 	/**
@@ -38,6 +38,11 @@ public class Floor {
 	 */
 	private int depth;
 
+	/**
+	 * Génère un étage à la profondeur depth
+	 * 
+	 * @param depth
+	 */
 	public Floor(int depth) {
 		objects = new ArrayList<GameObject>();
 		if (depth == -1) {
@@ -75,7 +80,10 @@ public class Floor {
 	}
 
 	
-
+	/**
+	 * 
+	 * @return La liste des masques des murs
+	 */
 	public ArrayList<Mask> getWalls() {
 		return walls;
 	}
@@ -88,40 +96,76 @@ public class Floor {
 		return objects;
 	}
 
+	/**
+	 * 
+	 * @param Redéfinie la liste des objets
+	 */
 	public void setObjects(ArrayList<GameObject> objects) {
 		this.objects = objects;
 	}
 	
+	/**
+	 * 
+	 * @param Redéfinie le joueur
+	 */
 	public void setPlayer(Player player)
 	{
 		this.player = player;
 	}
 	
+	/**
+	 * 
+	 * @return renvoi le joueur
+	 */
 	public Player getPlayer()
 	{
 		return player;
 	}
 
+	/**
+	 * 
+	 * @return renvoi les tuiles du Floor
+	 */
 	public World.TILE[][] getTiles() {
 		return tiles;
 	}
 	
+	/**
+	 * 
+	 * @return renvoi le point d'entré de l'étage en x
+	 */
 	public double getStartX() {
 		return startx + 0.5;
 	}
 	
+	/**
+	 * 
+	 * @return renvoi le point d'entré de l'étage en y
+	 */
 	public double getStartY() {
 		return starty + 0.5;
 	}
 	
+	/**
+	 * 
+	 * @return renvoi le point de sortie de l'étage en x
+	 */
 	public double getEndX() {
 		return endx + 0.5;
 	}
 	
+	/**
+	 * 
+	 * @return renvoi le point de sortie de l'étage en y
+	 */
 	public double getEndY() {
 		return endy + 0.5;
 	}
 
+	/**
+	 * 
+	 * @return renvoi l'étage du Floor
+	 */
 	public int getDepth() {
 		return depth;
 	}

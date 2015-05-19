@@ -16,10 +16,16 @@ public class MonsterGenerator {
 
 	private ArrayList<Point> locationList;
 
+	/**Constructeur par défaut	 */
 	public MonsterGenerator() {
 		locationList = new ArrayList<Point>();
 	}
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param Floor
+	 */
 	public void generateMonster(Floor f) {
 
 		// gÃ©nÃ¨re le nombre d'enemmi dans le floor present
@@ -67,8 +73,9 @@ public class MonsterGenerator {
 	}
 
 	/**
+	 * ajoute à une liste toutes les positions possible pour qu'un monstre apparaît
 	 * 
-	 * @return a number within 7, 11, 12 and 15
+	 * @param Floor
 	 */
 	private void createLocationList(Floor f) {
 		for (int i = 0; i < World.SIZE; i++)
@@ -95,6 +102,7 @@ public class MonsterGenerator {
 	}
 
 	/**
+	 * @param Floor
 	 * 
 	 * @return 20 + 5 * "numÃ©ro de l'Ã©tage"
 	 */
