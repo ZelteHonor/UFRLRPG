@@ -8,13 +8,27 @@ import gameobject.Mask;
 import world.Floor;
 
 /**
- * @author gabriel Classe représentant un projectile
+ * Classe représentant une flèche
+ * 
+ * @author gabriel
  */
 public class Arrow extends GameObject {
+	/**
+	 * Dégat du projectile
+	 */
 	private int damage;
+	/**
+	 * Vitesse en X et en Y du projectile
+	 */
 	private double vx, vy;
 
+	/**
+	 * Si le projectile est planté dans un mur
+	 */
 	private boolean stuck;
+	/**
+	 * Temps avant la destruction du projectile (quand il est dans le mur)
+	 */
 	private int ticksToDeath;
 
 	/**

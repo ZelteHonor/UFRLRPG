@@ -8,12 +8,36 @@ import world.Floor;
 
 public class Sword extends Weapon {
 
+	/**
+	 * Angle de départ relatif
+	 */
 	public static final int startangle = -105;
+	/**
+	 * Angle final relatif
+	 */
 	public static final int endangle = 50;
 
+	/**
+	 * Si l'arme est animé
+	 */
 	private boolean animate;
+	/**
+	 * Angle relatif
+	 */
 	private int anglediff;
 
+	/**
+	 * Constructeur de Sword
+	 * 
+	 * @param x
+	 *            X d'origine
+	 * @param y
+	 *            Y d'origine
+	 * @param damage
+	 *            Dégat de l'épée
+	 * @param attackspeed
+	 *            Vitesse d'attaque de l'épée
+	 */
 	public Sword(double x, double y, int damage, int attackspeed) {
 		super(x, y, damage, attackspeed);
 		sprite = "img/sword.png";
@@ -57,6 +81,11 @@ public class Sword extends Weapon {
 			cooldown--;
 	}
 
+	/**
+	 * Retourne l'angle relatif
+	 * @return
+	 * 	Angle relatif
+	 */
 	public int getAngleDiff() {
 		return anglediff;
 	}

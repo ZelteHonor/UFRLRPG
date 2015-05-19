@@ -8,6 +8,9 @@ import world.Floor;
  */
 public class Bow extends Weapon {
 
+	/**
+	 * Vitesse des projectiles tiré
+	 */
 	private float speed;
 
 	/**
