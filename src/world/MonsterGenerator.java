@@ -7,10 +7,15 @@ import entity.Monster;
 
 public class MonsterGenerator {
 
-	// liste de noms pour les monstres
+	/**
+	 * liste de noms pour les monstres
+	 */
 	public static final String[] NAMES = { "Alpha", "Bravo", "Charlie",
 			"Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett" };
 
+	/**
+	 * 
+	 */
 	public static final String[] IMAGES = { "spider_green", "spider_grey",
 			"spider_purple", "spider_red", "zombie" };
 
